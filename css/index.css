@@ -26,6 +26,10 @@ h3 {
     line-height: 1.1;
 }
 
+.redText {
+    color: #7c3838;
+}
+
 .gradient {
     background: linear-gradient(90deg, #9db280 0%, #5f7554 30%, #23372d 65%, #14241d 100%);
     background-size: 260% 100%;
@@ -64,6 +68,16 @@ header img {
     height: auto;
     display: block;
     margin: 0.5rem 0 0 0;
+}
+
+.endText {
+    background: linear-gradient(90deg, #4a1010 0%, #7c1b1b 30%, #a52d2d 65%, #4a1010 100%);
+    background-size: 260% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    animation: gradientMove 12s ease-in-out infinite;
 }
 
 header {
