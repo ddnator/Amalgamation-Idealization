@@ -1,0 +1,48 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.Scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.Background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.Door {
+    position: absolute;
+    bottom:30%;
+    right: 47%;
+    z-index: 2;
+    padding: 10rem 3rem;
+    background: transparent;
+    border: none !important;
+    font-size:0;
+}
+
+.Overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.Door:hover ~ .Overlay {
+    opacity: 1;
+}
