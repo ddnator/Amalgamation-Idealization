@@ -27,7 +27,7 @@ if(isset($_POST['submit'])) {
         $errors['password'] = 'No password has been entered';
     } else {
         if (strlen($password) > 30 || strlen($password) < 8) {
-            $errors['password'] = 'Please select a password length between 8 and 30 characters';
+            $errors['password'] = 'Please enter a password length between 8 and 30 characters';
         } 
     }
 
@@ -46,7 +46,7 @@ if(isset($_POST['submit'])) {
                 header("location: index.php");
                 exit;
             } else {
-                print_r('incorectefa');
+                $errors['password'] = 'Password incorrect';
             }
         }
     }
@@ -68,11 +68,17 @@ if(isset($_POST['submit'])) {
    
     <?php if (!$login) { ?>
    <form method="post">
-        <label for="username">username</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" name="username" value='<?= htmlentities($username ?? '')  ?>' required>
+        <p>
+            <?= $errors['username'] ?? '' ?>
+        </p>
 
-        <label for="password">password</label>
+        <label for="password">Password:</label>
         <input type="password" id="password" name="password" value="" required>
+        <p>
+            <?= $errors['password'] ?? '' ?>
+        </p>
 
         <input type="submit" name="submit">
    </form>
