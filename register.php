@@ -76,21 +76,21 @@ if (isset($_POST['submit'])) {
    
 
    <form method="post">
+    <label for="username">Username:</label>
         <input type="text" id="username" name="username" value="<?= htmlentities($username ?? '' )?>" required>
-        <label for="username"></label>
-        <p class="help is-danger">
+        <p>
             <?= $errors['username'] ?? '' ?>
         </p>
 
+        <label for="password">Password:</label>
         <input type="text" id="password" name="password" value="<?= htmlentities($password ?? '' )?>" required>
-        <label for="password"></label>
-        <p class="help is-danger">
+        <p>
             <?= $errors['password'] ?? '' ?>
         </p>
 
+        <label for="banknumber">Banknumber:</label>
         <input type="text" id="banknumber" name="banknumber" value="<?= htmlentities($banknumber ?? '' )?>" required>
-        <label for="banknumber"></label>
-        <p class="help is-danger">
+        <p>
             <?= $errors['banknumber'] ?? '' ?>
         </p>
 
