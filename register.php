@@ -67,6 +67,10 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
    <nav></nav> 
@@ -74,7 +78,7 @@ if (isset($_POST['submit'])) {
    
     <h1>Register</h1>
    
-
+    <main>
    <form method="post">
     <label for="username">Username:</label>
         <input type="text" id="username" name="username" value="<?= htmlentities($username ?? '' )?>" required>
@@ -94,10 +98,12 @@ if (isset($_POST['submit'])) {
             <?= $errors['banknumber'] ?? '' ?>
         </p>
 
+        <div class=submitRegisterDiv>
         <input type="submit" name="submit">
+        <a href="login.php">Already have an account?</a>
+        </div>
    </form>
-
-   <a href="login.php">Already have an account?</a>
+   </main>
 </body>
 </html>
 </html>

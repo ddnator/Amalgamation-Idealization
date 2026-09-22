@@ -59,15 +59,19 @@ if(isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
    <nav></nav> 
 
-   
+    
     <h1>Login</h1>
-   
+    <main>
     <?php if (!$login) { ?>
-   <form method="post">
+        <form method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" value='<?= htmlentities($username ?? '')  ?>' required>
         <p>
@@ -79,13 +83,15 @@ if(isset($_POST['submit'])) {
         <p>
             <?= $errors['password'] ?? '' ?>
         </p>
-
-        <input type="submit" name="submit">
-   </form>
-   <a href="register.php">register</a>
-    <?php } else { ?>
+        <div class=submitRegisterDiv>
+            <input type="submit" name="submit">
+            <a href="register.php">Register</a>
+        </div>
+        </form>
+        <?php } else { ?>
         <p>You are already logged in!</p>
         <p><a href="logout.php">Log out</a> / <a href="index.php">To home page</a></p>
-    <?php } ?>
+        <?php } ?>
+    </main>
 </body>
 </html>
