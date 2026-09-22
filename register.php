@@ -7,7 +7,7 @@ $errors = [];
 if (isset($_SESSION['logged_in'])) {
     if ($_SESSION['logged_in'] === true) {
         $login = true;
-        header("location: index.php");
+        header("location: login.php");
     }
 }
 
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($db, $query);
         $user = mysqli_fetch_all($result, MYSQLI_ASSOC);
         if(!empty($user)) {
-            
+            $errors['username'] = 'Username is already in use, please try another name';
         } else {
             $securePassword = password_hash($password, PASSWORD_DEFAULT);
             $query = "INSERT INTO `users`(`banknumber`, `password`, `username`) VALUES ('$banknumber','$securePassword', '$username')";
@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
         </p>
 
         <label for="password">Password:</label>
-        <input type="text" id="password" name="password" value="<?= htmlentities($password ?? '' )?>" required>
+        <input type="password" id="password" name="password" required>
         <p>
             <?= $errors['password'] ?? '' ?>
         </p>

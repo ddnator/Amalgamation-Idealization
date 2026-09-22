@@ -23,10 +23,10 @@ if(isset($_POST['submit'])) {
         }
     }
 
-    if ($password === '') {
+    if ($givenPassword === '') {
         $errors['password'] = 'No password has been entered';
     } else {
-        if (strlen($password) > 30 || strlen($password) < 8) {
+        if (strlen($givenPassword) > 30 || strlen($givenPassword) < 8) {
             $errors['password'] = 'Please enter a password length between 8 and 30 characters';
         } 
     }
@@ -36,8 +36,7 @@ if(isset($_POST['submit'])) {
         $result = mysqli_query($db, $query);
         $user = mysqli_fetch_all($result, MYSQLI_ASSOC);
         if(empty($user)) {
-            print_r('user does not exist');
-            
+            $errors['username'] = 'User does not exist';
         } else {
             $userPassword = $user[0]['password'];
             if(password_verify($givenPassword, $userPassword)) {;
@@ -90,7 +89,7 @@ if(isset($_POST['submit'])) {
         </form>
         <?php } else { ?>
         <p>You are already logged in!</p>
-        <p><a href="logout.php">Log out</a> / <a href="index.php">To home page</a></p>
+        <div><a href="logout.php" class='red'>Log out</a> / <a href="index.php">To home page</a></div>
         <?php } ?>
     </main>
 </body>
