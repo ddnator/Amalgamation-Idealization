@@ -83,6 +83,10 @@ a:hover {
 
 }
 
+.backToHomeA {
+    font-size: 3rem;
+}
+
 header img {
     width: 85vw;
     height: auto;
@@ -98,6 +102,12 @@ header img {
     color: transparent;
     display: inline-block;
     animation: gradientMove 12s ease-in-out infinite;
+}
+
+.tilted {
+    color: #7c3838;
+    rotate: 25deg;
+    font-size: 2rem;
 }
 
 header {
