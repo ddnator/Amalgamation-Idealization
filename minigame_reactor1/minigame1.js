@@ -65,19 +65,38 @@ function choicesReaction(choiceIndex) {
 
     dialogContent.innerHTML = '';
     const message = document.createElement("h3");
+    const button = document.createElement("button");
 
 
     if (choiceIndex === 0) {
         message.innerText = 'You increased the power usage, the temperature is rising even more!'
+        button.innerText = 'Go back';
+        button.addEventListener('click', () => {
+            choiceContainer.close();
+        });
     } else if (choiceIndex === 1) {
         message.innerText = 'You opened a window, this does nothing at all.'
+        button.innerText = 'Go back';
+        button.addEventListener('click', () => {
+            choiceContainer.close();
+        });
     } else if (choiceIndex === 2) {
         message.innerText = 'You increased the coolant flow, the temperature is dropping.'
+        button.innerText = 'Proceed';
+        button.addEventListener('click', () => {
+            choiceContainer.close();
+            window.location.href = '../minigame_reactor2/index.html';
+        });
     } else if (choiceIndex === 3) {
         message.innerText = 'You increased the pressure, the temperature is rising even more.'
+        button.innerText = 'Go back';
+        button.addEventListener('click', () => {
+            choiceContainer.close();
+        });
     }
 
     dialogContent.appendChild(message);
+    dialogContent.appendChild(button);
     choiceContainer.showModal();
 
 }
