@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -21,63 +20,37 @@
         rel="stylesheet"
         href="dialogue.css"
     >
-
 </head>
 
 <body>
 
-
 <div id="game">
 
-
-    <!-- ==================================================
-         POINT AND CLICK SPEELVELD
-    =================================================== -->
+    <!-- =========================================
+         POINT AND CLICK AREA
+    ========================================== -->
 
     <div id="point-click-area">
 
-
-        <!-- HUD -->
-
         <div id="hud">
-
-            <span>
-                LEVEL 1
-            </span>
+            <span>LEVEL 1</span>
 
             <span id="location-label">
                 HOME
             </span>
-
         </div>
 
 
-        <!-- SCENE -->
-
         <div id="scene">
-
-            <!--
-                Later kun je hier een echte achtergrond
-                of afbeelding plaatsen.
-
-                Bijvoorbeeld:
-
-                <img
-                    id="scene-background"
-                    src="img/home.png"
-                    alt=""
-                >
-            -->
-
 
             <div id="scene-name">
                 HOME
             </div>
 
 
-            <!-- ==========================================
-                 HOME HOTSPOTS
-            =========================================== -->
+            <!-- ===============================
+                 HOME
+            ================================ -->
 
             <button
                 id="hotspot-bed"
@@ -115,10 +88,9 @@
             </button>
 
 
-
-            <!-- ==========================================
-                 WORK HOTSPOTS
-            =========================================== -->
+            <!-- ===============================
+                 WORK
+            ================================ -->
 
             <button
                 id="hotspot-jim"
@@ -147,10 +119,9 @@
             </button>
 
 
-
-            <!-- ==========================================
+            <!-- ===============================
                  AFTER MINIGAME
-            =========================================== -->
+            ================================ -->
 
             <button
                 id="hotspot-home"
@@ -169,24 +140,18 @@
                 GO BAR
             </button>
 
-
         </div>
 
     </div>
 
 
-
-    <!-- ==================================================
+    <!-- =========================================
          BOTTOM BAR
-    =================================================== -->
+    ========================================== -->
 
     <div id="bottom-bar">
 
-
-        <!-- ==========================================
-             NORMALE BAR
-             Als niemand praat
-        =========================================== -->
+        <!-- Normale point-and-click bar -->
 
         <div id="normal-bar">
 
@@ -201,10 +166,7 @@
         </div>
 
 
-
-        <!-- ==========================================
-             DIALOGUE
-        =========================================== -->
+        <!-- Dialogue -->
 
         <div
             id="dialogue-content"
@@ -230,14 +192,12 @@
 
         </div>
 
-
     </div>
 
 
-
-    <!-- ==================================================
+    <!-- =========================================
          START
-    =================================================== -->
+    ========================================== -->
 
     <div id="start-screen">
 
@@ -263,46 +223,31 @@
     </div>
 
 
+    <!-- =========================================
+         REACTOR MINIGAME
 
-    <!-- ==================================================
-         MINIGAME PLACEHOLDER
-    =================================================== -->
+         Het iframe opent eerst Reactor 01.
+         Reactor 01 gaat daarna naar Reactor 02.
+    ========================================== -->
 
     <div
         id="minigame-screen"
         class="hidden"
     >
 
-        <div class="screen">
-
-            <div class="tiny">
-                WORK_TASK.EXE
-            </div>
-
-            <h1>
-                [MINIGAME]
-            </h1>
-
-            <p>
-                Hier komt jullie echte minigame.
-            </p>
-
-            <button
-                id="finish-minigame"
-                type="button"
-            >
-                &gt; COMPLETE MINIGAME
-            </button>
-
-        </div>
+        <iframe
+            id="reactor-minigame-frame"
+            title="Reactor minigame"
+            src="about:blank"
+            allow="autoplay"
+        ></iframe>
 
     </div>
 
 
-
-    <!-- ==================================================
+    <!-- =========================================
          LEVEL END
-    =================================================== -->
+    ========================================== -->
 
     <div
         id="end-screen"
@@ -328,12 +273,10 @@
 
     </div>
 
-
 </div>
 
 
 <script src="dialogue.js"></script>
-
 
 </body>
 </html>
