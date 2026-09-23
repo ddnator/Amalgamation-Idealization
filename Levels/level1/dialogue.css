@@ -1,0 +1,771 @@
+:root {
+
+    /*
+        Alleen deze waarde veranderen
+        om de onderste bar hoger/lager
+        te maken.
+    */
+
+    --bar-height: 190px;
+
+    --black: #000000;
+    --dark: #080808;
+
+    --white: #eeeeE6;
+
+    --green: #47d92f;
+    --dark-green: #1f7218;
+
+    --gray: #707069;
+}
+
+
+/* ==================================================
+   RESET
+================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+
+body {
+    font-family:
+        "Pixelify Sans",
+        monospace;
+
+    color:
+        var(--white);
+}
+
+
+/* ==================================================
+   GAME
+================================================== */
+
+#game {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        #000;
+}
+
+
+/* ==================================================
+   POINT & CLICK AREA
+
+   ALLES BOVEN DE BAR IS VRIJE SPEELRUIMTE
+================================================== */
+
+#point-click-area {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height:
+        calc(
+            100vh -
+            var(--bar-height)
+        );
+
+    overflow: hidden;
+
+    background:
+        #101010;
+
+    z-index:
+        1;
+}
+
+
+/* ==================================================
+   HUD
+================================================== */
+
+#hud {
+    position: absolute;
+
+    top: 14px;
+    left: 18px;
+    right: 18px;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    color:
+        var(--green);
+
+    font-size:
+        17px;
+
+    letter-spacing:
+        1px;
+
+    z-index:
+        50;
+
+    pointer-events:
+        none;
+}
+
+
+/* ==================================================
+   SCENE
+================================================== */
+
+#scene {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    background:
+        #101010;
+}
+
+
+/*
+#scene-background {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    image-rendering: pixelated;
+}
+*/
+
+
+#scene-name {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color:
+        #202020;
+
+    font-size:
+        clamp(
+            55px,
+            9vw,
+            120px
+        );
+
+    pointer-events:
+        none;
+
+    user-select:
+        none;
+}
+
+
+/* ==================================================
+   HOTSPOTS
+================================================== */
+
+.hotspot {
+    position: absolute;
+
+    padding:
+        6px 9px;
+
+    border:
+        2px solid
+        var(--green);
+
+    border-radius:
+        0;
+
+    background:
+        rgba(0, 0, 0, 0.35);
+
+    color:
+        var(--green);
+
+    font-family:
+        "Pixelify Sans",
+        monospace;
+
+    font-size:
+        15px;
+
+    cursor:
+        pointer;
+
+    z-index:
+        20;
+}
+
+
+.hotspot:hover {
+    background:
+        var(--green);
+
+    color:
+        #000;
+}
+
+
+/* ==================================================
+   HOME HOTSPOT POSITIONS
+
+   Later zet je deze over echte objecten.
+================================================== */
+
+#hotspot-bed {
+    left:
+        13%;
+
+    bottom:
+        24%;
+}
+
+
+#hotspot-food {
+    left:
+        43%;
+
+    top:
+        32%;
+}
+
+
+#hotspot-board {
+    right:
+        15%;
+
+    top:
+        25%;
+}
+
+
+#hotspot-door {
+    right:
+        10%;
+
+    bottom:
+        18%;
+}
+
+
+/* ==================================================
+   WORK HOTSPOTS
+================================================== */
+
+#hotspot-jim {
+    left:
+        18%;
+
+    bottom:
+        24%;
+}
+
+
+#hotspot-boss {
+    right:
+        14%;
+
+    top:
+        25%;
+}
+
+
+#hotspot-work {
+    left:
+        50%;
+
+    bottom:
+        18%;
+
+    transform:
+        translateX(-50%);
+}
+
+
+/* ==================================================
+   AFTER WORK
+================================================== */
+
+#hotspot-home {
+    left:
+        35%;
+
+    bottom:
+        12%;
+}
+
+
+#hotspot-bar {
+    right:
+        35%;
+
+    bottom:
+        12%;
+}
+
+
+/* ==================================================
+   BOTTOM BAR
+================================================== */
+
+#bottom-bar {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height:
+        var(--bar-height);
+
+    background:
+        #030303;
+
+    border-top:
+        4px solid
+        var(--white);
+
+    overflow: hidden;
+
+    z-index:
+        100;
+}
+
+
+/* ==================================================
+   NORMALE BAR
+================================================== */
+
+#normal-bar {
+    position: absolute;
+
+    inset: 0;
+
+    padding:
+        18px 24px;
+}
+
+
+#bar-location {
+    color:
+        var(--green);
+
+    font-size:
+        19px;
+}
+
+
+#bar-hint {
+    position: absolute;
+
+    left:
+        24px;
+
+    bottom:
+        18px;
+
+    color:
+        #55554f;
+
+    font-size:
+        14px;
+}
+
+
+/* ==================================================
+   DIALOGUE
+================================================== */
+
+#dialogue-content {
+    position: absolute;
+
+    inset: 0;
+
+    padding:
+        13px 22px;
+}
+
+
+/* ==================================================
+   SPEAKER
+================================================== */
+
+#dialogue-speaker {
+    margin-bottom:
+        5px;
+
+    color:
+        var(--green);
+
+    font-size:
+        18px;
+
+    text-transform:
+        uppercase;
+}
+
+
+/* ==================================================
+   TEXT
+================================================== */
+
+#dialogue-text {
+    min-height:
+        46px;
+
+    max-width:
+        96%;
+
+    color:
+        var(--white);
+
+    font-size:
+        20px;
+
+    line-height:
+        1.1;
+
+    white-space:
+        pre-line;
+}
+
+
+/* ==================================================
+   OPTIONS
+
+   2 KOLOMMEN ZODAT DE BAR LAAG KAN BLIJVEN
+================================================== */
+
+#dialogue-options {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    column-gap:
+        24px;
+
+    row-gap:
+        0;
+
+    margin-top:
+        5px;
+}
+
+
+.dialogue-option {
+    position: relative;
+
+    width: 100%;
+
+    padding:
+        1px 2px 1px 30px;
+
+    border:
+        0;
+
+    border-radius:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        var(--white);
+
+    font-family:
+        "Pixelify Sans",
+        monospace;
+
+    font-size:
+        16px;
+
+    text-align:
+        left;
+
+    cursor:
+        pointer;
+
+    white-space:
+        nowrap;
+
+    overflow:
+        hidden;
+
+    text-overflow:
+        ellipsis;
+}
+
+
+.dialogue-option:hover {
+    color:
+        var(--green);
+}
+
+
+.dialogue-option.selected {
+    color:
+        var(--green);
+}
+
+
+.dialogue-option.selected::before {
+    content:
+        ">";
+
+    position: absolute;
+
+    left:
+        5px;
+
+    color:
+        var(--green);
+}
+
+
+.option-number {
+    display:
+        inline-block;
+
+    width:
+        24px;
+
+    color:
+        var(--gray);
+}
+
+
+.dialogue-option.selected .option-number {
+    color:
+        var(--green);
+}
+
+
+/* ==================================================
+   PLAYER SPEAKING
+================================================== */
+
+#bottom-bar.player-speaking {
+    border-top-color:
+        var(--green);
+}
+
+
+#bottom-bar.player-speaking #dialogue-speaker {
+    color:
+        var(--white);
+}
+
+
+/* ==================================================
+   AI
+================================================== */
+
+#bottom-bar.ai-speaking {
+    border-top-color:
+        var(--green);
+}
+
+
+/* ==================================================
+   HELP
+================================================== */
+
+#dialogue-help {
+    position: absolute;
+
+    right:
+        18px;
+
+    bottom:
+        7px;
+
+    color:
+        #4b4b47;
+
+    font-size:
+        10px;
+}
+
+
+/* ==================================================
+   START / MINIGAME / END
+================================================== */
+
+#start-screen,
+#minigame-screen,
+#end-screen {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    background:
+        #000;
+
+    z-index:
+        500;
+}
+
+
+.screen {
+    width:
+        min(650px, 90vw);
+}
+
+
+.screen .tiny {
+    color:
+        #62625d;
+
+    font-size:
+        12px;
+}
+
+
+.screen h1 {
+    margin:
+        5px 0 25px 0;
+
+    color:
+        var(--green);
+
+    font-size:
+        47px;
+}
+
+
+.screen p {
+    margin-bottom:
+        25px;
+
+    font-size:
+        20px;
+}
+
+
+.screen button {
+    padding:
+        0;
+
+    border:
+        0;
+
+    border-radius:
+        0;
+
+    background:
+        transparent;
+
+    color:
+        var(--white);
+
+    font-family:
+        "Pixelify Sans",
+        monospace;
+
+    font-size:
+        22px;
+
+    cursor:
+        pointer;
+}
+
+
+.screen button:hover {
+    color:
+        var(--green);
+}
+
+
+/* ==================================================
+   HIDDEN
+================================================== */
+
+.hidden {
+    display:
+        none !important;
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width: 700px) {
+
+    :root {
+        --bar-height:
+            220px;
+    }
+
+
+    #dialogue-options {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    #dialogue-text {
+        font-size:
+            17px;
+    }
+
+
+    .dialogue-option {
+        font-size:
+            14px;
+    }
+
+
+    #scene-name {
+        font-size:
+            48px;
+    }
+
+
+    .hotspot {
+        font-size:
+            12px;
+    }
+
+}
