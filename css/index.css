@@ -4,6 +4,12 @@
     margin: 0;
 }
 
+body {
+    background-image: url("../images/background-home.png");
+    background-size: cover;
+    height: 100vh;
+}
+
 @keyframes gradientMove {
     0% {
         background-position: 0% 50%;
@@ -69,8 +75,10 @@ p {
 
 nav {
     display: flex;
-    gap: 12px;
-    margin-left: 1vw;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 40px;
+    margin-right: 1vw;
 }
 
 nav a {
@@ -153,12 +161,9 @@ main div {
     flex-direction: column;
 }
 
-body {
-    background-color: white;
-}
 
 footer {
-    margin-top: 23vh;
+    margin-top: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
