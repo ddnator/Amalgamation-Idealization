@@ -3,8 +3,9 @@
 }
 
 body {
-    background-color: #D7AE6F;
-    margin: 0;
+    background-image: url("../images/background-home.png");
+    background-size: cover;
+    height: 100vh;
 }
 
 nav {

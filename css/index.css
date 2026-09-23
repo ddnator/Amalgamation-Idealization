@@ -16,6 +16,22 @@
     100% {
         background-position: 0% 50%;
     }
+
+}
+
+@keyframes textPulse {
+    0% {
+        scale: 1;
+    }
+
+    50% {
+        scale: 1.15;
+    }
+
+    100% {
+        scale: 1;
+    }
+
 }
 
 
@@ -83,6 +99,10 @@ a:hover {
 
 }
 
+.backToHomeA {
+    font-size: 3rem;
+}
+
 header img {
     width: 85vw;
     height: auto;
@@ -98,6 +118,13 @@ header img {
     color: transparent;
     display: inline-block;
     animation: gradientMove 12s ease-in-out infinite;
+}
+
+.tilted {
+    color: #7c3838;
+    rotate: 25deg;
+    font-size: 2rem;
+    animation: textPulse 0.7s ease-in-out infinite;
 }
 
 header {
