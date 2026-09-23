@@ -39,37 +39,35 @@ main {
 
 form {
     background-color: white;
-    padding: 40px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     width: 40vw;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 1.1rem;
-    border: 1px solid #647859;
 }
 
 input[type=submit] {
     background-color: #7c3838;
     border: none;
     border-radius: 10px;
-    padding: 10px;
     font-size: 1.1rem;
-    color: white;
 }
 
 input[type=submit]:hover {
     cursor: pointer;
+    color: black;
 }
 
 form a {
     text-decoration: none;
     background-color: #647859;
-    padding: 10px;
+    padding: 3px;
     border-radius: 10px;
-    color: white;
 }
 
 form a:visited {
+    color: black;
 
 }
 
@@ -81,13 +79,4 @@ form a:visited {
 
 .red {
     background-color: #7c3838;
-}
-
-form input {
-    padding: 10px;
-    border-radius: 10px;
-}
-
-form label {
-    font-size: 1.3rem;
 }
