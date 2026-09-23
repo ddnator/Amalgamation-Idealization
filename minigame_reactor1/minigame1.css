@@ -16,7 +16,8 @@ header {
     flex-direction: row;
     justify-content: space-between;
     padding: 10px;
-    height: 15vh;
+    border-bottom: 5px solid #7c3838;
+    margin-bottom: 5vh;
 }
 
 #date-time {
