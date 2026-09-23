@@ -1,0 +1,81 @@
+* {
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+body {
+    background-color: #D7AE6F;
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    gap: 12px;
+    margin-left: 1vw;
+}
+
+nav a {
+    font-size: 1.7rem;
+    color: #647859;
+    line-height: 1.3;
+    transition: transform 0.25s ease, color 0.25s ease;
+    margin: 0.35rem 0 0 0;
+}
+
+input[type=submit]:hover, a:hover {
+    transform: scale(1.1);
+    color: #3a3522;
+}
+
+h1 {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+input[type=submit] {
+    background-color: #7c3838;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+    color: black;
+}
+
+form a {
+    text-decoration: none;
+    background-color: #647859;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+form a:visited {
+    color: black;
+
+}
+
+.submitRegisterDiv {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.red {
+    background-color: #7c3838;
+}
