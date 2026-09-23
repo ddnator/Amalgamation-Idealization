@@ -478,7 +478,7 @@ const dialogueTree = {
 
             {
                 text:
-                    "O yeah that is waht happend.",
+                    "O yeah that is what happend.",
 
                 next:
                     "jim_remember"
@@ -550,7 +550,7 @@ const dialogueTree = {
         options: [
             {
                 text:
-                    "O yeah that is waht happend.",
+                    "O yeah that is what happend.",
 
                 next:
                     "jim_work_end"
@@ -612,7 +612,7 @@ const dialogueTree = {
             "ai",
 
         text:
-            "Hi Y/N good to see u are on time ur task for today is *minigame task* *minigame uitleg* goodluck and keep up the good work.",
+            "Hi Y/N good to see u are on time ur task for today is just to manage the factory and put in the code, goodluck and keep up the good work.",
 
         options: [
             {
@@ -685,7 +685,7 @@ const dialogueTree = {
         options: [
             {
                 text:
-                    "Go to level 2",
+                    "Go to home",
 
                 speak:
                     false,
@@ -723,7 +723,7 @@ const dialogueTree = {
         options: [
             {
                 text:
-                    "Go to level 3",
+                    "Go to the bar",
 
                 speak:
                     false,
