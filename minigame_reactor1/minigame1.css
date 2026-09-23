@@ -88,6 +88,7 @@ main {
     flex-direction: row;
     justify-content: space-between;
     gap: 20px;
+    font-size: 1.3rem;
 }
 
 #pick-menu {
@@ -168,4 +169,7 @@ dialog {
     padding: 20px;
     justify-self: center;
     align-self: center;
+    width: 50%;
+    height: 30%;
+    align-items: center;
 }
