@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
-   <nav></nav> 
+   <nav><a href="index.php">Home</a></nav> 
 
    
     <h1>Register</h1>
