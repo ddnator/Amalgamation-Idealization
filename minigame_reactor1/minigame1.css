@@ -172,5 +172,16 @@ dialog {
     align-self: center;
     width: 50%;
     height: 30%;
-    align-items: center;
+}
+
+dialog div {
+    padding: 10px;
+}
+
+dialog button {
+    padding: 5px;
+    color: white;
+    background-color: #7c3838;
+    border: 1px solid #7c3838;
+    border-radius: 5px;
 }
