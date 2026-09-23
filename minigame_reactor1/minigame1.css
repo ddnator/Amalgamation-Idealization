@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    font-family: 'Pixelify Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: #222;
+    width: 85%;
+    justify-self: center;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    height: 15vh;
+}
+
+#date-time {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#core-details {
+    width: 100%;
+    height: 35vh;
+    border: 1px solid #647859;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#core-details-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#core-details-div {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    font-size: 1.4rem;
+}
+
+.core-detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20vw;
+}
+
+.core-detail-value {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-bar {
+    width: 250px;
+    height: 20px;
+    background: #fff;
+    border: 1px solid #647859;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #647859;
+}
+
+#core-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#pick-menu {
+    width: 50%;
+    border: 1px solid #647859;
+    border-radius: 20px;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+    padding: 2%;
+}
+
+#choices-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+}
+
+#choices-menu div:hover {
+    color: #7c3838;
+    transform: scale(1.02);
+}
+
+#system-message {
+    width: 50%;
+    border: 1px solid #647859;
+    border-radius: 20px;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+    padding: 2%;
+}
+
+#messages p {
+    background-color: #7c3838;
+    padding: 8px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+footer {
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #7c3838;
+}
+
+#work-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.work-bar {
+    width: 100%;
+    height: 30px;
+    background: #fff;
+    border: 1px solid #647859;
+    overflow: hidden;
+}
+
+.work-fill {
+    height: 100%;
+    background: #7c3838;
+}
+
+dialog {
+    border: 1px solid #647859;
+    border-radius: 20px;
+    padding: 20px;
+    justify-self: center;
+    align-self: center;
+}
