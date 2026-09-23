@@ -1,9 +1,10 @@
-body{
-    justify-self: center;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 main {
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,27 +13,30 @@ main {
 }
 
 header {
-    font-size: 30px;
+    margin-right: 250px;
+    margin-left: 250px;
+    margin-top: 15px;
+    display: flex;
     font-family: 'Pixelify Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     justify-content: space-between;
+
 }
 
 h1 {
     color: #7c3838;
-    margin: 0;
+
 }
 
 
 .game-container{
-    text-align: left;
-    transform: scale(2.2);
+    transform: scale(1.5);
 }
 
 #gameBoard {
     width: 520px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    gap: 15px;
     margin: 20px auto;
     border: 0.5px solid #7c3838;
     border-radius: 25px;

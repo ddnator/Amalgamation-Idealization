@@ -2,8 +2,24 @@ const gameBoard = document.getElementById("gameBoard");
 const nextNumberText = document.getElementById("nextNumber");
 const restartButton = document.getElementById("restartButton");
 
+const dateTimeContainer = document.getElementById('date-time');
+const dateElement = document.getElementById('date');
+const timeElement = document.getElementById('time');
+
 let nextNumber = 1;
 
+
+function updateDateTime() {
+    const now = new Date();
+    const date = now.toLocaleDateString('nl-NL', {month: 'numeric', day: 'numeric'});
+    const time = now.toLocaleTimeString('nl-NL', {hour: '2-digit', minute: '2-digit'});
+
+    dateElement.textContent = date;
+    timeElement.textContent = time;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
 function startGame() {
     gameBoard.innerHTML = "";
 
