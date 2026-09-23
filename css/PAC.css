@@ -1,0 +1,81 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.Scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Base image */
+.Background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* All overlays Allemaal uitgelijnd op BG image */
+.Overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+.Bed,
+.Computer,
+.Kitchen {
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    z-index: 2;
+}
+
+.Bed {
+    bottom: 30%;
+    right: 47%;
+}
+
+.Computer {
+    bottom: 40%;
+    right: 20%;
+}
+
+.Kitchen {
+    bottom: 25%;
+    right: 70%;
+}
+
+.Bed:hover + .BedOverlay {
+    opacity: 1;
+}
+
+.Computer:hover + .ComputerOverlay {
+    opacity: 1;
+}
+
+.Kitchen:hover + .KitchenOverlay {
+    opacity: 1;
+}
