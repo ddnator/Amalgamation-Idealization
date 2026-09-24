@@ -96,14 +96,14 @@ const hotspotBed =
         "hotspot-bed"
     );
 
-const hotspotFood =
+const hotspotKitchen =
     document.getElementById(
-        "hotspot-food"
+        "hotspot-kitchen"
     );
 
-const hotspotBoard =
+const hotspotComputer =
     document.getElementById(
-        "hotspot-board"
+        "hotspot-computer"
     );
 
 const hotspotDoor =
@@ -315,13 +315,13 @@ const dialogueTree = {
         options: [
             {
                 text:
-                    "Go to work",
+                    "leave",
 
                 speak:
                     false,
 
                 next:
-                    "walk_to_work"
+                    "outside_caravan"
             },
 
             {
@@ -339,16 +339,16 @@ const dialogueTree = {
 
 
     /* =====================================
-       BOARD
+       Computah
     ====================================== */
 
-    board: {
+    computer: {
 
         speaker:
             "NARRATOR",
 
         text:
-            "You check your board.",
+            "Computer no workie today :(.",
 
         options: [
             {
@@ -364,6 +364,32 @@ const dialogueTree = {
         ]
     },
 
+
+    /* =====================================
+    LEAVE HOME
+    ====================================== */
+
+    outside_caravan: {
+
+        speaker:
+            "NARRATOR",
+
+        text:
+            "You're outside your lovely home",
+
+        options: [
+            {
+                text:
+                    "Go to Work",
+
+                speak:
+                    false,
+
+                next:
+                    "walk_to_work"
+            }
+        ]
+    },
 
     /* =====================================
        WALK TO WORK
@@ -779,6 +805,7 @@ function startLevel1() {
 
     setScene(
         "home"
+        
     );
 
     startDialogue(
@@ -1012,7 +1039,7 @@ hotspotBed.addEventListener(
 );
 
 
-hotspotFood.addEventListener(
+hotspotKitchen.addEventListener(
     "click",
     () => {
 
@@ -1027,7 +1054,7 @@ hotspotFood.addEventListener(
 );
 
 
-hotspotBoard.addEventListener(
+hotspotComputer.addEventListener(
     "click",
     () => {
 
@@ -1036,7 +1063,7 @@ hotspotBoard.addEventListener(
         }
 
         startDialogue(
-            "board"
+            "computer"
         );
     }
 );
