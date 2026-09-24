@@ -1,6 +1,7 @@
 window.addEventListener('load', init)
 
 function init() {
+
     VarCreator()
     fillWindow()
     textCreator()
@@ -15,8 +16,12 @@ function VarCreator() {
 }
 
 function EndButtonEventHandler(event) {
+    history.back()
     event.preventDefault()
 }
+
+
+
 
 function textCreator() {
     const headerTitle = document.querySelector('#homeHeader h1')
