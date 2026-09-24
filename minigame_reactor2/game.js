@@ -1,18 +1,8 @@
-const gameBoard =
-    document.getElementById("gameBoard");
-
-const nextNumberText =
-    document.getElementById("nextNumber");
-
-const restartButton =
-    document.getElementById("restartButton");
-
-const dateElement =
-    document.getElementById("date");
-
-const timeElement =
-    document.getElementById("time");
-
+const gameBoard = document.getElementById("gameBoard");
+const nextNumberText = document.getElementById("nextNumber");
+const restartButton = document.getElementById("restartButton");
+const dateElement = document.getElementById("date");
+const timeElement = document.getElementById("time");
 
 let nextNumber = 1;
 let gameFinished = false;
