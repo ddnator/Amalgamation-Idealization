@@ -99,7 +99,7 @@ if (isset($_POST['submit'])) {
         </p>
 
         <div class=submitRegisterDiv>
-        <input type="submit" name="submit">
+        <input type="submit" name="submit" value='Register'>
         <a href="login.php">Already have an account?</a>
         </div>
    </form>
