@@ -1,23 +1,23 @@
 <?php
-//require_once __DIR__ . '/../includes/database.php';
-//
-//$result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
-//$moneyRow = mysqli_fetch_assoc($result);
-//$moneyMade = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
-//
-//if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//    $earned = (int)($_POST['earned'] ?? 0);
-//
-//    $stmt = mysqli_prepare($db, 'UPDATE money_made SET amount = amount + ? LIMIT 1');
-//    mysqli_stmt_bind_param($stmt, 'i', $earned);
-//    mysqli_stmt_execute($stmt);
-//
-//    $result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
-//    $moneyRow = mysqli_fetch_assoc($result);
-//    $moneyMadeNew = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
-//
-//    exit;
-//}
+require_once __DIR__ . '/../includes/database.php';
+
+$result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
+$moneyRow = mysqli_fetch_assoc($result);
+$moneyMade = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $earned = (int)($_POST['earned'] ?? 0);
+
+    $stmt = mysqli_prepare($db, 'UPDATE money_made SET amount = amount + ? LIMIT 1');
+    mysqli_stmt_bind_param($stmt, 'i', $earned);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
+    $moneyRow = mysqli_fetch_assoc($result);
+    $moneyMadeNew = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
+
+    exit;
+}
 
 session_start();
 
