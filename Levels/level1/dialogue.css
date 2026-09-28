@@ -1,5 +1,5 @@
 :root {
-    --bar-height: 210px;
+    --bar-height: 125px;
 
     --black: #000000;
     --dark: #070707;
@@ -120,7 +120,7 @@ body {
    SCENE
 ========================================= */
 
-#scene {
+#caravanScene {
     position: absolute;
 
     inset: 0;
@@ -210,20 +210,26 @@ body {
 ========================================= */
 
 #hotspot-bed {
-    left: 13%;
+    left: 45%;
     bottom: 24%;
+    padding: 5rem;
+    padding-top: 12rem;
 }
 
 
-#hotspot-food {
-    left: 43%;
-    top: 32%;
+#hotspot-kitchen {
+    right: 70%;
+    top: 20%;
+    padding: 10rem;
+    padding-top: 12rem;
+
 }
 
 
-#hotspot-board {
-    right: 15%;
-    top: 25%;
+#hotspot-computer {
+    right: 20%;
+    top: 10%; !important;
+    padding: 6rem;
 }
 
 

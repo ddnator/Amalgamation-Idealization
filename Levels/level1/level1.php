@@ -5,21 +5,19 @@
     <meta charset="UTF-8">
 
     <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
     >
 
     <title>Level 1</title>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
-        rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
+            rel="stylesheet"
     >
 
-    <link
-        rel="stylesheet"
-        href="dialogue.css"
-    >
+    <link rel="stylesheet" href="dialogue.css">
+    <link rel="stylesheet" href="/css/PAC.css">
 </head>
 
 <body>
@@ -38,120 +36,162 @@
             <span id="location-label">
                 HOME
             </span>
+
+            <span id="scene-name">
+                HOME
+            </span>
+
         </div>
 
 
-        <div id="scene">
+        <!-- =====================================
+              CARAVAN SCENE INSIDE
+        ====================================== -->
 
-            <div id="scene-name">
-                HOME
-            </div>
+        <div id="caravanScene" class="game-scene">
 
-
-            <!-- ===============================
-                 HOME
-            ================================ -->
-
-            <button
-                id="hotspot-bed"
-                class="hotspot home-hotspot"
-                type="button"
+            <img
+                    class="Background"
+                    src="/Images/Home_Base.png"
+                    alt=""
             >
-                BED
-            </button>
-
 
             <button
-                id="hotspot-food"
-                class="hotspot home-hotspot"
-                type="button"
+                    id="hotspot-bed"
+                    class="Bed"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay BedOverlay"
+                    src="/Images/Home_bed.png"
+                    alt=""
             >
-                FOOD
-            </button>
 
 
             <button
-                id="hotspot-board"
-                class="hotspot home-hotspot"
-                type="button"
+                    id="hotspot-computer"
+                    class="Computer"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay ComputerOverlay"
+                    src="/Images/Home_Computer.png"
+                    alt=""
             >
-                BOARD
-            </button>
+
+            <button
+                id="hotspot-breakfast"
+                class="Breakfast"
+                type="button"
+
+            ></button>
+            <img
+                    class="Overlay BreakfastOverlay hidden"
+                    src="/Images/Breakfast.png"
+                    alt=""
+            >
 
 
             <button
+                    id="hotspot-kitchen"
+                    class="Kitchen"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay KitchenOverlay"
+                    src="/Images/Home_kitchen.png"
+                    alt=""
+            >
+
+        </div>
+
+        <!-- =====================================
+            CARAVAN SCENE OUTSIDE during DAY (Only hotspot is the door)
+      ====================================== -->
+        <div id="caravanSceneOutside" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/CAravan_Base.png"
+                    alt=""
+            >
+        </div>
+
+        <button
                 id="hotspot-door"
-                class="hotspot home-hotspot"
+                class="Door"
                 type="button"
+        ></button>
+
+        <img
+                class="Overlay DoorOverlay"
+                src="/Images/CAravan_Door.png"
+                alt=""
+        >
+
+        <!-- =====================================
+                Walking to Work Scene DAY
+          ====================================== -->
+        <div id="walkingToWorkDay" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/StreetDay.png"
+                    alt=""
             >
-                GO TO WORK
-            </button>
 
 
-            <!-- ===============================
-                 WORK
-            ================================ -->
+        </div>
 
-            <button
-                id="hotspot-jim"
-                class="hotspot work-hotspot hidden"
-                type="button"
+        <!-- =====================================
+               Outside work scene day
+         ====================================== -->
+        <div id="OutsideWorkDay" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/Work_Outside_D.png"
+                    alt=""
             >
-                JIM
-            </button>
+        </div>
 
+        <!-- =====================================
+              AT work scene day
+        ====================================== -->
+        <div id="work" class="game-scene hidden">
 
-            <button
-                id="hotspot-boss"
-                class="hotspot work-hotspot hidden"
-                type="button"
+            <img
+                    class="Background"
+                    src="/Images/Work_Base.png"
+                    alt=""
             >
-                BOSS
-            </button>
-
-
-            <button
-                id="hotspot-work"
-                class="hotspot work-hotspot hidden"
-                type="button"
-            >
-                START WORKING
-            </button>
-
-
-            <!-- ===============================
-                 AFTER MINIGAME
-            ================================ -->
-
-            <button
-                id="hotspot-home"
-                class="hotspot after-work-hotspot hidden"
-                type="button"
-            >
-                GO HOME
-            </button>
-
-
-            <button
-                id="hotspot-bar"
-                class="hotspot after-work-hotspot hidden"
-                type="button"
-            >
-                GO BAR
-            </button>
-
         </div>
 
     </div>
+    <!-- =====================================
+                Walking to Work Scene
+          ====================================== -->
+    <div id="walkingToWorkDay" class="game-scene hidden">
 
+        <img
+                class="Background"
+                src="/Images/StreetDay.png"
+                alt=""
+        >
+    </div>
+
+
+
+</div>
 
     <!-- =========================================
          BOTTOM BAR
     ========================================== -->
 
     <div id="bottom-bar">
-
-        <!-- Normale point-and-click bar -->
 
         <div id="normal-bar">
 
@@ -169,22 +209,19 @@
         <!-- Dialogue -->
 
         <div
-            id="dialogue-content"
-            class="hidden"
+                id="dialogue-content"
+                class="hidden"
         >
 
             <div id="dialogue-speaker">
                 JIM
             </div>
 
-
             <div id="dialogue-text">
                 ...
             </div>
 
-
             <div id="dialogue-options"></div>
-
 
             <div id="dialogue-help">
                 ↑ ↓ SELECT &nbsp;&nbsp; ENTER / 1-4
@@ -196,7 +233,7 @@
 
 
     <!-- =========================================
-         START
+         START SCREEN
     ========================================== -->
 
     <div id="start-screen">
@@ -212,8 +249,8 @@
             </h1>
 
             <button
-                id="start-button"
-                type="button"
+                    id="start-button"
+                    type="button"
             >
                 &gt; START GAME
             </button>
@@ -225,21 +262,18 @@
 
     <!-- =========================================
          REACTOR MINIGAME
-
-         Het iframe opent eerst Reactor 01.
-         Reactor 01 gaat daarna naar Reactor 02.
     ========================================== -->
 
     <div
-        id="minigame-screen"
-        class="hidden"
+            id="minigame-screen"
+            class="hidden"
     >
 
         <iframe
-            id="reactor-minigame-frame"
-            title="Reactor minigame"
-            src="about:blank"
-            allow="autoplay"
+                id="reactor-minigame-frame"
+                title="Reactor minigame"
+                src="about:blank"
+                allow="autoplay"
         ></iframe>
 
     </div>
@@ -250,8 +284,8 @@
     ========================================== -->
 
     <div
-        id="end-screen"
-        class="hidden"
+            id="end-screen"
+            class="hidden"
     >
 
         <div class="screen">
@@ -263,8 +297,8 @@
             <p id="end-text"></p>
 
             <button
-                id="restart-button"
-                type="button"
+                    id="restart-button"
+                    type="button"
             >
                 &gt; RESTART LEVEL 1
             </button>
@@ -273,10 +307,9 @@
 
     </div>
 
-</div>
-
-
-<script src="dialogue.js"></script>
-
+<script
+        type="module"
+        src="dialogue.js"
+></script>
 </body>
 </html>

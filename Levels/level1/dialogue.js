@@ -1,175 +1,49 @@
-/* =========================================
-   ELEMENTS
-========================================= */
+import {
+    barHint,
+    barLocation,
+    bottomBar,
+    normalBar,
 
-const startScreen =
-    document.getElementById("start-screen");
+    dialogueContent,
+    dialogueSpeaker,
+    dialogueText,
+    dialogueHelp,
+    dialogueOptions,
 
-const minigameScreen =
-    document.getElementById("minigame-screen");
+    locationLabel,
+    sceneName,
 
-const endScreen =
-    document.getElementById("end-screen");
+    startButton,
+    startScreen,
 
-const startButton =
-    document.getElementById("start-button");
+    minigameScreen,
+    reactorMinigameFrame,
 
-const reactorMinigameFrame =
-    document.getElementById(
-        "reactor-minigame-frame"
-    );
+    endScreen,
+    endTitle,
+    endText,
 
-const restartButton =
-    document.getElementById("restart-button");
+    restartButton, hotspotKitchen, hotspotBed, hotspotComputer
+} from "./element.js";
+import {
+    setScene,
+    hideAllHotspots,
+    showNormalBar,
+    showBreakfastOverlay,
+} from "./scene.js";
 
+import {
+    gameState
+} from "./gameState.js";
 
-const bottomBar =
-    document.getElementById("bottom-bar");
-
-const normalBar =
-    document.getElementById("normal-bar");
-
-const dialogueContent =
-    document.getElementById(
-        "dialogue-content"
-    );
-
-const dialogueSpeaker =
-    document.getElementById(
-        "dialogue-speaker"
-    );
-
-const dialogueText =
-    document.getElementById(
-        "dialogue-text"
-    );
-
-const dialogueOptions =
-    document.getElementById(
-        "dialogue-options"
-    );
-
-const dialogueHelp =
-    document.getElementById(
-        "dialogue-help"
-    );
-
-
-const locationLabel =
-    document.getElementById(
-        "location-label"
-    );
-
-const barLocation =
-    document.getElementById(
-        "bar-location"
-    );
-
-const barHint =
-    document.getElementById(
-        "bar-hint"
-    );
-
-const sceneName =
-    document.getElementById(
-        "scene-name"
-    );
-
-
-const endTitle =
-    document.getElementById(
-        "end-title"
-    );
-
-const endText =
-    document.getElementById(
-        "end-text"
-    );
-
-
-/* =========================================
-   HOTSPOTS
-========================================= */
-
-const hotspotBed =
-    document.getElementById(
-        "hotspot-bed"
-    );
-
-const hotspotFood =
-    document.getElementById(
-        "hotspot-food"
-    );
-
-const hotspotBoard =
-    document.getElementById(
-        "hotspot-board"
-    );
-
-const hotspotDoor =
-    document.getElementById(
-        "hotspot-door"
-    );
-
-const hotspotJim =
-    document.getElementById(
-        "hotspot-jim"
-    );
-
-const hotspotBoss =
-    document.getElementById(
-        "hotspot-boss"
-    );
-
-const hotspotWork =
-    document.getElementById(
-        "hotspot-work"
-    );
-
-const hotspotHome =
-    document.getElementById(
-        "hotspot-home"
-    );
-
-const hotspotBar =
-    document.getElementById(
-        "hotspot-bar"
-    );
-
-
-/* =========================================
-   STATE
-========================================= */
-
-let currentScene =
-    "home";
-
-let currentNodeId =
-    null;
-
-let selectedOption =
-    0;
-
-let dialogueActive =
-    false;
-
-let inputLocked =
-    false;
-
-let waitingForContinue =
-    false;
-
-let pendingOption =
-    null;
-
-let minigameCompleted =
-    false;
-
-
+import {
+    closeDialogue,
+    runAction
+} from "./action.js";
 /* =========================================
    DIALOGUE TREE
 ========================================= */
-
+let breakfast = false;
 const dialogueTree = {
 
     /* =====================================
@@ -314,14 +188,10 @@ const dialogueTree = {
 
         options: [
             {
-                text:
-                    "Go to work",
+                text: "leave",
+                speak: false,
+                action: "action_Outside",
 
-                speak:
-                    false,
-
-                next:
-                    "walk_to_work"
             },
 
             {
@@ -339,16 +209,16 @@ const dialogueTree = {
 
 
     /* =====================================
-       BOARD
+       Computah
     ====================================== */
 
-    board: {
+    computer: {
 
         speaker:
             "NARRATOR",
 
         text:
-            "You check your board.",
+            "Computer no workie today :(.",
 
         options: [
             {
@@ -366,7 +236,28 @@ const dialogueTree = {
 
 
     /* =====================================
-       WALK TO WORK
+    LEAVE HOME
+    ====================================== */
+
+    outside_caravan: {
+
+        speaker:
+            "NARRATOR",
+
+        text:
+            "You're outside your 'luxurious' home",
+
+        options: [
+            {
+                text: "Head to work",
+                speak: false,
+                action: "action_go_to_work"
+            }
+        ]
+    },
+
+    /* =====================================
+       WALK TO WORK DAY
     ====================================== */
 
     walk_to_work: {
@@ -375,7 +266,7 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "You walk to work",
+            "You're enroute to work, shame you couldn't keep your car",
 
         options: [
             {
@@ -385,12 +276,36 @@ const dialogueTree = {
                 speak:
                     false,
 
+                action: "OutsideWorkDay",
+
+            }
+        ]
+    },
+    /* =====================================
+           WINSTON NUCLEAR POWERPLANT
+        ====================================== */
+
+    winston_nuclear_powerplant: {
+
+        speaker:
+            "NARRATOR",
+
+        text:
+            "Operational since the discovery of oil in Serstan in 2035",
+
+        options: [
+            {
+                text:
+                    "Enter building",
+
+                speak:
+                    false,
+
                 next:
                     "arrive_work"
             }
         ]
     },
-
 
     arrive_work: {
 
@@ -478,7 +393,7 @@ const dialogueTree = {
 
             {
                 text:
-                    "O yeah that is what happend.",
+                    "O yeah that is what happened.",
 
                 next:
                     "jim_remember"
@@ -550,7 +465,7 @@ const dialogueTree = {
         options: [
             {
                 text:
-                    "O yeah that is what happend.",
+                    "O yeah that is what happened.",
 
                 next:
                     "jim_work_end"
@@ -565,7 +480,7 @@ const dialogueTree = {
             "JIM",
 
         text:
-            "Well i beter get to work before the same happens to me.",
+            "Well i better get to work before the same happens to me.",
 
         options: [
             {
@@ -585,7 +500,7 @@ const dialogueTree = {
             "JIM",
 
         text:
-            "It is such a shame that that happend. Well I better get to work before I get the same fate",
+            "It is such a shame that that happened. Well I better get to work before I get the same fate",
 
         options: [
             {
@@ -774,11 +689,12 @@ function startLevel1() {
     reactorMinigameFrame.src =
         "about:blank";
 
-    minigameCompleted =
+    gameState.minigameCompleted =
         false;
 
     setScene(
         "home"
+
     );
 
     startDialogue(
@@ -790,378 +706,15 @@ function startLevel1() {
 window.startLevel1 =
     startLevel1;
 
-
-/* =========================================
-   SCENES
-========================================= */
-
-function setScene(scene) {
-
-    currentScene =
-        scene;
-
-    hideAllHotspots();
-
-
-    /* HOME */
-
-    if (
-        scene === "home"
-    ) {
-
-        locationLabel.textContent =
-            "HOME";
-
-        barLocation.textContent =
-            "HOME";
-
-        sceneName.textContent =
-            "HOME";
-
-        barHint.textContent =
-            "CLICK SOMETHING.";
-
-
-        document
-            .querySelectorAll(
-                ".home-hotspot"
-            )
-            .forEach(
-                hotspot => {
-                    hotspot.classList.remove(
-                        "hidden"
-                    );
-                }
-            );
-    }
-
-
-    /* WORK */
-
-    else if (
-        scene === "work"
-    ) {
-
-        locationLabel.textContent =
-            "WORK";
-
-        barLocation.textContent =
-            "WORK";
-
-        sceneName.textContent =
-            "AT WORK";
-
-        barHint.textContent =
-            "JIM IS WAVING AT U.";
-
-
-        document
-            .querySelectorAll(
-                ".work-hotspot"
-            )
-            .forEach(
-                hotspot => {
-                    hotspot.classList.remove(
-                        "hidden"
-                    );
-                }
-            );
-    }
-
-
-    /* WORK AFTER MINIGAME */
-
-    else if (
-        scene === "work_after"
-    ) {
-
-        locationLabel.textContent =
-            "WORK";
-
-        barLocation.textContent =
-            "WORK";
-
-        sceneName.textContent =
-            "WORK";
-
-        barHint.textContent =
-            "WORK FINISHED.";
-
-
-        /*
-            Jim en boss blijven beschikbaar.
-        */
-
-        hotspotJim.classList.remove(
-            "hidden"
-        );
-
-        hotspotBoss.classList.remove(
-            "hidden"
-        );
-
-
-        /*
-            Nu verschijnen ook:
-            - Go home
-            - Go bar
-        */
-
-        document
-            .querySelectorAll(
-                ".after-work-hotspot"
-            )
-            .forEach(
-                hotspot => {
-                    hotspot.classList.remove(
-                        "hidden"
-                    );
-                }
-            );
-    }
-
-
-    showNormalBar();
-}
-
-
-/* =========================================
-   HIDE HOTSPOTS
-========================================= */
-
-function hideAllHotspots() {
-
-    document
-        .querySelectorAll(
-            ".hotspot"
-        )
-        .forEach(
-            hotspot => {
-                hotspot.classList.add(
-                    "hidden"
-                );
-            }
-        );
-}
-
-
-/* =========================================
-   NORMAL BAR
-========================================= */
-
-function showNormalBar() {
-
-    dialogueActive =
-        false;
-
-    currentNodeId =
-        null;
-
-    selectedOption =
-        0;
-
-    inputLocked =
-        false;
-
-    waitingForContinue =
-        false;
-
-    pendingOption =
-        null;
-
-
-    bottomBar.classList.remove(
-        "player-speaking",
-        "ai-speaking",
-        "waiting"
-    );
-
-
-    normalBar.classList.remove(
-        "hidden"
-    );
-
-    dialogueContent.classList.add(
-        "hidden"
-    );
-
-    dialogueOptions.innerHTML =
-        "";
-
-    dialogueHelp.textContent =
-        "↑ ↓ SELECT   ENTER / 1-4";
-}
-
-
-/* =========================================
-   HOME HOTSPOTS
-========================================= */
-
-hotspotBed.addEventListener(
-    "click",
-    () => {
-
-        if (dialogueActive) {
-            return;
-        }
-
-        startDialogue(
-            "try_sleep"
-        );
-    }
-);
-
-
-hotspotFood.addEventListener(
-    "click",
-    () => {
-
-        if (dialogueActive) {
-            return;
-        }
-
-        startDialogue(
-            "eat"
-        );
-    }
-);
-
-
-hotspotBoard.addEventListener(
-    "click",
-    () => {
-
-        if (dialogueActive) {
-            return;
-        }
-
-        startDialogue(
-            "board"
-        );
-    }
-);
-
-
-hotspotDoor.addEventListener(
-    "click",
-    () => {
-
-        if (dialogueActive) {
-            return;
-        }
-
-        startDialogue(
-            "walk_to_work"
-        );
-    }
-);
-
-
-/* =========================================
-   WORK HOTSPOTS
-========================================= */
-
-hotspotJim.addEventListener(
-    "click",
-    () => {
-
-        if (dialogueActive) {
-            return;
-        }
-
-        startDialogue(
-            "jim_intro"
-        );
-    }
-);
-
-
-hotspotBoss.addEventListener(
-    "click",
-    () => {
-
-        if (dialogueActive) {
-            return;
-        }
-
-
-        if (
-            minigameCompleted
-        ) {
-
-            startDialogue(
-                "boss_after"
-            );
-
-        }
-
-        else {
-
-            startDialogue(
-                "boss_task"
-            );
-
-        }
-    }
-);
-
-
-hotspotWork.addEventListener(
-    "click",
-    () => {
-
-        if (dialogueActive) {
-            return;
-        }
-
-        startMinigame();
-    }
-);
-
-
-/* =========================================
-   AFTER WORK
-========================================= */
-
-hotspotHome.addEventListener(
-    "click",
-    () => {
-
-        if (dialogueActive) {
-            return;
-        }
-
-        startDialogue(
-            "go_home"
-        );
-    }
-);
-
-
-hotspotBar.addEventListener(
-    "click",
-    () => {
-
-        if (dialogueActive) {
-            return;
-        }
-
-        startDialogue(
-            "go_bar"
-        );
-    }
-);
-
-
 /* =========================================
    START DIALOGUE
 ========================================= */
 
-function startDialogue(nodeId) {
+export function startDialogue(nodeId) {
 
-    dialogueActive =
-        true;
+    gameState.dialogueActive = true;
 
+    showBreakfastOverlay(nodeId);
 
     normalBar.classList.add(
         "hidden"
@@ -1184,9 +737,7 @@ function startDialogue(nodeId) {
 
 function showNode(nodeId) {
 
-    const node =
-        dialogueTree[nodeId];
-
+    const node = dialogueTree[nodeId];
 
     if (!node) {
 
@@ -1200,24 +751,19 @@ function showNode(nodeId) {
         return;
     }
 
+    gameState.currentNodeId = nodeId;
 
-    currentNodeId =
-        nodeId;
+    gameState.selectedOption = 0;
 
-    selectedOption =
-        0;
-
-    inputLocked =
+    gameState.inputLocked =
         false;
 
-    waitingForContinue =
+    gameState.waitingForContinue =
         false;
 
-    pendingOption =
-        null;
+    gameState.pendingOption = null;
 
-    dialogueActive =
-        true;
+    gameState.dialogueActive = true;
 
 
     normalBar.classList.add(
@@ -1267,7 +813,7 @@ function showNode(nodeId) {
 function renderOptions() {
 
     const node =
-        dialogueTree[currentNodeId];
+        dialogueTree[gameState.currentNodeId];
 
 
     dialogueOptions.innerHTML =
@@ -1299,7 +845,7 @@ function renderOptions() {
 
 
             if (
-                index === selectedOption
+                index === gameState.selectedOption
             ) {
 
                 button.classList.add(
@@ -1343,14 +889,13 @@ function renderOptions() {
                 () => {
 
                     if (
-                        inputLocked ||
-                        waitingForContinue
+                        gameState.inputLocked ||
+                        gameState.waitingForContinue
                     ) {
                         return;
                     }
 
-                    selectedOption =
-                        index;
+                    gameState.selectedOption = index;
 
                     updateSelection();
                 }
@@ -1383,15 +928,15 @@ function renderOptions() {
 function chooseOption(index) {
 
     if (
-        inputLocked ||
-        waitingForContinue
+        gameState.inputLocked ||
+        gameState.waitingForContinue
     ) {
         return;
     }
 
 
     const node =
-        dialogueTree[currentNodeId];
+        dialogueTree[gameState.currentNodeId];
 
 
     if (
@@ -1411,8 +956,7 @@ function chooseOption(index) {
     }
 
 
-    inputLocked =
-        true;
+    gameState.inputLocked = true;
 
 
     /*
@@ -1449,11 +993,10 @@ function chooseOption(index) {
        klikt, ENTER of SPACE indrukt.
     ====================================== */
 
-    pendingOption =
+    gameState.pendingOption =
         option;
 
-    waitingForContinue =
-        true;
+    gameState.waitingForContinue = true;
 
 
     bottomBar.classList.remove(
@@ -1487,25 +1030,19 @@ function chooseOption(index) {
 function continueDialogue() {
 
     if (
-        !waitingForContinue ||
-        !pendingOption
+        !gameState.waitingForContinue ||
+        !gameState.pendingOption
     ) {
         return;
     }
 
+    const option = gameState.pendingOption;
 
-    const option =
-        pendingOption;
+    gameState.pendingOption = null;
 
+    gameState.waitingForContinue = false;
 
-    pendingOption =
-        null;
-
-    waitingForContinue =
-        false;
-
-    inputLocked =
-        false;
+    gameState.inputLocked = false;
 
 
     bottomBar.classList.remove(
@@ -1547,7 +1084,7 @@ dialogueContent.addEventListener(
 
 
         if (
-            waitingForContinue
+            gameState.waitingForContinue
         ) {
 
             continueDialogue();
@@ -1562,7 +1099,7 @@ dialogueContent.addEventListener(
 
 function runOption(option) {
 
-    inputLocked =
+    gameState.inputLocked =
         false;
 
 
@@ -1589,213 +1126,9 @@ function runOption(option) {
         return;
     }
 
-
     closeDialogue();
 }
 
-
-/* =========================================
-   ACTIONS
-========================================= */
-
-function runAction(action) {
-
-    /* CLOSE */
-
-    if (
-        action === "close"
-    ) {
-
-        closeDialogue();
-
-        return;
-    }
-
-
-    /* ARRIVE AT WORK */
-
-    if (
-        action === "show_work"
-    ) {
-
-        closeDialogue();
-
-        setScene(
-            "work"
-        );
-
-        return;
-    }
-
-
-    /* LEAVE JIM */
-
-    if (
-        action === "leave_jim"
-    ) {
-
-        closeDialogue();
-
-        return;
-    }
-
-
-    /* START REACTOR */
-
-    if (
-        action === "start_minigame"
-    ) {
-
-        startMinigame();
-
-        return;
-    }
-
-
-    /* LEVEL 2 */
-
-    if (
-        action === "level2"
-    ) {
-
-        goToLevel(
-            2
-        );
-
-        return;
-    }
-
-
-    /* LEVEL 3 */
-
-    if (
-        action === "level3"
-    ) {
-
-        goToLevel(
-            3
-        );
-
-        return;
-    }
-}
-
-
-/* =========================================
-   CLOSE DIALOGUE
-========================================= */
-
-function closeDialogue() {
-
-    pendingOption =
-        null;
-
-    waitingForContinue =
-        false;
-
-    inputLocked =
-        false;
-
-
-    showNormalBar();
-}
-
-
-/* =========================================
-   REACTOR MINIGAME
-========================================= */
-
-function startMinigame() {
-
-    closeDialogue();
-
-
-    /*
-        level1.php zit in:
-
-        Levels/level1/level1.php
-
-        Reactor zit in:
-
-        minigame_reactor1/mingame1.html
-
-        Daarom:
-        ../../
-    */
-
-    reactorMinigameFrame.src =
-        "../../minigame_reactor1/mingame1.html?run="
-        +
-        Date.now();
-
-
-    minigameScreen.classList.remove(
-        "hidden"
-    );
-}
-
-
-/* =========================================
-   MINIGAME COMPLETE
-========================================= */
-
-function finishLevel1Minigame() {
-
-    minigameCompleted =
-        true;
-
-
-    minigameScreen.classList.add(
-        "hidden"
-    );
-
-
-    /*
-        iframe stoppen/resetten
-    */
-
-    reactorMinigameFrame.src =
-        "about:blank";
-
-
-    /*
-        Terug naar point-and-click.
-    */
-
-    setScene(
-        "work_after"
-    );
-}
-
-
-window.finishLevel1Minigame =
-    finishLevel1Minigame;
-
-
-/* =========================================
-   LUISTER NAAR REACTOR 02
-
-   Reactor 02 stuurt na completion:
-
-   {
-       type: "level1-minigame-complete"
-   }
-========================================= */
-
-window.addEventListener(
-    "message",
-    event => {
-
-        if (
-            event.data &&
-            event.data.type ===
-            "level1-minigame-complete"
-        ) {
-
-            finishLevel1Minigame();
-        }
-    }
-);
 
 
 /* =========================================
@@ -1807,7 +1140,7 @@ document.addEventListener(
     event => {
 
         if (
-            !dialogueActive
+            !gameState.dialogueActive
         ) {
             return;
         }
@@ -1818,7 +1151,7 @@ document.addEventListener(
         ================================== */
 
         if (
-            waitingForContinue
+            gameState.waitingForContinue
         ) {
 
             if (
@@ -1836,14 +1169,14 @@ document.addEventListener(
 
 
         if (
-            inputLocked
+            gameState.inputLocked
         ) {
             return;
         }
 
 
         const node =
-            dialogueTree[currentNodeId];
+            dialogueTree[gameState.currentNodeId];
 
 
         if (
@@ -1888,15 +1221,15 @@ document.addEventListener(
 
             event.preventDefault();
 
-            selectedOption++;
+            gameState.selectedOption++;
 
 
             if (
-                selectedOption >=
+                gameState.selectedOption >=
                 node.options.length
             ) {
 
-                selectedOption =
+                gameState.selectedOption =
                     0;
             }
 
@@ -1915,14 +1248,14 @@ document.addEventListener(
 
             event.preventDefault();
 
-            selectedOption--;
+            gameState.selectedOption--;
 
 
             if (
-                selectedOption < 0
+                gameState.selectedOption < 0
             ) {
 
-                selectedOption =
+                gameState.selectedOption =
                     node.options.length - 1;
             }
 
@@ -1942,7 +1275,7 @@ document.addEventListener(
             event.preventDefault();
 
             chooseOption(
-                selectedOption
+                gameState.selectedOption
             );
         }
     }
@@ -1966,7 +1299,7 @@ function updateSelection() {
 
             button.classList.toggle(
                 "selected",
-                index === selectedOption
+                index === gameState.selectedOption
             );
         }
     );
@@ -2035,51 +1368,64 @@ restartButton.addEventListener(
     "click",
     () => {
 
-        endScreen.classList.add(
-            "hidden"
-        );
+        endScreen.classList.add("hidden");
 
-        minigameScreen.classList.add(
-            "hidden"
-        );
+        minigameScreen.classList.add("hidden");
 
-        reactorMinigameFrame.src =
-            "about:blank";
+        reactorMinigameFrame.src = "about:blank";
 
-        startScreen.classList.remove(
-            "hidden"
-        );
+        startScreen.classList.remove("hidden");
 
+        gameState.minigameCompleted = false;
 
-        minigameCompleted =
-            false;
+        gameState.currentScene = "home";
 
-        currentScene =
-            "home";
+        gameState.waitingForContinue = false;
 
-        waitingForContinue =
-            false;
-
-        pendingOption =
-            null;
+        gameState.pendingOption = null;
 
 
-        hideAllHotspots();
-
-
-        locationLabel.textContent =
-            "HOME";
-
-        barLocation.textContent =
-            "HOME";
-
-        sceneName.textContent =
-            "HOME";
-
-        barHint.textContent =
-            "CLICK SOMETHING.";
-
-
-        showNormalBar();
     }
 );
+
+/* =========================================
+   HOME HOTSPOTS
+========================================= */
+
+hotspotKitchen.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+        showBreakfastOverlay();
+        startDialogue("eat");
+    }
+);
+
+hotspotBed.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        startDialogue("try_sleep");
+    }
+);
+
+hotspotComputer.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        startDialogue("computer");
+    }
+);
+
+
