@@ -45,617 +45,66 @@ import {
 ========================================= */
 let breakfast = false;
 const dialogueTree = {
-
-    /* =====================================
-       START
-    ====================================== */
-
     level_start: {
-
         speaker:
             "NARRATOR",
-
         text:
-            "You wake up alone in ur home",
+            "You arrive at work",
 
         options: [
             {
                 text:
-                    "Continue",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       SLEEP
-    ====================================== */
-
-    try_sleep: {
-
-        speaker:
-            "NARRATOR",
-
-        text:
-            "You just woke up so u are not tired yet",
-
-        options: [
-            {
-                text:
-                    "Continue sleeping",
+                    "Talk to your boss",
 
                 speak:
                     false,
 
                 next:
-                    "continue_sleeping"
+                    "boss"
+            }
+        ]
+    },
+
+    boss: {
+        speaker: "Boss",
+        text: "Hi Y/N ready for a day full of work? The others are gone now so no more distractions for you. You know what the task is for today?",
+        
+        options: [
+            {
+                text: 
+                    "Where is everyone?",
+
+                speak: 
+                    false,
+
+                next: "quota"
             },
-
             {
-                text:
-                    "Get up",
+                text: 
+                    "What is my task today",
 
-                speak:
+                speak: 
                     false,
 
-                action:
-                    "close"
-            }
-        ]
-    },
-
-
-    continue_sleeping: {
-
-        speaker:
-            "AI",
-
-        type:
-            "ai",
-
-        text:
-            "Your AI assistant warns you about the consequences of not working",
-
-        options: [
-            {
-                text:
-                    "Continue sleeping",
-
-                speak:
-                    false,
-
-                next:
-                    "ai_shock"
+                next: "minigame_explanation"
             },
-
             {
-                text:
-                    "Get up",
+                text: 
+                    "I got a strange letter, do you know what it is?",
 
-                speak:
+                speak: 
                     false,
 
-                action:
-                    "close"
-            }
-        ]
-    },
-
-
-    ai_shock: {
-
-        speaker:
-            "SYSTEM",
-
-        type:
-            "ai",
-
-        text:
-            "AI chip shocks you awake",
-
-        options: [
-            {
-                text:
-                    "Get up",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       FOOD
-    ====================================== */
-
-    eat: {
-
-        speaker:
-            "NARRATOR",
-
-        text:
-            "You bake some eggs",
-
-        options: [
-            {
-                text: "leave",
-                speak: false,
-                action: "action_Outside",
-
+                next: "show_me"
             },
-
             {
-                text:
-                    "Back",
+                text: 
+                    "bye",
 
-                speak:
+                speak: 
                     false,
 
-                action:
-                    "close"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       Computah
-    ====================================== */
-
-    computer: {
-
-        speaker:
-            "NARRATOR",
-
-        text:
-            "Computer no workie today :(.",
-
-        options: [
-            {
-                text:
-                    "Back",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
-            }
-        ]
-    },
-
-
-    /* =====================================
-    LEAVE HOME
-    ====================================== */
-
-    outside_caravan: {
-
-        speaker:
-            "NARRATOR",
-
-        text:
-            "You're outside your 'luxurious' home",
-
-        options: [
-            {
-                text: "Head to work",
-                speak: false,
-                action: "action_go_to_work"
-            }
-        ]
-    },
-
-    /* =====================================
-       WALK TO WORK DAY
-    ====================================== */
-
-    walk_to_work: {
-
-        speaker:
-            "NARRATOR",
-
-        text:
-            "You're enroute to work, shame you couldn't keep your car",
-
-        options: [
-            {
-                text:
-                    "Continue",
-
-                speak:
-                    false,
-
-                action: "OutsideWorkDay",
-
-            }
-        ]
-    },
-    /* =====================================
-           WINSTON NUCLEAR POWERPLANT
-        ====================================== */
-
-    winston_nuclear_powerplant: {
-
-        speaker:
-            "NARRATOR",
-
-        text:
-            "Operational since the discovery of oil in Serstan in 2035",
-
-        options: [
-            {
-                text:
-                    "Enter building",
-
-                speak:
-                    false,
-
-                next:
-                    "arrive_work"
-            }
-        ]
-    },
-
-    arrive_work: {
-
-        speaker:
-            "NARRATOR",
-
-        text:
-            "You have arrived at work,\nyour coworker Jim is waving at u",
-
-        options: [
-            {
-                text:
-                    "Continue",
-
-                speak:
-                    false,
-
-                action:
-                    "show_work"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       JIM INTRO
-    ====================================== */
-
-    jim_intro: {
-
-        speaker:
-            "JIM",
-
-        text:
-            "Hi Y/N how are you doing; Did you hear that they upgraded our boss last night?",
-
-        options: [
-            {
-                text:
-                    "No I have not heard it.",
-
-                next:
-                    "jim_upgrade"
-            },
-
-            {
-                text:
-                    "I slept like shit last night.",
-
-                next:
-                    "jim_bad_sleep"
-            },
-
-            {
-                text:
-                    "Bye.",
-
-                action:
-                    "leave_jim"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       JIM UPGRADE
-    ====================================== */
-
-    jim_upgrade: {
-
-        speaker:
-            "JIM",
-
-        text:
-            "Well it got a crazy upgrade to its hearing so it might hear us right now, o by the way do not forget to hit ur quota u know what happend to Lisa when she didn't.",
-
-        options: [
-            {
-                text:
-                    "No I do not remeber what did happen?",
-
-                next:
-                    "jim_lisa"
-            },
-
-            {
-                text:
-                    "O yeah that is what happened.",
-
-                next:
-                    "jim_remember"
-            },
-
-            {
-                text:
-                    "Bye.",
-
-                action:
-                    "leave_jim"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       BAD SLEEP
-    ====================================== */
-
-    jim_bad_sleep: {
-
-        speaker:
-            "JIM",
-
-        text:
-            "O that is unfortunate but remember to hit ur quota today u know what happend to Lisa when she didn't.",
-
-        options: [
-            {
-                text:
-                    "No I do not remeber what did happen?",
-
-                next:
-                    "jim_lisa"
-            },
-
-            {
-                text:
-                    "Yeah I do remeber such a shame what happend.",
-
-                next:
-                    "jim_remember"
-            },
-
-            {
-                text:
-                    "Bye",
-
-                action:
-                    "leave_jim"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       LISA
-    ====================================== */
-
-    jim_lisa: {
-
-        speaker:
-            "JIM",
-
-        text:
-            "U really do have problems remembering things don't u? She got taken away by them to some facility and we have not seen her since.",
-
-        options: [
-            {
-                text:
-                    "O yeah that is what happened.",
-
-                next:
-                    "jim_work_end"
-            }
-        ]
-    },
-
-
-    jim_work_end: {
-
-        speaker:
-            "JIM",
-
-        text:
-            "Well i better get to work before the same happens to me.",
-
-        options: [
-            {
-                text:
-                    "Bye.",
-
-                action:
-                    "leave_jim"
-            }
-        ]
-    },
-
-
-    jim_remember: {
-
-        speaker:
-            "JIM",
-
-        text:
-            "It is such a shame that that happened. Well I better get to work before I get the same fate",
-
-        options: [
-            {
-                text:
-                    "Bye.",
-
-                action:
-                    "leave_jim"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       BOSS
-    ====================================== */
-
-    boss_task: {
-
-        speaker:
-            "AI",
-
-        type:
-            "ai",
-
-        text:
-            "Hi Y/N good to see u are on time ur task for today is just to manage the factory and put in the code, goodluck and keep up the good work.",
-
-        options: [
-            {
-                text:
-                    "Start working",
-
-                speak:
-                    false,
-
-                action:
-                    "start_minigame"
-            },
-
-            {
-                text:
-                    "Leave",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       BOSS AFTER MINIGAME
-    ====================================== */
-
-    boss_after: {
-
-        speaker:
-            "AI",
-
-        type:
-            "ai",
-
-        text:
-            "...",
-
-        options: [
-            {
-                text:
-                    "Leave",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       GO HOME
-    ====================================== */
-
-    go_home: {
-
-        speaker:
-            "NARRATOR",
-
-        text:
-            "Go home.",
-
-        options: [
-            {
-                text:
-                    "Go to home",
-
-                speak:
-                    false,
-
-                action:
-                    "level2"
-            },
-
-            {
-                text:
-                    "Back",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       BAR
-    ====================================== */
-
-    go_bar: {
-
-        speaker:
-            "NARRATOR",
-
-        text:
-            "Go bar",
-
-        options: [
-            {
-                text:
-                    "Go to the bar",
-
-                speak:
-                    false,
-
-                action:
-                    "level3"
-            },
-
-            {
-                text:
-                    "Back",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
+                next: "level_start"
             }
         ]
     }
