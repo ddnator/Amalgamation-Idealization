@@ -76,9 +76,16 @@ p {
 nav {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: flex-end;
     gap: 40px;
     margin-right: 1vw;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+
 }
 
 nav a {
@@ -105,6 +112,11 @@ a:hover {
     transform: scale(1.1);
     color: #3a3522;
 
+}
+
+.profileImg {
+    width: 6vw;
+    height: auto;
 }
 
 .contextDiv {
