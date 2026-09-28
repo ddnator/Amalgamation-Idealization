@@ -107,6 +107,25 @@ a:hover {
 
 }
 
+.contextDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.contextBody {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.contextBody p {
+    max-width: 60vw;
+    font-size: 2rem;
+}
+
 .backToHomeA {
     font-size: 3rem;
 }

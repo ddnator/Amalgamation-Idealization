@@ -1,3 +1,9 @@
+<?php
+  require_once "includes/isUserLoggedIn.php";
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,8 +28,8 @@
         <p>A world where humanity got replaced</p>
     </header>
     <main>
-        <div class="MainContent"> 
-            <a href="Levels/level1/level1.php">Start Game</a>
+        <div class="MainContent">
+            <a href="contextpage.php">Start Game</a>
             <a href="" id="endGameButton">End Game</a>
         </div>
     </main>

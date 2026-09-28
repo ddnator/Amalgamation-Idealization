@@ -1,3 +1,3 @@
 <?php
-header('Location: homescreen.html');
+header('Location: homescreen.php');
 exit;
