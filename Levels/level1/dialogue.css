@@ -243,25 +243,7 @@ body {
    WORK HOTSPOTS
 ========================================= */
 
-#hotspot-jim {
-    left: 18%;
-    bottom: 24%;
-}
 
-
-#hotspot-boss {
-    right: 14%;
-    top: 25%;
-}
-
-
-#hotspot-work {
-    left: 50%;
-    bottom: 18%;
-
-    transform:
-        translateX(-50%);
-}
 
 
 /* =========================================

@@ -108,7 +108,7 @@ export const hotspotDoor =
         "hotspot-door"
     );
 
-export const hotspotJim =
+export const hotspotjim =
     document.getElementById(
         "hotspot-jim"
     );
@@ -133,10 +133,6 @@ export const hotspotBar =
         "hotspot-bar"
     );
 
-export const hotspotBreakfast =
-    document.getElementById(
-        "hotspot-breakfast"
-    );
 
 
 export const breakfastOverlay =
