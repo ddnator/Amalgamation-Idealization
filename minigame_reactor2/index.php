@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["points"])) {
+    $_SESSION["points"] = 0;
+}
+
+if (isset($_GET["points"])) {
+    $_SESSION["points"] += (int)$_GET["points"];
+
+    header("location: index.php");
+    exit;
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,6 +36,11 @@
         <h1>Reactor 02</h1>
         <p>Minigame: Number game</p>
     </div>
+
+    <div id="point-amount">
+        <p id="point">Points: <?php echo $_SESSION["points"]; ?></p>
+    </div>
+
     <div id="date-time">
         <p id="date"></p>
         <p id="time"></p>
@@ -48,8 +68,8 @@
             <p>$100</p>
         </div>
     </div>
-    <div class="work-bar" role="progressbar" aria-label="work-value" aria-valuenow="10" aria-valuemin="0"
-         aria-valuemax="100">
+    <div aria-label="work-value" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" class="work-bar"
+         role="progressbar">
         <div class="work-fill" style="width: 10%"></div>
     </div>
 </footer>
