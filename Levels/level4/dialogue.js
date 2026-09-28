@@ -276,7 +276,7 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "You're outside your 'luxurious' home",
+            "You're outside your 'luxurious' home again",
 
         options: [
             {
@@ -297,7 +297,7 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "You're enroute to work, shame you couldn't keep your car",
+            "You're walking to work again, those robot legs might not be such a bad idea.",
 
         options: [
             {
@@ -322,7 +322,7 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "Operational since the discovery of oil in Serstan in 2035",
+            "And we are back in the building again",
 
         options: [
             {
@@ -332,8 +332,8 @@ const dialogueTree = {
                 speak:
                     false,
 
-                next:
-                    "arrive_work"
+                action:
+                    "level5"
             }
         ]
     },
