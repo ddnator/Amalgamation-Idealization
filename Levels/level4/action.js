@@ -15,8 +15,8 @@ startDialogue("outside_caravan"); */
 /* =========================================
    ACTIONS
 ========================================= */
-import {gameState} from "./gameState.js";
-import {minigameScreen, reactorMinigameFrame} from "./element.js";
+import { gameState } from "./gameState.js";
+import { minigameScreen, reactorMinigameFrame } from "./element.js";
 
 export function runAction(action) {
 
@@ -129,29 +129,16 @@ export function runAction(action) {
     }
 
 
-    /* LEVEL 2 */
+
+
+    /* LEVEL 5 */
 
     if (
-        action === "level2"
+        action === "level5"
     ) {
 
-        goToLevel(
-            2
-        );
+        window.location.href = "../level5/level5.php";
 
-        return;
-    }
-
-
-    /* LEVEL 3 */
-
-    if (
-        action === "level3"
-    ) {
-
-        goToLevel(
-            3
-        );
 
         return;
     }
@@ -162,7 +149,7 @@ export function runAction(action) {
    CLOSE DIALOGUE
 ========================================= */
 
- export function closeDialogue() {
+export function closeDialogue() {
 
     gameState.pendingOption =
         null;
@@ -173,7 +160,7 @@ export function runAction(action) {
     gameState.inputLocked =
         false;
 
-     showBreakfastOverlay(null);
+    showBreakfastOverlay(null);
 
     showNormalBar();
 }
