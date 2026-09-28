@@ -170,12 +170,20 @@ dialog {
     padding: 20px;
     justify-self: center;
     align-self: center;
-    width: 50%;
-    height: 30%;
+    width: 60%;
+    height: 50%;
+}
+
+dialog img {
+    height: 250px;
 }
 
 dialog div {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 dialog button {

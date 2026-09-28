@@ -79,9 +79,7 @@ function handleNumberClick(number, button) {
         return;
     }
 
-    button.classList.add(
-        "incorrect"
-    );
+    button.classList.add("incorrect");
 
     setTimeout(() => {
             button.classList.remove(
@@ -90,73 +88,22 @@ function handleNumberClick(number, button) {
         }, 500
     );
 }
-
 function finishReactor2() {
 
-    if (
-        gameFinished
-    ) {
-
+    if (gameFinished) {
         return;
     }
 
     gameFinished = true;
     nextNumberText.textContent = "Done!";
-    setTimeout(
-        returnToLevel1,
-        700
-    );
 
+    window.location.href = "index.php?points=100";
+    setTimeout(returnToLevel1, 700);
 }
 
 function returnToLevel1() {
-
-    console.log(
-        "Reactor 2 complete - returning to Level 1"
-    );
-
-    try {
-
-        if (
-            window.parent &&
-            window.parent !== window &&
-            typeof window.parent.finishLevel1Minigame === "function"
-        ) {
-
-            window.parent.finishLevel1Minigame();
-            return;
-        }
-    }
-
-    catch (error) {
-        console.warn(
-            "Direct parent call failed:",
-            error
-        );
-    }
-
-    if (
-        window.parent &&
-        window.parent !== window
-    ) {
-
-        window.parent.postMessage({
-                type:
-                    "level1-minigame-complete"
-            },
-            "*"
-        );
-
-
-        return;
-    }
-    window.location.href =
-        "../Levels/level1/level1.php?reactorComplete=1";
+    window.location.href = "../Levels/level1/level1.php?reactorComplete=1&points=100";
 }
 
-restartButton.addEventListener(
-    "click",
-    startGame
-);
-
+restartButton.addEventListener("click", startGame);
 startGame();
