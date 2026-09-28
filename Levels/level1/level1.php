@@ -36,6 +36,11 @@
             <span id="location-label">
                 HOME
             </span>
+
+            <span id="scene-name">
+                HOME
+            </span>
+
         </div>
 
 
@@ -76,6 +81,18 @@
                     alt=""
             >
 
+            <button
+                id="hotspot-breakfast"
+                class="Breakfast"
+                type="button"
+
+            ></button>
+            <img
+                    class="Overlay BreakfastOverlay hidden"
+                    src="/Images/Breakfast.png"
+                    alt=""
+            >
+
 
             <button
                     id="hotspot-kitchen"
@@ -92,7 +109,7 @@
         </div>
 
         <!-- =====================================
-            CARAVAN SCENE OUTSIDE (Only hotspot is the door)
+            CARAVAN SCENE OUTSIDE during DAY (Only hotspot is the door)
       ====================================== -->
         <div id="caravanSceneOutside" class="game-scene hidden">
 
@@ -115,9 +132,60 @@
                 alt=""
         >
 
+        <!-- =====================================
+                Walking to Work Scene DAY
+          ====================================== -->
+        <div id="walkingToWorkDay" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/StreetDay.png"
+                    alt=""
+            >
+
+
+        </div>
+
+        <!-- =====================================
+               Outside work scene day
+         ====================================== -->
+        <div id="OutsideWorkDay" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/Work_Outside_D.png"
+                    alt=""
+            >
+        </div>
+
+        <!-- =====================================
+              AT work scene day
+        ====================================== -->
+        <div id="work" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/Work_Base.png"
+                    alt=""
+            >
+        </div>
 
     </div>
+    <!-- =====================================
+                Walking to Work Scene
+          ====================================== -->
+    <div id="walkingToWorkDay" class="game-scene hidden">
 
+        <img
+                class="Background"
+                src="/Images/StreetDay.png"
+                alt=""
+        >
+    </div>
+
+
+
+</div>
 
     <!-- =========================================
          BOTTOM BAR
@@ -239,7 +307,9 @@
 
     </div>
 
-<script src="dialogue.js"></script>
-
+<script
+        type="module"
+        src="dialogue.js"
+></script>
 </body>
 </html>

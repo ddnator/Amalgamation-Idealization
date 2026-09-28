@@ -52,7 +52,7 @@ body {
 /* =========================
    INVISIBLE HOTSPOTS
 ========================= */
-
+.BreakfastOverlay,
 .Bed,
 .Computer,
 .Kitchen,
@@ -102,7 +102,14 @@ body {
     height: 100px;
 }
 
+.BreakfastOverlay {
+    bottom: 0;
+    left: 0;
 
+    width: 100%;
+    height: 100%;
+    opacity: 100; !important;
+}
 /* DOOR of Caravan */
 
 .Door {
@@ -145,3 +152,8 @@ body {
 .game-scene.hidden {
     display: none !important;
 }
+
+/* =========================
+   BREAKFAST OVERLAY
+========================= */
+
