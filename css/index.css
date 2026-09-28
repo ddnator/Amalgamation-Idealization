@@ -7,6 +7,7 @@
 body {
     background-image: url("../images/background-home.png");
     background-size: cover;
+    height: 100vh;
 }
 
 @keyframes gradientMove {
@@ -74,9 +75,17 @@ p {
 
 nav {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: flex-end;
-    gap: 30px;
+    gap: 40px;
     margin-right: 1vw;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+
 }
 
 nav a {
@@ -103,6 +112,30 @@ a:hover {
     transform: scale(1.1);
     color: #3a3522;
 
+}
+
+.profileImg {
+    width: 6vw;
+    height: auto;
+}
+
+.contextDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.contextBody {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.contextBody p {
+    max-width: 60vw;
+    font-size: 2rem;
 }
 
 .backToHomeA {
@@ -159,12 +192,9 @@ main div {
     flex-direction: column;
 }
 
-body {
-    background-color: white;
-}
 
 footer {
-    margin-top: 23vh;
+    margin-top: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
