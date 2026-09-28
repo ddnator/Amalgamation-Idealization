@@ -70,9 +70,7 @@ export function runAction(action) {
         action === "level4"
     ) {
 
-        goToLEvel(
-            4
-        );
+        window.location.href = "../level4/level4.php";
 
         return;
     }
