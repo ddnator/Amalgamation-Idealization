@@ -1,3 +1,24 @@
+<?php
+require_once __DIR__ . '/../includes/database.php';
+
+$result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
+$moneyRow = mysqli_fetch_assoc($result);
+$moneyMade = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $earned = (int)($_POST['earned'] ?? 0);
+
+    $stmt = mysqli_prepare($db, 'UPDATE money_made SET amount = amount + ? LIMIT 1');
+    mysqli_stmt_bind_param($stmt, 'i', $earned);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
+    $moneyRow = mysqli_fetch_assoc($result);
+    $moneyMadeNew = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
+
+    exit;
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -109,7 +130,7 @@
             <p>Working...</p>
         </div>
         <div id="money-made">
-
+            <p>$<?php echo number_format($moneyMade, 0); ?></p>
         </div>
     </div>
     <div class="work-bar" role="progressbar" aria-label="work-value" aria-valuenow="10" aria-valuemin="0"
