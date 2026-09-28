@@ -23,7 +23,9 @@ import {
     endTitle,
     endText,
 
-    restartButton, hotspotKitchen, hotspotBed, hotspotComputer
+    hotspotjim,
+
+    restartButton, hotspotKitchen, hotspotBed, hotspotComputer, hotspotWork
 } from "./element.js";
 import {
     setScene,
@@ -276,13 +278,13 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "OutsideWorkDay",
+                action: "action_OutsideWorkDay",
 
             }
         ]
     },
     /* =====================================
-           WINSTON NUCLEAR POWERPLANT
+           WINSTON NUCLEAR POWER PLANT
         ====================================== */
 
     winston_nuclear_powerplant: {
@@ -301,19 +303,19 @@ const dialogueTree = {
                 speak:
                     false,
 
-                next:
-                    "arrive_work"
+                action:
+                    "action_work"
             }
         ]
     },
 
-    arrive_work: {
+    work: {
 
         speaker:
             "NARRATOR",
 
         text:
-            "You have arrived at work,\nyour coworker Jim is waving at u",
+            "You have arrived at work,\nyour favorite coworker Jim is waving at you",
 
         options: [
             {
@@ -324,7 +326,7 @@ const dialogueTree = {
                     false,
 
                 action:
-                    "show_work"
+                    "action_work"
             }
         ]
     },
@@ -347,16 +349,15 @@ const dialogueTree = {
                 text:
                     "No I have not heard it.",
 
-                next:
-                    "jim_upgrade"
+                action: "action_jimTwo"
+
             },
 
             {
                 text:
                     "I slept like shit last night.",
 
-                next:
-                    "jim_bad_sleep"
+                action: "action_jimThree"
             },
 
             {
@@ -364,7 +365,7 @@ const dialogueTree = {
                     "Bye.",
 
                 action:
-                    "leave_jim"
+                    "action_leave_jim"
             }
         ]
     },
@@ -385,10 +386,9 @@ const dialogueTree = {
         options: [
             {
                 text:
-                    "No I do not remeber what did happen?",
+                    "No I do not remember, what happened?",
 
-                next:
-                    "jim_lisa"
+                action: "action_jimFour"
             },
 
             {
@@ -404,7 +404,7 @@ const dialogueTree = {
                     "Bye.",
 
                 action:
-                    "leave_jim"
+                    "action_leave_jim"
             }
         ]
     },
@@ -427,8 +427,7 @@ const dialogueTree = {
                 text:
                     "No I do not remeber what did happen?",
 
-                next:
-                    "jim_lisa"
+                action: "action_jimFour"
             },
 
             {
@@ -444,7 +443,7 @@ const dialogueTree = {
                     "Bye",
 
                 action:
-                    "leave_jim"
+                    "action_leave_jim"
             }
         ]
     },
@@ -460,7 +459,7 @@ const dialogueTree = {
             "JIM",
 
         text:
-            "U really do have problems remembering things don't u? She got taken away by them to some facility and we have not seen her since.",
+            "You really do have problems remembering things don't you? She got taken away by them to some facility and we have not seen her since.",
 
         options: [
             {
@@ -488,7 +487,7 @@ const dialogueTree = {
                     "Bye.",
 
                 action:
-                    "leave_jim"
+                    "action_leave_jim"
             }
         ]
     },
@@ -508,7 +507,7 @@ const dialogueTree = {
                     "Bye.",
 
                 action:
-                    "leave_jim"
+                    "action_leave_jim"
             }
         ]
     },
@@ -538,7 +537,7 @@ const dialogueTree = {
                     false,
 
                 action:
-                    "start_minigame"
+                    "action_start_minigame"
             },
 
             {
@@ -1427,5 +1426,30 @@ hotspotComputer.addEventListener(
         startDialogue("computer");
     }
 );
+/* =========================================
+   WORK HOTSPOTS
+========================================= */
 
+hotspotjim.addEventListener(
+    "click",
+    () => {
 
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_jimOne")
+    }
+);
+
+hotspotWork.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_start_minigame")
+    }
+);

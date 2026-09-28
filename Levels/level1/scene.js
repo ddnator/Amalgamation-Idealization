@@ -12,7 +12,7 @@ import {
     dialogueOptions,
     hotspotBoss,
     hotspotDoor,
-    hotspotJim,
+    hotspotjim,
     locationLabel,
     normalBar,
     sceneName,
@@ -28,6 +28,9 @@ const homeHotspots =
 
 const allHotspots =
     ".Bed, .Computer, .Breakfast, .Kitchen, .Door";
+
+const workHotspots =
+    ".jim, .work, .boss";
 export function setScene(scene) {
 
     gameState.currentScene = scene;
@@ -109,11 +112,21 @@ export function setScene(scene) {
     }
 
     else if ( scene === "work" )
-    { locationLabel.textContent = "WORK";
+    {
+
+
+        document
+            .getElementById("work")
+            .classList.remove("hidden");
+        locationLabel.textContent = "WORK";
         barLocation.textContent = "WORK";
         sceneName.textContent = "AT WORK";
         barHint.textContent = "JIM IS WAVING AT U.";
-        document .querySelectorAll( ".work-hotspot" )
+
+        const workHotspots =
+        ".jim, .work, .boss";
+
+        document .querySelectorAll( workHotspots )
 
             .forEach( hotspot =>
             { hotspot.classList.remove( "hidden" ); } ); }
@@ -139,7 +152,55 @@ export function setScene(scene) {
                 }
             ); }
 
+    else if (scene === "jim1") {
 
+        document
+            .getElementById("jim1")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "JIM1";
+        barLocation.textContent = "JIM1";
+        sceneName.textContent = "JIM1";
+        barHint.textContent = "JIM1.";
+
+    }
+
+    else if (scene === "jim2") {
+
+        document
+            .getElementById("jim2")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "JIM2";
+        barLocation.textContent = "JIM2";
+        sceneName.textContent = "JIM2";
+        barHint.textContent = "JIM2.";
+
+    }
+    else if (scene === "jim3") {
+
+        document
+            .getElementById("jim3")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "JIM3";
+        barLocation.textContent = "JIM3";
+        sceneName.textContent = "JIM3";
+        barHint.textContent = "JIM3.";
+
+    }
+    else if (scene === "jim4") {
+
+        document
+            .getElementById("jim4")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "JIM4";
+        barLocation.textContent = "JIM4";
+        sceneName.textContent = "JIM4";
+        barHint.textContent = "JIM4.";
+
+    }
     showNormalBar();
 }
 
