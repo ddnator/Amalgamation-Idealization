@@ -191,7 +191,7 @@
             >
 
             <button
-                    id="hotspot-talkToBoss"
+                    id="hotspot-boss"
                     class="boss"
                     type="button"
             ></button>
@@ -234,6 +234,15 @@
             <img
                     class="Background"
                     src="/Images/jimAngry.png"
+                    alt=""
+            >
+        </div>
+
+        <div id="boss" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/boss.png"
                     alt=""
             >
         </div>

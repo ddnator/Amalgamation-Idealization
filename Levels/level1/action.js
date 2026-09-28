@@ -156,6 +156,29 @@ export function runAction(action) {
         return;
     }
 
+    if (
+        action === "action_boss"
+    ) {
+
+        startDialogue("boss_task");
+
+        setScene("boss");
+
+        return;
+    }
+
+    if (
+        action === "close"
+    ) {
+
+        closeDialogue();
+        
+        setScene("work");
+
+        return;
+    }
+
+
 
     /* START REACTOR */
 

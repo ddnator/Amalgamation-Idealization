@@ -201,6 +201,19 @@ export function setScene(scene) {
         barHint.textContent = "JIM4.";
 
     }
+
+    else if (scene === "boss") {
+
+        document
+            .getElementById("boss")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "BOSS";
+        barLocation.textContent = "BOSS";
+        sceneName.textContent = "BOSS";
+        barHint.textContent = "BOSS";
+
+    }
     showNormalBar();
 }
 

@@ -25,7 +25,7 @@ import {
 
     hotspotjim,
 
-    restartButton, hotspotKitchen, hotspotBed, hotspotComputer, hotspotWork
+    restartButton, hotspotKitchen, hotspotBed, hotspotComputer, hotspotWork, hotspotBoss
 } from "./element.js";
 import {
     setScene,
@@ -342,12 +342,12 @@ const dialogueTree = {
             "JIM",
 
         text:
-            "Hi Y/N how are you doing; Did you hear that they upgraded our boss last night?",
+            "Hi Y/N how are you doing; Did you hear that they upgraded our boss last night? I think he's trying to suck up to our new 'overlords' by looking less human",
 
         options: [
             {
                 text:
-                    "No I have not heard it.",
+                    "First time I'm hearing about it.",
 
                 action: "action_jimTwo"
 
@@ -381,19 +381,19 @@ const dialogueTree = {
             "JIM",
 
         text:
-            "Well it got a crazy upgrade to its hearing so it might hear us right now, o by the way do not forget to hit ur quota u know what happend to Lisa when she didn't.",
+            "Well it got a crazy upgrade to its hearing so it might hear us right now. Oh by the way do not forget to hit your quota! You know what happened to Lisa when she didn't.",
 
         options: [
             {
                 text:
-                    "No I do not remember, what happened?",
+                    "I don't recall, what happened?",
 
                 action: "action_jimFour"
             },
 
             {
                 text:
-                    "O yeah that is what happened.",
+                    "Oh, I remember her sudden disappearance now ",
 
                 next:
                     "jim_remember"
@@ -420,19 +420,19 @@ const dialogueTree = {
             "JIM",
 
         text:
-            "O that is unfortunate but remember to hit ur quota today u know what happend to Lisa when she didn't.",
+            "That is shitty, even more important to not forget to hit your quota today then. You know what happened to Lisa when she fell behind.",
 
         options: [
             {
                 text:
-                    "No I do not remeber what did happen?",
+                    "Don't worry about it, but I don't recall what happened to her?",
 
                 action: "action_jimFour"
             },
 
             {
                 text:
-                    "Yeah I do remeber such a shame what happend.",
+                    "Oh, I remember her sudden disappearance now ",
 
                 next:
                     "jim_remember"
@@ -526,7 +526,7 @@ const dialogueTree = {
             "ai",
 
         text:
-            "Hi Y/N good to see u are on time ur task for today is just to manage the factory and put in the code, goodluck and keep up the good work.",
+            "Morning Y/N, good to see you are on time today. The task for today is to manage the factory and put in the code, even you can manage that, right?",
 
         options: [
             {
@@ -1451,5 +1451,19 @@ hotspotWork.addEventListener(
         }
 
         runAction("action_start_minigame")
+    }
+);
+
+hotspotBoss.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_boss")
+
+        startDialogue("boss_task");
     }
 );
