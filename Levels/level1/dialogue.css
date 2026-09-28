@@ -4,12 +4,12 @@
     --black: #000000;
     --dark: #070707;
 
-    --white: #eeeeE6;
+    --white: #647859;
 
-    --green: #47d92f;
-    --dark-green: #1f7218;
+    --green: #7c3838;
+    --dark-green: #451f1f;
 
-    --gray: #707069;
+    --gray: #647859;
 }
 
 
@@ -32,7 +32,7 @@ body {
 
     overflow: hidden;
 
-    background: #000;
+    background: white;
 }
 
 
@@ -41,8 +41,7 @@ body {
         "Pixelify Sans",
         monospace;
 
-    color:
-        var(--white);
+    color: var(--black);
 }
 
 
@@ -58,7 +57,7 @@ body {
 
     overflow: hidden;
 
-    background: #000;
+    background: white;
 }
 
 
@@ -81,7 +80,7 @@ body {
 
     overflow: hidden;
 
-    background: #101010;
+    background: white;
 
     z-index: 1;
 }
@@ -102,8 +101,7 @@ body {
 
     justify-content: space-between;
 
-    color:
-        var(--green);
+    color: white;
 
     font-size:
         17px;
@@ -127,8 +125,7 @@ body {
 
     overflow: hidden;
 
-    background:
-        #101010;
+    background: white;
 }
 
 
@@ -175,8 +172,7 @@ body {
     border-radius:
         0;
 
-    background:
-        rgba(0, 0, 0, 0.35);
+    background: white;
 
     color:
         var(--green);
@@ -294,8 +290,7 @@ body {
     height:
         var(--bar-height);
 
-    background:
-        #030303;
+    background: white;
 
     border-top:
         4px solid var(--white);
@@ -573,8 +568,7 @@ body {
     align-items:
         center;
 
-    background:
-        #000;
+    background: white;
 
     z-index:
         500;
