@@ -6,4 +6,4 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("location: login.php");
 }
 //Get name from the SESSION
-$userName = $_SESSION['userName'];
+$userName = $_SESSION['username'];

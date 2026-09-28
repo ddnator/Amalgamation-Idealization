@@ -83,7 +83,7 @@ if(isset($_POST['submit'])) {
             <?= $errors['password'] ?? '' ?>
         </p>
         <div class=submitRegisterDiv>
-            <input type="submit" name="submit">
+            <input type="submit" name="submit" value='Log in'>
             <a href="register.php">Register</a>
         </div>
         </form>
