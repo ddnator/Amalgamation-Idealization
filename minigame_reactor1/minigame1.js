@@ -151,6 +151,7 @@ function choicesReaction(choiceIndex) {
         message.innerText = 'You increased the power usage, the core is now getting enough power.'
         button.innerText = 'Proceed';
         image.src = '../images/good-job.png'
+        button.addEventListener('click', () => updateMoney(50))
         button.addEventListener('click', () => {
             window.location.href = "../minigame_reactor2/index.php?points=100";
         });
