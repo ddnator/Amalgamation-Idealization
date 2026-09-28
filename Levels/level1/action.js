@@ -83,35 +83,75 @@ export function runAction(action) {
 
     /* Winston Nuclear PowerPlant outside*/
 
-    if (action === "OutsideWorkDay") {
+    if (action === "action_OutsideWorkDay") {
 
         setScene("OutsideWorkDay");
 
         startDialogue("winston_nuclear_powerplant");
-
         return;
     }
     /* ARRIVE AT WORK */
 
     if (
-        action === "show_work"
+        action === "action_work"
     ) {
 
-        startDialogue("jim_intro");
+        startDialogue("work");
 
         setScene("work");
 
         return;
     }
 
+    if (
+        action === "action_jimOne"
+    ) {
+
+        setScene("jim1");
+
+        startDialogue("jim_intro");
+        return;
+    }
+
+    if (
+        action === "action_jimTwo"
+    ) {
+
+        setScene("jim2");
+
+        startDialogue("jim_upgrade");
+        return;
+    }
+
+    if (
+        action === "action_jimThree"
+    ) {
+
+        setScene("jim3");
+
+        startDialogue("jim_bad_sleep");
+        return;
+    }
+
+    if (
+        action === "action_jimFour"
+    ) {
+
+        setScene("jim4");
+
+        startDialogue("jim_lisa");
+        return;
+    }
 
     /* LEAVE JIM */
 
     if (
-        action === "leave_jim"
+        action === "action_leave_jim"
     ) {
 
         closeDialogue();
+
+        setScene("work");
 
         return;
     }
@@ -120,7 +160,7 @@ export function runAction(action) {
     /* START REACTOR */
 
     if (
-        action === "start_minigame"
+        action === "action_start_minigame"
     ) {
 
         startMinigame();

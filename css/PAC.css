@@ -56,6 +56,9 @@ body {
 .Bed,
 .Computer,
 .Kitchen,
+.jim,
+.work,
+.boss,
 .Door {
     position: absolute;
 
@@ -102,6 +105,32 @@ body {
     height: 100px;
 }
 
+/* JIM */
+
+.jim {
+    bottom: 25%; !important;
+    left: 80%; !important;
+
+    width: 100px; !important;
+    height: 200px; !important;
+}
+
+/* MINIGAME */
+.work {
+     bottom: 40%; !important;
+     right: 20%; !important;
+     width: 300px; !important;
+     height: 200px; !important;
+ }
+
+/* BOSS */
+
+.boss {
+    bottom: 50%; !important;
+    left: 10%; !important;
+    width: 300px; !important;
+    height: 650px; !important;
+}
 .BreakfastOverlay {
     bottom: 0;
     left: 0;
@@ -139,6 +168,17 @@ body {
 }
 
 .Kitchen:hover + .KitchenOverlay {
+    opacity: 1;
+}
+
+
+.jim:hover + .jimOverlay {
+    opacity: 1;
+}
+.boss:hover + .bossOverlay {
+    opacity: 1;
+}
+.work:hover + .workOverlay {
     opacity: 1;
 }
 

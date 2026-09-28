@@ -1,24 +1,38 @@
 <?php
-require_once __DIR__ . '/../includes/database.php';
+//require_once __DIR__ . '/../includes/database.php';
+//
+//$result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
+//$moneyRow = mysqli_fetch_assoc($result);
+//$moneyMade = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
+//
+//if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//    $earned = (int)($_POST['earned'] ?? 0);
+//
+//    $stmt = mysqli_prepare($db, 'UPDATE money_made SET amount = amount + ? LIMIT 1');
+//    mysqli_stmt_bind_param($stmt, 'i', $earned);
+//    mysqli_stmt_execute($stmt);
+//
+//    $result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
+//    $moneyRow = mysqli_fetch_assoc($result);
+//    $moneyMadeNew = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
+//
+//    exit;
+//}
 
-$result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
-$moneyRow = mysqli_fetch_assoc($result);
-$moneyMade = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
+session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $earned = (int)($_POST['earned'] ?? 0);
+if (!isset($_SESSION["points"])) {
+    $_SESSION["points"] = 0;
+}
 
-    $stmt = mysqli_prepare($db, 'UPDATE money_made SET amount = amount + ? LIMIT 1');
-    mysqli_stmt_bind_param($stmt, 'i', $earned);
-    mysqli_stmt_execute($stmt);
+if (isset($_GET["points"])) {
+    $_SESSION["points"] += (int)$_GET["points"];
 
-    $result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
-    $moneyRow = mysqli_fetch_assoc($result);
-    $moneyMadeNew = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
-
+    header("location: index.php");
     exit;
 }
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,6 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>Reactor 01</h1>
         <p>Core stability interface</p>
     </div>
+
+    <div id="point-amount">
+        <p id="point">Points: <?php echo $_SESSION["points"]; ?></p>
+    </div>
+
     <div id="date-time">
         <p id="date"></p>
         <p id="time"></p>

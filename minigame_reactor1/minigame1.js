@@ -33,6 +33,7 @@ function updateMoney(amount) {
     });
 }
 
+
 window.addEventListener('load', () => addMessage(0));
 const messagesContainer = document.getElementById('messages');
 
@@ -151,7 +152,7 @@ function choicesReaction(choiceIndex) {
         button.innerText = 'Proceed';
         image.src = '../images/good-job.png'
         button.addEventListener('click', () => {
-            window.location.href = "../minigame_reactor2/index.html"
+            window.location.href = "../minigame_reactor2/index.php?points=100";
         });
     } else if (choiceIndex === 7) {
         message.innerText = 'You increased the pressure, this does nothing.'

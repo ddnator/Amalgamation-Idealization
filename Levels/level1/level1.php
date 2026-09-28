@@ -142,8 +142,6 @@
                     src="/Images/StreetDay.png"
                     alt=""
             >
-
-
         </div>
 
         <!-- =====================================
@@ -168,23 +166,82 @@
                     src="/Images/Work_Base.png"
                     alt=""
             >
+
+            <button
+                    id="hotspot-jim"
+                    class="jim"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay jimOverlay"
+                    src="/Images/Work_JimO.png"
+                    alt=""
+            >
+            <button
+                    id="hotspot-work"
+                    class="work"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay workOverlay"
+                    src="/Images/Work_MinigameO.png"
+                    alt=""
+            >
+
+            <button
+                    id="hotspot-talkToBoss"
+                    class="boss"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay bossOverlay"
+                    src="/Images/Work_TalkToBossO.png"
+                    alt=""
+            >
         </div>
 
+        <div id="jim1" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/jimHappy.png"
+                    alt=""
+            >
+        </div>
+
+        <div id="jim2" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/jimSpeaking.png"
+                    alt=""
+            >
+        </div>
+
+        <div id="jim3" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/jimNeutral.png"
+                    alt=""
+            >
+        </div>
+        <div id="jim4" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/jimAngry.png"
+                    alt=""
+            >
+        </div>
+
+        <!-- =====================================
+                All Scenes must be INSIDE this </div> otherwise it will not work!
+             ====================================== -->
     </div>
-    <!-- =====================================
-                Walking to Work Scene
-          ====================================== -->
-    <div id="walkingToWorkDay" class="game-scene hidden">
-
-        <img
-                class="Background"
-                src="/Images/StreetDay.png"
-                alt=""
-        >
-    </div>
-
-
-
 </div>
 
     <!-- =========================================
