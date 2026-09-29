@@ -26,10 +26,16 @@ function updateDateTime() {
     dateElement.textContent = date;
     timeElement.textContent = time;
 }
-
-
 setInterval(updateDateTime, 1000);
 updateDateTime();
+
+async function updateMoney(amount) {
+    const response = await fetch('minigame2.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({earned: amount})
+    });
+}
 
 
 function startGame() {
@@ -96,8 +102,8 @@ function finishReactor2() {
 
     gameFinished = true;
     nextNumberText.textContent = "Done!";
-
     window.location.href = "index.php?points=100";
+
     setTimeout(returnToLevel1, 700);
 }
 
