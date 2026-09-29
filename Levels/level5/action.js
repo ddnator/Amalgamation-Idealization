@@ -204,15 +204,7 @@ function startMinigame() {
         ../../
     */
 
-    reactorMinigameFrame.src =
-        "../../minigame_reactor1/mingame1.html?run="
-        +
-        Date.now();
-
-
-    minigameScreen.classList.remove(
-        "hidden"
-    );
+    window.location.href = "../../minigame_reactor2/index.php";
 }
 
 

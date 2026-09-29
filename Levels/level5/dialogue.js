@@ -75,7 +75,7 @@ const dialogueTree = {
                     false,
 
                 action:
-                    ""//check
+                    "start_minigame"//check
             }
         ]
     },
