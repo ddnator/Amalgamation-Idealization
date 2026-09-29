@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
             $errors['username'] = 'Username is already in use, please try another name';
         } else {
             $securePassword = password_hash($password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO `users`(`banknumber`, `password`, `username`) VALUES ('$banknumber','$securePassword', '$username')";
+            $query = "INSERT INTO `users`(`banknumber`, `password`, `username`,`money`) VALUES ('$banknumber','$securePassword', '$username', 100)";
             mysqli_query($db, $query);
             header("location: login.php");
         }

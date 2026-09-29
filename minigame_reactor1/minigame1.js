@@ -7,7 +7,6 @@ const closeButton = choiceContainer.querySelector('.close');
 const dialogContent = choiceContainer.querySelector('#dialog-content');
 
 const moneyContainer = document.querySelector('#money-made');
-window.addEventListener('load', () => updateMoney());
 
 closeButton.addEventListener('click', () => {
     choiceContainer.close();
@@ -25,8 +24,8 @@ function updateDateTime() {
 setInterval(updateDateTime, 1000);
 updateDateTime();
 
-function updateMoney(amount) {
-    fetch('minigame1.php', {
+async function updateMoney(amount) {
+    const response = await fetch('minigame1.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: new URLSearchParams({earned: amount})
@@ -123,9 +122,11 @@ function choicesReaction(choiceIndex) {
         message.innerText = 'You increased the coolant flow, the temperature is dropping.'
         button.innerText = 'Proceed';
         image.src = '../images/good-job.png'
-        button.addEventListener('click', () => addMessage(1));
-        button.addEventListener('click', () => addChoices(1))
-        button.addEventListener('click', () => updateMoney(50))
+        button.addEventListener('click', async () => {
+            await updateMoney(50);
+            addMessage(1);
+            addChoices(1);
+        });
     } else if (choiceIndex === 3) {
         message.innerText = 'You increased the pressure, the temperature is rising even more.'
         button.innerText = 'Go back';
@@ -151,8 +152,8 @@ function choicesReaction(choiceIndex) {
         message.innerText = 'You increased the power usage, the core is now getting enough power.'
         button.innerText = 'Proceed';
         image.src = '../images/good-job.png'
-        button.addEventListener('click', () => updateMoney(50))
-        button.addEventListener('click', () => {
+        button.addEventListener('click', async () => {
+            await updateMoney(50);
             window.location.href = "../minigame_reactor2/index.php?points=100";
         });
     } else if (choiceIndex === 7) {
