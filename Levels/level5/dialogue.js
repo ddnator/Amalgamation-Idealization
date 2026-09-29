@@ -48,7 +48,6 @@ const hidden = document.getElementById('hidden');
 let gameComplete = 'not done';
 if (hidden) {
     gameComplete = hidden.dataset.myValue;
-    console.log(value); // "done"
 }
 const dialogueTree = {
     level_start: {
