@@ -1,25 +1,27 @@
 <?php
 require_once __DIR__ . '/../includes/database.php';
-
-$result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
-$moneyRow = mysqli_fetch_assoc($result);
-$moneyMade = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
+require_once __DIR__ . "/../includes/isUserLoggedIn.php";
+if ($_SESSION['logged_in'] && $_SESSION['username']) {
+    $username = $_SESSION['username'];
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $earned = (int)($_POST['earned'] ?? 0);
 
-    $stmt = mysqli_prepare($db, 'UPDATE money_made SET amount = amount + ? LIMIT 1');
-    mysqli_stmt_bind_param($stmt, 'i', $earned);
+    $stmt = mysqli_prepare($db, 'UPDATE users SET money = money + ? WHERE username = ?');
+    mysqli_stmt_bind_param($stmt, 'is', $earned, $username);
     mysqli_stmt_execute($stmt);
 
-    $result = mysqli_query($db, 'SELECT amount FROM money_made LIMIT 1');
-    $moneyRow = mysqli_fetch_assoc($result);
-    $moneyMadeNew = $moneyRow === null ? 0 : (float)$moneyRow['amount'];
-
+    header('Content-Type: application/json');
+    echo json_encode(['success' => true]);
     exit;
 }
 
-session_start();
+$stmt = mysqli_prepare($db, 'SELECT money FROM users WHERE username = ?');
+mysqli_stmt_bind_param($stmt, 's', $username);
+mysqli_stmt_execute($stmt);
+$user = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+
 
 if (!isset($_SESSION["points"])) {
     $_SESSION["points"] = 0;
@@ -149,7 +151,7 @@ if (isset($_GET["points"])) {
             <p>Working...</p>
         </div>
         <div id="money-made">
-            <p>$<?php echo number_format($moneyMade, 0); ?></p>
+            <p>$<?php echo $user['money'] ?></p>
         </div>
     </div>
     <div class="work-bar" role="progressbar" aria-label="work-value" aria-valuenow="10" aria-valuemin="0"
