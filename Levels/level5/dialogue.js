@@ -44,12 +44,18 @@ import {
    DIALOGUE TREE
 ========================================= */
 let breakfast = false;
+const hidden = document.getElementById('hidden');
+let gameComplete = 'not done';
+if (hidden) {
+    gameComplete = hidden.dataset.myValue;
+    console.log(value); // "done"
+}
 const dialogueTree = {
     level_start: {
         speaker:
             "NARRATOR",
         text:
-            "You arrive at work",
+            "You arrive at work.",
 
         options: [
             {
@@ -61,50 +67,195 @@ const dialogueTree = {
 
                 next:
                     "boss"
+            },
+            {
+                text:
+                    "Work",
+
+                speak:
+                    false,
+
+                action:
+                    ""//check
             }
         ]
     },
 
     boss: {
-        speaker: "Boss",
+        speaker: "boss",
         text: "Hi Y/N ready for a day full of work? The others are gone now so no more distractions for you. You know what the task is for today?",
-        
+
         options: [
             {
-                text: 
+                text:
                     "Where is everyone?",
 
-                speak: 
+                speak:
                     false,
 
                 next: "quota"
             },
             {
-                text: 
+                text:
                     "What is my task today",
 
-                speak: 
+                speak:
                     false,
 
                 next: "minigame_explanation"
             },
             {
-                text: 
+                text:
                     "I got a strange letter, do you know what it is?",
 
-                speak: 
+                speak:
                     false,
 
-                next: "show_me"
+                next: "strange_letter"
             },
             {
-                text: 
+                text:
                     "bye",
 
-                speak: 
+                speak:
                     false,
 
                 next: "level_start"
+            }
+        ]
+    },
+
+    quota: {
+        speaker:
+            "AI",
+        text: "They did not meet their quota yesterday.",
+
+        options: [
+            {
+                text: "Continue",
+
+                speak: false,
+
+                next:
+                    "boss"
+            }
+        ]
+    },
+
+    minigame_explanation: {
+        speaker:
+            "AI",
+        text: "Today I want you to fix reactor 2. The system of that reactor has recently crashed and nobody has fixed it yet. \n The way you fix the system is by pressing the numbers in the right order.",
+
+        options: [
+            {
+                text: "Continue",
+
+                speak: false,
+
+                next: "boss"
+            }
+        ]
+    },
+
+    strange_letter: {
+        speaker:
+            "AI",
+        text: "Can you show me?",
+
+        options: [
+            {
+                text: "Yes, it's here in my pocket.",
+
+                speak: false,
+
+                next: "show_it"
+            },
+            {
+                text: "No I left it at home",
+
+                speak: false,
+
+                next: "okay"
+            }
+        ]
+    },
+
+    show_it: {
+        speaker:
+            "AI",
+        text: "I am so dissapointed in you, have a good life rotting in hell",
+
+        options: [
+            {
+                text: "Game over",
+
+                speak: false,
+
+                action: "game_over"
+            }
+        ]
+    },
+
+    okay: {
+        speaker:
+            "AI",
+        text: "Okay",
+
+        options: [
+            {
+                text: "Continue",
+
+                speak: false,
+
+                next: "boss"
+            }
+        ]
+    },
+
+    okay: {
+        speaker:
+            "AI",
+        text: "Okay",
+
+        options: [
+            {
+                text: "Continue",
+
+                speak: false,
+
+                next: "game_over"
+            }
+        ]
+    },
+
+    minigame_done: {
+        speaker: "AI",
+        text: "Goodjob! Tomorow after work we got something for you!",
+
+        options: [
+            {
+                text: "Ok thanks!",
+                speak: false,
+                next: "finish_work"
+            }
+        ]
+    },
+
+    finish_work: {
+        speaker: "Narrator",
+        text: "",
+
+        options: [
+            {
+                text: "Go to bar",
+                speak: false,
+                action: "level6"
+            },
+            {
+                text: "Go home",
+                speak: false,
+                action: "level7"
             }
         ]
     }
@@ -146,9 +297,15 @@ function startLevel1() {
 
     );
 
-    startDialogue(
-        "level_start"
-    );
+    if (gameComplete === "done") {
+        startDialogue(
+            "minigame_done"
+        );
+    } else {
+        startDialogue(
+            "level_start"
+        );
+    }
 }
 
 
@@ -876,5 +1033,4 @@ hotspotComputer.addEventListener(
         startDialogue("computer");
     }
 );
-
 

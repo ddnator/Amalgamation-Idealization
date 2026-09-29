@@ -98,11 +98,11 @@ function finishReactor2() {
     nextNumberText.textContent = "Done!";
 
     window.location.href = "index.php?points=100";
-    setTimeout(returnToLevel1, 700);
+    setTimeout(returnToLevel5, 700);
 }
 
-function returnToLevel1() {
-    window.location.href = "../Levels/level1/level1.php?reactorComplete=1&points=100";
+function returnToLevel5() {
+    window.location.href = "../Levels/level5/level5.php?reactorComplete=1&points=100";
 }
 
 restartButton.addEventListener("click", startGame);

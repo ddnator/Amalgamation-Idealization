@@ -129,15 +129,31 @@ export function runAction(action) {
     }
 
 
+    if (
+        action === "game_over"
+    ) {
+        window.location.href = "../../gameoverscreen.html";
 
+        return
+    }
 
     /* LEVEL 5 */
 
     if (
-        action === "level5"
+        action === "level6"
     ) {
 
-        window.location.href = "../level5/level5.php";
+        window.location.href = "../level6/level6.php";
+
+
+        return;
+    }
+
+    if (
+        action === "level7"
+    ) {
+
+        window.location.href = "../level7/level7.php";
 
 
         return;
