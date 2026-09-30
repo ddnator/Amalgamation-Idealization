@@ -42,6 +42,12 @@ import {
     closeDialogue,
     runAction
 } from "./action.js";
+
+const hidden = document.getElementById('hidden');
+let gameComplete = 'not done';
+if (hidden) {
+    gameComplete = hidden.dataset.myValue;
+}
 /* =========================================
    DIALOGUE TREE
 ========================================= */
@@ -567,18 +573,28 @@ const dialogueTree = {
             "ai",
 
         text:
-            "...",
+            "Good job today!",
 
         options: [
             {
                 text:
-                    "Leave",
+                    "Go home",
 
                 speak:
                     false,
 
                 action:
-                    "close"
+                    "level2"
+            },
+            {
+                text:
+                    "Go to the bar",
+
+                speak:
+                    false,
+
+                action:
+                    "level3"
             }
         ]
     },
@@ -696,9 +712,15 @@ function startLevel1() {
 
     );
 
-    startDialogue(
-        "level_start"
-    );
+    if (gameComplete === "done") {
+        startDialogue(
+            "boss_after"
+        );
+    } else {
+        startDialogue(
+            "level_start"
+        );
+    }
 }
 
 

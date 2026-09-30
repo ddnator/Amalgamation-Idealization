@@ -1,3 +1,12 @@
+<?php
+$gamecomplete = false;
+if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
+    if ($_GET['reactorComplete'] === '1' && $_GET['points'] === '100') {
+        $gamecomplete = true;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +30,12 @@
 </head>
 
 <body>
+
+<body>
+    <?php if ($gamecomplete) { ?>
+    <div id="hidden" data-my-value="done"></div>
+    <?php } ?>
+<div id="game">
 
 <div id="game">
 

@@ -199,9 +199,7 @@ export function runAction(action) {
         action === "level2"
     ) {
 
-        goToLevel(
-            2
-        );
+        window.location.href = "../level2/level2.php";
 
         return;
     }
@@ -213,9 +211,7 @@ export function runAction(action) {
         action === "level3"
     ) {
 
-        goToLevel(
-            3
-        );
+        window.location.href = "../level3/level3.php";
 
         return;
     }
