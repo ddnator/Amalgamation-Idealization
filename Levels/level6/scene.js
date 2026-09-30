@@ -50,7 +50,7 @@ export function setScene(scene) {
 
         locationLabel.textContent = "HOME";
         barLocation.textContent = "HOME";
-        sceneName.textContent = "";
+        sceneName.textContent = "HOME";
         barHint.textContent = "CLICK SOMETHING.";
 
         const homeHotspots =

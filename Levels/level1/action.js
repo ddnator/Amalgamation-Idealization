@@ -15,8 +15,8 @@ startDialogue("outside_caravan"); */
 /* =========================================
    ACTIONS
 ========================================= */
-import { gameState } from "./gameState.js";
-import { minigameScreen, reactorMinigameFrame } from "./element.js";
+import {gameState} from "./gameState.js";
+import {minigameScreen, reactorMinigameFrame} from "./element.js";
 
 export function runAction(action) {
 
@@ -172,7 +172,7 @@ export function runAction(action) {
     ) {
 
         closeDialogue();
-
+        
         setScene("work");
 
         return;
@@ -187,7 +187,6 @@ export function runAction(action) {
     ) {
 
         startMinigame();
-        window.location.href = "/minigame_reactor1/minigame1.php";
 
         return;
     }
@@ -199,7 +198,9 @@ export function runAction(action) {
         action === "level2"
     ) {
 
-        window.location.href = "../level2/level2.php";
+        goToLevel(
+            2
+        );
 
         return;
     }
@@ -211,7 +212,9 @@ export function runAction(action) {
         action === "level3"
     ) {
 
-        window.location.href = "../level3/level3.php";
+        goToLevel(
+            3
+        );
 
         return;
     }
@@ -222,7 +225,7 @@ export function runAction(action) {
    CLOSE DIALOGUE
 ========================================= */
 
-export function closeDialogue() {
+ export function closeDialogue() {
 
     gameState.pendingOption =
         null;
@@ -233,7 +236,7 @@ export function closeDialogue() {
     gameState.inputLocked =
         false;
 
-    showBreakfastOverlay(null);
+     showBreakfastOverlay(null);
 
     showNormalBar();
 }
@@ -249,9 +252,9 @@ function startMinigame() {
 
 
     /*
-        level22.php zit in:
+        level1.php zit in:
 
-        Levels/level1/level22.php
+        Levels/level1/level1.php
 
         Reactor zit in:
 

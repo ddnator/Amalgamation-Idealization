@@ -109,118 +109,22 @@ const dialogueTree = {
     },
 
     game_complete: {
-        speaker:"Y/N",
-        text:"I did it...",
+        speaker:"",
+        text:"",
 
         options: [
             {
                 text:
-                    "Continue",
+                    "",
 
                 speak:
                     false,
 
                 next:
-                    "end" //check
+                    "" //check
             },
         ]
     },
-
-    end: {
-        speaker: "Y/N",
-        text: "Now all AI knows I'm here... \n I should probably flee for now.",
-
-        options: [
-            {
-                text: "Continue",
-                speak: false,
-                next: "end2"
-            }
-        ]
-    },
-
-    end2: {
-        speaker: "Y/N",
-        text: "However... I will come back one day.",
-
-        options: [
-            {
-                text: "Continue",
-                speak: false,
-                next: "end3"
-            }
-        ]
-    },
-
-    end3: {
-        speaker: "Y/N",
-        text: "I need to contact the Stefanie. The rebellion needs to know that the AI can be beaten",
-
-        options: [
-            {
-                text: "Continue",
-                speak: false,
-                next: "end4"
-            }
-        ]
-    },
-
-    end4: {
-        speaker: "Y/N",
-        text: "Me... a rebel... never thought that this day would come",
-
-        options: [
-            {
-                text: "Continue",
-                speak: false,
-                next: "end5"
-            }
-        ]
-    },
-
-    end5: {
-        speaker: "Y/N",
-        text: "but...",
-
-        options: [
-            {
-                text: "Continue",
-                speak: false,
-                next: "end6"
-            }
-        ]
-    },
-
-    end6: {
-        speaker: "Y/N",
-        text: "For the first time in my life, I feel like I'm in controll agains.",
-
-        options: [
-            {
-                text: "Continue",
-                speak: false,
-                action: "ending"
-            }
-        ]
-    },
-
-    // end7: {
-    //     speaker: "Y/N",
-    //     text: "The end, thanks for playing our game!",
-
-    //     options: [
-    //         {
-    //             text: "Replay",
-    //             speak: false,
-    //             action: "replay"
-    //         },
-    //         {
-    //             text: "Quit game",
-    //             speak: false,
-    //             action: "quit_game"
-    //         }
-    //     ]
-    // },
 }
 /* =========================================
    START LEVEL

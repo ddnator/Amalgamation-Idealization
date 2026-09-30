@@ -35,27 +35,6 @@ export function runAction(action) {
 
         return;
     }
-
-    if (action === "replay") {
-
-        window.location.href = "../level1/level1.php";
-
-        return;
-    }
-
-    if (action === "quit_game") {
-
-        window.location.href = "../../homescreen.php";
-
-        return;
-    }
-
-    if (action === "ending") {
-
-        window.location.href = "../../endingscreen.html";
-
-        return;
-    }
 };
 
 export function closeDialogue() {
