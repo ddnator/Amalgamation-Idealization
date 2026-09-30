@@ -52,6 +52,11 @@ import {
     runAction
 } from "./action.js";
 
+const hidden = document.getElementById('hidden');
+let gameComplete = 'not done';
+if (hidden) {
+    gameComplete = hidden.dataset.myValue;
+}
 
 /* =========================================
    DIALOGUE TREE
@@ -791,7 +796,7 @@ function showNode(nodeId) {
 
     const node =
         dialogueTree[
-            nodeId
+        nodeId
         ];
 
 
@@ -896,7 +901,7 @@ function renderOptions() {
 
     const node =
         dialogueTree[
-            gameState.currentNodeId
+        gameState.currentNodeId
         ];
 
 
@@ -1036,7 +1041,7 @@ function chooseOption(index) {
 
     const node =
         dialogueTree[
-            gameState.currentNodeId
+        gameState.currentNodeId
         ];
 
 
@@ -1051,7 +1056,7 @@ function chooseOption(index) {
 
     const option =
         node.options[
-            index
+        index
         ];
 
 
@@ -1298,7 +1303,7 @@ document.addEventListener(
 
         const node =
             dialogueTree[
-                gameState.currentNodeId
+            gameState.currentNodeId
             ];
 
 

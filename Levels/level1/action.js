@@ -21,6 +21,8 @@ import {
 /* =========================================
    ACTIONS
 ========================================= */
+import { gameState } from "./gameState.js";
+import { minigameScreen, reactorMinigameFrame } from "./element.js";
 
 export function runAction(action) {
 
@@ -276,29 +278,13 @@ export function runAction(action) {
         return;
     }
 
+    if (
+        action === "close"
+    ) {
 
-    /* =====================================
-       BOSS
-    ====================================== */
+        closeDialogue();
 
-    if (action === "action_boss") {
-
-        /*
-            Eerst scene veranderen.
-
-            setScene() sluit namelijk de huidige
-            dialogue-bar.
-
-            Daarna pas boss dialogue openen.
-        */
-
-        setScene(
-            "boss"
-        );
-
-        startDialogue(
-            "boss_task"
-        );
+        setScene("work");
 
         return;
     }
@@ -322,9 +308,7 @@ export function runAction(action) {
 
     if (action === "level2") {
 
-        goToLevel(
-            2
-        );
+        window.location.href = "../level2/level2.php";
 
         return;
     }
@@ -336,9 +320,8 @@ export function runAction(action) {
 
     if (action === "level3") {
 
-        goToLevel(
-            3
-        );
+        window.location.href = "../level3/level3.php";
+
 
         return;
     }
@@ -357,15 +340,6 @@ export function runAction(action) {
 
 export function closeDialogue() {
 
-    /*
-        Scene onthouden voordat showNormalBar()
-        alle dialogue state reset.
-    */
-
-    const sceneBeforeClose =
-        gameState.currentScene;
-
-
     gameState.pendingOption =
         null;
 
@@ -377,20 +351,7 @@ export function closeDialogue() {
     gameState.inputLocked =
         false;
 
-
-    showBreakfastOverlay(
-        null
-    );
-
-
-    /*
-        showNormalBar zet onder andere:
-
-        dialogueActive = false
-        currentNodeId = null
-        waitingForContinue = false
-        inputLocked = false
-    */
+    showBreakfastOverlay(null);
 
     showNormalBar();
 
@@ -639,7 +600,7 @@ window.addEventListener(
         if (
             event.data &&
             event.data.type ===
-                "level1-minigame-complete"
+            "level1-minigame-complete"
         ) {
 
             finishLevel1Minigame();
