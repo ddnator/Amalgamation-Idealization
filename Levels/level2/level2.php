@@ -126,6 +126,33 @@
          LEVEL END
     ========================================== -->
 
-<script src="dialogue.js" type="module"></script><script src="hotspots.js"></script><script src="fullscreen.js"></script>
+    <div
+            id="end-screen"
+            class="hidden"
+    >
+
+        <div class="screen">
+
+            <h1 id="end-title">
+                LEVEL COMPLETE
+            </h1>
+
+            <p id="end-text"></p>
+
+            <button
+                    id="restart-button"
+                    type="button"
+            >
+                &gt; RESTART LEVEL 1
+            </button>
+
+        </div>
+
+    </div>
+
+<script
+        type="module"
+        src="dialogue.js"
+></script>
 </body>
 </html>

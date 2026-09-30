@@ -60,10 +60,10 @@ function addChoices(choicesIndex) {
 
     if (choicesIndex === 0) {
         const choicesOne = [
-            { text: 'Increase the power usage' },
-            { text: 'Open a window' },
-            { text: 'Increase the coolant flow', },
-            { text: 'Increase the pressure' }
+            {text: 'Increase the power usage'},
+            {text: 'Open a window'},
+            {text: 'Increase the coolant flow',},
+            {text: 'Increase the pressure'}
         ];
         choice1.textContent = '[A] ' + choicesOne[0].text;
         choice1.addEventListener('click', () => choicesReaction(0));
@@ -78,10 +78,10 @@ function addChoices(choicesIndex) {
         choice4.addEventListener('click', () => choicesReaction(3));
     } else if (choicesIndex === 1) {
         const choicesTwo = [
-            { text: 'Increase the coolant flow' },
-            { text: 'Open a window' },
-            { text: 'Increase the power usage', },
-            { text: 'Increase the pressure' }
+            {text: 'Increase the coolant flow'},
+            {text: 'Open a window'},
+            {text: 'Increase the power usage',},
+            {text: 'Increase the pressure'}
         ];
         choice1.textContent = '[A] ' + choicesTwo[0].text;
         choice1.addEventListener('click', () => choicesReaction(4));
@@ -154,8 +154,8 @@ function choicesReaction(choiceIndex) {
         image.src = '../images/good-job.png'
         button.addEventListener('click', async () => {
             await updateMoney(50);
-            window.location.href = "../Levels/level1/level1.php?reactorComplete=1&points=100";
-        })
+            window.location.href = "../minigame_reactor2/index.php?points=100";
+        });
     } else if (choiceIndex === 7) {
         message.innerText = 'You increased the pressure, this does nothing.'
         button.innerText = 'Go back'

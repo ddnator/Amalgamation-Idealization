@@ -182,12 +182,13 @@ dialog div {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    height: 85%;
 }
 
 dialog button {
-    padding: 5px;
+    padding: 10px;
     color: white;
     background-color: #7c3838;
     border: 1px solid #7c3838;
