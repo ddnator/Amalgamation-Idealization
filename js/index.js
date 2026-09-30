@@ -1,11 +1,15 @@
 window.addEventListener('load', init)
 
-
 function init() {
+    let titleOption = Math.floor(Math.random() * 6) + 1
     VarCreator()
     fillWindow()
-    textCreator()
+    textCreator(titleOption)
     eventCreator()
+
+
+
+
 }
 
 function VarCreator() {
@@ -38,13 +42,30 @@ function EndButtonEventHandler(event) {
 
 
 
-function textCreator() {
+function textCreator(number) {
+    let randomNumber = number
     const headerTitle = document.querySelector('#homeHeader h1')
-
+    console.log(randomNumber)
     if (!headerTitle) return
 
     const sidewaysText = document.createElement('span')
-    sidewaysText.textContent = 'Try now!'
+
+    if (randomNumber == 1) {
+        sidewaysText.textContent = 'Try now!'
+    } else if (randomNumber == 2) {
+        sidewaysText.textContent = 'Also try Cyberpunk!'
+    } else if (randomNumber == 3) {
+        sidewaysText.textContent = 'Leon Kennedy?'
+    } else if (randomNumber == 4) {
+        sidewaysText.textContent = 'Use your brain!'
+    } else if (randomNumber == 5) {
+        sidewaysText.textContent = 'Is this AI?'
+    } else {
+        sidewaysText.textContent = 'Can you stop the AI?'
+
+    }
+
+
     sidewaysText.classList.add('tilted')
     sidewaysText.style.display = 'inline-block'
     sidewaysText.style.marginLeft = '5px'
