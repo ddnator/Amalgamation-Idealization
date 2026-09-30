@@ -42,6 +42,7 @@ if(isset($_POST['submit'])) {
             if(password_verify($givenPassword, $userPassword)) {;
                 $_SESSION['username'] = $user[0]['username'];
                 $_SESSION['logged_in'] = true;
+                $_SESSION['points'] = 0;
                 header("location: index.php");
                 exit;
             } else {

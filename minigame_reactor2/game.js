@@ -7,7 +7,6 @@ const timeElement = document.getElementById("time");
 let nextNumber = 1;
 let gameFinished = false;
 
-
 function updateDateTime() {
 
     const now = new Date();
@@ -94,16 +93,36 @@ function handleNumberClick(number, button) {
         }, 500
     );
 }
-function finishReactor2() {
 
+function showWinDialog() {
+    const dialog = document.querySelector('dialog');
+    const dialogContent = document.querySelector('#dialog-content');
+
+    dialogContent.innerHTML = `
+        <h2>Completed!</h2>
+        <p>You found all the numbers!</p>
+        <img src="../images/good-job.png" alt="">
+        <button class="done-button">Done</button>
+    `;
+
+    const doneButton = dialogContent.querySelector('.done-button');
+
+    doneButton.addEventListener('click', () => {
+        window.location.href = '../minigame_reactor3/memory.php?points=100';
+    });
+
+    dialog.showModal();
+}
+
+function finishReactor2() {
     if (gameFinished) {
         return;
     }
 
     gameFinished = true;
     nextNumberText.textContent = "Done!";
-    window.location.href = "index.php?points=100";
-    setTimeout(returnToLevel5, 700);
+
+    showWinDialog();
 }
 
 function returnToLevel5() {
