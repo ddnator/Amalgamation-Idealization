@@ -72,11 +72,20 @@ export function runAction(action) {
         return;
     }
 
-    if (action === "action_go_to_work") {
+    if (action === "action_go_home") {
 
-        setScene("walkingToWorkDay");
+        setScene("walkingHomeNight");
 
-        startDialogue("walk_to_work");
+        startDialogue("walk_home");
+
+        return;
+    }
+
+    if (action === "action_go_bar") {
+
+        setScene("ErwinsBar");
+
+        startDialogue("outside_bar");
 
         return;
     }
@@ -104,54 +113,54 @@ export function runAction(action) {
     }
 
     if (
-        action === "action_jimOne"
+        action === "action_stevenOne"
     ) {
 
-        setScene("jim1");
+        setScene("steven1");
 
-        startDialogue("jim_intro");
+        startDialogue("steven_intro");
         return;
     }
 
     if (
-        action === "action_jimTwo"
+        action === "action_stevenTwo"
     ) {
 
-        setScene("jim2");
+        setScene("steven3");
 
-        startDialogue("jim_upgrade");
+        startDialogue("steven_no_money");
         return;
     }
 
     if (
-        action === "action_jimThree"
+        action === "action_stevenThree"
     ) {
 
-        setScene("jim3");
+        setScene("steven3");
 
-        startDialogue("jim_bad_sleep");
+        startDialogue("steven_yes_money");
         return;
     }
 
     if (
-        action === "action_jimFour"
+        action === "action_stevenFour"
     ) {
 
-        setScene("jim4");
+        setScene("steve4");
 
-        startDialogue("jim_lisa");
+        startDialogue("steven_explain");
         return;
     }
 
-    /* LEAVE JIM */
+    /* LEAVE STEVEN */
 
     if (
-        action === "action_leave_jim"
+        action === "action_leave_steven"
     ) {
 
         closeDialogue();
 
-        setScene("work");
+        setScene("ErwinsBar");
 
         return;
     }

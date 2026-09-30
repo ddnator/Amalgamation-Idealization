@@ -23,7 +23,9 @@ import {
     endTitle,
     endText,
 
-    restartButton, hotspotKitchen, hotspotBed, hotspotComputer
+    hotspotjim,
+
+    restartButton, hotspotKitchen, hotspotBed, hotspotComputer, hotspotWork, hotspotBoss, hotspotsteven, hotspotsbar
 } from "./element.js";
 import {
     setScene,
@@ -52,60 +54,37 @@ const dialogueTree = {
 
     level_start: {
 
-        speaker:
-            "NARRATOR",
-
-        text:
-            "You arrive home after a long day of work. You have a message on your laptop",
-
+        speaker: "NARRATOR",
+        text: "You've just left work, ",
         options: [
             {
-                text:
-                    "Continue",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
+                text: "Continue",
+                speak: false,
+                action: "action_go_home"
             }
         ]
     },
 
-
     /* =====================================
        SLEEP
     ====================================== */
-
     try_sleep: {
 
-        speaker:
-            "NARRATOR",
+        speaker: "NARRATOR",
 
-        text:
-            "You want to sleep?",
+        text: "You just woke up so u are not tired yet",
 
         options: [
             {
-                text:
-                    "Go to sleep",
-
-                speak:
-                    false,
-
-                next:
-                    "continue_sleeping"
+                text: "Continue sleeping",
+                speak: false,
+                next: "continue_sleeping"
             },
 
             {
-                text:
-                    "Not yet",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
+                text: "Get up",
+                speak: false,
+                action: "close"
             }
         ]
     },
@@ -113,30 +92,45 @@ const dialogueTree = {
 
     continue_sleeping: {
 
-        speaker:
-            "AI",
+        speaker: "AI",
 
-        type:
-            "ai",
+        type: "ai",
 
-        text:
-            "Okay",
+        text: "Your AI assistant warns you about the consequences of not working",
 
         options: [
             {
-                text:
-                    "Goodnight",
+                text: "Continue sleeping",
 
-                speak:
-                    false,
+                speak: false,
 
-                action:
-                    "level4"
+                next: "ai_shock"
             },
 
-
+            {
+                text: "Get up",
+                speak: false,
+                action: "close"
+            }
         ]
     },
+
+
+    ai_shock: {
+
+        speaker: "SYSTEM",
+        type: "ai",
+        text: "AI chip shocks you awake",
+
+        options: [
+            {
+                text: "Get up",
+                speak: false,
+                action: "close"
+            }
+        ]
+    },
+
 
     /* =====================================
        FOOD
@@ -144,22 +138,22 @@ const dialogueTree = {
 
     eat: {
 
-        speaker:
-            "NARRATOR",
+        speaker: "NARRATOR",
 
-        text:
-            "You make some instant ramen",
+        text: "You bake some eggs",
 
         options: [
             {
-                text:
-                    "Back",
+                text: "leave",
+                speak: false,
+                action: "action_Outside",
 
-                speak:
-                    false,
+            },
 
-                action:
-                    "close"
+            {
+                text: "Back",
+                speak: false,
+                action: "close"
             }
         ]
     },
@@ -171,53 +165,15 @@ const dialogueTree = {
 
     computer: {
 
-        speaker:
-            "NARRATOR",
+        speaker: "NARRATOR",
 
-        text:
-            "You received one mysterious message.",
+        text: "Computer no workie today :(.",
 
         options: [
             {
-                text:
-                    "Look at the message",
-
-                speak:
-                    false,
-
-                next:
-                    "computer_message"
-            },
-            {
-                text:
-                    "Back",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
-            }
-        ]
-    },
-
-    computer_message: {
-        speaker:
-            "NARRATOR",
-
-        text:
-            "They messages reads as follows: Bsf zpv opu ujsfe pg uif BJ uibu jt dpouspmmjoh vt kpjo uif sfcfmt. Tff zpv tppo...",
-
-        options: [
-            {
-                text:
-                    "Back",
-
-                speak:
-                    false,
-
-                action:
-                    "close"
+                text: "Back",
+                speak: false,
+                action: "close"
             }
         ]
     },
@@ -229,11 +185,8 @@ const dialogueTree = {
 
     outside_caravan: {
 
-        speaker:
-            "NARRATOR",
-
-        text:
-            "You're outside your 'luxurious' home",
+        speaker: "NARRATOR",
+        text: "You're outside your 'luxurious' home",
 
         options: [
             {
@@ -248,103 +201,118 @@ const dialogueTree = {
        WALK TO WORK DAY
     ====================================== */
 
-    walk_to_work: {
+    walk_home: {
 
-        speaker:
-            "NARRATOR",
+        speaker: "NARRATOR",
 
-        text:
-            "You're enroute to work, shame you couldn't keep your car",
+        text: "You're on your way home. Erwin's bar is just around the corner",
 
         options: [
             {
-                text:
-                    "Continue",
+                text: "Go home",
+                speak: false,
+                action: "action_Outside"
+            },
 
-                speak:
-                    false,
-
-                action: "OutsideWorkDay",
-
+            {
+                text: "Go to Erwin's bar",
+                speak: false,
+                action: "action_go_bar"
             }
         ]
     },
     /* =====================================
-           WINSTON NUCLEAR POWERPLANT
+      Outside bar
+    ====================================== */
+
+    outside_bar: {
+
+        speaker: "NARRATOR",
+
+        text: "Successful since I'm of drinking age",
+
+        options: [
+            {
+                text: "Continue",
+                speak: false,
+                action: "close"
+            }
+        ]
+    },
+    /* =====================================
+           WINSTON NUCLEAR POWER PLANT
         ====================================== */
 
     winston_nuclear_powerplant: {
 
-        speaker:
-            "NARRATOR",
+        speaker: "NARRATOR",
 
-        text:
-            "Operational since the discovery of oil in Serstan in 2035",
+        text: "Operational since the discovery of oil in Serstan in 2035",
 
         options: [
             {
-                text:
-                    "Enter building",
-
-                speak:
-                    false,
-
-                next:
-                    "arrive_work"
+                text: "Enter building",
+                speak: false,
+                action: "action_work"
             }
         ]
     },
 
-    arrive_work: {
+    work: {
 
-        speaker:
-            "NARRATOR",
-
-        text:
-            "You have arrived at work,\nyour coworker Jim is waving at u",
+        speaker: "NARRATOR",
+        text: "You have arrived at work,\nyour favorite coworker Jim is waving at you",
 
         options: [
             {
-                text:
-                    "Continue",
-
-                speak:
-                    false,
-
-                action:
-                    "show_work"
+                text: "Continue",
+                speak: false,
+                action: "action_work"
             }
         ]
     },
-
-
     /* =====================================
-       JIM INTRO
+       steven INTRO
     ====================================== */
+    steven_intro: {
 
-    jim_intro: {
-
-        speaker:
-            "JIM",
-
-        text:
-            "Hi Y/N how are you doing; Did you hear that they upgraded our boss last night?",
-
+        speaker: "STEVEN",
+        text: "GIVE. ME. YOUR. LEGS. \n haha just kidding, but seriously could you spare a dime Y/N? ",
         options: [
             {
-                text:
-                    "No I have not heard it.",
+                text: "I want to, but I'm kinda low on cash myself",
 
-                next:
-                    "jim_upgrade"
+                action: "action_stevenTwo"
+
             },
 
             {
-                text:
-                    "I slept like shit last night.",
+                text: "Sure Steven, it's going to getting your legs running again, right?",
 
-                next:
-                    "jim_bad_sleep"
+                action: "action_stevenThree"
+            },
+
+            {
+                text: "Bye.",
+
+                action: "action_leave_steven"
+            }
+        ]
+    },
+    /* =====================================
+       steven no money
+    ====================================== */
+
+    steven_no_money: {
+
+        speaker: "STEVEN",
+        text: "Oh don't worry about it Y/N. I already have enough for my next bottle anyway",
+
+        options: [
+            {
+                text: "What about getting your legs working again?",
+
+                next: "steven_legs",
             },
 
             {
@@ -352,79 +320,32 @@ const dialogueTree = {
                     "Bye.",
 
                 action:
-                    "leave_jim"
+                    "action_leave_steven"
             }
         ]
     },
 
 
     /* =====================================
-       JIM UPGRADE
+Steven will talk about his shutdown legs
     ====================================== */
 
-    jim_upgrade: {
+    steven_legs: {
 
         speaker:
-            "JIM",
+            "STEVEN",
 
         text:
-            "Well it got a crazy upgrade to its hearing so it might hear us right now, o by the way do not forget to hit ur quota u know what happend to Lisa when she didn't.",
+            "Do you know how much it cost to get these guys working? I need to pay 1.5 times as much now \n which is 450 a month. \n even when these legs allowed me to work, I would only make 900 ",
 
         options: [
-            {
-                text:
-                    "No I do not remeber what did happen?",
-
-                next:
-                    "jim_lisa"
-            },
 
             {
                 text:
-                    "O yeah that is what happened.",
-
-                next:
-                    "jim_remember"
-            },
-
-            {
-                text:
-                    "Bye.",
+                    "why did you get these legs to begin with anyway?",
 
                 action:
-                    "leave_jim"
-            }
-        ]
-    },
-
-
-    /* =====================================
-       BAD SLEEP
-    ====================================== */
-
-    jim_bad_sleep: {
-
-        speaker:
-            "JIM",
-
-        text:
-            "O that is unfortunate but remember to hit ur quota today u know what happend to Lisa when she didn't.",
-
-        options: [
-            {
-                text:
-                    "No I do not remeber what did happen?",
-
-                next:
-                    "jim_lisa"
-            },
-
-            {
-                text:
-                    "Yeah I do remeber such a shame what happend.",
-
-                next:
-                    "jim_remember"
+                    "action_stevenFour"
             },
 
             {
@@ -432,71 +353,71 @@ const dialogueTree = {
                     "Bye",
 
                 action:
-                    "leave_jim"
+                    "action_leave_jim"
             }
         ]
     },
 
 
     /* =====================================
-       LISA
+       Steven will explain why he got the legs
     ====================================== */
 
-    jim_lisa: {
+    steven_explain: {
 
         speaker:
-            "JIM",
+            "STEVEN",
 
         text:
-            "U really do have problems remembering things don't u? She got taken away by them to some facility and we have not seen her since.",
+            "Look man, this is all stupid in hindsight, but with bionic legs, they said they would pay me quadruple. \n I didn't like the idea, but you know I need to put my girls through college. \n guess what, after the surgery, they said their rates changed and could only pay 10% more. \n that increase doesn't even cover the monthly subscription on these tin cans.",
 
         options: [
             {
                 text:
-                    "O yeah that is what happened.",
+                    "That sucks man, I hope you can crawl out of this mess",
 
                 next:
-                    "jim_work_end"
+                    "steven_end"
             }
         ]
     },
 
 
-    jim_work_end: {
+    steven_end: {
 
         speaker:
-            "JIM",
+            "STEVEN",
 
         text:
-            "Well i better get to work before the same happens to me.",
+            "Sorry to bother you with my mess again Y/N.",
 
         options: [
             {
                 text:
-                    "Bye.",
+                    "Don't worry about it, I'll see you again soon.",
 
                 action:
-                    "leave_jim"
+                    "action_leave_steven"
             }
         ]
     },
 
 
-    jim_remember: {
+    steven_yes_money: {
 
         speaker:
-            "JIM",
+            "STEVEN",
 
         text:
-            "It is such a shame that that happened. Well I better get to work before I get the same fate",
+            "Excellent my friend, really excellent, this will get me one more glass",
 
         options: [
             {
                 text:
-                    "Bye.",
+                    "What about your clanker legs then?",
 
-                action:
-                    "leave_jim"
+                next:
+                    "steven_explain"
             }
         ]
     },
@@ -515,7 +436,7 @@ const dialogueTree = {
             "ai",
 
         text:
-            "Hi Y/N good to see u are on time ur task for today is just to manage the factory and put in the code, goodluck and keep up the good work.",
+            "Morning Y/N, good to see you are on time today. The task for today is to manage the factory and put in the code, even you can manage that, right?",
 
         options: [
             {
@@ -526,7 +447,7 @@ const dialogueTree = {
                     false,
 
                 action:
-                    "start_minigame"
+                    "action_start_minigame"
             },
 
             {
@@ -656,11 +577,11 @@ const dialogueTree = {
 
 startButton.addEventListener(
     "click",
-    startLevel1
+    startLevel2
 );
 
 
-function startLevel1() {
+function startLevel2() {
 
     startScreen.classList.add(
         "hidden"
@@ -681,7 +602,7 @@ function startLevel1() {
         false;
 
     setScene(
-        "home"
+        "OutsideWorkNight"
 
     );
 
@@ -691,8 +612,8 @@ function startLevel1() {
 }
 
 
-window.startLevel1 =
-    startLevel1;
+window.startLevel2 =
+    startLevel2;
 
 /* =========================================
    START DIALOGUE
@@ -854,23 +775,13 @@ function renderOptions() {
                 `${index + 1}.`;
 
 
-            const label =
-                document.createElement(
-                    "span"
-                );
+            const label = document.createElement("span");
 
-            label.textContent =
-                option.text;
+            label.textContent = option.text;
 
+            button.appendChild(number);
 
-            button.appendChild(
-                number
-            );
-
-            button.appendChild(
-                label
-            );
-
+            button.appendChild(label);
 
             button.addEventListener(
                 "mouseenter",
@@ -893,17 +804,11 @@ function renderOptions() {
             button.addEventListener(
                 "click",
                 () => {
-
-                    chooseOption(
-                        index
-                    );
+                    chooseOption(index);
                 }
             );
 
-
-            dialogueOptions.appendChild(
-                button
-            );
+            dialogueOptions.appendChild(button);
         }
     );
 }
@@ -923,9 +828,7 @@ function chooseOption(index) {
     }
 
 
-    const node =
-        dialogueTree[gameState.currentNodeId];
-
+    const node = dialogueTree[gameState.currentNodeId];
 
     if (
         !node ||
@@ -934,9 +837,7 @@ function chooseOption(index) {
         return;
     }
 
-
-    const option =
-        node.options[index];
+    const option = node.options[index];
 
 
     if (!option) {
@@ -960,14 +861,8 @@ function chooseOption(index) {
         weergegeven.
     */
 
-    if (
-        option.speak === false
-    ) {
-
-        runOption(
-            option
-        );
-
+    if (option.speak === false) {
+        runOption(option);
         return;
     }
 
@@ -1415,5 +1310,68 @@ hotspotComputer.addEventListener(
         startDialogue("computer");
     }
 );
+/* =========================================
+   WORK HOTSPOTS
+========================================= */
+
+hotspotjim.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_jimOne")
+    }
+);
+
+hotspotWork.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_start_minigame")
+    }
+);
+
+hotspotBoss.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_boss")
+
+        startDialogue("boss_task");
+    }
+);
+hotspotsteven.addEventListener(
+    "click",
+    () => {
 
 
+
+        runAction("action_stevenOne")
+
+    }
+
+
+);
+hotspotsbar.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_boss")
+
+        startDialogue("boss_task");
+    });

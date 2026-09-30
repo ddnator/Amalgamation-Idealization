@@ -114,7 +114,49 @@ body {
     width: 100px; !important;
     height: 200px; !important;
 }
+/* STEVEN */
 
+.steven {
+    position: absolute;
+
+    bottom: 30% !important;
+    left: 90% !important;
+
+    width: 100px !important;
+    height: 200px !important;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    z-index: 2;
+    cursor: pointer;
+}
+
+/* BAR */
+
+/* BAR DOOR */
+
+.bar {
+    position: absolute;
+
+    bottom: 50% !important;
+    left: 50% !important;
+
+    width: 500px !important;
+    height: 900px !important;
+
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    z-index: 2;
+    cursor: pointer;
+}
+
+.bar:hover + .doorBarOverlay {
+    opacity: 1;
+}
 /* MINIGAME */
 .work {
      bottom: 40%; !important;
@@ -181,6 +223,10 @@ body {
 .work:hover + .workOverlay {
     opacity: 1;
 }
+.steven:hover + .stevenOverlay {
+    opacity: 1;
+}
+
 
 .game-scene {
     position: absolute;

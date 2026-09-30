@@ -31,13 +31,16 @@
     <div id="point-click-area">
 
         <div id="hud">
-            <span>LEVEL 1</span>
+            <span>LEVEL 2</span>
 
             <span id="location-label">
-                HOME
+                OUTSIDE WORK
             </span>
 
 
+            <span id="scene-name">
+                OUTSIDE WORK
+            </span>
         </div>
 
 
@@ -106,13 +109,13 @@
         </div>
 
         <!-- =====================================
-            CARAVAN SCENE OUTSIDE during DAY (Only hotspot is the door)
+            CARAVAN SCENE OUTSIDE at NIGHT (Only hotspot is the door)
       ====================================== -->
         <div id="caravanSceneOutside" class="game-scene hidden">
 
             <img
                     class="Background"
-                    src="/Images/CAravan_Base.png"
+                    src="/Images/CAravan_Base_N.png"
                     alt=""
             >
         </div>
@@ -130,13 +133,13 @@
         >
 
         <!-- =====================================
-                Walking to Work Scene DAY
+                Walking Home scene Night
           ====================================== -->
-        <div id="walkingToWorkDay" class="game-scene hidden">
+        <div id="walkingHomeNight" class="game-scene hidden">
 
             <img
                     class="Background"
-                    src="/Images/StreetDay.png"
+                    src="/Images/StreetNight.png"
                     alt=""
             >
 
@@ -144,19 +147,53 @@
         </div>
 
         <!-- =====================================
-               Outside work scene day
+               Outside work scene Night
          ====================================== -->
-        <div id="OutsideWorkDay" class="game-scene hidden">
+        <div id="OutsideWorkNight" class="game-scene hidden">
 
             <img
                     class="Background"
-                    src="/Images/Work_Outside_D.png"
+                    src="/Images/Work_Outside.png"
                     alt=""
             >
         </div>
 
         <!-- =====================================
-              AT work scene day
+              Outside Erwin's Bar
+        ====================================== -->
+        <div id="ErwinsBar" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/ErwinBar_Base.png"
+                    alt=""
+            >
+
+            <button
+                    id="hotspot-steven"
+                    class="steven"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay stevenOverlay"
+                    src="/Images/ErwinBar_Steven.png"
+                    alt=""
+            >
+            <button
+                    id="hotspot-doorBar"
+                    class="bar"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay doorBarOverlay"
+                    src="/Images/ErwinBar_Door.png"
+                    alt=""
+            >
+        </div>
+        <!-- =====================================
+              AT work scene AfterWork
         ====================================== -->
         <div id="work" class="game-scene hidden">
 
@@ -165,23 +202,91 @@
                     src="/Images/Work_Base.png"
                     alt=""
             >
+
+            <button
+                    id="hotspot-jim"
+                    class="jim"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay jimOverlay"
+                    src="/Images/Work_JimO.png"
+                    alt=""
+            >
+            <button
+                    id="hotspot-work"
+                    class="work"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay workOverlay"
+                    src="/Images/Work_MinigameO.png"
+                    alt=""
+            >
+
+            <button
+                    id="hotspot-boss"
+                    class="boss"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay bossOverlay"
+                    src="/Images/Work_TalkToBossO.png"
+                    alt=""
+            >
         </div>
 
+        <div id="steven1" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/steven1.png"
+                    alt=""
+            >
+        </div>
+
+        <div id="steven2" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/steven2.png"
+                    alt=""
+            >
+        </div>
+
+        <div id="steven3" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/steven3.png"
+                    alt=""
+            >
+        </div>
+        <div id="steven4" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/steven3.png"
+                    alt=""
+            >
+        </div>
+
+        <div id="boss" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/boss.png"
+                    alt=""
+            >
+        </div>
+
+        <!-- =====================================
+                All Scenes must be INSIDE this </div> otherwise it will not work!
+             ====================================== -->
     </div>
-    <!-- =====================================
-                Walking to Work Scene
-          ====================================== -->
-    <div id="walkingToWorkDay" class="game-scene hidden">
-
-        <img
-                class="Background"
-                src="/Images/StreetDay.png"
-                alt=""
-        >
-    </div>
-
-
-
 </div>
 
     <!-- =========================================
@@ -238,11 +343,11 @@
         <div class="screen">
 
             <div class="tiny">
-                LEVEL_2.EXE
+                LEVEL_1.EXE
             </div>
 
             <h1>
-                LEVEL 2
+                LEVEL 1
             </h1>
 
             <button
