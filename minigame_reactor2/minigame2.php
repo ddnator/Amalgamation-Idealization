@@ -29,7 +29,7 @@ if (!isset($_SESSION["points"])) {
 if (isset($_GET["points"])) {
     $_SESSION["points"] += (int)$_GET["points"];
 
-    header("location: memory.php");
+    header("location: minigame2.php");
     exit;
 }
 ?>
@@ -80,6 +80,12 @@ if (isset($_GET["points"])) {
 </div>
 
 </main>
+
+<dialog>
+    <button class="close">X</button>
+    <div id="dialog-content"></div>
+</dialog>
+
 <footer>
     <div id="work-info">
         <div>
