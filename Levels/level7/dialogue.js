@@ -23,7 +23,9 @@ import {
     endTitle,
     endText,
 
-    restartButton, hotspotKitchen, hotspotBed, hotspotComputer
+    hotspotjim,
+
+    restartButton, hotspotKitchen, hotspotBed, hotspotComputer, hotspotWork, hotspotBoss
 } from "./element.js";
 import {
     setScene,
@@ -44,198 +46,821 @@ import {
    DIALOGUE TREE
 ========================================= */
 let breakfast = false;
-const hidden = document.getElementById('hidden');
-let gameComplete = 'not done';
-if (hidden) {
-    gameComplete = hidden.dataset.myValue;
-}
 const dialogueTree = {
+
+    /* =====================================
+       START
+    ====================================== */
+
     level_start: {
+
         speaker:
             "NARRATOR",
+
         text:
-            "You arrive at work.",
+            "There is someone waiting infront of your door",
 
         options: [
             {
                 text:
-                    "Talk to your boss",
+                    "Hello? Who are you?",
 
                 speak:
                     false,
 
                 next:
-                    "boss"
+                    "sticky"
             },
             {
                 text:
-                    "Work",
+                    "GO AWAY STRANGER!",
+
+                speak:
+                    false,
+
+                next:
+                    "calm"
+            },
+            {
+                text:
+                    "Are you the one that gave me the sticky note?",
+
+                speak:
+                    false,
+
+                next:
+                    "indeed"
+            }
+        ]
+    },
+
+
+
+    /* =====================================
+       STICKY
+    ====================================== */
+
+    sticky: {
+
+        speaker:
+            "???",
+
+        text:
+            "I am the one who put the sticky note there, u should really start lockin youre door by the way.",
+
+        options: [
+            {
+                text:
+                    "What do you want?",
+
+                speak:
+                    false,
+
+                next:
+                    "intro"
+            },
+            {
+                text:
+                    "What is your name?",
+
+                speak:
+                    false,
+
+                next:
+                    "name"
+            }
+        ]
+    },
+
+
+    /* =====================================
+       FOOD
+    ====================================== */
+
+    name: {
+
+        speaker:
+            "???",
+
+        text:
+            "O I never introduced myself did I?",
+
+        options: [
+            {
+                text: "No u did not",
+                speak: false,
+                action: "intro",
+
+            },
+        ]
+    },
+
+
+    /* =====================================
+       Computah
+    ====================================== */
+
+    intro: {
+
+        speaker:
+            "Stefanie",
+
+        text:
+            "I am Stefanie, leader of the rebels against the AI and I want you to join me.",
+
+        options: [
+            {
+                text:
+                    "Okay I will join you what is the plan?",
 
                 speak:
                     false,
 
                 action:
-                    "start_minigame"//check
+                    "plan"
+            },
+            {
+                text:
+                    "No thanks not interested.",
+
+                speak:
+                    false,
+
+                action:
+                    "really"
             }
         ]
     },
 
-    boss: {
-        speaker: "AI",
-        text: "Hi Y/N ready for a day full of work? The others are gone now so no more distractions for you. You know what the task is for today?",
 
-        options: [
-            {
-                text:
-                    "Where is everyone?",
+    /* =====================================
+    LEAVE HOME
+    ====================================== */
 
-                speak:
-                    false,
+    plan: {
 
-                next: "quota"
-            },
-            {
-                text:
-                    "What is my task today",
-
-                speak:
-                    false,
-
-                next: "minigame_explanation"
-            },
-            {
-                text:
-                    "I got a strange letter, do you know what it is?",
-
-                speak:
-                    false,
-
-                next: "strange_letter"
-            },
-            {
-                text:
-                    "bye",
-
-                speak:
-                    false,
-
-                next: "level_start"
-            }
-        ]
-    },
-
-    quota: {
         speaker:
-            "AI",
-        text: "They did not meet their quota yesterday.",
+            "Stefanie",
+
+        text:
+            "Okay you wanna hear the idea it is simple.",
 
         options: [
             {
-                text: "Continue",
-
+                text: "Listen to the plan",
                 speak: false,
+                action: "dissapoint"
+            }
+        ]
+    },
+
+    /* =====================================
+       WALK TO WORK DAY
+    ====================================== */
+
+    dissapoint: {
+
+        speaker:
+            "Stefanie",
+
+        text:
+            "So do not dissapoint this al counts on if you are able to pull this of",
+
+        options: [
+            {
+                text:
+                    "Lets do this!",
+
+                speak:
+                    false,
+
+                action: "level8",
+
+            }
+        ]
+    },
+    /* =====================================
+           WINSTON NUCLEAR POWER PLANT
+        ====================================== */
+
+    calm: {
+
+        speaker:
+            "???",
+
+        text:
+            "Calm down you I come in peace",
+
+        options: [
+            {
+                text:
+                    "What do you want?",
+
+                speak:
+                    false,
+
+                action:
+                    "want"
+            },
+            {
+                text:
+                    "Leave",
+
+                speak:
+                    false,
+
+                action:
+                    "leave"
+            }
+        ]
+    },
+
+    want: {
+
+        speaker:
+            "???",
+
+        text:
+            "You got my sticky note correct?",
+
+        options: [
+            {
+                text:
+                    "No I did not",
+
+                speak:
+                    false,
+
+                action:
+                    "No"
+            },
+            {
+                text:
+                    "Yes I did",
+
+                speak:
+                    false,
+
+                action:
+                    "Yes"
+            }
+        ]
+    },
+    yes: {
+
+        speaker:
+            "???",
+
+        text:
+            "Great I hope you managed to decode the message.",
+
+        options: [
+            {
+                text:
+                    "Yes I did",
+
+                speak:
+                    false,
+
+                action: "yesdid",
+
+            },
+            {
+                text:
+                    "No I did not",
+
+                speak:
+                    false,
+
+                action: "nodid",
+
+            },
+        ]
+    },
+
+    indeed: {
+
+        speaker:
+            "???",
+
+        text:
+            "Yes I am indeed. I hope you managed to decode the message",
+
+        options: [
+            {
+                text:
+                    "Yes I did",
+
+                speak:
+                    false,
+
+                action: "yesdid",
+
+            },
+            {
+                text:
+                    "No I did not",
+
+                speak:
+                    false,
+
+                action: "nodid",
+
+            },
+        ]
+    },
+    yesdid: {
+
+        speaker:
+            "???",
+
+        text:
+            "I knew you would be able to decode it, I have been keeping a close eye on you you know.",
+
+        options: [
+            {
+                text:
+                    "Continu",
+
+                speak:
+                    false,
+
+                action: "join",
+
+            }
+        ]
+    },
+    join: {
+
+        speaker:
+            "???",
+
+        text:
+            "So do you want to join.",
+
+        options: [
+            {
+                text:
+                    "Yes I want to join",
+
+                speak:
+                    false,
+
+                action: "iwant",
+
+            },
+            {
+                text:
+                    "Join what?",
+
+                speak:
+                    false,
+
+                action: "what",
+
+            },
+            {
+                text:
+                    "No I do not want to join so go away",
+
+                speak:
+                    false,
+
+                action: "nonot",
+
+            }
+        ]
+    },
+    yesdid: {
+
+        speaker:
+            "???",
+
+        text:
+            "Great okay!.",
+
+        options: [
+            {
+                text:
+                    "Continu",
+
+                speak:
+                    false,
+
+                action: "intro",
+
+            }
+        ]
+    },
+    what: {
+
+        speaker:
+            "???",
+
+        text:
+            "I thought u said that u decoded the message. U know that you could have just said no and I would have told you?.",
+
+        options: [
+            {
+                text:
+                    "Continu",
+
+                speak:
+                    false,
+
+                action: "said",
+
+            }
+        ]
+    },
+    said: {
+
+        speaker:
+            "???",
+
+        text:
+            "It said: Are you not tired of the AI that is controlling us join the rebels. See you soon...",
+
+        options: [
+            {
+                text:
+                    "Continu",
+
+                speak:
+                    false,
+
+                action: "intro",
+
+            }
+        ]
+    },
+    nonot: {
+
+        speaker:
+            "???",
+
+        text:
+            "O okay then not I guess have fun with the very little life you have left.",
+
+        options: [
+            {
+                text:
+                    "Continu",
+
+                speak:
+                    false,
+
+                action: "level9",
+
+            }
+        ]
+    },
+
+
+
+    /* =====================================
+       JIM INTRO
+    ====================================== */
+
+    No: {
+
+        speaker:
+            "???",
+
+        text:
+            "I put it there so I know u got it.",
+
+        options: [
+            {
+                text:
+                    "Okay I got it",
+
+                speak:
+                    false,
+
+                action:
+                    "Decode"
+            },
+            {
+                text:
+                    "I really did not see it",
+
+                speak:
+                    false,
+
+                action:
+                    "funny"
+            }
+        ]
+    },
+
+    funny: {
+
+        speaker:
+            "???",
+
+        text:
+            "Okay Mr funny pants then not. Enjoy youre last few moments while you can",
+
+        options: [
+            {
+                text:
+                    "Continu",
+
+                speak:
+                    false,
+
+                action:
+                    "level9"
+            }
+        ]
+    },
+
+
+    /* =====================================
+       JIM UPGRADE
+    ====================================== */
+
+    jim_upgrade: {
+
+        speaker:
+            "JIM",
+
+        text:
+            "Well it got a crazy upgrade to its hearing so it might hear us right now. Oh by the way do not forget to hit your quota! You know what happened to Lisa when she didn't.",
+
+        options: [
+            {
+                text:
+                    "I don't recall, what happened?",
+
+                action: "action_jimFour"
+            },
+
+            {
+                text:
+                    "Oh, I remember her sudden disappearance now ",
 
                 next:
-                    "boss"
-            }
-        ]
-    },
-
-    minigame_explanation: {
-        speaker:
-            "AI",
-        text: "Today I want you to fix reactor 2. The system of that reactor has recently crashed and nobody has fixed it yet. \n The way you fix the system is by pressing the numbers in the right order.",
-
-        options: [
-            {
-                text: "Continue",
-
-                speak: false,
-
-                next: "boss"
-            }
-        ]
-    },
-
-    strange_letter: {
-        speaker:
-            "AI",
-        text: "Can you show me?",
-
-        options: [
-            {
-                text: "Yes, it's here in my pocket.",
-
-                speak: false,
-
-                next: "show_it"
+                    "jim_remember"
             },
+
             {
-                text: "No I left it at home",
+                text:
+                    "Bye.",
 
-                speak: false,
-
-                next: "okay"
+                action:
+                    "action_leave_jim"
             }
         ]
     },
 
-    show_it: {
+
+    /* =====================================
+       BAD SLEEP
+    ====================================== */
+
+    jim_bad_sleep: {
+
+        speaker:
+            "JIM",
+
+        text:
+            "That is shitty, even more important to not forget to hit your quota today then. You know what happened to Lisa when she fell behind.",
+
+        options: [
+            {
+                text:
+                    "Don't worry about it, but I don't recall what happened to her?",
+
+                action: "action_jimFour"
+            },
+
+            {
+                text:
+                    "Oh, I remember her sudden disappearance now ",
+
+                next:
+                    "jim_remember"
+            },
+
+            {
+                text:
+                    "Bye",
+
+                action:
+                    "action_leave_jim"
+            }
+        ]
+    },
+
+
+    /* =====================================
+       LISA
+    ====================================== */
+
+    jim_lisa: {
+
+        speaker:
+            "JIM",
+
+        text:
+            "You really do have problems remembering things don't you? She got taken away by them to some facility and we have not seen her since.",
+
+        options: [
+            {
+                text:
+                    "O yeah that is what happened.",
+
+                next:
+                    "jim_work_end"
+            }
+        ]
+    },
+
+
+    jim_work_end: {
+
+        speaker:
+            "JIM",
+
+        text:
+            "Well i better get to work before the same happens to me.",
+
+        options: [
+            {
+                text:
+                    "Bye.",
+
+                action:
+                    "action_leave_jim"
+            }
+        ]
+    },
+
+
+    jim_remember: {
+
+        speaker:
+            "JIM",
+
+        text:
+            "It is such a shame that that happened. Well I better get to work before I get the same fate",
+
+        options: [
+            {
+                text:
+                    "Bye.",
+
+                action:
+                    "action_leave_jim"
+            }
+        ]
+    },
+
+
+    /* =====================================
+       BOSS
+    ====================================== */
+
+    boss_task: {
+
         speaker:
             "AI",
-        text: "I am so dissapointed in you, have a good life rotting in hell",
+
+        type:
+            "ai",
+
+        text:
+            "Morning Y/N, good to see you are on time today. The task for today is to manage the factory and put in the code, even you can manage that, right?",
 
         options: [
             {
-                text: "Game over",
+                text:
+                    "Start working",
 
-                speak: false,
+                speak:
+                    false,
 
-                action: "game_over"
-            }
-        ]
-    },
-
-    okay: {
-        speaker: "AI",
-        text: "Okay",
-
-        options: [
-            {
-                text: "Continue",
-                speak: false,
-                next: "boss"
-            }
-        ]
-    },
-
-    minigame_done: {
-        speaker: "AI",
-        text: "Goodjob! Tomorow after work we got something for you!",
-
-        options: [
-            {
-                text: "Ok thanks!",
-                speak: false,
-                next: "finish_work"
-            }
-        ]
-    },
-
-    finish_work: {
-        speaker: "Narrator",
-        text: "",
-
-        options: [
-            {
-                text: "Go to bar",
-                speak: false,
-                action: "level6"
+                action:
+                    "action_start_minigame"
             },
+
             {
-                text: "Go home",
-                speak: false,
-                action: "level7"
+                text:
+                    "Leave",
+
+                speak:
+                    false,
+
+                action:
+                    "close"
+            }
+        ]
+    },
+
+
+    /* =====================================
+       BOSS AFTER MINIGAME
+    ====================================== */
+
+    boss_after: {
+
+        speaker:
+            "AI",
+
+        type:
+            "ai",
+
+        text:
+            "...",
+
+        options: [
+            {
+                text:
+                    "Leave",
+
+                speak:
+                    false,
+
+                action:
+                    "close"
+            }
+        ]
+    },
+
+
+    /* =====================================
+       GO HOME
+    ====================================== */
+
+    go_home: {
+
+        speaker:
+            "NARRATOR",
+
+        text:
+            "Go home.",
+
+        options: [
+            {
+                text:
+                    "Go to home",
+
+                speak:
+                    false,
+
+                action:
+                    "level2"
+            },
+
+            {
+                text:
+                    "Back",
+
+                speak:
+                    false,
+
+                action:
+                    "close"
+            }
+        ]
+    },
+
+
+    /* =====================================
+       BAR
+    ====================================== */
+
+    go_bar: {
+
+        speaker:
+            "NARRATOR",
+
+        text:
+            "Go bar",
+
+        options: [
+            {
+                text:
+                    "Go to the bar",
+
+                speak:
+                    false,
+
+                action:
+                    "level3"
+            },
+
+            {
+                text:
+                    "Back",
+
+                speak:
+                    false,
+
+                action:
+                    "close"
             }
         ]
     }
@@ -277,15 +902,9 @@ function startLevel1() {
 
     );
 
-    if (gameComplete === "done") {
-        startDialogue(
-            "minigame_done"
-        );
-    } else {
-        startDialogue(
-            "level_start"
-        );
-    }
+    startDialogue(
+        "level_start"
+    );
 }
 
 
@@ -1013,4 +1632,44 @@ hotspotComputer.addEventListener(
         startDialogue("computer");
     }
 );
+/* =========================================
+   WORK HOTSPOTS
+========================================= */
 
+hotspotjim.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_jimOne")
+    }
+);
+
+hotspotWork.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_start_minigame")
+    }
+);
+
+hotspotBoss.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_boss")
+
+        startDialogue("boss_task");
+    }
+);
