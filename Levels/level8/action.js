@@ -49,6 +49,13 @@ export function runAction(action) {
 
         return;
     }
+
+    if (action === "ending") {
+
+        window.location.href = "../../endingscreen.html";
+
+        return;
+    }
 };
 
 export function closeDialogue() {

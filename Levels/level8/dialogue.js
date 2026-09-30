@@ -199,28 +199,28 @@ const dialogueTree = {
             {
                 text: "Continue",
                 speak: false,
-                next: "end7"
+                action: "ending"
             }
         ]
     },
 
-    end7: {
-        speaker: "Y/N",
-        text: "The end, thanks for playing our game!",
+    // end7: {
+    //     speaker: "Y/N",
+    //     text: "The end, thanks for playing our game!",
 
-        options: [
-            {
-                text: "Replay",
-                speak: false,
-                action: "replay"
-            },
-            {
-                text: "Quit game",
-                speak: false,
-                action: "quit_game"
-            }
-        ]
-    },
+    //     options: [
+    //         {
+    //             text: "Replay",
+    //             speak: false,
+    //             action: "replay"
+    //         },
+    //         {
+    //             text: "Quit game",
+    //             speak: false,
+    //             action: "quit_game"
+    //         }
+    //     ]
+    // },
 }
 /* =========================================
    START LEVEL
