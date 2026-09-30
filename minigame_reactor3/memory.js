@@ -1,10 +1,18 @@
 const cards = document.querySelectorAll('.memory-card');
-
+const dialog = document.querySelector('dialog');
 
 let matchedPairs = 0;
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
+
+function updateMoney(amount) {
+    const response = fetch('memory.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({earned: amount})
+    });
+}
 
 function flipCard() {
     if (lockBoard) return;
@@ -55,8 +63,9 @@ function showWinDialog() {
 
     const doneButton = dialogContent.querySelector('.done-button');
 
-    doneButton.addEventListener('click', () => {
-        window.location.href = 'memory.php?points=100';
+    doneButton.addEventListener('click', async () => {
+        await updateMoney(50);
+        window.location.href = "../minigame_reactor4/minigame4.php";
     });
 
     dialog.showModal();
@@ -86,9 +95,4 @@ function resetBoard() {
 
 cards.forEach(card => card.addEventListener('click', flipCard));
 
-const dialog = document.querySelector('dialog');
-const closeButton = document.querySelector('.close');
 
-closeButton.addEventListener('click', () => {
-    dialog.close();
-});
