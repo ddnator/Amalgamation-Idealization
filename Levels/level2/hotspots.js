@@ -1,25 +1,4 @@
-/* =========================================================
-   LEVEL 1
-   PIXEL PERFECT HOME HOTSPOTS
 
-   SPECIAAL VOOR DE NIEUWE LAYOUT:
-
-   object-fit: fill;
-
-   Daardoor:
-
-   - hele scene zichtbaar
-   - geen cropping
-   - geen zwarte balken in monitor
-   - X en Y worden apart geschaald
-
-   Deze JS gebruikt exact dezelfde schaal.
-========================================================= */
-
-
-/* =========================================================
-   ELEMENTEN
-========================================================= */
 
 const homeScene =
     document.getElementById(
@@ -39,19 +18,9 @@ const bottomBar =
     );
 
 
-/* =========================================================
-   HOTSPOT DATA
 
-   De overlay-afbeelding wordt gebruikt als MASK.
-
-   Alleen zichtbare pixels zijn klikbaar.
-========================================================= */
 
 const hotspots = [
-
-    /* =====================================================
-       BED
-    ===================================================== */
 
     {
         name:

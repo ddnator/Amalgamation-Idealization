@@ -69,7 +69,7 @@ canvas {
 
 
 /* =================================
-   MONITOR LAYOUT
+   MONITOR AREA
 ================================= */
 
 #monitor-area {
@@ -80,7 +80,6 @@ canvas {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     overflow: hidden;
@@ -88,6 +87,10 @@ canvas {
     background: #000;
 }
 
+
+/* =================================
+   MONITOR SHELL
+================================= */
 
 #monitor-shell {
     position: relative;
@@ -122,9 +125,6 @@ canvas {
 
 /* =================================
    MONITOR VIEWPORT
-
-   EnshittifiedTV.png:
-   650 x 488
 ================================= */
 
 #monitor-viewport {
@@ -168,8 +168,7 @@ canvas {
     height:
         100%;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     background:
         #000;
@@ -268,8 +267,7 @@ canvas {
 
 
 #hud-top {
-    display:
-        flex;
+    display: flex;
 
     justify-content:
         space-between;
@@ -295,12 +293,11 @@ canvas {
 
 
 /* =================================
-   HEALTH
+   HEALTH BAR
 ================================= */
 
 #health-bar {
-    display:
-        flex;
+    display: flex;
 
     width:
         100%;
@@ -383,8 +380,7 @@ canvas {
 ================================= */
 
 #turn-text {
-    position:
-        absolute;
+    position: absolute;
 
     top:
         112px;
@@ -426,11 +422,16 @@ canvas {
 
 /* =================================
    STAGE
+
+   Alleen:
+   - Operator links
+   - Player rechts
+
+   Speaker is volledig verwijderd.
 ================================= */
 
 #stage {
-    position:
-        absolute;
+    position: absolute;
 
     left:
         0;
@@ -439,20 +440,19 @@ canvas {
         0;
 
     bottom:
-        125px;
+        110px;
 
     width:
         100%;
 
     height:
-        58%;
+        62%;
 
     display:
         grid;
 
     grid-template-columns:
         1fr
-        0.35fr
         1fr;
 
     align-items:
@@ -468,6 +468,11 @@ canvas {
 ================================= */
 
 #boss-area {
+    position: relative;
+
+    width:
+        100%;
+
     height:
         100%;
 
@@ -479,19 +484,27 @@ canvas {
 
     align-items:
         flex-end;
+
+    overflow:
+        visible;
 }
 
 
 /* =================================
-   BOSS
+   THE OPERATOR
+
+   Kleiner binnen monitor.
 ================================= */
 
 #boss {
     width:
-        340px;
+        380px;
 
     max-width:
-        34%;
+        38vw;
+
+    max-height:
+        78%;
 
     height:
         auto;
@@ -503,13 +516,34 @@ canvas {
         bottom center;
 
     margin-bottom:
-        0;
+        -5px;
 
     transition:
         none;
 
     image-rendering:
         pixelated !important;
+}
+
+
+/* =================================
+   FULLSCREEN OPERATOR
+
+   In fullscreen groter.
+================================= */
+
+#game.game-fullscreen-mode #boss {
+    width:
+        560px;
+
+    max-width:
+        47vw;
+
+    max-height:
+        86%;
+
+    margin-bottom:
+        -8px;
 }
 
 
@@ -595,7 +629,7 @@ canvas {
 
 
 /* =================================
-   BOSS GLITCH 2
+   BOSS GLITCH PHASE 2
 ================================= */
 
 @keyframes boss-glitch-2 {
@@ -654,7 +688,7 @@ canvas {
 
 
 /* =================================
-   BOSS GLITCH 3
+   BOSS GLITCH PHASE 3
 ================================= */
 
 @keyframes boss-glitch-3 {
@@ -774,13 +808,11 @@ canvas {
 ================================= */
 
 #game.phase-3 #boss-area {
-
     animation:
         boss-area-shake
         0.07s
         steps(2)
         infinite;
-
 }
 
 
@@ -833,47 +865,36 @@ canvas {
 ================================= */
 
 #boss.beat {
-
     transform:
         translateY(-6px);
-
 }
 
 
 #boss.left {
-
     transform:
         translateX(-17px);
-
 }
 
 
 #boss.down {
-
     transform:
         translateY(11px);
-
 }
 
 
 #boss.up {
-
     transform:
         translateY(-20px);
-
 }
 
 
 #boss.right {
-
     transform:
         translateX(17px);
-
 }
 
 
 #boss.fake {
-
     transform:
         translateX(8px)
         skewX(-9deg);
@@ -883,83 +904,6 @@ canvas {
         saturate(0)
         brightness(0.65)
         !important;
-
-}
-
-
-/* =================================
-   SPEAKER
-================================= */
-
-#speaker {
-
-    position:
-        relative;
-
-    width:
-        115px;
-
-    height:
-        150px;
-
-    margin:
-        auto;
-
-    background:
-        #222;
-
-    border:
-        6px solid #000;
-
-}
-
-
-.speaker-small,
-.speaker-big {
-
-    position:
-        absolute;
-
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        #080808;
-
-    border:
-        4px solid #444;
-
-}
-
-
-.speaker-small {
-
-    top:
-        14px;
-
-    width:
-        42px;
-
-    height:
-        42px;
-
-}
-
-
-.speaker-big {
-
-    bottom:
-        14px;
-
-    width:
-        70px;
-
-    height:
-        70px;
-
 }
 
 
@@ -968,6 +912,8 @@ canvas {
 ================================= */
 
 #player {
+    width:
+        100%;
 
     display:
         flex;
@@ -978,14 +924,15 @@ canvas {
     align-items:
         center;
 
+    justify-content:
+        flex-end;
+
     margin-bottom:
         16px;
-
 }
 
 
 #player-head {
-
     width:
         82px;
 
@@ -1012,12 +959,10 @@ canvas {
 
     font-size:
         28px;
-
 }
 
 
 #player-body {
-
     width:
         125px;
 
@@ -1041,22 +986,19 @@ canvas {
 
     font-size:
         18px;
-
 }
 
 
 /* =================================
-   PLAYER GHOST HIT
+   PLAYER HIT EFFECT
 ================================= */
 
 #game.ghost-hit #player {
-
     animation:
         player-glitch
         0.12s
         steps(2)
         3;
-
 }
 
 
@@ -1107,7 +1049,6 @@ canvas {
 ================================= */
 
 .lane-group {
-
     position:
         absolute;
 
@@ -1137,28 +1078,22 @@ canvas {
 
     z-index:
         20;
-
 }
 
 
 #boss-lanes {
-
     left:
         1%;
-
 }
 
 
 #player-lanes {
-
     right:
         1%;
-
 }
 
 
 .lane {
-
     position:
         relative;
 
@@ -1167,7 +1102,6 @@ canvas {
 
     background:
         transparent;
-
 }
 
 
@@ -1176,7 +1110,6 @@ canvas {
 ================================= */
 
 .receptor {
-
     position:
         absolute;
 
@@ -1221,12 +1154,10 @@ canvas {
 
     line-height:
         1;
-
 }
 
 
 .receptor.active {
-
     transform:
         translateX(-50%)
         translate(
@@ -1239,7 +1170,6 @@ canvas {
 
     color:
         #111;
-
 }
 
 
@@ -1249,7 +1179,6 @@ canvas {
 
 #player-lanes
 .receptor.ghost-active {
-
     background:
         #111;
 
@@ -1264,25 +1193,20 @@ canvas {
         0.07s
         steps(2)
         infinite;
-
 }
 
 
 @keyframes ghost-flicker {
 
     0% {
-
         translate:
             -3px 0;
-
     }
 
 
     50% {
-
         translate:
             3px 0;
-
     }
 
 }
@@ -1293,7 +1217,6 @@ canvas {
 ================================= */
 
 .note {
-
     position:
         absolute;
 
@@ -1332,39 +1255,30 @@ canvas {
 
     line-height:
         1;
-
 }
 
 
 .note-left {
-
     background:
         var(--purple);
-
 }
 
 
 .note-down {
-
     background:
         var(--blue);
-
 }
 
 
 .note-up {
-
     background:
         var(--green);
-
 }
 
 
 .note-right {
-
     background:
         var(--red);
-
 }
 
 
@@ -1373,7 +1287,6 @@ canvas {
 ================================= */
 
 .fake-note {
-
     background:
         #1b1b1b
         !important;
@@ -1413,12 +1326,10 @@ canvas {
             124,
             0.28
         );
-
 }
 
 
 .fake-note::after {
-
     content:
         "";
 
@@ -1439,12 +1350,10 @@ canvas {
 
     pointer-events:
         none;
-
 }
 
 
 .fake-note.reveal {
-
     background:
         #080808
         !important;
@@ -1488,12 +1397,10 @@ canvas {
         0.07s
         steps(2)
         infinite;
-
 }
 
 
 .fake-note.reveal::after {
-
     border-color:
         rgba(
             255,
@@ -1501,7 +1408,6 @@ canvas {
             85,
             0.65
         );
-
 }
 
 
@@ -1532,7 +1438,6 @@ canvas {
 ================================= */
 
 .ghost-touch-mark {
-
     position:
         absolute;
 
@@ -1580,23 +1485,18 @@ canvas {
         0.16s
         steps(2)
         infinite;
-
 }
 
 
 .ghost-touch-mark::after {
-
     content:
         "?";
-
 }
 
 
 .ghost-touch-mark.fade {
-
     opacity:
         0;
-
 }
 
 
@@ -1625,7 +1525,6 @@ canvas {
 ================================= */
 
 #judgement {
-
     position:
         absolute;
 
@@ -1661,24 +1560,19 @@ canvas {
 
     font-size:
         30px;
-
 }
 
 
 #judgement.show {
-
     display:
         block;
-
 }
 
 
 #judgement.tricked,
 #judgement.ghost {
-
     color:
         #ff5555;
-
 }
 
 
@@ -1688,7 +1582,6 @@ canvas {
 
 #start-screen,
 #end-screen {
-
     position:
         absolute;
 
@@ -1709,7 +1602,6 @@ canvas {
 
     background:
         transparent;
-
 }
 
 
@@ -1718,7 +1610,6 @@ canvas {
 ================================= */
 
 .menu {
-
     width:
         min(
             440px,
@@ -1736,12 +1627,10 @@ canvas {
 
     text-align:
         center;
-
 }
 
 
 .menu h1 {
-
     margin:
         5px;
 
@@ -1750,34 +1639,28 @@ canvas {
 
     font-size:
         39px;
-
 }
 
 
 .menu p {
-
     font-size:
         19px;
 
     line-height:
         1.2;
-
 }
 
 
 .menu .help {
-
     color:
         #8a8170;
 
     font-size:
         13px;
-
 }
 
 
 .tiny {
-
     color:
         #777;
 
@@ -1786,7 +1669,6 @@ canvas {
 
     font-size:
         12px;
-
 }
 
 
@@ -1795,7 +1677,6 @@ canvas {
 ================================= */
 
 #controls {
-
     display:
         flex;
 
@@ -1807,12 +1688,10 @@ canvas {
 
     margin:
         15px;
-
 }
 
 
 #controls div {
-
     width:
         60px;
 
@@ -1836,24 +1715,20 @@ canvas {
 
     border:
         4px solid #000;
-
 }
 
 
 #controls b {
-
     font-size:
         26px;
-
 }
 
 
 /* =================================
-   BUTTON
+   BUTTONS
 ================================= */
 
 button {
-
     padding:
         8px 20px;
 
@@ -1878,18 +1753,15 @@ button {
 
     cursor:
         pointer;
-
 }
 
 
 button:active {
-
     transform:
         translate(
             3px,
             3px
         );
-
 }
 
 
@@ -1898,7 +1770,6 @@ button:active {
 ================================= */
 
 #end-stats {
-
     margin:
         15px;
 
@@ -1907,7 +1778,6 @@ button:active {
 
     line-height:
         1.5;
-
 }
 
 
@@ -1916,19 +1786,16 @@ button:active {
 ================================= */
 
 .hidden {
-
     display:
         none !important;
-
 }
 
 
 /* =================================
-   FULLSCREEN TOGGLE
+   FULLSCREEN BUTTON
 ================================= */
 
 #fullscreen-toggle {
-
     position:
         fixed;
 
@@ -1979,12 +1846,10 @@ button:active {
 
     cursor:
         pointer;
-
 }
 
 
 #fullscreen-toggle:hover {
-
     background:
         #f5f5f0;
 
@@ -1993,43 +1858,34 @@ button:active {
 
     text-shadow:
         none;
-
 }
 
 
 #fullscreen-toggle:focus-visible {
-
     outline:
         2px solid #fff;
 
     outline-offset:
         2px;
-
 }
 
 
 /* =================================
    FULLSCREEN
-
-   - monitor weg
-   - viewport vult hele scherm
 ================================= */
 
 #game.game-fullscreen-mode
 #monitor-area {
-
     display:
         block;
 
     background:
         #000;
-
 }
 
 
 #game.game-fullscreen-mode
 #monitor-shell {
-
     position:
         absolute;
 
@@ -2050,22 +1906,18 @@ button:active {
 
     aspect-ratio:
         auto;
-
 }
 
 
 #game.game-fullscreen-mode
 #monitor-frame {
-
     display:
         none !important;
-
 }
 
 
 #game.game-fullscreen-mode
 #monitor-viewport {
-
     left:
         0;
 
@@ -2086,27 +1938,21 @@ button:active {
 
     border-radius:
         0;
-
 }
 
 
 #game.game-fullscreen-mode
 #fight-surface {
-
     width:
         100%;
 
     height:
         100%;
-
 }
 
 
-/* ruimte voor fullscreen button */
-
 #game.game-fullscreen-mode
 #hud {
-
     width:
         min(
             700px,
@@ -2115,12 +1961,46 @@ button:active {
                 170px
             )
         );
+}
+
+
+/* =================================
+   MEDIUM SCREENS
+================================= */
+
+@media (
+    max-width: 1100px
+) {
+
+    #boss {
+        width:
+            340px;
+
+        max-width:
+            37vw;
+
+        max-height:
+            76%;
+    }
+
+
+    #game.game-fullscreen-mode
+    #boss {
+        width:
+            470px;
+
+        max-width:
+            46vw;
+
+        max-height:
+            86%;
+    }
 
 }
 
 
 /* =================================
-   SMALL SCREEN
+   SMALL SCREENS
 ================================= */
 
 @media (
@@ -2128,23 +2008,21 @@ button:active {
 ) {
 
     #stage {
-
         bottom:
             90px;
 
+        height:
+            60%;
     }
 
 
     .lane-group {
-
         width:
             48%;
-
     }
 
 
     .receptor {
-
         width:
             52px;
 
@@ -2156,12 +2034,10 @@ button:active {
 
         font-size:
             36px;
-
     }
 
 
     .note {
-
         width:
             49px;
 
@@ -2173,36 +2049,47 @@ button:active {
 
         font-size:
             34px;
-
     }
 
 
     #boss {
-
         width:
-            250px;
+            285px;
 
+        max-width:
+            37vw;
+
+        max-height:
+            75%;
+    }
+
+
+    #game.game-fullscreen-mode
+    #boss {
+        width:
+            390px;
+
+        max-width:
+            45vw;
+
+        max-height:
+            84%;
     }
 
 
     #player {
-
         margin-bottom:
             8px;
-
     }
 
 
     #stats {
-
         font-size:
             10px;
-
     }
 
 
     #fullscreen-toggle {
-
         top:
             10px;
 
@@ -2214,13 +2101,11 @@ button:active {
 
         font-size:
             11px;
-
     }
 
 
     #game.game-fullscreen-mode
     #hud {
-
         width:
             min(
                 620px,
@@ -2229,7 +2114,6 @@ button:active {
                     120px
                 )
             );
-
     }
 
 }

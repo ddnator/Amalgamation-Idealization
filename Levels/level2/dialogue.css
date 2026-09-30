@@ -1,1852 +1,581 @@
-/* =========================================================
-   LEVEL 1
-
-   NORMAL:
-   - monitor zichtbaar
-   - dialogue buiten monitor
-
-   FULLSCREEN:
-   - monitor-overlay weg
-   - game gebruikt volledig bovenste scherm
-   - dialogue blijft onderaan
-========================================================= */
-
-
 :root {
-
-    --bottom-bar-height:
-        150px;
-
-
-    --monitor-ratio:
-        1.33178654;
-
-
-    --white:
-        #f4f4f1;
-
-
-    --text:
-        #53634d;
-
-
-    --red:
-        #b85f53;
-
-
-    --red-bright:
-        #ee806f;
-
+    --bottom-bar-height: 175px;
+    --monitor-ratio: 1.3319672131;
+    --bar-bg: #f4f4f1;
+    --text: #53634d;
+    --accent: #b85f53;
+    --accent-bright: #ee806f;
 }
-
-
-/* =========================================================
-   RESET
-========================================================= */
 
 * {
-
-    box-sizing:
-        border-box;
-
+    box-sizing: border-box;
 }
-
 
 html,
 body {
-
-    margin:
-        0;
-
-    padding:
-        0;
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    overflow:
-        hidden;
-
-    background:
-        #000;
-
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
 }
 
-
-body {
-
-    font-family:
-        "Pixelify Sans",
-        monospace;
-
+body,
+button {
+    font-family: "Pixelify Sans", monospace;
 }
-
-
-/* =========================================================
-   GAME
-========================================================= */
 
 #game {
-
-    position:
-        relative;
-
-    width:
-        100vw;
-
-    height:
-        100vh;
-
-    overflow:
-        hidden;
-
-    background:
-        #000;
-
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
 }
-
-
-/* =========================================================
-   FULLSCREEN BUTTON
-========================================================= */
 
 #fullscreen-toggle {
-
-    position:
-        fixed;
-
-    top:
-        14px;
-
-    right:
-        18px;
-
-    z-index:
-        10000;
-
-
-    padding:
-        7px 11px;
-
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.65
-        );
-
-
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.72
-        );
-
-
-    color:
-        #f5f5f0;
-
-
-    font-family:
-        "Pixelify Sans",
-        monospace;
-
-
-    font-size:
-        14px;
-
-
-    line-height:
-        1;
-
-
-    cursor:
-        pointer;
-
-
-    text-shadow:
-        1px 1px 0
-        #000;
-
-
-    backdrop-filter:
-        blur(
-            2px
-        );
-
+    position: fixed;
+    top: 14px;
+    right: 18px;
+    z-index: 10000;
+    padding: 7px 11px;
+    border: 1px solid rgba(255,255,255,0.65);
+    background: rgba(0,0,0,0.76);
+    color: #f5f5f0;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
 }
-
 
 #fullscreen-toggle:hover {
-
-    background:
-        #f5f5f0;
-
-
-    color:
-        #111;
-
-
-    text-shadow:
-        none;
-
+    background: #f5f5f0;
+    color: #111;
 }
-
-
-#fullscreen-toggle:focus-visible {
-
-    outline:
-        2px solid
-        #fff;
-
-
-    outline-offset:
-        2px;
-
-}
-
-
-/* =========================================================
-   MONITOR AREA
-========================================================= */
 
 #monitor-area {
-
-    position:
-        absolute;
-
-    top:
-        0;
-
-    left:
-        0;
-
-    right:
-        0;
-
-
-    bottom:
-        var(--bottom-bar-height);
-
-
-    display:
-        flex;
-
-
-    align-items:
-        center;
-
-
-    justify-content:
-        center;
-
-
-    overflow:
-        hidden;
-
-
-    background:
-        #000;
-
-
-    z-index:
-        1;
-
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: var(--bottom-bar-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #000;
+    z-index: 1;
 }
-
-
-/* =========================================================
-   MONITOR SHELL
-========================================================= */
 
 #monitor-shell {
-
-    position:
-        relative;
-
-
-    height:
-        min(
-            100%,
-            calc(
-                100vw /
-                var(--monitor-ratio)
-            )
-        );
-
-
-    width:
-        min(
-            100%,
-            calc(
-                (
-                    100vh -
-                    var(--bottom-bar-height)
-                )
-                *
-                var(--monitor-ratio)
-            )
-        );
-
-
-    aspect-ratio:
-        574 / 431;
-
-
-    flex:
-        0 0 auto;
-
-
-    overflow:
-        hidden;
-
-
-    background:
-        transparent;
-
+    position: relative;
+    width: min(
+        100%,
+        calc(
+            (100vh - var(--bottom-bar-height))
+            * var(--monitor-ratio)
+        )
+    );
+    height: min(
+        100%,
+        calc(
+            100vw / var(--monitor-ratio)
+        )
+    );
+    aspect-ratio: 650 / 488;
+    flex: 0 0 auto;
+    overflow: hidden;
 }
-
-
-/* =========================================================
-   MONITOR FRAME
-========================================================= */
 
 #monitor-frame {
-
-    position:
-        absolute;
-
-
-    inset:
-        0;
-
-
-    width:
-        100%;
-
-
-    height:
-        100%;
-
-
-    display:
-        block;
-
-
-    object-fit:
-        fill;
-
-
-    pointer-events:
-        none;
-
-
-    user-select:
-        none;
-
-
-    z-index:
-        100;
-
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: fill;
+    image-rendering: pixelated;
+    pointer-events: none;
+    user-select: none;
+    z-index: 100;
 }
-
-
-/* =========================================================
-   MONITOR VIEWPORT
-========================================================= */
 
 #monitor-viewport {
-
-    position:
-        absolute;
-
-
-    left:
-        2.44%;
-
-
-    top:
-        2.78%;
-
-
-    right:
-        2.96%;
-
-
-    bottom:
-        4.87%;
-
-
-    overflow:
-        hidden;
-
-
-    background:
-        #000;
-
-
-    border-radius:
-        1.6%;
-
-
-    z-index:
-        5;
-
+    position: absolute;
+    left: 8.923%;
+    top: 7.787%;
+    right: 8.462%;
+    bottom: 9.836%;
+    overflow: hidden;
+    background: #000;
+    border-radius: 2.2%;
+    z-index: 5;
 }
-
-
-/* =========================================================
-   POINT CLICK AREA
-========================================================= */
 
 #point-click-area {
-
-    position:
-        absolute;
-
-
-    inset:
-        0;
-
-
-    width:
-        100%;
-
-
-    height:
-        100%;
-
-
-    overflow:
-        hidden;
-
-
-    background:
-        transparent;
-
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
 }
 
+.game-scene {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+}
 
-/* =========================================================
-   HUD
-========================================================= */
+.Background,
+.Overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: fill;
+    object-position: center;
+    image-rendering: pixelated;
+}
+
+.Background {
+    z-index: 1;
+}
+
+.Overlay {
+    z-index: 12;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.BreakfastOverlay {
+    z-index: 16;
+    opacity: 1;
+}
 
 #hud {
-
-    position:
-        absolute;
-
-
-    top:
-        12px;
-
-
-    left:
-        16px;
-
-
-    right:
-        16px;
-
-
-    display:
-        flex;
-
-
-    align-items:
-        center;
-
-
-    justify-content:
-        space-between;
-
-
-    color:
-        #f5f5f0;
-
-
-    font-size:
-        16px;
-
-
-    line-height:
-        1;
-
-
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #f5f5f0;
+    font-size: 16px;
+    line-height: 1;
     text-shadow:
         1px 1px 0 #000,
-        -1px 1px 0 #000;
-
-
-    pointer-events:
-        none;
-
-
-    z-index:
-        60;
-
+        -1px 1px 0 #000,
+        1px -1px 0 #000;
+    pointer-events: none;
+    z-index: 60;
 }
 
-
-#scene-name,
-#location-label {
-
-    color:
-        #f5f5f0;
-
+.hotspot {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    outline: 0;
+    cursor: pointer;
+    z-index: 40;
 }
 
-
-/* =========================================================
-   SCENES
-========================================================= */
-
-.game-scene,
-#caravanScene,
-#caravanSceneOutside,
-#walkingToWorkDay,
-#OutsideWorkDay,
-#work,
-#jim1,
-#jim2,
-#jim3,
-#jim4,
-#boss {
-
-    position:
-        absolute;
-
-
-    inset:
-        0;
-
-
-    width:
-        100%;
-
-
-    height:
-        100%;
-
-
-    overflow:
-        hidden;
-
-
-    background:
-        transparent;
-
+.bed-hotspot {
+    left: 37.95%;
+    top: 23.42%;
+    width: 28.14%;
+    height: 58.54%;
 }
 
-
-/* =========================================================
-   SCENE IMAGE
-
-   fill betekent:
-
-   - niets afgesneden
-   - geen balken binnen scherm
-========================================================= */
-
-.game-scene > img.Background,
-#caravanScene > img.Background,
-#caravanSceneOutside > img.Background,
-#walkingToWorkDay > img.Background,
-#OutsideWorkDay > img.Background,
-#work > img.Background,
-#jim1 > img.Background,
-#jim2 > img.Background,
-#jim3 > img.Background,
-#jim4 > img.Background,
-#boss > img.Background {
-
-    position:
-        absolute !important;
-
-
-    inset:
-        0 !important;
-
-
-    width:
-        100% !important;
-
-
-    height:
-        100% !important;
-
-
-    display:
-        block !important;
-
-
-    object-fit:
-        fill !important;
-
-
-    object-position:
-        center center !important;
-
-
-    image-rendering:
-        pixelated;
-
-
-    filter:
-        none !important;
-
-
-    background:
-        transparent !important;
-
-
-    z-index:
-        0 !important;
-
+.computer-hotspot {
+    left: 62.05%;
+    top: 25%;
+    width: 21.54%;
+    height: 35.44%;
 }
 
-
-/* =========================================================
-   OVERLAYS
-========================================================= */
-
-.game-scene > img.Overlay {
-
-    position:
-        absolute !important;
-
-
-    inset:
-        0 !important;
-
-
-    width:
-        100% !important;
-
-
-    height:
-        100% !important;
-
-
-    display:
-        block;
-
-
-    object-fit:
-        fill !important;
-
-
-    object-position:
-        center center !important;
-
-
-    image-rendering:
-        pixelated;
-
-
-    filter:
-        none !important;
-
-
-    pointer-events:
-        none !important;
-
-
-    z-index:
-        5 !important;
-
+.kitchen-hotspot {
+    left: 0.21%;
+    top: 23.42%;
+    width: 43.71%;
+    height: 74.05%;
 }
 
-
-#point-click-area > img.Overlay {
-
-    position:
-        absolute !important;
-
-
-    inset:
-        0 !important;
-
-
-    width:
-        100% !important;
-
-
-    height:
-        100% !important;
-
-
-    object-fit:
-        fill !important;
-
-
-    pointer-events:
-        none !important;
-
-
-    z-index:
-        5 !important;
-
+.breakfast-hotspot {
+    left: 8%;
+    top: 58%;
+    width: 25%;
+    height: 30%;
 }
 
-
-/* =========================================================
-   HOME HOTSPOTS
-
-   Pixel detection gebeurt via hotspots.js.
-========================================================= */
-
-#hotspot-bed,
-#hotspot-kitchen,
-#hotspot-computer,
-#hotspot-breakfast {
-
-    position:
-        absolute !important;
-
-
-    left:
-        0 !important;
-
-
-    top:
-        0 !important;
-
-
-    width:
-        0 !important;
-
-
-    height:
-        0 !important;
-
-
-    right:
-        auto !important;
-
-
-    bottom:
-        auto !important;
-
-
-    padding:
-        0 !important;
-
-
-    margin:
-        0 !important;
-
-
-    border:
-        0 !important;
-
-
-    outline:
-        0 !important;
-
-
-    background:
-        transparent !important;
-
-
-    pointer-events:
-        none !important;
-
+.exit-hotspot {
+    left: 0;
+    top: 62%;
+    width: 100%;
+    height: 38%;
 }
 
-
-/* =========================================================
-   ANDERE HOTSPOTS
-========================================================= */
-
-#hotspot-door,
-#hotspot-jim,
-#hotspot-work,
-#hotspot-boss,
-.Door,
-.jim,
-.work,
-.boss {
-
-    z-index:
-        40 !important;
-
+.door-hotspot {
+    left: 0;
+    top: 21%;
+    width: 54%;
+    height: 79%;
 }
 
+.jim-hotspot {
+    left: 77.88%;
+    top: 21.11%;
+    width: 13.25%;
+    height: 72.89%;
+}
 
-/* =========================================================
-   DIALOGUE
-========================================================= */
+.work-terminal-hotspot {
+    left: 32.13%;
+    top: 16.44%;
+    width: 33.75%;
+    height: 43.11%;
+}
+
+.boss-hotspot {
+    left: 3.38%;
+    top: 12.44%;
+    width: 23.63%;
+    height: 85.11%;
+}
+
+#hotspot-bed:hover + .BedOverlay,
+#hotspot-bed:focus-visible + .BedOverlay,
+#hotspot-computer:hover + .ComputerOverlay,
+#hotspot-computer:focus-visible + .ComputerOverlay,
+#hotspot-kitchen:hover + .KitchenOverlay,
+#hotspot-kitchen:focus-visible + .KitchenOverlay,
+#hotspot-exit:hover + .ExitOverlay,
+#hotspot-exit:focus-visible + .ExitOverlay,
+#hotspot-door:hover + .DoorOverlay,
+#hotspot-door:focus-visible + .DoorOverlay,
+#hotspot-jim:hover + .JimOverlay,
+#hotspot-jim:focus-visible + .JimOverlay,
+#hotspot-work:hover + .WorkOverlay,
+#hotspot-work:focus-visible + .WorkOverlay,
+#hotspot-boss:hover + .BossOverlay,
+#hotspot-boss:focus-visible + .BossOverlay {
+    opacity: 1;
+}
+
+.after-work-hotspot {
+    position: absolute;
+    bottom: 18px;
+    z-index: 70;
+    padding: 7px 12px;
+    border: 3px solid #000;
+    background: #f4f4f1;
+    color: #53634d;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#hotspot-home {
+    left: 25px;
+}
+
+#hotspot-bar {
+    right: 25px;
+}
 
 #bottom-bar {
-
-    position:
-        absolute;
-
-
-    left:
-        0;
-
-
-    right:
-        0;
-
-
-    bottom:
-        0;
-
-
-    width:
-        100%;
-
-
-    height:
-        var(--bottom-bar-height);
-
-
-    overflow:
-        hidden;
-
-
-    background:
-        #f4f4f1;
-
-
-    border-top:
-        3px solid #647859;
-
-
-    color:
-        var(--text);
-
-
-    z-index:
-        200;
-
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: var(--bottom-bar-height);
+    overflow: hidden;
+    background: var(--bar-bg);
+    border-top: 3px solid #647859;
+    color: var(--text);
+    z-index: 200;
 }
-
-
-/* =========================================================
-   NORMAL BAR
-========================================================= */
 
 #normal-bar {
-
-    position:
-        absolute;
-
-
-    inset:
-        0;
-
-
-    padding:
-        18px 24px;
-
+    position: absolute;
+    inset: 0;
+    padding: 18px 26px;
 }
-
 
 #bar-location {
-
-    color:
-        var(--red);
-
-
-    font-size:
-        19px;
-
+    color: var(--accent);
+    font-size: 20px;
 }
-
 
 #bar-hint {
-
-    position:
-        absolute;
-
-
-    left:
-        24px;
-
-
-    bottom:
-        17px;
-
-
-    color:
-        #606e5a;
-
-
-    font-size:
-        13px;
-
+    position: absolute;
+    left: 26px;
+    bottom: 18px;
+    color: #606e5a;
+    font-size: 14px;
 }
-
-
-/* =========================================================
-   DIALOGUE CONTENT
-========================================================= */
 
 #dialogue-content {
-
-    position:
-        absolute;
-
-
-    inset:
-        0;
-
-
-    padding:
-        15px 24px 28px 24px;
-
-
-    overflow-x:
-        hidden;
-
-
-    overflow-y:
-        auto;
-
+    position: absolute;
+    inset: 0;
+    padding: 15px 26px 30px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
-
-
-/* =========================================================
-   SPEAKER
-========================================================= */
 
 #dialogue-speaker {
-
-    margin:
-        0 0 6px 0;
-
-
-    color:
-        var(--red);
-
-
-    font-size:
-        19px;
-
-
-    line-height:
-        1;
-
-
-    text-transform:
-        uppercase;
-
+    margin: 0 0 7px;
+    color: var(--accent);
+    font-size: 20px;
+    line-height: 1;
+    text-transform: uppercase;
 }
-
-
-/* =========================================================
-   DIALOGUE TEXT
-========================================================= */
 
 #dialogue-text {
-
-    max-width:
-        96%;
-
-
-    margin:
-        0 0 9px 0;
-
-
-    color:
-        var(--text);
-
-
-    font-size:
-        19px;
-
-
-    line-height:
-        1.2;
-
-
-    white-space:
-        pre-line;
-
-
-    overflow-wrap:
-        break-word;
-
+    max-width: 96%;
+    margin: 0 0 10px;
+    color: var(--text);
+    font-size: 19px;
+    line-height: 1.2;
+    white-space: pre-line;
+    overflow-wrap: break-word;
 }
-
-
-/* =========================================================
-   OPTIONS
-========================================================= */
 
 #dialogue-options {
-
-    display:
-        grid;
-
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(
-                0,
-                1fr
-            )
-        );
-
-
-    column-gap:
-        30px;
-
-
-    row-gap:
-        3px;
-
-
-    width:
-        100%;
-
-
-    margin-top:
-        4px;
-
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    column-gap: 32px;
+    row-gap: 4px;
+    width: 100%;
+    margin-top: 4px;
 }
-
-
-/* =========================================================
-   OPTION
-========================================================= */
 
 .dialogue-option {
-
-    position:
-        relative;
-
-
-    display:
-        flex;
-
-
-    align-items:
-        flex-start;
-
-
-    width:
-        100%;
-
-
-    min-width:
-        0;
-
-
-    margin:
-        0;
-
-
-    padding:
-        2px 5px 2px 31px;
-
-
-    border:
-        0;
-
-
-    border-radius:
-        0;
-
-
-    background:
-        transparent;
-
-
-    color:
-        var(--text);
-
-
-    font-family:
-        "Pixelify Sans",
-        monospace;
-
-
-    font-size:
-        15px;
-
-
-    line-height:
-        1.2;
-
-
-    text-align:
-        left;
-
-
-    white-space:
-        normal;
-
-
-    overflow-wrap:
-        anywhere;
-
-
-    cursor:
-        pointer;
-
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 3px 5px 3px 32px;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.2;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    cursor: pointer;
 }
 
-
-.dialogue-option:hover {
-
-    color:
-        var(--red-bright);
-
-}
-
-
+.dialogue-option:hover,
 .dialogue-option.selected {
-
-    color:
-        var(--red);
-
+    color: var(--accent-bright);
 }
-
 
 .dialogue-option.selected::before {
-
-    content:
-        ">";
-
-
-    position:
-        absolute;
-
-
-    left:
-        6px;
-
-
-    top:
-        2px;
-
-
-    color:
-        var(--red);
-
+    content: ">";
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    color: var(--accent-bright);
 }
-
 
 .option-number {
-
-    display:
-        inline-block;
-
-
-    flex:
-        0 0 25px;
-
-
-    width:
-        25px;
-
-
-    color:
-        #71806a;
-
+    display: inline-block;
+    flex: 0 0 25px;
+    width: 25px;
+    color: #71806a;
 }
 
-
-.dialogue-option.selected
-.option-number {
-
-    color:
-        var(--red);
-
+#dialogue-help {
+    position: absolute;
+    right: 16px;
+    bottom: 7px;
+    color: #687562;
+    font-size: 9px;
+    pointer-events: none;
 }
-
-
-/* =========================================================
-   PLAYER
-========================================================= */
 
 #bottom-bar.player-speaking {
-
-    border-top-color:
-        var(--red);
-
+    border-top-color: var(--accent);
 }
 
-
-#bottom-bar.player-speaking
-#dialogue-speaker {
-
-    color:
-        var(--text);
-
+#bottom-bar.waiting #dialogue-help {
+    color: var(--accent);
 }
 
-
-/* =========================================================
-   WAITING
-========================================================= */
-
-#bottom-bar.waiting {
-
-    cursor:
-        pointer;
-
+#start-screen,
+#end-screen {
+    position: absolute;
+    inset: 0;
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
 }
-
-
-#bottom-bar.waiting
-#dialogue-help {
-
-    color:
-        var(--red);
-
-}
-
-
-/* =========================================================
-   HELP
-========================================================= */
-
-#dialogue-help {
-
-    position:
-        absolute;
-
-
-    right:
-        16px;
-
-
-    bottom:
-        7px;
-
-
-    color:
-        #687562;
-
-
-    font-size:
-        9px;
-
-
-    pointer-events:
-        none;
-
-}
-
-
-/* =========================================================
-   DIALOGUE OPEN
-========================================================= */
-
-#bottom-bar.dialogue-open {
-
-    height:
-        var(--bottom-bar-height);
-
-}
-
-
-/* =========================================================
-   FULLSCREEN GAME MODE
-
-   Wordt door fullscreen.js toegevoegd.
-
-   Monitor-overlay volledig weg.
-
-   Monitor viewport gebruikt volledige bovenste ruimte.
-========================================================= */
-
-#game.game-fullscreen-mode
-#monitor-area {
-
-    align-items:
-        stretch;
-
-
-    justify-content:
-        stretch;
-
-
-    background:
-        #000;
-
-}
-
-
-/* =========================================================
-   SHELL WORDT VOLLEDIG SCHERM
-========================================================= */
-
-#game.game-fullscreen-mode
-#monitor-shell {
-
-    width:
-        100%;
-
-
-    height:
-        100%;
-
-
-    max-width:
-        none;
-
-
-    max-height:
-        none;
-
-
-    aspect-ratio:
-        auto;
-
-
-    flex:
-        1 1 auto;
-
-}
-
-
-/* =========================================================
-   MONITOR RAND VERBERGEN
-========================================================= */
-
-#game.game-fullscreen-mode
-#monitor-frame {
-
-    display:
-        none !important;
-
-}
-
-
-/* =========================================================
-   VIEWPORT VULT HELE GAME AREA
-========================================================= */
-
-#game.game-fullscreen-mode
-#monitor-viewport {
-
-    left:
-        0;
-
-
-    top:
-        0;
-
-
-    right:
-        0;
-
-
-    bottom:
-        0;
-
-
-    width:
-        100%;
-
-
-    height:
-        100%;
-
-
-    border-radius:
-        0;
-
-}
-
-
-/* =========================================================
-   FULLSCREEN HUD
-
-   Beetje extra ruimte zodat fullscreen button
-   rechtsboven niet over HOME heen valt.
-========================================================= */
-
-#game.game-fullscreen-mode
-#hud {
-
-    right:
-        170px;
-
-}
-
-
-/* =========================================================
-   FULLSCREEN BUTTON IN FULLSCREEN MODE
-========================================================= */
-
-#game.game-fullscreen-mode
-#fullscreen-toggle {
-
-    background:
-        rgba(
-            0,
-            0,
-            0,
-            0.78
-        );
-
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-#start-screen {
-
-    position:
-        absolute;
-
-
-    inset:
-        0;
-
-
-    display:
-        flex;
-
-
-    justify-content:
-        center;
-
-
-    align-items:
-        center;
-
-
-    background:
-        #000;
-
-
-    z-index:
-        500;
-
-}
-
 
 .screen {
-
-    width:
-        min(
-            650px,
-            90vw
-        );
-
-
-    color:
-        #eee;
-
+    width: min(650px,90vw);
+    color: #eee;
 }
-
 
 .screen .tiny {
-
-    color:
-        #777771;
-
-
-    font-size:
-        12px;
-
+    color: #777771;
+    font-size: 12px;
 }
-
 
 .screen h1 {
-
-    margin:
-        5px 0 25px 0;
-
-
-    color:
-        var(--red);
-
-
-    font-size:
-        47px;
-
+    margin: 5px 0 25px;
+    color: var(--accent);
+    font-size: 47px;
 }
-
 
 .screen p {
-
-    margin-bottom:
-        25px;
-
-
-    color:
-        #eee;
-
-
-    font-size:
-        20px;
-
+    color: #eee;
+    font-size: 18px;
 }
-
 
 .screen button {
-
-    padding:
-        0;
-
-
-    border:
-        0;
-
-
-    background:
-        transparent;
-
-
-    color:
-        #eee;
-
-
-    font-family:
-        "Pixelify Sans",
-        monospace;
-
-
-    font-size:
-        22px;
-
-
-    cursor:
-        pointer;
-
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #eee;
+    font-size: 22px;
+    cursor: pointer;
 }
-
 
 .screen button:hover {
-
-    color:
-        var(--red-bright);
-
+    color: var(--accent-bright);
 }
-
-
-/* =========================================================
-   MINIGAME
-========================================================= */
 
 #minigame-screen {
-
-    position:
-        absolute;
-
-
-    inset:
-        0;
-
-
-    display:
-        flex;
-
-
-    justify-content:
-        center;
-
-
-    align-items:
-        center;
-
-
-    padding:
-        0;
-
-
-    background:
-        #000;
-
-
-    z-index:
-        500;
-
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: #000;
 }
-
 
 #reactor-minigame-frame {
-
-    display:
-        block;
-
-
-    width:
-        100%;
-
-
-    height:
-        100%;
-
-
-    margin:
-        0;
-
-
-    padding:
-        0;
-
-
-    border:
-        0;
-
-
-    background:
-        #fff;
-
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #000;
 }
 
-
-/* =========================================================
-   END
-========================================================= */
-
-#end-screen {
-
-    position:
-        absolute;
-
-
-    inset:
-        0;
-
-
-    display:
-        flex;
-
-
-    justify-content:
-        center;
-
-
-    align-items:
-        center;
-
-
-    background:
-        #000;
-
-
-    z-index:
-        500;
-
+#minigame-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 20001;
+    padding: 7px 11px;
+    border: 1px solid #fff;
+    background: #000;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
 }
-
-
-/* =========================================================
-   HIDDEN
-========================================================= */
 
 .hidden {
-
-    display:
-        none !important;
-
+    display: none !important;
 }
 
+#game.game-fullscreen-mode #monitor-area {
+    align-items: stretch;
+    justify-content: stretch;
+}
 
-/* =========================================================
-   MEDIUM
-========================================================= */
+#game.game-fullscreen-mode #monitor-shell {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    aspect-ratio: auto;
+    flex: 1 1 auto;
+}
 
-@media (
-    max-width:
-    1000px
-) {
+#game.game-fullscreen-mode #monitor-frame {
+    display: none !important;
+}
 
+#game.game-fullscreen-mode #monitor-viewport {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+#game.game-fullscreen-mode #hud {
+    right: 180px;
+}
+
+@media (max-width:1000px) {
     :root {
-
-        --bottom-bar-height:
-            170px;
-
+        --bottom-bar-height: 190px;
     }
-
 
     #dialogue-options {
-
-        grid-template-columns:
-            1fr;
-
+        grid-template-columns: 1fr;
     }
 
-
-    #dialogue-speaker {
-
-        font-size:
-            17px;
-
-    }
-
-
+    #dialogue-speaker,
     #dialogue-text {
-
-        font-size:
-            17px;
-
+        font-size: 17px;
     }
-
 
     .dialogue-option {
-
-        font-size:
-            14px;
-
+        font-size: 14px;
     }
-
 
     #fullscreen-toggle {
-
-        top:
-            10px;
-
-
-        right:
-            10px;
-
-
-        font-size:
-            12px;
-
+        top: 10px;
+        right: 10px;
+        font-size: 12px;
     }
-
-
-    #game.game-fullscreen-mode
-    #hud {
-
-        right:
-            145px;
-
-    }
-
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (
-    max-width:
-    700px
-) {
-
+@media (max-width:700px) {
     :root {
-
-        --bottom-bar-height:
-            190px;
-
+        --bottom-bar-height: 210px;
     }
-
 
     #hud {
-
-        top:
-            7px;
-
-
-        left:
-            9px;
-
-
-        right:
-            9px;
-
-
-        font-size:
-            11px;
-
+        top: 7px;
+        left: 9px;
+        right: 9px;
+        font-size: 11px;
     }
-
 
     #dialogue-content {
-
-        padding:
-            11px 12px 25px 12px;
-
+        padding: 12px 13px 27px;
     }
 
-
-    #dialogue-speaker {
-
-        font-size:
-            15px;
-
-    }
-
-
+    #dialogue-speaker,
     #dialogue-text {
-
-        font-size:
-            15px;
-
+        font-size: 15px;
     }
-
-
-    #dialogue-options {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
 
     .dialogue-option {
-
-        padding-left:
-            27px;
-
-
-        font-size:
-            12px;
-
+        padding-left: 27px;
+        font-size: 12px;
     }
-
-
-    #dialogue-help {
-
-        right:
-            8px;
-
-
-        bottom:
-            5px;
-
-
-        font-size:
-            8px;
-
-    }
-
 
     #fullscreen-toggle {
-
-        padding:
-            6px 8px;
-
-
-        font-size:
-            10px;
-
+        padding: 6px 8px;
+        font-size: 10px;
     }
-
-
-    #game.game-fullscreen-mode
-    #hud {
-
-        right:
-            115px;
-
-    }
-
 }

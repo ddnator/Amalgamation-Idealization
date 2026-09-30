@@ -1,15 +1,15 @@
 :root {
-    --bar-height: 125px;
+    --bottom-bar-height: 180px;
 
-    --black: #000000;
-    --dark: #070707;
+    --monitor-ratio: 1.3319672131;
 
-    --white: #647859;
+    --bar-bg: #f4f4f1;
 
-    --green: #7c3838;
-    --dark-green: #451f1f;
+    --text: #53634d;
 
-    --gray: #647859;
+    --accent: #b85f53;
+
+    --accent-bright: #ee806f;
 }
 
 
@@ -32,7 +32,7 @@ body {
 
     overflow: hidden;
 
-    background: white;
+    background: #000;
 }
 
 
@@ -40,8 +40,13 @@ body {
     font-family:
         "Pixelify Sans",
         monospace;
+}
 
-    color: var(--black);
+
+button {
+    font-family:
+        "Pixelify Sans",
+        monospace;
 }
 
 
@@ -57,32 +62,275 @@ body {
 
     overflow: hidden;
 
-    background: white;
+    background: #000;
 }
 
 
 /* =========================================
-   POINT AND CLICK AREA
+   FULLSCREEN BUTTON
 ========================================= */
 
-#point-click-area {
+#fullscreen-toggle {
+    position: fixed;
+
+    top: 12px;
+    right: 18px;
+
+    z-index: 10000;
+
+    padding:
+        7px 11px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.65
+        );
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.78
+        );
+
+    color:
+        #f5f5f0;
+
+    font-size:
+        14px;
+
+    line-height:
+        1;
+
+    cursor: pointer;
+
+    text-shadow:
+        1px 1px 0 #000;
+}
+
+
+#fullscreen-toggle:hover {
+    background:
+        #f5f5f0;
+
+    color:
+        #111;
+
+    text-shadow:
+        none;
+}
+
+
+#fullscreen-toggle:focus-visible {
+    outline:
+        2px solid #fff;
+
+    outline-offset:
+        2px;
+}
+
+
+/* =========================================
+   MONITOR AREA
+========================================= */
+
+#monitor-area {
     position: absolute;
 
     top: 0;
     left: 0;
     right: 0;
 
-    height:
-        calc(
-            100vh -
-            var(--bar-height)
-        );
+    bottom:
+        var(--bottom-bar-height);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     overflow: hidden;
 
-    background: white;
+    background: #000;
 
     z-index: 1;
+}
+
+
+/* =========================================
+   MONITOR SHELL
+========================================= */
+
+#monitor-shell {
+    position: relative;
+
+    width:
+        min(
+            100%,
+            calc(
+                (
+                    100vh -
+                    var(--bottom-bar-height)
+                )
+                *
+                var(--monitor-ratio)
+            )
+        );
+
+    height:
+        min(
+            100%,
+            calc(
+                100vw /
+                var(--monitor-ratio)
+            )
+        );
+
+    aspect-ratio:
+        650 / 488;
+
+    flex:
+        0 0 auto;
+
+    overflow: hidden;
+
+    background:
+        transparent;
+}
+
+
+/* =========================================
+   MONITOR FRAME
+========================================= */
+
+#monitor-frame {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: fill;
+
+    image-rendering:
+        pixelated;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    z-index: 100;
+}
+
+
+/* =========================================
+   MONITOR SCREEN OPENING
+========================================= */
+
+#monitor-viewport {
+    position: absolute;
+
+    left: 8.923%;
+    top: 7.787%;
+
+    right: 8.462%;
+    bottom: 9.836%;
+
+    overflow: hidden;
+
+    background: #000;
+
+    border-radius: 2.2%;
+
+    z-index: 5;
+}
+
+
+/* =========================================
+   ACTUAL GAME AREA
+========================================= */
+
+#point-click-area {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background:
+        #000;
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   HOME BACKGROUND
+
+   Heel belangrijk:
+   expliciete z-index zodat hij NIET onder
+   het zwarte scherm verdwijnt.
+========================================= */
+
+#home-background {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: fill;
+
+    object-position: center;
+
+    image-rendering:
+        pixelated;
+
+    opacity: 1;
+
+    visibility: visible;
+
+    filter: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   EXTRA BACKGROUND FALLBACK
+
+   Als de <img> om welke reden dan ook niet
+   laadt, probeert de browser ook dit.
+========================================= */
+
+#point-click-area {
+    background-image:
+        url("/Images/Home_Base.png");
+
+    background-size:
+        100% 100%;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
 }
 
 
@@ -93,170 +341,35 @@ body {
 #hud {
     position: absolute;
 
-    top: 14px;
-    left: 18px;
-    right: 18px;
+    top: 12px;
+    left: 16px;
+    right: 16px;
 
     display: flex;
 
-    justify-content: space-between;
+    align-items: center;
 
-    color: white;
-
-    font-size:
-        17px;
-
-    z-index:
-        50;
-
-    pointer-events:
-        none;
-}
-
-
-/* =========================================
-   SCENE
-========================================= */
-
-#caravanScene {
-    position: absolute;
-
-    inset: 0;
-
-    overflow: hidden;
-
-    background: white;
-}
-
-
-#scene-name {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform:
-        translate(-50%, -50%);
+    justify-content:
+        space-between;
 
     color:
-        #202020;
+        #f5f5f0;
 
     font-size:
-        clamp(
-            55px,
-            9vw,
-            120px
-        );
+        16px;
+
+    line-height:
+        1;
+
+    text-shadow:
+        1px 1px 0 #000,
+        -1px 1px 0 #000,
+        1px -1px 0 #000;
 
     pointer-events:
         none;
 
-    user-select:
-        none;
-
-    opacity: 0;
-}
-
-
-/* =========================================
-   HOTSPOTS
-========================================= */
-
-.hotspot {
-    position: absolute;
-
-    padding:
-        6px 9px;
-
-    border:
-        2px solid var(--green);
-
-    border-radius:
-        0;
-
-    background: white;
-
-    color:
-        var(--green);
-
-    font-family:
-        "Pixelify Sans",
-        monospace;
-
-    font-size:
-        15px;
-
-    cursor:
-        pointer;
-
-    z-index:
-        20;
-}
-
-
-.hotspot:hover {
-    background:
-        var(--green);
-
-    color:
-        #000;
-}
-
-
-/* =========================================
-   HOME HOTSPOTS
-========================================= */
-
-#hotspot-bed {
-    left: 45%;
-    bottom: 24%;
-    padding: 5rem;
-    padding-top: 12rem;
-}
-
-
-#hotspot-kitchen {
-    right: 70%;
-    top: 20%;
-    padding: 10rem;
-    padding-top: 12rem;
-
-}
-
-
-#hotspot-computer {
-    right: 20%;
-    top: 10%; !important;
-    padding: 6rem;
-}
-
-
-#hotspot-door {
-    right: 10%;
-    bottom: 18%;
-}
-
-
-/* =========================================
-   WORK HOTSPOTS
-========================================= */
-
-
-
-
-/* =========================================
-   AFTER WORK HOTSPOTS
-========================================= */
-
-#hotspot-home {
-    left: 30%;
-    bottom: 14%;
-}
-
-
-#hotspot-bar {
-    right: 30%;
-    bottom: 14%;
+    z-index: 50;
 }
 
 
@@ -271,19 +384,23 @@ body {
     right: 0;
     bottom: 0;
 
-    height:
-        var(--bar-height);
+    width: 100%;
 
-    background: white;
+    height:
+        var(--bottom-bar-height);
+
+    overflow: hidden;
+
+    background:
+        var(--bar-bg);
 
     border-top:
-        4px solid var(--white);
+        3px solid #647859;
 
-    overflow:
-        hidden;
+    color:
+        var(--text);
 
-    z-index:
-        100;
+    z-index: 200;
 }
 
 
@@ -297,27 +414,28 @@ body {
     inset: 0;
 
     padding:
-        18px 24px;
+        18px 26px;
 }
 
 
 #bar-location {
     color:
-        var(--green);
+        var(--accent);
 
     font-size:
-        19px;
+        20px;
 }
 
 
 #bar-hint {
     position: absolute;
 
-    left: 24px;
+    left: 26px;
+
     bottom: 18px;
 
     color:
-        #55554f;
+        #606e5a;
 
     font-size:
         14px;
@@ -334,54 +452,55 @@ body {
     inset: 0;
 
     padding:
-        14px 22px 28px 22px;
+        16px 26px 30px;
 
-    cursor:
-        default;
+    overflow-x:
+        hidden;
+
+    overflow-y:
+        auto;
 }
 
 
-/* =========================================
-   SPEAKER
-========================================= */
-
 #dialogue-speaker {
-    margin-bottom:
-        6px;
+    margin:
+        0 0 7px;
 
     color:
-        var(--green);
+        var(--accent);
 
     font-size:
-        19px;
+        20px;
+
+    line-height:
+        1;
 
     text-transform:
         uppercase;
 }
 
 
-/* =========================================
-   TEXT
-========================================= */
-
 #dialogue-text {
-    min-height:
-        55px;
-
     max-width:
         96%;
 
+    margin:
+        0 0 10px;
+
     color:
-        var(--white);
+        var(--text);
 
     font-size:
-        20px;
+        19px;
 
     line-height:
-        1.15;
+        1.2;
 
     white-space:
         pre-line;
+
+    overflow-wrap:
+        break-word;
 }
 
 
@@ -393,63 +512,75 @@ body {
     display: grid;
 
     grid-template-columns:
-        1fr 1fr;
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
 
     column-gap:
-        25px;
+        34px;
 
     row-gap:
-        2px;
+        4px;
+
+    width:
+        100%;
 
     margin-top:
-        6px;
+        4px;
 }
 
 
 .dialogue-option {
     position: relative;
 
+    display: flex;
+
+    align-items:
+        flex-start;
+
     width: 100%;
 
+    min-width: 0;
+
+    margin: 0;
+
     padding:
-        2px 4px 2px 32px;
+        3px 5px 3px 32px;
 
-    border:
-        0;
-
-    border-radius:
-        0;
+    border: 0;
 
     background:
         transparent;
 
     color:
-        var(--white);
-
-    font-family:
-        "Pixelify Sans",
-        monospace;
+        var(--text);
 
     font-size:
-        16px;
+        15px;
 
-    text-align:
-        left;
+    line-height:
+        1.2;
 
-    cursor:
-        pointer;
+    text-align: left;
+
+    white-space:
+        normal;
+
+    overflow-wrap:
+        anywhere;
+
+    cursor: pointer;
 }
 
 
-.dialogue-option:hover {
-    color:
-        var(--green);
-}
-
-
+.dialogue-option:hover,
 .dialogue-option.selected {
     color:
-        var(--green);
+        var(--accent-bright);
 }
 
 
@@ -458,60 +589,26 @@ body {
 
     position: absolute;
 
-    left: 6px;
+    left: 7px;
+
+    top: 3px;
 
     color:
-        var(--green);
+        var(--accent-bright);
 }
 
 
 .option-number {
-    display:
-        inline-block;
+    display: inline-block;
+
+    flex:
+        0 0 25px;
 
     width:
         25px;
 
     color:
-        var(--gray);
-}
-
-
-.dialogue-option.selected .option-number {
-    color:
-        var(--green);
-}
-
-
-/* =========================================
-   PLAYER SPEAKING
-========================================= */
-
-#bottom-bar.player-speaking {
-    border-top-color:
-        var(--green);
-}
-
-
-#bottom-bar.player-speaking #dialogue-speaker {
-    color:
-        var(--white);
-}
-
-
-/* =========================================
-   WAITING FOR CONTINUE
-========================================= */
-
-#bottom-bar.waiting {
-    cursor:
-        pointer;
-}
-
-
-#bottom-bar.waiting #dialogue-help {
-    color:
-        var(--green);
+        #71806a;
 }
 
 
@@ -522,139 +619,110 @@ body {
 #dialogue-help {
     position: absolute;
 
-    right: 18px;
+    right: 16px;
+
     bottom: 7px;
 
     color:
-        #4b4b47;
+        #687562;
 
     font-size:
-        11px;
+        9px;
+
+    pointer-events: none;
 }
 
 
 /* =========================================
-   START / MINIGAME / END
+   START SCREEN
 ========================================= */
 
-#start-screen,
-#minigame-screen,
-#end-screen {
+#start-screen {
     position: absolute;
 
     inset: 0;
 
+    z-index: 5000;
+
     display: flex;
 
-    justify-content:
-        center;
+    align-items: center;
 
-    align-items:
-        center;
+    justify-content: center;
 
-    background: white;
-
-    z-index:
-        500;
+    background: #000;
 }
 
 
-/* =========================================
-   REACTOR MINIGAME
-========================================= */
+.start-menu {
+    width:
+        min(
+            620px,
+            88vw
+        );
 
-#minigame-screen {
     padding:
-        0;
-}
+        30px;
 
-
-#reactor-minigame-frame {
-    display:
-        block;
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    border:
-        0;
-
-    background:
-        #fff;
-}
-
-
-/* =========================================
-   SCREENS
-========================================= */
-
-.screen {
-    width:
-        min(650px, 90vw);
-}
-
-
-.screen .tiny {
     color:
-        #62625d;
+        #eee;
+}
+
+
+.start-menu .tiny {
+    color:
+        #777771;
 
     font-size:
         12px;
 }
 
 
-.screen h1 {
+.start-menu h1 {
     margin:
-        5px 0 25px 0;
+        5px 0 12px;
 
     color:
-        var(--green);
+        var(--accent);
 
     font-size:
-        47px;
+        50px;
 }
 
 
-.screen p {
-    margin-bottom:
-        25px;
+.start-menu p {
+    margin:
+        0 0 28px;
+
+    color:
+        #777;
 
     font-size:
-        20px;
+        16px;
 }
 
 
-.screen button {
-    padding:
-        0;
+.start-menu button {
+    padding: 0;
 
-    border:
-        0;
+    border: 0;
 
     background:
         transparent;
 
     color:
-        var(--white);
-
-    font-family:
-        "Pixelify Sans",
-        monospace;
+        #eee;
 
     font-size:
         22px;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 }
 
 
-.screen button:hover {
+.start-menu button:hover {
     color:
-        var(--green);
+        var(--accent-bright);
 }
 
 
@@ -669,14 +737,73 @@ body {
 
 
 /* =========================================
-   MOBILE
+   FULLSCREEN
+
+   Monitor verdwijnt.
+   HOME vult scherm boven dialogue.
 ========================================= */
 
-@media(max-width: 700px) {
+#game.game-fullscreen-mode
+#monitor-area {
+    align-items:
+        stretch;
+
+    justify-content:
+        stretch;
+}
+
+
+#game.game-fullscreen-mode
+#monitor-shell {
+    width: 100%;
+    height: 100%;
+
+    max-width: none;
+    max-height: none;
+
+    aspect-ratio: auto;
+
+    flex:
+        1 1 auto;
+}
+
+
+#game.game-fullscreen-mode
+#monitor-frame {
+    display:
+        none !important;
+}
+
+
+#game.game-fullscreen-mode
+#monitor-viewport {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 0;
+}
+
+
+#game.game-fullscreen-mode
+#hud {
+    right:
+        180px;
+}
+
+
+
+@media (
+    max-width: 1000px
+) {
 
     :root {
-        --bar-height:
-            250px;
+        --bottom-bar-height:
+            190px;
     }
 
 
@@ -686,6 +813,7 @@ body {
     }
 
 
+    #dialogue-speaker,
     #dialogue-text {
         font-size:
             17px;
@@ -698,14 +826,103 @@ body {
     }
 
 
-    #scene-name {
-        font-size:
-            48px;
-    }
+    #fullscreen-toggle {
+        top:
+            10px;
 
+        right:
+            10px;
 
-    .hotspot {
         font-size:
             12px;
     }
+
+
+    #game.game-fullscreen-mode
+    #hud {
+        right:
+            150px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL
+========================================= */
+
+@media (
+    max-width: 700px
+) {
+
+    :root {
+        --bottom-bar-height:
+            210px;
+    }
+
+
+    #hud {
+        top:
+            7px;
+
+        left:
+            9px;
+
+        right:
+            9px;
+
+        font-size:
+            11px;
+    }
+
+
+    #dialogue-content {
+        padding:
+            12px 13px 27px;
+    }
+
+
+    #dialogue-speaker,
+    #dialogue-text {
+        font-size:
+            15px;
+    }
+
+
+    .dialogue-option {
+        padding-left:
+            27px;
+
+        font-size:
+            12px;
+    }
+
+
+    #dialogue-help {
+        right:
+            8px;
+
+        bottom:
+            5px;
+
+        font-size:
+            8px;
+    }
+
+
+    #fullscreen-toggle {
+        padding:
+            6px 8px;
+
+        font-size:
+            10px;
+    }
+
+
+    #game.game-fullscreen-mode
+    #hud {
+        right:
+            120px;
+    }
+
 }
