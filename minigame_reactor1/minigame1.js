@@ -154,7 +154,7 @@ function choicesReaction(choiceIndex) {
         image.src = '../images/good-job.png'
         button.addEventListener('click', async () => {
             await updateMoney(50);
-            window.location.href = "../minigame_reactor2/index.php?points=100";
+            window.location.href = "../minigame_reactor2/minigame2.php?points=100";
         });
     } else if (choiceIndex === 7) {
         message.innerText = 'You increased the pressure, this does nothing.'
