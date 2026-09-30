@@ -21,8 +21,7 @@ import {
 /* =========================================
    ACTIONS
 ========================================= */
-import { gameState } from "./gameState.js";
-import { minigameScreen, reactorMinigameFrame } from "./element.js";
+
 
 export function runAction(action) {
 
