@@ -7,321 +7,136 @@ if (isset($_GET['wonGame'])) {
 }
 ?>
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Level 8</title>
-
-    <link
-            href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
-            rel="stylesheet"
-    >
-
-    <link rel="stylesheet" href="dialogue.css">
-    <link rel="stylesheet" href="/css/PAC.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Level 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&amp;display=swap" rel="stylesheet"/>
+<link href="dialogue.css" rel="stylesheet"/>
+<link href="../../css/PAC.css" rel="stylesheet"/>
 </head>
-
 <body>
 <?php if ($gamecomplete) { ?>
-    <div id="hidden" data-my-value="done"></div>
+<div data-my-value="done" id="hidden"></div>
 <?php } ?>
-
-
-<div id="game">
-
-    <!-- =========================================
+<div id="game"><button aria-label="Toggle fullscreen" id="fullscreen-toggle" title="Fullscreen" type="button">⛶ FULLSCREEN</button>
+<!-- =========================================
          POINT AND CLICK AREA
     ========================================== -->
-
-    <div id="point-click-area">
-
-        <div id="hud">
-            <span>LEVEL 1</span>
-
-            <span id="location-label">
+<div id="monitor-area"><div id="monitor-shell"><div id="monitor-viewport"><div id="point-click-area">
+<div id="hud">
+<span>LEVEL 8</span>
+<span id="location-label">
                 HOME
             </span>
-
-            <span id="scene-name">
+<span id="scene-name">
                 HOME
             </span>
-
-        </div>
-
-
-        <!-- =====================================
+</div>
+<!-- =====================================
               CARAVAN SCENE INSIDE
         ====================================== -->
-
-        <div id="caravanScene" class="game-scene">
-
-            <img
-                    class="Background"
-                    src="/Images/Home_Base.png"
-                    alt=""
-            >
-
-            <button
-                    id="hotspot-bed"
-                    class="Bed"
-                    type="button"
-            ></button>
-
-            <img
-                    class="Overlay BedOverlay"
-                    src="/Images/Home_bed.png"
-                    alt=""
-            >
-
-
-            <button
-                    id="hotspot-computer"
-                    class="Computer"
-                    type="button"
-            ></button>
-
-            <img
-                    class="Overlay ComputerOverlay"
-                    src="/Images/Home_Computer.png"
-                    alt=""
-            >
-
-            <button
-                id="hotspot-breakfast"
-                class="Breakfast"
-                type="button"
-
-            ></button>
-            <img
-                    class="Overlay BreakfastOverlay hidden"
-                    src="/Images/Breakfast.png"
-                    alt=""
-            >
-
-
-            <button
-                    id="hotspot-kitchen"
-                    class="Kitchen"
-                    type="button"
-            ></button>
-
-            <img
-                    class="Overlay KitchenOverlay"
-                    src="/Images/Home_kitchen.png"
-                    alt=""
-            >
-
-        </div>
-
-        <!-- =====================================
+<div class="game-scene" id="caravanScene">
+<img alt="" class="Background" src="../../images/Home_Base.png"/>
+<button class="Bed" id="hotspot-bed" type="button"></button>
+<img alt="" class="Overlay BedOverlay" src="../../images/Home_bed.png"/>
+<button class="Computer" id="hotspot-computer" type="button"></button>
+<img alt="" class="Overlay ComputerOverlay" src="../../images/Home_Computer.png"/>
+<button class="Breakfast" id="hotspot-breakfast" type="button"></button>
+<img alt="" class="Overlay BreakfastOverlay hidden" src="../../images/Breakfast.png"/>
+<button class="Kitchen" id="hotspot-kitchen" type="button"></button>
+<img alt="" class="Overlay KitchenOverlay" src="../../images/Home_kitchen.png"/>
+</div>
+<!-- =====================================
             CARAVAN SCENE OUTSIDE during DAY (Only hotspot is the door)
       ====================================== -->
-        <div id="caravanSceneOutside" class="game-scene hidden">
-
-            <img
-                    class="Background"
-                    src="/Images/CAravan_Base.png"
-                    alt=""
-            >
-        </div>
-
-        <button
-                id="hotspot-door"
-                class="Door"
-                type="button"
-        ></button>
-
-        <img
-                class="Overlay DoorOverlay"
-                src="/Images/CAravan_Door.png"
-                alt=""
-        >
-
-        <!-- =====================================
+<div class="game-scene hidden" id="caravanSceneOutside">
+<img alt="" class="Background" src="../../images/CAravan_Base.png"/>
+</div>
+<button class="Door" id="hotspot-door" type="button"></button>
+<img alt="" class="Overlay DoorOverlay" src="../../images/CAravan_Door.png"/>
+<!-- =====================================
                 Walking to Work Scene DAY
           ====================================== -->
-        <div id="walkingToWorkDay" class="game-scene hidden">
-
-            <img
-                    class="Background"
-                    src="/Images/StreetDay.png"
-                    alt=""
-            >
-
-
-        </div>
-
-        <!-- =====================================
+<div class="game-scene hidden" id="walkingToWorkDay">
+<img alt="" class="Background" src="../../images/StreetDay.png"/>
+</div>
+<!-- =====================================
                Outside work scene day
          ====================================== -->
-        <div id="OutsideWorkDay" class="game-scene hidden">
-
-            <img
-                    class="Background"
-                    src="/Images/Work_Outside_D.png"
-                    alt=""
-            >
-        </div>
-
-        <!-- =====================================
+<div class="game-scene hidden" id="OutsideWorkDay">
+<img alt="" class="Background" src="../../images/Work_Outside_D.png"/>
+</div>
+<!-- =====================================
               AT work scene day
         ====================================== -->
-        <div id="work" class="game-scene hidden">
-
-            <img
-                    class="Background"
-                    src="/Images/Work_Base.png"
-                    alt=""
-            >
-        </div>
-
-    </div>
-    <!-- =====================================
+<div class="game-scene hidden" id="work">
+<img alt="" class="Background" src="../../images/Work_Base.png"/>
+</div>
+</div></div><img alt="" id="monitor-frame" src="../../images/Computer_UI.png"/></div></div>
+<!-- =====================================
                 Walking to Work Scene
           ====================================== -->
-    <div id="walkingToWorkDay" class="game-scene hidden">
 
-        <img
-                class="Background"
-                src="/Images/StreetDay.png"
-                alt=""
-        >
-    </div>
-
-
-
+<div id="bottom-bar">
+<div id="normal-bar">
+<div id="bar-location">
+                HOME
+            </div>
+<div id="bar-hint">
+                CLICK SOMETHING.
+            </div>
 </div>
-
-    <!-- =========================================
+<!-- Dialogue -->
+<div class="hidden" id="dialogue-content">
+<div id="dialogue-speaker">
+                JIM
+            </div>
+<div id="dialogue-text">
+                ...
+            </div>
+<div id="dialogue-options"></div>
+<div id="dialogue-help">
+                ↑ ↓ SELECT    ENTER / 1-4
+            </div>
+</div>
+</div><div id="start-screen">
+<div class="screen">
+<div class="tiny">LEVEL_8.EXE</div>
+<h1>LEVEL 8</h1>
+<button id="start-button" type="button">
+                &gt; START GAME
+            </button>
+</div>
+</div><div class="hidden" id="minigame-screen">
+<iframe allow="autoplay" id="reactor-minigame-frame" src="about:blank" title="Reactor minigame"></iframe>
+</div><div class="hidden" id="end-screen">
+<div class="screen">
+<h1 id="end-title">
+                LEVEL COMPLETE
+            </h1>
+<p id="end-text"></p>
+<button id="restart-button" type="button">&gt; RESTART LEVEL 8</button>
+</div>
+</div></div>
+<!-- =========================================
          BOTTOM BAR
     ========================================== -->
 
-    <div id="bottom-bar">
-
-        <div id="normal-bar">
-
-            <div id="bar-location">
-                HOME
-            </div>
-
-            <div id="bar-hint">
-                CLICK SOMETHING.
-            </div>
-
-        </div>
-
-
-        <!-- Dialogue -->
-
-        <div
-                id="dialogue-content"
-                class="hidden"
-        >
-
-            <div id="dialogue-speaker">
-                JIM
-            </div>
-
-            <div id="dialogue-text">
-                ...
-            </div>
-
-            <div id="dialogue-options"></div>
-
-            <div id="dialogue-help">
-                ↑ ↓ SELECT &nbsp;&nbsp; ENTER / 1-4
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================================
+<!-- =========================================
          START SCREEN
     ========================================== -->
 
-    <div id="start-screen">
-
-        <div class="screen">
-
-            <div class="tiny">
-                LEVEL_1.EXE
-            </div>
-
-            <h1>
-                LEVEL 1
-            </h1>
-
-            <button
-                    id="start-button"
-                    type="button"
-            >
-                &gt; START GAME
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================================
+<!-- =========================================
          REACTOR MINIGAME
     ========================================== -->
 
-    <div
-            id="minigame-screen"
-            class="hidden"
-    >
-
-        <iframe
-                id="reactor-minigame-frame"
-                title="Reactor minigame"
-                src="about:blank"
-                allow="autoplay"
-        ></iframe>
-
-    </div>
-
-
-    <!-- =========================================
+<!-- =========================================
          LEVEL END
     ========================================== -->
 
-    <div
-            id="end-screen"
-            class="hidden"
-    >
-
-        <div class="screen">
-
-            <h1 id="end-title">
-                LEVEL COMPLETE
-            </h1>
-
-            <p id="end-text"></p>
-
-            <button
-                    id="restart-button"
-                    type="button"
-            >
-                &gt; RESTART LEVEL 1
-            </button>
-
-        </div>
-
-    </div>
-
-<script
-        type="module"
-        src="dialogue.js"
-></script>
+<script src="dialogue.js" type="module"></script><script src="hotspots.js"></script><script src="fullscreen.js"></script>
 </body>
 </html>

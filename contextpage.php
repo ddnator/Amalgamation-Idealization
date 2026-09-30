@@ -33,7 +33,7 @@ $username = $_SESSION['username'];
     <div class='contextDiv'>
             <p>The year is 2044. Artificial Intelligence has gone rogue and has completely taken over 
                 the world. Humanity is now dependant on AI. You are simply another person trying to get to the end of the week
-                and trying to make a living. You work for Winston Nuclear Powerplant. Try to stay afloat for one more week, if you can...
+                and trying to make a living. You work for Winston Nuclear Powerplant. <br> <br> Use your keys and mousepad to click different elements in the game. Can you stay afloat for another week?
             </p>
             <a href="levels/level1/level1.php">Proceed</a>
 </div>
