@@ -215,6 +215,29 @@ export function setScene(scene) {
 
     }
 
+    else if (scene === "insideBarOne") {
+
+        document
+            .getElementById("insideBarOne")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "Erwin's Bar";
+        barLocation.textContent = "Erwin's Bar";
+        sceneName.textContent = "Erwin's Bar";
+        barHint.textContent = "Erwin's Bar";
+
+    }
+    else if (scene === "insideBarTwo") {
+
+        document
+            .getElementById("insideBarTwo")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "Erwin's Bar";
+        barLocation.textContent = "Erwin's Bar";
+        sceneName.textContent = "Erwin's Bar";
+        barHint.textContent = "Erwin's Bar";
+    }
     else if (scene === "boss") {
 
         document

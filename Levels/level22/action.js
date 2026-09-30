@@ -81,6 +81,13 @@ export function runAction(action) {
         return;
     }
 
+    if (action === "action_enter_home") {
+
+        setScene("home");
+
+        return;
+    }
+
     if (action === "action_go_bar") {
 
         setScene("ErwinsBar");
@@ -90,6 +97,28 @@ export function runAction(action) {
         return;
     }
 
+    if (action === "action_enter_bar") {
+
+        setScene("insideBarOne");
+
+        startDialogue("erwin_intro");
+
+        return;
+    }
+
+    if (action ===  "action_erwin_about_steven") {
+        setScene("insideBarTwo");
+
+        startDialogue("erwin_steven");
+    }
+
+    if (action ===  "action_leave_erwin") {
+
+        closeDialogue();
+        setScene("ErwinsBar");
+
+
+    }
     /* Winston Nuclear PowerPlant outside*/
 
     if (action === "action_OutsideWorkDay") {
@@ -146,7 +175,7 @@ export function runAction(action) {
         action === "action_stevenFour"
     ) {
 
-        setScene("steve4");
+        setScene("steven4");
 
         startDialogue("steven_explain");
         return;

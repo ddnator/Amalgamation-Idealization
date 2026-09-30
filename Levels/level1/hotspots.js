@@ -1,25 +1,37 @@
 /* =========================================================
    LEVEL 1
-   PIXEL PERFECT HOME HOTSPOTS
+   PIXEL PERFECT HOTSPOTS
 
-   SPECIAAL VOOR DE NIEUWE LAYOUT:
+   DEZE FILE REGELT:
 
-   object-fit: fill;
+   HOME
+   - Bed
+   - Kitchen / koelkast
+   - Computer
 
-   Daardoor:
+   WORK
+   - Jim
+   - Start Work
+   - Boss
 
-   - hele scene zichtbaar
-   - geen cropping
-   - geen zwarte balken in monitor
-   - X en Y worden apart geschaald
+   De overlay-afbeeldingen worden gebruikt
+   als echte pixel-maskers.
 
-   Deze JS gebruikt exact dezelfde schaal.
+   Daardoor gebruik je GEEN onnauwkeurige
+   rechthoeken meer.
+
+   Ook belangrijk:
+
+   - tijdens dialogue zijn hotspots geblokkeerd
+   - na Continue / Back werken ze direct weer
+   - hotspots worden NIET permanent disabled
+   - werkt ook in fullscreen
 ========================================================= */
 
 
-/* =========================================================
-   ELEMENTEN
-========================================================= */
+/* =========================================
+   SCENES
+========================================= */
 
 const homeScene =
     document.getElementById(
@@ -27,9 +39,9 @@ const homeScene =
     );
 
 
-const homeBackground =
-    homeScene?.querySelector(
-        "img.Background"
+const workScene =
+    document.getElementById(
+        "work"
     );
 
 
@@ -39,263 +51,445 @@ const bottomBar =
     );
 
 
-/* =========================================================
-   HOTSPOT DATA
+/* =========================================
+   BREAKFAST BUTTON
 
-   De overlay-afbeelding wordt gebruikt als MASK.
+   Je eten-interactie gebeurt via Kitchen.
 
-   Alleen zichtbare pixels zijn klikbaar.
-========================================================= */
+   Deze oude button hoeft daarom zelf geen
+   eigen rechthoekige hitbox te houden.
+========================================= */
 
-const hotspots = [
+const breakfastButton =
+    document.getElementById(
+        "hotspot-breakfast"
+    );
 
-    /* =====================================================
-       BED
-    ===================================================== */
+
+/* =========================================
+   HOTSPOT GROUPS
+========================================= */
+
+const hotspotGroups = [
+
+
+    /* =====================================
+       HOME
+    ====================================== */
 
     {
+
         name:
-            "bed",
+            "home",
 
-        button:
-            document.getElementById(
-                "hotspot-bed"
-            ),
 
-        overlay:
-            document.querySelector(
-                ".BedOverlay"
-            ),
+        scene:
+            homeScene,
 
-        mask:
-            null,
 
-        fallback: {
+        hotspots: [
 
-            x: 175,
-            y: 150,
 
-            width: 145,
-            height: 155
+            /* BED */
 
-        }
+            {
+
+                name:
+                    "bed",
+
+
+                button:
+                    document.getElementById(
+                        "hotspot-bed"
+                    ),
+
+
+                overlay:
+                    document.querySelector(
+                        ".BedOverlay"
+                    ),
+
+
+                mask:
+                    null
+
+            },
+
+
+            /* KITCHEN */
+
+            {
+
+                name:
+                    "kitchen",
+
+
+                button:
+                    document.getElementById(
+                        "hotspot-kitchen"
+                    ),
+
+
+                overlay:
+                    document.querySelector(
+                        ".KitchenOverlay"
+                    ),
+
+
+                mask:
+                    null
+
+            },
+
+
+            /* COMPUTER */
+
+            {
+
+                name:
+                    "computer",
+
+
+                button:
+                    document.getElementById(
+                        "hotspot-computer"
+                    ),
+
+
+                overlay:
+                    document.querySelector(
+                        ".ComputerOverlay"
+                    ),
+
+
+                mask:
+                    null
+
+            }
+
+        ]
+
     },
 
 
-    /* =====================================================
-       KITCHEN / KOELKAST
-    ===================================================== */
+
+    /* =====================================
+       WORK
+    ====================================== */
 
     {
+
         name:
-            "kitchen",
-
-        button:
-            document.getElementById(
-                "hotspot-kitchen"
-            ),
-
-        overlay:
-            document.querySelector(
-                ".KitchenOverlay"
-            ),
-
-        mask:
-            null,
-
-        fallback: {
-
-            x: 10,
-            y: 60,
-
-            width: 175,
-            height: 230
-
-        }
-    },
+            "work",
 
 
-    /* =====================================================
-       COMPUTER
-    ===================================================== */
+        scene:
+            workScene,
 
-    {
-        name:
-            "computer",
 
-        button:
-            document.getElementById(
-                "hotspot-computer"
-            ),
+        hotspots: [
 
-        overlay:
-            document.querySelector(
-                ".ComputerOverlay"
-            ),
 
-        mask:
-            null,
+            /* JIM */
 
-        fallback: {
+            {
 
-            x: 290,
-            y: 70,
+                name:
+                    "jim",
 
-            width: 125,
-            height: 130
 
-        }
+                button:
+                    document.getElementById(
+                        "hotspot-jim"
+                    ),
+
+
+                overlay:
+                    document.querySelector(
+                        ".jimOverlay"
+                    ),
+
+
+                mask:
+                    null
+
+            },
+
+
+            /* START WORK */
+
+            {
+
+                name:
+                    "work",
+
+
+                button:
+                    document.getElementById(
+                        "hotspot-work"
+                    ),
+
+
+                overlay:
+                    document.querySelector(
+                        ".workOverlay"
+                    ),
+
+
+                mask:
+                    null
+
+            },
+
+
+            /* BOSS */
+
+            {
+
+                name:
+                    "boss",
+
+
+                button:
+                    document.getElementById(
+                        "hotspot-boss"
+                    ),
+
+
+                overlay:
+                    document.querySelector(
+                        ".bossOverlay"
+                    ),
+
+
+                mask:
+                    null
+
+            }
+
+        ]
+
     }
 
 ];
 
 
-/* =========================================================
+/* =========================================
    ALPHA THRESHOLD
 
-   Hogere waarde betekent:
+   Een pixel moet minimaal deze alpha hebben
+   om klikbaar te zijn.
 
-   alleen duidelijk zichtbare delen van de highlight
-   zijn klikbaar.
-
-   Daardoor wordt het klikvlak nauwkeuriger.
-========================================================= */
+   20 = object + een klein beetje glow.
+========================================= */
 
 const ALPHA_THRESHOLD =
-    45;
+    20;
 
 
-/* =========================================================
+/* =========================================
    STATUS
-========================================================= */
+========================================= */
 
 let hoveredHotspot =
     null;
 
 
-let dispatchingHotspotClick =
+let hoveredGroup =
+    null;
+
+
+let dispatchingSyntheticClick =
     false;
 
 
-/* =========================================================
-   OUDE CSS HOTSPOTS UITSCHAKELEN
+/* =========================================
+   DIALOGUE OPEN?
+========================================= */
 
-   De buttons blijven bestaan zodat dialogue.js
-   zijn bestaande click listeners kan gebruiken.
+function dialogueIsOpen() {
 
-   Maar ze mogen zelf geen rechthoekig klikgebied meer zijn.
-========================================================= */
+    return Boolean(
 
-function disableOldButtonHitboxes() {
+        bottomBar &&
 
-    hotspots.forEach(
-        hotspot => {
+        bottomBar.classList.contains(
+            "dialogue-open"
+        )
 
-            if (
-                !hotspot.button
-            ) {
-
-                return;
-
-            }
-
-
-            hotspot.button.style.setProperty(
-                "pointer-events",
-                "none",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "position",
-                "absolute",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "left",
-                "0",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "top",
-                "0",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "right",
-                "auto",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "bottom",
-                "auto",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "width",
-                "0",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "height",
-                "0",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "padding",
-                "0",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "margin",
-                "0",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "border",
-                "0",
-                "important"
-            );
-
-
-            hotspot.button.style.setProperty(
-                "background",
-                "transparent",
-                "important"
-            );
-
-
-            hotspot.button.tabIndex =
-                -1;
-
-        }
     );
 
 }
 
 
-/* =========================================================
-   MAAK PIXEL MASK VAN OVERLAY PNG
-========================================================= */
+/* =========================================
+   SCENE ZICHTBAAR?
+========================================= */
+
+function sceneIsVisible(
+    scene
+) {
+
+    if (
+        !scene
+    ) {
+
+        return false;
+
+    }
+
+
+    if (
+        scene.classList.contains(
+            "hidden"
+        )
+    ) {
+
+        return false;
+
+    }
+
+
+    const style =
+        window.getComputedStyle(
+            scene
+        );
+
+
+    if (
+        style.display ===
+            "none" ||
+
+        style.visibility ===
+            "hidden"
+    ) {
+
+        return false;
+
+    }
+
+
+    const rect =
+        scene.getBoundingClientRect();
+
+
+    return (
+        rect.width > 0 &&
+        rect.height > 0
+    );
+
+}
+
+
+/* =========================================
+   OUDE RECHTHOEKIGE HITBOXES UIT
+
+   dialogue.js heeft de button-elementen nog
+   nodig vanwege zijn click listeners.
+
+   Daarom verwijderen we ze NIET.
+
+   We zetten alleen browser pointer-events uit.
+
+   Deze hotspots.js bepaalt voortaan zelf
+   of een pixel klikbaar is.
+========================================= */
+
+function disableOldHitboxes() {
+
+    hotspotGroups.forEach(
+        group => {
+
+
+            group.hotspots.forEach(
+                hotspot => {
+
+
+                    if (
+                        !hotspot.button
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    hotspot.button.style.setProperty(
+                        "pointer-events",
+                        "none",
+                        "important"
+                    );
+
+
+                    hotspot.button.style.setProperty(
+                        "padding",
+                        "0",
+                        "important"
+                    );
+
+
+                    hotspot.button.style.setProperty(
+                        "margin",
+                        "0",
+                        "important"
+                    );
+
+
+                    hotspot.button.style.setProperty(
+                        "border",
+                        "0",
+                        "important"
+                    );
+
+
+                    hotspot.button.style.setProperty(
+                        "background",
+                        "transparent",
+                        "important"
+                    );
+
+
+                    /*
+                        Niet via TAB selecteerbaar.
+                    */
+
+                    hotspot.button.tabIndex =
+                        -1;
+
+                }
+            );
+
+        }
+    );
+
+
+    /*
+        Oude Breakfast button ook geen
+        eigen hitbox laten houden.
+    */
+
+    if (
+        breakfastButton
+    ) {
+
+        breakfastButton.style.setProperty(
+            "pointer-events",
+            "none",
+            "important"
+        );
+
+
+        breakfastButton.tabIndex =
+            -1;
+
+    }
+
+}
+
+
+/* =========================================
+   IMAGE -> ALPHA MASK
+========================================= */
 
 function createMaskFromImage(
     image
@@ -314,6 +508,7 @@ function createMaskFromImage(
 
     try {
 
+
         const canvas =
             document.createElement(
                 "canvas"
@@ -330,10 +525,14 @@ function createMaskFromImage(
 
         const context =
             canvas.getContext(
+
                 "2d",
+
                 {
-                    willReadFrequently: true
+                    willReadFrequently:
+                        true
                 }
+
             );
 
 
@@ -347,28 +546,38 @@ function createMaskFromImage(
 
 
         context.clearRect(
+
             0,
             0,
+
             canvas.width,
             canvas.height
+
         );
 
 
         context.drawImage(
+
             image,
+
             0,
             0,
+
             canvas.width,
             canvas.height
+
         );
 
 
         const imageData =
             context.getImageData(
+
                 0,
                 0,
+
                 canvas.width,
                 canvas.height
+
             );
 
 
@@ -377,8 +586,10 @@ function createMaskFromImage(
             width:
                 canvas.width,
 
+
             height:
                 canvas.height,
+
 
             data:
                 imageData.data
@@ -387,12 +598,13 @@ function createMaskFromImage(
 
     }
 
+
     catch (
         error
     ) {
 
         console.warn(
-            "Hotspot mask kon niet worden gemaakt:",
+            "Kon hotspot-mask niet maken:",
             error
         );
 
@@ -404,11 +616,11 @@ function createMaskFromImage(
 }
 
 
-/* =========================================================
-   PREPARE MASK
-========================================================= */
+/* =========================================
+   PREPARE ONE MASK
+========================================= */
 
-function prepareMask(
+function prepareHotspotMask(
     hotspot
 ) {
 
@@ -422,7 +634,7 @@ function prepareMask(
 
 
     /*
-        Al geladen.
+        Image is al geladen.
     */
 
     if (
@@ -442,10 +654,11 @@ function prepareMask(
 
 
     /*
-        Wachten op afbeelding.
+        Anders wachten tot image geladen is.
     */
 
     hotspot.overlay.addEventListener(
+
         "load",
 
         () => {
@@ -458,24 +671,33 @@ function prepareMask(
         },
 
         {
-            once: true
+            once:
+                true
         }
+
     );
 
 }
 
 
-/* =========================================================
-   PREPARE ALLES
-========================================================= */
+/* =========================================
+   PREPARE ALL MASKS
+========================================= */
 
 function prepareAllMasks() {
 
-    hotspots.forEach(
-        hotspot => {
+    hotspotGroups.forEach(
+        group => {
 
-            prepareMask(
-                hotspot
+
+            group.hotspots.forEach(
+                hotspot => {
+
+                    prepareHotspotMask(
+                        hotspot
+                    );
+
+                }
             );
 
         }
@@ -484,116 +706,36 @@ function prepareAllMasks() {
 }
 
 
-/* =========================================================
-   HOME ZICHTBAAR?
-========================================================= */
+/* =========================================
+   SCREEN POINT -> NORMALIZED IMAGE POINT
 
-function homeIsVisible() {
-
-    if (
-        !homeScene
-    ) {
-
-        return false;
-
-    }
-
-
-    if (
-        homeScene.classList.contains(
-            "hidden"
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    const style =
-        window.getComputedStyle(
-            homeScene
-        );
-
-
-    if (
-        style.display ===
-            "none" ||
-        style.visibility ===
-            "hidden"
-    ) {
-
-        return false;
-
-    }
-
-
-    const rect =
-        homeScene.getBoundingClientRect();
-
-
-    return (
-        rect.width > 0 &&
-        rect.height > 0
-    );
-
-}
-
-
-/* =========================================================
-   DIALOGUE OPEN?
-
-   BELANGRIJK:
-
-   Hotspots worden alleen TIJDELIJK geblokkeerd.
-
-   Ze worden nooit permanent disabled.
-
-   Dus:
-
-   eten
-   -> Back
-   -> hotspots werken weer.
-========================================================= */
-
-function dialogueIsOpen() {
-
-    if (
-        !bottomBar
-    ) {
-
-        return false;
-
-    }
-
-
-    return bottomBar.classList.contains(
-        "dialogue-open"
-    );
-
-}
-
-
-/* =========================================================
-   MUISPOSITIE OMREKENEN NAAR ORIGINELE IMAGE PIXEL
-
-   Omdat CSS:
+   Je huidige layout gebruikt:
 
    object-fit: fill
 
-   gebruikt, hebben X en Y ieder hun eigen schaal.
+   Daarom wordt:
 
-   Dit is veel simpeler en stabieler dan contain/cover.
-========================================================= */
+   links = 0
+   rechts = 1
 
-function screenPointToImagePixel(
+   boven = 0
+   onder = 1
+
+   Dit blijft ook kloppen wanneer fullscreen
+   aan of uit staat.
+========================================= */
+
+function screenPointToSourcePoint(
+
+    scene,
+
     clientX,
     clientY
+
 ) {
 
     if (
-        !homeScene ||
-        !homeBackground
+        !scene
     ) {
 
         return null;
@@ -602,7 +744,7 @@ function screenPointToImagePixel(
 
 
     const rect =
-        homeScene.getBoundingClientRect();
+        scene.getBoundingClientRect();
 
 
     if (
@@ -615,10 +757,6 @@ function screenPointToImagePixel(
     }
 
 
-    /*
-        Muis binnen de scene.
-    */
-
     const localX =
         clientX -
         rect.left;
@@ -630,7 +768,7 @@ function screenPointToImagePixel(
 
 
     /*
-        Buiten scene?
+        Buiten scene.
     */
 
     if (
@@ -645,80 +783,38 @@ function screenPointToImagePixel(
     }
 
 
-    /*
-        Echte bronafmetingen.
-
-        Normaal Home_Base = 469 x 316.
-    */
-
-    const sourceWidth =
-        homeBackground.naturalWidth ||
-        469;
-
-
-    const sourceHeight =
-        homeBackground.naturalHeight ||
-        316;
-
-
-    /*
-        Bij object-fit: fill:
-
-        0% links   -> pixel 0
-        100% rechts -> pixel sourceWidth
-
-        Zelfde voor Y.
-    */
-
-    const sourceX =
-        (
-            localX /
-            rect.width
-        )
-        *
-        sourceWidth;
-
-
-    const sourceY =
-        (
-            localY /
-            rect.height
-        )
-        *
-        sourceHeight;
-
-
     return {
 
-        x:
-            sourceX,
+        normalizedX:
+            localX /
+            rect.width,
 
-        y:
-            sourceY,
 
-        sourceWidth:
-            sourceWidth,
-
-        sourceHeight:
-            sourceHeight
+        normalizedY:
+            localY /
+            rect.height
 
     };
 
 }
 
 
-/* =========================================================
-   ALPHA VAN HOTSPOT OP PIXEL
-========================================================= */
+/* =========================================
+   ALPHA WAARDE OP CURSOR
+========================================= */
 
 function getHotspotAlpha(
+
     hotspot,
-    point
+
+    sourcePoint
+
 ) {
 
     if (
         !hotspot ||
-        !point
+        !hotspot.mask ||
+        !sourcePoint
     ) {
 
         return 0;
@@ -726,141 +822,104 @@ function getHotspotAlpha(
     }
 
 
-    /* =====================================================
-       PIXEL MASK BESCHIKBAAR
-    ===================================================== */
+    /* =====================================
+       X PIXEL
+    ====================================== */
 
-    if (
-        hotspot.mask
-    ) {
+    const maskX =
+        Math.min(
 
-        /*
-            Zet Home_Base pixel om naar de overlay-resolutie.
-        */
+            hotspot.mask.width -
+            1,
 
-        const maskX =
-            Math.floor(
+            Math.max(
 
-                (
-                    point.x /
-                    point.sourceWidth
-                )
-                *
-                hotspot.mask.width
+                0,
 
-            );
+                Math.floor(
 
-
-        const maskY =
-            Math.floor(
-
-                (
-                    point.y /
-                    point.sourceHeight
-                )
-                *
-                hotspot.mask.height
-
-            );
-
-
-        if (
-            maskX < 0 ||
-            maskY < 0 ||
-            maskX >= hotspot.mask.width ||
-            maskY >= hotspot.mask.height
-        ) {
-
-            return 0;
-
-        }
-
-
-        const pixelIndex =
-            (
-                (
-                    maskY *
+                    sourcePoint.normalizedX *
                     hotspot.mask.width
+
                 )
-                +
-                maskX
+
             )
-            *
-            4;
 
-
-        /*
-            RGBA:
-
-            +0 red
-            +1 green
-            +2 blue
-            +3 alpha
-        */
-
-        return hotspot.mask.data[
-            pixelIndex + 3
-        ];
-
-    }
-
-
-    /* =====================================================
-       FALLBACK
-
-       Alleen als Canvas-mask niet werkt.
-    ===================================================== */
-
-    const x =
-        point.x *
-        (
-            469 /
-            point.sourceWidth
         );
 
 
-    const y =
-        point.y *
-        (
-            316 /
-            point.sourceHeight
+    /* =====================================
+       Y PIXEL
+    ====================================== */
+
+    const maskY =
+        Math.min(
+
+            hotspot.mask.height -
+            1,
+
+            Math.max(
+
+                0,
+
+                Math.floor(
+
+                    sourcePoint.normalizedY *
+                    hotspot.mask.height
+
+                )
+
+            )
+
         );
 
 
-    const box =
-        hotspot.fallback;
+    /* =====================================
+       RGBA INDEX
+    ====================================== */
+
+    const index = (
+
+        maskY *
+        hotspot.mask.width
+        +
+        maskX
+
+    ) * 4;
 
 
-    if (
-        x >= box.x &&
-        x <=
-            box.x + box.width &&
-        y >= box.y &&
-        y <=
-            box.y + box.height
-    ) {
+    /*
+        +0 red
+        +1 green
+        +2 blue
+        +3 alpha
+    */
 
-        return 255;
-
-    }
-
-
-    return 0;
+    return hotspot.mask.data[
+        index + 3
+    ];
 
 }
 
 
-/* =========================================================
-   WELKE HOTSPOT IS ONDER DE CURSOR?
-========================================================= */
+/* =========================================
+   VIND HOTSPOT ONDER CURSOR
+========================================= */
 
 function findHotspotAtPoint(
+
+    group,
+
     clientX,
     clientY
+
 ) {
 
     if (
-        !homeIsVisible()
+        !group ||
+        !sceneIsVisible(
+            group.scene
+        )
     ) {
 
         return null;
@@ -869,9 +928,13 @@ function findHotspotAtPoint(
 
 
     const point =
-        screenPointToImagePixel(
+        screenPointToSourcePoint(
+
+            group.scene,
+
             clientX,
             clientY
+
         );
 
 
@@ -893,27 +956,59 @@ function findHotspotAtPoint(
         1;
 
 
-    hotspots.forEach(
+    group.hotspots.forEach(
         hotspot => {
+
+
+            if (
+                !hotspot.button
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+                Als hotspot hidden is,
+                bijvoorbeeld Work na minigame,
+                niet meer klikbaar.
+            */
+
+            if (
+                hotspot.button.classList.contains(
+                    "hidden"
+                )
+            ) {
+
+                return;
+
+            }
+
 
             const alpha =
                 getHotspotAlpha(
+
                     hotspot,
+
                     point
+
                 );
 
 
             /*
-                Als twee hotspot overlays overlappen,
-                kiezen we degene waarvan de pixel het
-                meest opaque is.
+                Bij overlap kiezen we hotspot
+                met hoogste alpha.
             */
 
             if (
+
                 alpha >=
                     ALPHA_THRESHOLD &&
+
                 alpha >
                     winnerAlpha
+
             ) {
 
                 winner =
@@ -934,79 +1029,172 @@ function findHotspotAtPoint(
 }
 
 
-/* =========================================================
-   HOVER OVERLAY
-========================================================= */
+/* =========================================
+   ALLE HOVERS VERBERGEN
+========================================= */
 
-function setHoverHotspot(
-    hotspot
-) {
+function clearAllHoverOverlays() {
 
-    hotspots.forEach(
-        item => {
+    hotspotGroups.forEach(
+        group => {
+
+
+            group.hotspots.forEach(
+                hotspot => {
+
+
+                    if (
+                        hotspot.overlay
+                    ) {
+
+                        hotspot.overlay.style.opacity =
+                            "0";
+
+                    }
+
+                }
+            );
+
 
             if (
-                !item.overlay
+                group.scene
             ) {
 
-                return;
+                group.scene.style.cursor =
+                    "default";
 
             }
-
-
-            /*
-                Tijdens dialogue nooit hover tonen.
-            */
-
-            if (
-                dialogueIsOpen()
-            ) {
-
-                item.overlay.style.opacity =
-                    "0";
-
-
-                return;
-
-            }
-
-
-            item.overlay.style.opacity =
-                item === hotspot
-                    ? "1"
-                    : "0";
 
         }
     );
 
 
     hoveredHotspot =
-        hotspot;
+        null;
 
 
-    if (
-        homeScene
-    ) {
-
-        homeScene.style.cursor =
-            hotspot &&
-            !dialogueIsOpen()
-                ? "pointer"
-                : "default";
-
-    }
+    hoveredGroup =
+        null;
 
 }
 
 
-/* =========================================================
+/* =========================================
+   HOVER INSTELLEN
+========================================= */
+
+function setHoveredHotspot(
+
+    group,
+
+    hotspot
+
+) {
+
+    hotspotGroups.forEach(
+        currentGroup => {
+
+
+            currentGroup.hotspots.forEach(
+                currentHotspot => {
+
+
+                    if (
+                        !currentHotspot.overlay
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const hidden =
+                        currentHotspot.button
+                            ?.classList
+                            .contains(
+                                "hidden"
+                            );
+
+
+                    const shouldShow =
+                        Boolean(
+
+                            !dialogueIsOpen() &&
+
+                            !hidden &&
+
+                            currentGroup ===
+                                group &&
+
+                            currentHotspot ===
+                                hotspot
+
+                        );
+
+
+                    currentHotspot
+                        .overlay
+                        .style
+                        .opacity =
+
+                        shouldShow
+                            ? "1"
+                            : "0";
+
+                }
+            );
+
+
+            if (
+                currentGroup.scene
+            ) {
+
+                currentGroup.scene.style.cursor =
+
+                    currentGroup ===
+                        group &&
+
+                    hotspot &&
+
+                    !dialogueIsOpen()
+
+                        ? "pointer"
+                        : "default";
+
+            }
+
+        }
+    );
+
+
+    hoveredGroup =
+        group;
+
+
+    hoveredHotspot =
+        hotspot;
+
+}
+
+
+/* =========================================
    ACTIVEER HOTSPOT
 
-   We sturen een synthetische click naar de originele button.
+   De daadwerkelijke game-logica staat al
+   in dialogue.js.
 
-   Daardoor blijven je bestaande dialogue.js listeners
-   gewoon werken.
-========================================================= */
+   Daar zitten listeners op:
+
+   #hotspot-bed
+   #hotspot-kitchen
+   #hotspot-computer
+
+   #hotspot-jim
+   #hotspot-work
+   #hotspot-boss
+
+   Wij sturen daarom een click naar de button.
+========================================= */
 
 function activateHotspot(
     hotspot
@@ -1023,7 +1211,8 @@ function activateHotspot(
 
 
     /*
-        Geen hotspot openen terwijl een dialogue actief is.
+        Geen andere interacties terwijl
+        dialogue openstaat.
     */
 
     if (
@@ -1035,18 +1224,45 @@ function activateHotspot(
     }
 
 
-    dispatchingHotspotClick =
+    /*
+        Hidden = niet actief.
+    */
+
+    if (
+        hotspot.button.classList.contains(
+            "hidden"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    dispatchingSyntheticClick =
         true;
 
 
     const clickEvent =
         new MouseEvent(
+
             "click",
+
             {
-                bubbles: false,
-                cancelable: true,
-                view: window
+
+                bubbles:
+                    false,
+
+
+                cancelable:
+                    true,
+
+
+                view:
+                    window
+
             }
+
         );
 
 
@@ -1055,33 +1271,29 @@ function activateHotspot(
     );
 
 
-    dispatchingHotspotClick =
+    dispatchingSyntheticClick =
         false;
 
 
     /*
-        Dialogue is waarschijnlijk geopend.
-
-        Highlight direct weg.
+        Hover weg zodra interactie begint.
     */
 
-    setHoverHotspot(
-        null
-    );
+    clearAllHoverOverlays();
 
 }
 
 
-/* =========================================================
-   MOUSE MOVE
-========================================================= */
+/* =========================================
+   HANDLERS INSTALLEREN
+========================================= */
 
-function handleMouseMove(
-    event
+function installGroupHandlers(
+    group
 ) {
 
     if (
-        dispatchingHotspotClick
+        !group.scene
     ) {
 
         return;
@@ -1089,337 +1301,349 @@ function handleMouseMove(
     }
 
 
-    /*
-        Tijdens dialogue niks kunnen hoveren.
-    */
+    /* =====================================
+       MOUSE MOVE
+    ====================================== */
 
-    if (
-        dialogueIsOpen()
-    ) {
+    group.scene.addEventListener(
 
-        if (
-            hoveredHotspot !== null
-        ) {
+        "mousemove",
 
-            setHoverHotspot(
-                null
-            );
+        event => {
+
+
+            if (
+                dispatchingSyntheticClick
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+                Dialogue actief:
+                geen hotspots.
+            */
+
+            if (
+                dialogueIsOpen()
+            ) {
+
+                if (
+                    hoveredHotspot
+                ) {
+
+                    clearAllHoverOverlays();
+
+                }
+
+
+                return;
+
+            }
+
+
+            const hotspot =
+                findHotspotAtPoint(
+
+                    group,
+
+                    event.clientX,
+                    event.clientY
+
+                );
+
+
+            if (
+
+                hotspot !==
+                    hoveredHotspot ||
+
+                group !==
+                    hoveredGroup
+
+            ) {
+
+                setHoveredHotspot(
+
+                    group,
+
+                    hotspot
+
+                );
+
+            }
 
         }
 
-
-        return;
-
-    }
+    );
 
 
-    if (
-        !homeIsVisible()
-    ) {
+    /* =====================================
+       MOUSE LEAVE
+    ====================================== */
 
-        setHoverHotspot(
-            null
-        );
+    group.scene.addEventListener(
 
+        "mouseleave",
 
-        return;
-
-    }
+        () => {
 
 
-    const hotspot =
-        findHotspotAtPoint(
-            event.clientX,
-            event.clientY
-        );
+            if (
+                hoveredGroup ===
+                group
+            ) {
+
+                clearAllHoverOverlays();
+
+            }
+
+        }
+
+    );
 
 
-    if (
-        hotspot !== hoveredHotspot
-    ) {
+    /* =====================================
+       CLICK
 
-        setHoverHotspot(
-            hotspot
-        );
+       Capture = true.
 
-    }
+       Hierdoor komt onze accurate
+       pixel-detectie vóór oude handlers.
+    ====================================== */
 
-}
+    group.scene.addEventListener(
 
+        "click",
 
-/* =========================================================
-   HOME CLICK
-========================================================= */
-
-function handleHomeClick(
-    event
-) {
-
-    /*
-        Voorkom recursie van onze synthetische click.
-    */
-
-    if (
-        dispatchingHotspotClick
-    ) {
-
-        return;
-
-    }
+        event => {
 
 
-    /*
-        Geen andere hotspot tijdens dialogue.
-    */
+            /*
+                Dit is onze eigen synthetic click.
+            */
 
-    if (
-        dialogueIsOpen()
-    ) {
+            if (
+                dispatchingSyntheticClick
+            ) {
 
-        return;
+                return;
 
-    }
-
-
-    if (
-        !homeIsVisible()
-    ) {
-
-        return;
-
-    }
+            }
 
 
-    const hotspot =
-        findHotspotAtPoint(
-            event.clientX,
-            event.clientY
-        );
+            /*
+                Dialogue open?
+                Geen scene-interactie.
+            */
+
+            if (
+                dialogueIsOpen()
+            ) {
+
+                return;
+
+            }
 
 
-    /*
-        Geen object geraakt.
-    */
+            const hotspot =
+                findHotspotAtPoint(
 
-    if (
-        !hotspot
-    ) {
+                    group,
 
-        return;
+                    event.clientX,
+                    event.clientY
 
-    }
+                );
 
 
-    event.preventDefault();
+            /*
+                Niks geraakt.
+            */
+
+            if (
+                !hotspot
+            ) {
+
+                return;
+
+            }
 
 
-    event.stopPropagation();
+            event.preventDefault();
 
 
-    event.stopImmediatePropagation();
+            event.stopPropagation();
 
 
-    activateHotspot(
-        hotspot
+            event.stopImmediatePropagation();
+
+
+            activateHotspot(
+                hotspot
+            );
+
+        },
+
+        true
+
     );
 
 }
 
 
-/* =========================================================
-   MOUSE VERLAAT HOME
-========================================================= */
+/* =========================================
+   DIALOGUE OBSERVER
 
-function handleMouseLeave() {
+   Zodra dialogue opent:
+   hover weg.
 
-    setHoverHotspot(
-        null
-    );
-
-}
-
-
-/* =========================================================
-   DIALOGUE STATUS
-
-   Zodra je bijvoorbeeld:
-
-   EAT
-   -> BACK
-
-   kiest, verwijdert je bestaande dialogue.js de class:
-
-   dialogue-open
-
-   Vervolgens zijn hotspots direct weer beschikbaar.
-========================================================= */
-
-function handleDialogueChange() {
-
-    if (
-        dialogueIsOpen()
-    ) {
-
-        setHoverHotspot(
-            null
-        );
-
-
-        return;
-
-    }
-
-
-    /*
-        Dialogue gesloten.
-
-        GEEN used flag.
-        GEEN disabled button.
-
-        Hotspots zijn automatisch weer beschikbaar.
-    */
-
-    hoveredHotspot =
-        null;
-
-
-    if (
-        homeScene
-    ) {
-
-        homeScene.style.cursor =
-            "default";
-
-    }
-
-}
-
-
-/* =========================================================
-   EVENTS
-========================================================= */
-
-homeScene?.addEventListener(
-    "mousemove",
-    handleMouseMove
-);
-
-
-homeScene?.addEventListener(
-    "mouseleave",
-    handleMouseLeave
-);
-
-
-/*
-    Capture mode.
-
-    Onze pixel-hit detection krijgt voorrang boven
-    eventuele oude listeners.
-*/
-
-homeScene?.addEventListener(
-    "click",
-    handleHomeClick,
-    true
-);
-
-
-/* =========================================================
-   WATCH DIALOGUE CLASS
-========================================================= */
+   Zodra dialogue sluit:
+   hotspots worden NIET permanent disabled,
+   dus ze werken meteen weer.
+========================================= */
 
 if (
+
     bottomBar &&
+
     typeof MutationObserver !==
-    "undefined"
+        "undefined"
+
 ) {
 
     const dialogueObserver =
         new MutationObserver(
-            handleDialogueChange
+            () => {
+
+                clearAllHoverOverlays();
+
+            }
         );
 
 
     dialogueObserver.observe(
+
         bottomBar,
+
         {
 
-            attributes: true,
+            attributes:
+                true,
+
 
             attributeFilter: [
                 "class"
             ]
 
         }
+
     );
 
 }
 
 
-/* =========================================================
+/* =========================================
    INITIALISEREN
-========================================================= */
+========================================= */
 
-disableOldButtonHitboxes();
+disableOldHitboxes();
 
 
 prepareAllMasks();
 
 
-setHoverHotspot(
-    null
-);
+hotspotGroups.forEach(
+    group => {
 
-
-/* =========================================================
-   WINDOW LOAD
-========================================================= */
-
-window.addEventListener(
-    "load",
-
-    () => {
-
-        disableOldButtonHitboxes();
-
-
-        prepareAllMasks();
-
-
-        setHoverHotspot(
-            null
+        installGroupHandlers(
+            group
         );
 
     }
 );
 
 
-/* =========================================================
+clearAllHoverOverlays();
+
+
+/* =========================================
+   WINDOW LOAD
+
+   Nog een keer masks laden voor afbeeldingen
+   die iets later binnenkomen.
+========================================= */
+
+window.addEventListener(
+
+    "load",
+
+    () => {
+
+        disableOldHitboxes();
+
+        prepareAllMasks();
+
+        clearAllHoverOverlays();
+
+    }
+
+);
+
+
+/* =========================================
    DEBUG
 
-   In browserconsole:
+   F12 -> Console:
 
    getLevel1HotspotStatus()
-========================================================= */
+========================================= */
 
 window.getLevel1HotspotStatus =
     () => {
 
-        return hotspots.map(
-            hotspot => {
 
-                return {
+        return hotspotGroups.flatMap(
+            group => {
 
-                    name:
-                        hotspot.name,
 
-                    maskLoaded:
-                        Boolean(
-                            hotspot.mask
-                        )
+                return group.hotspots.map(
+                    hotspot => {
 
-                };
+
+                        return {
+
+                            scene:
+                                group.name,
+
+
+                            name:
+                                hotspot.name,
+
+
+                            maskLoaded:
+                                Boolean(
+                                    hotspot.mask
+                                ),
+
+
+                            hidden:
+                                Boolean(
+
+                                    hotspot.button
+                                        ?.classList
+                                        .contains(
+                                            "hidden"
+                                        )
+
+                                )
+
+                        };
+
+                    }
+                );
 
             }
         );
@@ -1427,31 +1651,76 @@ window.getLevel1HotspotStatus =
     };
 
 
-/* =========================================================
+/* =========================================
    DEBUG
 
-   Hiermee kun je kijken welk object onder je cursor zit.
+   Je kunt ook testen:
 
-   Gebruik bijvoorbeeld in console:
+   findLevel1HotspotAt(500, 300)
 
-   level1HotspotAt(500, 300)
-========================================================= */
+   Resultaat bijvoorbeeld:
 
-window.level1HotspotAt =
+   {
+       scene: "work",
+       hotspot: "jim"
+   }
+========================================= */
+
+window.findLevel1HotspotAt =
     (
-        x,
-        y
+        clientX,
+        clientY
     ) => {
 
-        const hotspot =
-            findHotspotAtPoint(
-                x,
-                y
-            );
+
+        for (
+            const group
+            of hotspotGroups
+        ) {
 
 
-        return hotspot
-            ? hotspot.name
-            : null;
+            if (
+                !sceneIsVisible(
+                    group.scene
+                )
+            ) {
+
+                continue;
+
+            }
+
+
+            const hotspot =
+                findHotspotAtPoint(
+
+                    group,
+
+                    clientX,
+                    clientY
+
+                );
+
+
+            if (
+                hotspot
+            ) {
+
+                return {
+
+                    scene:
+                        group.name,
+
+
+                    hotspot:
+                        hotspot.name
+
+                };
+
+            }
+
+        }
+
+
+        return null;
 
     };
