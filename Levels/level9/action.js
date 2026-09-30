@@ -29,9 +29,9 @@ export function runAction(action) {
         return;
     }
 
-    if ( action === "start_bossfight") {
+    if ( action === "game_over") {
 
-        window.location.href = "../../bossfight/bossfight.php";
+        window.location.href = "../../gameoverscreen.html";
 
         return;
     }
