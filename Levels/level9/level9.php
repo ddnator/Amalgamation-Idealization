@@ -52,15 +52,15 @@
 
             <img
                     class="Background"
-                    src="/Images/Home_Base.png"
+                    src="/Images/boss.png"
                     alt=""
             >
 
-            <button
+            <!-- <button
                     id="hotspot-bed"
                     class="Bed"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay BedOverlay"
@@ -69,11 +69,11 @@
             >
 
 
-            <button
+            <!-- <button
                     id="hotspot-computer"
                     class="Computer"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay ComputerOverlay"
@@ -81,12 +81,12 @@
                     alt=""
             >
 
-            <button
+            <!-- <button
                 id="hotspot-breakfast"
                 class="Breakfast"
                 type="button"
 
-            ></button>
+            ></button> -->
             <img
                     class="Overlay BreakfastOverlay hidden"
                     src="/Images/Breakfast.png"
@@ -94,11 +94,11 @@
             >
 
 
-            <button
+            <!-- <button
                     id="hotspot-kitchen"
                     class="Kitchen"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay KitchenOverlay"
@@ -115,7 +115,7 @@
 
             <img
                     class="Background"
-                    src="/Images/CAravan_Base.png"
+                    src="/Images/boss.png"
                     alt=""
             >
         </div>

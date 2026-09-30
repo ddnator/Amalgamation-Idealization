@@ -1,8 +1,10 @@
 <?php
 $gamecomplete = false;
+$backgroundLink = "/Images/boss.png";
 if (isset($_GET['wonGame'])) {
     if ($_GET['wonGame'] === '1') {
         $gamecomplete = true;
+        $backgroundLink = "/Images/Work_Outside.png";
     }
 }
 ?>
@@ -64,15 +66,15 @@ if (isset($_GET['wonGame'])) {
 
             <img
                     class="Background"
-                    src="/Images/Home_Base.png"
+                    src="<?= $backgroundLink?>"
                     alt=""
             >
 
-            <button
+            <!-- <button
                     id="hotspot-bed"
                     class="Bed"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay BedOverlay"
@@ -81,11 +83,11 @@ if (isset($_GET['wonGame'])) {
             >
 
 
-            <button
+            <!-- <button
                     id="hotspot-computer"
                     class="Computer"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay ComputerOverlay"
@@ -93,12 +95,12 @@ if (isset($_GET['wonGame'])) {
                     alt=""
             >
 
-            <button
+            <!-- <button
                 id="hotspot-breakfast"
                 class="Breakfast"
                 type="button"
 
-            ></button>
+            ></button> -->
             <img
                     class="Overlay BreakfastOverlay hidden"
                     src="/Images/Breakfast.png"
@@ -106,11 +108,11 @@ if (isset($_GET['wonGame'])) {
             >
 
 
-            <button
+            <!-- <button
                     id="hotspot-kitchen"
                     class="Kitchen"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay KitchenOverlay"
@@ -127,7 +129,7 @@ if (isset($_GET['wonGame'])) {
 
             <img
                     class="Background"
-                    src="/Images/CAravan_Base.png"
+                    src="/Images/boss.png"
                     alt=""
             >
         </div>
