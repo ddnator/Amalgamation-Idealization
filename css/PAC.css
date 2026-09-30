@@ -108,37 +108,48 @@ body {
 /* JIM */
 
 .jim {
-    bottom: 25%; !important;
-    left: 80%; !important;
+    bottom: 15%;
+    !important;
+    left: 82%;
+    !important;
 
-    width: 100px; !important;
-    height: 200px; !important;
+    width: 110px;
+    !important;
+    height: 340px;
+    !important;
 }
 
 /* MINIGAME */
 .work {
-     bottom: 40%; !important;
-     right: 20%; !important;
-     width: 300px; !important;
-     height: 200px; !important;
- }
+    bottom: 45%;
+    !important;
+    right: 35%;
+    !important;
+    width: 300px;
+    !important;
+    height: 200px;
+    !important;
+}
 
 /* BOSS */
 
 .boss {
-    bottom: 50%; !important;
-    left: 10%; !important;
-    width: 300px; !important;
-    height: 650px; !important;
+    width: 235px;
+    !important;
+    height: 655px;
+    !important;
 }
+
 .BreakfastOverlay {
     bottom: 0;
     left: 0;
 
     width: 100%;
     height: 100%;
-    opacity: 100; !important;
+    opacity: 100;
+    !important;
 }
+
 /* DOOR of Caravan */
 
 .Door {
@@ -159,26 +170,28 @@ body {
    HOVER EFFECTS
 ========================= */
 
-.Bed:hover + .BedOverlay {
+.Bed:hover+.BedOverlay {
     opacity: 1;
 }
 
-.Computer:hover + .ComputerOverlay {
+.Computer:hover+.ComputerOverlay {
     opacity: 1;
 }
 
-.Kitchen:hover + .KitchenOverlay {
+.Kitchen:hover+.KitchenOverlay {
     opacity: 1;
 }
 
 
-.jim:hover + .jimOverlay {
+.jim:hover+.jimOverlay {
     opacity: 1;
 }
-.boss:hover + .bossOverlay {
+
+.boss:hover+.bossOverlay {
     opacity: 1;
 }
-.work:hover + .workOverlay {
+
+.work:hover+.workOverlay {
     opacity: 1;
 }
 
@@ -196,4 +209,3 @@ body {
 /* =========================
    BREAKFAST OVERLAY
 ========================= */
-
