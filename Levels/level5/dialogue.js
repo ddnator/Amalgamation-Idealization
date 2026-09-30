@@ -40,6 +40,7 @@ import {
     closeDialogue,
     runAction
 } from "./action.js";
+
 /* =========================================
    DIALOGUE TREE
 ========================================= */
@@ -49,7 +50,10 @@ let gameComplete = 'not done';
 if (hidden) {
     gameComplete = hidden.dataset.myValue;
 }
+
+
 const dialogueTree = {
+
     level_start: {
         speaker:
             "NARRATOR",
@@ -292,9 +296,10 @@ function startLevel1() {
         false;
 
     setScene(
-        "home"
-
+        "work"
     );
+
+
 
     if (gameComplete === "done") {
         startDialogue(

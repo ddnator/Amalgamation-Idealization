@@ -97,7 +97,7 @@ export function runAction(action) {
         action === "show_work"
     ) {
 
-        startDialogue("jim_intro");
+        startDialogue("level_start");
 
         setScene("work");
 
