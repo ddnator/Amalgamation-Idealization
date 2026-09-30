@@ -46,8 +46,9 @@ function textCreator(number) {
     let randomNumber = number
     const headerTitle = document.querySelector('#homeHeader h1')
     console.log(randomNumber)
-    if (!headerTitle) return
-
+    if (!headerTitle) {
+        return
+    }
     const sidewaysText = document.createElement('span')
 
     if (randomNumber == 1) {
