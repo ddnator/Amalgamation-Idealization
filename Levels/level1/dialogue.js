@@ -737,9 +737,15 @@ function startLevel1() {
     );
 
 
-    startDialogue(
-        "level_start"
-    );
+    if (gameComplete === "done") {
+        startDialogue(
+            "boss_after"
+        );
+    } else {
+        startDialogue(
+            "level_start"
+        );
+    }
 }
 
 

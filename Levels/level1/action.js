@@ -476,81 +476,81 @@ function startMinigame() {
     */
 
     closeDialogue();
-
+    window.location.href = "../../minigame_reactor1/minigame1.php";
 
     /* =====================================
        ELEMENT CHECK
     ====================================== */
 
-    if (
-        !minigameScreen
-    ) {
+    // if (
+    //     !minigameScreen
+    // ) {
 
-        console.error(
-            "#minigame-screen bestaat niet."
-        );
-
-
-        return;
-    }
+    //     console.error(
+    //         "#minigame-screen bestaat niet."
+    //     );
 
 
-    if (
-        !reactorMinigameFrame
-    ) {
-
-        console.error(
-            "#reactor-minigame-frame bestaat niet."
-        );
+    //     return;
+    // }
 
 
-        return;
-    }
+    // if (
+    //     !reactorMinigameFrame
+    // ) {
+
+    //     console.error(
+    //         "#reactor-minigame-frame bestaat niet."
+    //     );
 
 
-    /* =====================================
-       JUISTE FILE
-
-       action.js:
-       /Levels/level1/action.js
-
-       Reactor:
-       /minigame_reactor1/minigame1.php
-    ====================================== */
-
-    const reactorUrl =
-        new URL(
-            "../../minigame_reactor1/minigame1.php",
-            import.meta.url
-        );
+    //     return;
+    // }
 
 
-    /*
-        Voorkom dat Chrome een oude versie
-        van het iframe uit cache gebruikt.
-    */
+    // /* =====================================
+    //    JUISTE FILE
 
-    reactorUrl.searchParams.set(
-        "run",
-        Date.now().toString()
-    );
+    //    action.js:
+    //    /Levels/level1/action.js
 
+    //    Reactor:
+    //    /minigame_reactor1/minigame1.php
+    // ====================================== */
 
-    /* =====================================
-       IFRAME LADEN
-    ====================================== */
-
-    reactorMinigameFrame.src =
-        reactorUrl.href;
+    // const reactorUrl =
+    //     new URL(
+    //         "../../minigame_reactor1/minigame1.php",
+    //         import.meta.url
+    //     );
 
 
-    /* =====================================
-       MINIGAME TONEN
-    ====================================== */
+    // /*
+    //     Voorkom dat Chrome een oude versie
+    //     van het iframe uit cache gebruikt.
+    // */
 
-    minigameScreen.classList.remove(
-        "hidden"
-    );
+    // reactorUrl.searchParams.set(
+    //     "run",
+    //     Date.now().toString()
+    // );
+
+
+    // /* =====================================
+    //    IFRAME LADEN
+    // ====================================== */
+
+    // reactorMinigameFrame.src =
+    //     reactorUrl.href;
+
+
+    // /* =====================================
+    //    MINIGAME TONEN
+    // ====================================== */
+
+    // minigameScreen.classList.remove(
+    //     "hidden"
+    // );
 }
 
 
