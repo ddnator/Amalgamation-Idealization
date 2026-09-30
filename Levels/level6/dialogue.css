@@ -156,6 +156,8 @@ body {
 
     user-select:
         none;
+
+    opacity: 0;
 }
 
 
