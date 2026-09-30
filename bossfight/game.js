@@ -182,10 +182,8 @@ let bossTimer =
 /* =====================================
    HIDDEN ASSIST MODE
 
-   Secret input op het startmenu:
-   LEFT, LEFT, RIGHT, RIGHT
-
-   Geen UI, tekst, badge of geluid.
+   Secret input:
+   LEFT LEFT RIGHT RIGHT
 ===================================== */
 
 let botPlayEnabled =
@@ -361,8 +359,6 @@ function beatToTime(beat) {
 
 /* =====================================
    PIXELATE BOSS
-
-   48px = expres shitty
 ===================================== */
 
 function pixelateBoss(
@@ -625,8 +621,6 @@ function buildFight() {
                         item[1];
 
 
-                    /* BOSS */
-
                     notes.push({
 
                         side:
@@ -662,8 +656,6 @@ function buildFight() {
 
                     });
 
-
-                    /* PLAYER */
 
                     notes.push({
 
@@ -773,13 +765,6 @@ function buildFight() {
                     });
 
 
-                    /*
-                        Verborgen trap.
-
-                        Fake boss note wordt niet
-                        aan player gegeven.
-                    */
-
                     round.traps.push({
 
                         lane:
@@ -817,7 +802,7 @@ function buildFight() {
 
 
 /* =====================================
-   PHASE + PNG BACKGROUND
+   PHASE
 ===================================== */
 
 function setPhase(phase) {
@@ -838,10 +823,6 @@ function setPhase(phase) {
         `PHASE ${phase}`;
 
 
-    /*
-        Alleen echte PNG wordt vervangen.
-    */
-
     background.src =
         `img/bg-phase${phase}.png`;
 
@@ -849,17 +830,7 @@ function setPhase(phase) {
 
 
 /* =====================================
-   SECRET START-MENU INPUT
-
-   LEFT LEFT RIGHT RIGHT
-
-   Werkt met:
-   - ArrowLeft / ArrowRight
-   - A / D
-
-   Alleen op het startmenu en alleen voordat
-   de fight draait. Er verschijnt bewust niets
-   op het scherm wanneer dit geactiveerd wordt.
+   SECRET BOTPLAY CODE
 ===================================== */
 
 function getSecretDirection(code) {
@@ -963,11 +934,6 @@ function handleSecretMenuInput(event) {
     }
 
 
-    /*
-        Bij een verkeerde invoer kan een nieuwe
-        LEFT meteen het begin van de code zijn.
-    */
-
     secretInputIndex =
         direction ===
         secretInputSequence[0]
@@ -995,10 +961,16 @@ startButton.addEventListener(
 );
 
 
-restartButton.addEventListener(
-    "click",
-    startGame
-);
+if (
+    restartButton
+) {
+
+    restartButton.addEventListener(
+        "click",
+        startGame
+    );
+
+}
 
 
 /* =====================================
@@ -1119,9 +1091,15 @@ async function startGame() {
     );
 
 
-    endScreen.classList.add(
-        "hidden"
-    );
+    if (
+        endScreen
+    ) {
+
+        endScreen.classList.add(
+            "hidden"
+        );
+
+    }
 
 
     try {
@@ -1208,7 +1186,7 @@ function gameLoop() {
 
 
 /* =====================================
-   BEAT ANIMATION
+   BEAT
 ===================================== */
 
 function updateBeat(time) {
@@ -1265,8 +1243,6 @@ function updateRound(time) {
             rounds[i];
 
 
-        /* BOSS */
-
         if (
             time >=
             round.bossStart -
@@ -1292,8 +1268,6 @@ function updateRound(time) {
 
         }
 
-
-        /* PLAYER */
 
         if (
             time >=
@@ -1358,10 +1332,6 @@ function changeRound(index) {
         config.phase
     );
 
-
-    /*
-        Reset ghost touch voor ronde.
-    */
 
     ghostRoundIndex =
         -1;
@@ -1530,7 +1500,7 @@ function createNote(note) {
 
 
 /* =====================================
-   NOTE MOVEMENT
+   UPDATE NOTES
 ===================================== */
 
 function updateNotes(time) {
@@ -1619,11 +1589,6 @@ function updateNotes(time) {
                 progress;
 
 
-            /*
-                4-pixel movement voor
-                shitty retro look.
-            */
-
             note.element.style.top =
                 `${
                     Math.round(
@@ -1690,13 +1655,7 @@ function updateNotes(time) {
 
 
             /* =================================
-               HIDDEN AUTO INPUT
-
-               Wanneer de geheime startmenu-code actief is,
-               raakt deze alleen echte player notes.
-
-               Fake traps en ghost touches worden bewust
-               genegeerd. Er wordt geen extra UI getoond.
+               HIDDEN BOTPLAY
             ================================= */
 
             if (
@@ -1889,22 +1848,9 @@ function getPlayerRound(time) {
 
 /* =====================================
    GHOST TOUCH
-
-   PHASE 1:
-   geen ghost touch
-
-   PHASE 2:
-   soms één phantom input
-
-   PHASE 3:
-   sneller + soms twee tegelijk
 ===================================== */
 
 function updateGhostTouch(time) {
-
-    /*
-        Oude ghost touches verwijderen.
-    */
 
     ghostTouches =
         ghostTouches.filter(
@@ -1927,10 +1873,6 @@ function updateGhostTouch(time) {
         );
 
 
-    /*
-        Alleen tijdens player beurt.
-    */
-
     if (
         !round
         ||
@@ -1949,10 +1891,6 @@ function updateGhostTouch(time) {
 
     }
 
-
-    /*
-        Nieuwe ronde.
-    */
 
     if (
         ghostRoundIndex !==
@@ -1998,10 +1936,6 @@ function updateGhostTouch(time) {
     }
 
 
-    /*
-        Niet op het allerlaatste moment.
-    */
-
     if (
         time >
         round.end -
@@ -2018,10 +1952,6 @@ function updateGhostTouch(time) {
         time
     );
 
-
-    /*
-        Phase 3 vaker.
-    */
 
     if (
         round.config.phase === 2
@@ -2066,11 +1996,6 @@ function triggerGhostTouch(
     const phase =
         round.config.phase;
 
-
-    /*
-        Phase 3 heeft kans op
-        dubbele ghost touch.
-    */
 
     let amount =
         (
@@ -2117,11 +2042,6 @@ function triggerGhostTouch(
             lane
         );
 
-
-        /*
-            Ghost touch niet direct
-            bovenop echte note zetten.
-        */
 
         const realTooClose =
             notes.some(
@@ -2365,12 +2285,6 @@ document.addEventListener(
         }
 
 
-        /*
-            In hidden assist mode worden handmatige
-            inputs tijdens de fight genegeerd, zodat een
-            toevallige toets geen fake/ghost penalty geeft.
-        */
-
         if (
             botPlayEnabled
         ) {
@@ -2423,15 +2337,6 @@ function playerHit(
     const time =
         music.currentTime;
 
-
-    /*
-        1.
-        ECHTE NOTE KRIJGT ALTIJD
-        VOORRANG.
-
-        Ghost touch kan dus geen
-        goede input stelen.
-    */
 
     const matching =
         notes
@@ -2542,14 +2447,6 @@ function playerHit(
     }
 
 
-    /*
-        2.
-        GHOST TOUCH
-
-        Player reageert op
-        phantom receptor.
-    */
-
     const ghost =
         getGhostTouch(
             lane,
@@ -2574,14 +2471,6 @@ function playerHit(
 
     }
 
-
-    /*
-        3.
-        FAKE BOSS NOTE
-
-        Player heeft een fake boss
-        note onthouden en kopieert hem.
-    */
 
     const trap =
         round.traps.find(
@@ -2624,11 +2513,6 @@ function playerHit(
 
     }
 
-
-    /*
-        4.
-        Verkeerde richting.
-    */
 
     const nearby =
         notes
@@ -3215,6 +3099,9 @@ function checkEnd(time) {
 
 /* =====================================
    WIN
+
+   Geen SHIFT COMPLETE scherm.
+   Meteen naar Level 8.
 ===================================== */
 
 function winGame() {
@@ -3240,17 +3127,30 @@ function winGame() {
     );
 
 
-    endTitle.textContent =
-        "SHIFT COMPLETE";
+    document
+        .querySelectorAll(
+            ".note, .ghost-touch-mark"
+        )
+        .forEach(
+            element => {
+
+                element.remove();
+
+            }
+        );
 
 
-    showEnd();
+    window.location.href =
+        "../levels/level8/level8.php?wonGame=1";
 
 }
 
 
 /* =====================================
    LOSE
+
+   Geen FAILED scherm.
+   Meteen naar game over.
 ===================================== */
 
 function loseGame() {
@@ -3276,21 +3176,6 @@ function loseGame() {
     );
 
 
-    endTitle.textContent =
-        "FAILED";
-
-
-    showEnd();
-
-}
-
-
-/* =====================================
-   END SCREEN
-===================================== */
-
-function showEnd() {
-
     document
         .querySelectorAll(
             ".note, .ghost-touch-mark"
@@ -3304,58 +3189,8 @@ function showEnd() {
         );
 
 
-    const attempts =
-        hits
-        +
-        misses;
-
-
-    const accuracy =
-        attempts
-
-            ?
-
-            hits
-            /
-            attempts
-            *
-            100
-
-            :
-
-            100;
-
-
-    endStats.innerHTML = `
-
-        SCORE ${
-            String(score)
-                .padStart(
-                    6,
-                    "0"
-                )
-        }
-
-        <br>
-
-        HITS ${hits}
-
-        <br>
-
-        MISS ${misses}
-
-        <br>
-
-        ACC ${
-            accuracy.toFixed(1)
-        }%
-
-    `;
-
-
-    endScreen.classList.remove(
-        "hidden"
-    );
+    window.location.href =
+        "../gameoverscreen.html";
 
 }
 
@@ -3370,14 +3205,6 @@ window.addEventListener(
 
     async () => {
 
-
-        /*
-            Boss terugbrengen naar
-            maar 48 pixels.
-
-            Daarna wordt hij groot
-            weergegeven zonder smoothing.
-        */
 
         pixelateBoss(
             48

@@ -26,12 +26,14 @@
 
 <body>
 
-
 <div
     id="game"
     class="phase-1"
 >
 
+    <!-- =============================================
+         FULLSCREEN BUTTON
+    ============================================== -->
 
     <button
         id="fullscreen-toggle"
@@ -53,7 +55,7 @@
 
 
             <!-- =========================================
-                 SCHERM BINNEN DE TV
+                 GAME SCREEN
             ========================================== -->
 
             <div id="monitor-viewport">
@@ -124,7 +126,7 @@
 
 
                     <!-- =================================
-                         TURN
+                         TURN TEXT
                     ================================== -->
 
                     <div id="turn-text">
@@ -146,19 +148,8 @@
                             <img
                                 id="boss"
                                 src="img/boss.png"
-                                alt="Boss"
+                                alt="The Operator"
                             >
-
-                        </div>
-
-
-                        <!-- SPEAKER -->
-
-                        <div id="speaker">
-
-                            <div class="speaker-small"></div>
-
-                            <div class="speaker-big"></div>
 
                         </div>
 
@@ -182,7 +173,7 @@
 
 
                     <!-- =================================
-                         BOSS ARROWS
+                         BOSS LANES
                     ================================== -->
 
                     <div
@@ -191,34 +182,45 @@
                     >
 
                         <div class="lane">
+
                             <div class="receptor">
                                 ←
                             </div>
+
                         </div>
 
+
                         <div class="lane">
+
                             <div class="receptor">
                                 ↓
                             </div>
+
                         </div>
 
+
                         <div class="lane">
+
                             <div class="receptor">
                                 ↑
                             </div>
+
                         </div>
 
+
                         <div class="lane">
+
                             <div class="receptor">
                                 →
                             </div>
+
                         </div>
 
                     </div>
 
 
                     <!-- =================================
-                         PLAYER ARROWS
+                         PLAYER LANES
                     ================================== -->
 
                     <div
@@ -227,27 +229,38 @@
                     >
 
                         <div class="lane">
+
                             <div class="receptor">
                                 ←
                             </div>
+
                         </div>
 
+
                         <div class="lane">
+
                             <div class="receptor">
                                 ↓
                             </div>
+
                         </div>
 
+
                         <div class="lane">
+
                             <div class="receptor">
                                 ↑
                             </div>
+
                         </div>
 
+
                         <div class="lane">
+
                             <div class="receptor">
                                 →
                             </div>
+
                         </div>
 
                     </div>
@@ -293,6 +306,7 @@
 
 
                             <div id="controls">
+
 
                                 <div>
 
@@ -345,6 +359,7 @@
 
                                 </div>
 
+
                             </div>
 
 
@@ -361,12 +376,9 @@
 
 
                     <!-- =================================
-                         END SCREEN
+                         FAILED SCREEN
 
-                         Alleen voor FAILED.
-
-                         Bij WIN:
-                         direct naar Level 8.
+                         WIN gaat direct naar Level 8.
                     ================================== -->
 
                     <div
@@ -402,7 +414,7 @@
 
 
             <!-- =========================================
-                 TV FRAME
+                 MONITOR FRAME
             ========================================== -->
 
             <img
@@ -415,6 +427,11 @@
         </div>
 
     </div>
+
+
+    <!-- =============================================
+         MUSIC
+    ============================================== -->
 
     <audio
         id="music"
