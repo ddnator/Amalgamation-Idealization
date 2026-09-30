@@ -190,9 +190,9 @@ const dialogueTree = {
 
         options: [
             {
-                text: "Head to work",
+                text: "Enter home",
                 speak: false,
-                action: "action_go_to_work"
+                action: "action_enter_home"
             }
         ]
     },
@@ -233,9 +233,9 @@ const dialogueTree = {
 
         options: [
             {
-                text: "Continue",
+                text: "go back",
                 speak: false,
-                action: "close"
+                action: "action_go_home"
             }
         ]
     },
@@ -261,7 +261,7 @@ const dialogueTree = {
     work: {
 
         speaker: "NARRATOR",
-        text: "You have arrived at work,\nyour favorite coworker Jim is waving at you",
+        text: "You have arrived at work,\n your favorite coworker Jim is waving at you",
 
         options: [
             {
@@ -423,6 +423,129 @@ Steven will talk about his shutdown legs
     },
 
 
+    /* =====================================
+       Erwin 1
+    ====================================== */
+
+    erwin_intro: {
+
+        speaker: "ERWIN",
+        text: "Yooo Y/N, how's it going?",
+
+        options: [
+            {
+                text: "Do you still have the good stuff?",
+
+                next: "erwin_goodstuff",
+            },
+
+            {
+                text: "Steven's outside again.",
+
+                action: "action_erwin_about_steven"
+            }
+        ]
+    },
+    /* =====================================
+      erwin GOODSTUFF
+   ====================================== */
+    erwin_goodstuff: {
+
+        speaker: "ERWIN",
+        text: "What kind of good stuff are we talking about here?",
+        options: [
+            {
+                text: "I want an upgrade",
+
+                action: "action_upgrade"
+
+            },
+
+            {
+                text: "You know, your home made specialty \n which, isn't a drink, if you catch my drift",
+
+                action: "action_drugs"
+            },
+
+            {
+                text: "I've changed my mind, bye",
+
+                action: "action_leave_erwin"
+            }
+        ]
+    },
+    /* =====================================
+     erwin upgrade
+  ====================================== */
+    erwin_upgrade: {
+
+        speaker: "ERWIN",
+        text: "these are all used models, so the rate should be affordable, even for someone like you. \n So tell me, what do you want to upgrade?",
+        options: [
+            {
+                text: "My eyes",
+
+                action: "action_upgrade_eyes"
+
+            },
+
+            {
+                text: "My legs",
+
+                action: "action_upgrade_legs"
+            },
+
+            {
+                text: "my arms",
+
+                action: "action_upgrade_arms"
+            },
+
+            {
+                text: "my HEART",
+
+                action: "action_upgrade_heart"
+            }
+        ]
+    },
+    /* =====================================
+      Erwin 2 about steven
+   ====================================== */
+
+    erwin_steven: {
+
+        speaker: "ERWIN",
+        text: "have you been giving him money again? I've really been getting sick of that guy. \n He sits outside here every night and bothers me when I refuse to serve him any more drinks",
+
+        options: [
+            {
+                text: "That's his only comfort right now",
+
+                next: "erwin_steven2",
+            },
+
+
+        ]
+    },
+    /* =====================================
+      Erwin about steven
+   ====================================== */
+
+    erwin_steven2: {
+
+        speaker: "ERWIN",
+        text: "I don't have it in me to force him to leave. \n besides, if he leaves, another one will crawl here, and I'm not sure if they will be as friendly as our Steven here",
+
+        options: [
+            {
+                text: "I hope he gets his shit together soon, anyhow, I'm here for the goodstuff",
+
+                next: "erwin_goodstuff",
+            },
+
+
+        ]
+    },
     /* =====================================
        BOSS
     ====================================== */
@@ -1367,11 +1490,7 @@ hotspotsbar.addEventListener(
     "click",
     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
 
-        runAction("action_boss")
+        runAction("action_enter_bar")
 
-        startDialogue("boss_task");
     });
