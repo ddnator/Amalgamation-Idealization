@@ -180,6 +180,31 @@ let bossTimer =
 
 
 /* =====================================
+   HIDDEN ASSIST MODE
+
+   Secret input op het startmenu:
+   LEFT, LEFT, RIGHT, RIGHT
+
+   Geen UI, tekst, badge of geluid.
+===================================== */
+
+let botPlayEnabled =
+    false;
+
+
+let secretInputIndex =
+    0;
+
+
+const secretInputSequence = [
+    "left",
+    "left",
+    "right",
+    "right"
+];
+
+
+/* =====================================
    GHOST TOUCH STATE
 ===================================== */
 
@@ -824,6 +849,143 @@ function setPhase(phase) {
 
 
 /* =====================================
+   SECRET START-MENU INPUT
+
+   LEFT LEFT RIGHT RIGHT
+
+   Werkt met:
+   - ArrowLeft / ArrowRight
+   - A / D
+
+   Alleen op het startmenu en alleen voordat
+   de fight draait. Er verschijnt bewust niets
+   op het scherm wanneer dit geactiveerd wordt.
+===================================== */
+
+function getSecretDirection(code) {
+
+    if (
+        code === "ArrowLeft"
+        ||
+        code === "KeyA"
+    ) {
+
+        return "left";
+
+    }
+
+
+    if (
+        code === "ArrowRight"
+        ||
+        code === "KeyD"
+    ) {
+
+        return "right";
+
+    }
+
+
+    return null;
+
+}
+
+
+function handleSecretMenuInput(event) {
+
+    if (
+        running
+        ||
+        startScreen.classList.contains(
+            "hidden"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const direction =
+        getSecretDirection(
+            event.code
+        );
+
+
+    if (
+        !direction
+    ) {
+
+        return;
+
+    }
+
+
+    event.preventDefault();
+
+
+    if (
+        event.repeat
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        direction ===
+        secretInputSequence[
+            secretInputIndex
+        ]
+    ) {
+
+        secretInputIndex++;
+
+
+        if (
+            secretInputIndex >=
+            secretInputSequence.length
+        ) {
+
+            botPlayEnabled =
+                true;
+
+
+            secretInputIndex =
+                0;
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+        Bij een verkeerde invoer kan een nieuwe
+        LEFT meteen het begin van de code zijn.
+    */
+
+    secretInputIndex =
+        direction ===
+        secretInputSequence[0]
+
+            ? 1
+
+            : 0;
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    handleSecretMenuInput
+);
+
+
+/* =====================================
    BUTTONS
 ===================================== */
 
@@ -930,6 +1092,10 @@ async function startGame() {
 
     nextGhostTouchAt =
         Infinity;
+
+
+    secretInputIndex =
+        0;
 
 
     running =
@@ -1475,7 +1641,15 @@ function updateNotes(time) {
                 &&
                 time >=
                 note.time -
-                0.11
+                (
+                    rounds[
+                        note.roundIndex
+                    ].config.phase === 2
+
+                        ? 0.42
+
+                        : 0.30
+                )
             ) {
 
                 note.revealed =
@@ -1511,6 +1685,61 @@ function updateNotes(time) {
 
 
                 return;
+
+            }
+
+
+            /* =================================
+               HIDDEN AUTO INPUT
+
+               Wanneer de geheime startmenu-code actief is,
+               raakt deze alleen echte player notes.
+
+               Fake traps en ghost touches worden bewust
+               genegeerd. Er wordt geen extra UI getoond.
+            ================================= */
+
+            if (
+                botPlayEnabled
+                &&
+                note.side ===
+                "player"
+                &&
+                !note.fake
+                &&
+                time >=
+                note.time
+                &&
+                time <=
+                note.time +
+                note.good
+            ) {
+
+                const round =
+                    rounds[
+                        note.roundIndex
+                    ];
+
+
+                if (
+                    round
+                ) {
+
+                    flashReceptor(
+                        playerLanes,
+                        note.lane
+                    );
+
+
+                    playerHit(
+                        note.lane,
+                        round
+                    );
+
+
+                    return;
+
+                }
 
             }
 
@@ -2129,6 +2358,21 @@ document.addEventListener(
 
         if (
             event.repeat
+        ) {
+
+            return;
+
+        }
+
+
+        /*
+            In hidden assist mode worden handmatige
+            inputs tijdens de fight genegeerd, zodat een
+            toevallige toets geen fake/ghost penalty geeft.
+        */
+
+        if (
+            botPlayEnabled
         ) {
 
             return;

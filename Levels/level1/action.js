@@ -158,34 +158,11 @@ export function runAction(action) {
     }
 
 
-    /* =====================================
-       ARRIVE AT WORK
-
-       In je huidige dialogue.js gebruikt
-       de Continue-knop van de work intro
-       OOK action_work.
-
-       Daarom:
-
-       Eerste action_work:
-       -> naar Work
-       -> intro tonen
-
-       Tweede action_work:
-       -> Continue
-       -> dialogue sluiten
-    ====================================== */
-
     if (
         action === "action_work"
     ) {
 
-        /*
-            We zijn al op Work en de work-intro
-            is zichtbaar.
-
-            Dit is dus de Continue-knop.
-        */
+    
 
         if (
             gameState.currentScene ===
@@ -223,10 +200,6 @@ export function runAction(action) {
     }
 
 
-    /* =====================================
-       JIM 1
-    ====================================== */
-
     if (
         action === "action_jimOne"
     ) {
@@ -251,10 +224,6 @@ export function runAction(action) {
     }
 
 
-    /* =====================================
-       JIM 2
-    ====================================== */
-
     if (
         action === "action_jimTwo"
     ) {
@@ -273,10 +242,6 @@ export function runAction(action) {
     }
 
 
-    /* =====================================
-       JIM 3
-    ====================================== */
-
     if (
         action === "action_jimThree"
     ) {
@@ -294,10 +259,6 @@ export function runAction(action) {
         return;
     }
 
-
-    /* =====================================
-       JIM 4
-    ====================================== */
 
     if (
         action === "action_jimFour"

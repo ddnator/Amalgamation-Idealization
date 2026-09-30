@@ -69,7 +69,147 @@ canvas {
 
 
 /* =================================
-   ALLEEN PNG BACKGROUND
+   MONITOR LAYOUT
+================================= */
+
+#monitor-area {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+
+#monitor-shell {
+    position: relative;
+
+    width: min(
+        100vw,
+        calc(
+            100vh *
+            650 /
+            488
+        )
+    );
+
+    height: min(
+        100vh,
+        calc(
+            100vw *
+            488 /
+            650
+        )
+    );
+
+    aspect-ratio:
+        650 / 488;
+
+    flex:
+        0 0 auto;
+
+    overflow: hidden;
+}
+
+
+/* =================================
+   MONITOR VIEWPORT
+
+   EnshittifiedTV.png:
+   650 x 488
+================================= */
+
+#monitor-viewport {
+    position: absolute;
+
+    left:
+        8.923%;
+
+    top:
+        7.787%;
+
+    right:
+        8.462%;
+
+    bottom:
+        9.836%;
+
+    overflow: hidden;
+
+    background:
+        #000;
+
+    border-radius:
+        2.2%;
+
+    z-index:
+        1;
+}
+
+
+/* =================================
+   FIGHT SURFACE
+================================= */
+
+#fight-surface {
+    position: relative;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    overflow:
+        hidden;
+
+    background:
+        #000;
+}
+
+
+/* =================================
+   MONITOR FRAME
+================================= */
+
+#monitor-frame {
+    position: absolute;
+
+    inset: 0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        fill;
+
+    image-rendering:
+        pixelated;
+
+    pointer-events:
+        none;
+
+    user-select:
+        none;
+
+    z-index:
+        200;
+}
+
+
+/* =================================
+   BACKGROUND
 ================================= */
 
 #background-image {
@@ -77,17 +217,26 @@ canvas {
 
     inset: 0;
 
-    width: 100%;
-    height: 100%;
+    width:
+        100%;
 
-    object-fit: cover;
-    object-position: center;
+    height:
+        100%;
 
-    z-index: 0;
+    object-fit:
+        cover;
 
-    pointer-events: none;
+    object-position:
+        center;
 
-    filter: none;
+    z-index:
+        0;
+
+    pointer-events:
+        none;
+
+    filter:
+        none;
 }
 
 
@@ -98,21 +247,29 @@ canvas {
 #hud {
     position: absolute;
 
-    top: 8px;
-    left: 50%;
+    top:
+        8px;
+
+    left:
+        50%;
 
     transform:
         translateX(-50%);
 
     width:
-        min(700px, 88vw);
+        min(
+            700px,
+            88%
+        );
 
-    z-index: 50;
+    z-index:
+        50;
 }
 
 
 #hud-top {
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         space-between;
@@ -142,10 +299,14 @@ canvas {
 ================================= */
 
 #health-bar {
-    display: flex;
+    display:
+        flex;
 
-    width: 100%;
-    height: 22px;
+    width:
+        100%;
+
+    height:
+        22px;
 
     border:
         4px solid #000;
@@ -156,8 +317,11 @@ canvas {
 
 
 #boss-health {
-    width: 50%;
-    height: 100%;
+    width:
+        50%;
+
+    height:
+        100%;
 
     background:
         var(--red);
@@ -170,8 +334,11 @@ canvas {
 
 
 #player-health {
-    width: 50%;
-    height: 100%;
+    width:
+        50%;
+
+    height:
+        100%;
 
     background:
         var(--green);
@@ -216,15 +383,20 @@ canvas {
 ================================= */
 
 #turn-text {
-    position: absolute;
+    position:
+        absolute;
 
-    top: 112px;
-    left: 50%;
+    top:
+        112px;
+
+    left:
+        50%;
 
     transform:
         translateX(-50%);
 
-    z-index: 55;
+    z-index:
+        55;
 
     padding:
         3px 7px;
@@ -254,22 +426,29 @@ canvas {
 
 /* =================================
    STAGE
-
-   BOSS + PLAYER STAAN HOGER
 ================================= */
 
 #stage {
-    position: absolute;
+    position:
+        absolute;
 
-    left: 0;
-    right: 0;
+    left:
+        0;
 
-    bottom: 125px;
+    right:
+        0;
 
-    width: 100%;
-    height: 58vh;
+    bottom:
+        125px;
 
-    display: grid;
+    width:
+        100%;
+
+    height:
+        58%;
+
+    display:
+        grid;
 
     grid-template-columns:
         1fr
@@ -279,7 +458,8 @@ canvas {
     align-items:
         end;
 
-    z-index: 10;
+    z-index:
+        10;
 }
 
 
@@ -288,9 +468,11 @@ canvas {
 ================================= */
 
 #boss-area {
-    height: 100%;
+    height:
+        100%;
 
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         center;
@@ -302,8 +484,6 @@ canvas {
 
 /* =================================
    BOSS
-
-   EXPRESS LOW QUALITY
 ================================= */
 
 #boss {
@@ -311,7 +491,7 @@ canvas {
         340px;
 
     max-width:
-        34vw;
+        34%;
 
     height:
         auto;
@@ -334,7 +514,7 @@ canvas {
 
 
 /* =================================
-   PHASE 1 BOSS
+   PHASE 1
 ================================= */
 
 #game.phase-1 #boss {
@@ -352,7 +532,7 @@ canvas {
 
 
 /* =================================
-   PHASE 2 BOSS
+   PHASE 2
 ================================= */
 
 #game.phase-2 #boss {
@@ -371,7 +551,7 @@ canvas {
 
 
 /* =================================
-   PHASE 3 BOSS
+   PHASE 3
 ================================= */
 
 #game.phase-3 #boss {
@@ -397,178 +577,252 @@ canvas {
 @keyframes boss-idle {
 
     0% {
-        margin-left: 0;
+        margin-left:
+            0;
     }
 
     50% {
-        margin-left: 2px;
+        margin-left:
+            2px;
     }
 
     100% {
-        margin-left: 0;
+        margin-left:
+            0;
     }
 
 }
 
 
 /* =================================
-   PHASE 2 DISTORTION
+   BOSS GLITCH 2
 ================================= */
 
 @keyframes boss-glitch-2 {
 
     0% {
-        margin-left: 0;
 
-        clip-path:
-            inset(0);
-    }
-
-    25% {
-        margin-left:
-            -3px;
-    }
-
-    50% {
-        margin-left:
-            3px;
-
-        clip-path:
-            inset(6% 0 4% 0);
-    }
-
-    75% {
-        margin-left:
-            -2px;
-    }
-
-    100% {
         margin-left:
             0;
 
         clip-path:
             inset(0);
+
+    }
+
+
+    25% {
+
+        margin-left:
+            -3px;
+
+    }
+
+
+    50% {
+
+        margin-left:
+            3px;
+
+        clip-path:
+            inset(
+                6% 0 4% 0
+            );
+
+    }
+
+
+    75% {
+
+        margin-left:
+            -2px;
+
+    }
+
+
+    100% {
+
+        margin-left:
+            0;
+
+        clip-path:
+            inset(0);
+
     }
 
 }
 
 
 /* =================================
-   PHASE 3 DISTORTION
+   BOSS GLITCH 3
 ================================= */
 
 @keyframes boss-glitch-3 {
 
     0% {
+
         margin-left:
             0;
 
         clip-path:
             inset(0);
+
     }
 
+
     12% {
+
         margin-left:
             -8px;
 
         clip-path:
-            inset(4% 0 22% 0);
+            inset(
+                4% 0 22% 0
+            );
+
     }
 
+
     25% {
+
         margin-left:
             7px;
 
         clip-path:
-            inset(25% 0 3% 0);
+            inset(
+                25% 0 3% 0
+            );
+
     }
 
+
     37% {
+
         margin-left:
             -5px;
 
         clip-path:
-            inset(8% 0 34% 0);
+            inset(
+                8% 0 34% 0
+            );
+
     }
 
+
     50% {
+
         margin-left:
             8px;
 
         clip-path:
-            inset(32% 0 6% 0);
+            inset(
+                32% 0 6% 0
+            );
+
     }
 
+
     62% {
+
         margin-left:
             -7px;
 
         clip-path:
-            inset(3% 0 18% 0);
+            inset(
+                3% 0 18% 0
+            );
+
     }
 
+
     75% {
+
         margin-left:
             6px;
 
         clip-path:
-            inset(20% 0 24% 0);
+            inset(
+                20% 0 24% 0
+            );
+
     }
+
 
     87% {
+
         margin-left:
             -4px;
+
     }
 
+
     100% {
+
         margin-left:
             0;
 
         clip-path:
             inset(0);
+
     }
 
 }
 
 
 /* =================================
-   PHASE 3 EXTRA SHAKE
+   PHASE 3 SHAKE
 ================================= */
 
 #game.phase-3 #boss-area {
+
     animation:
         boss-area-shake
         0.07s
         steps(2)
         infinite;
+
 }
 
 
 @keyframes boss-area-shake {
 
     0% {
+
         translate:
             0 0;
+
     }
+
 
     25% {
+
         translate:
             -2px 1px;
+
     }
+
 
     50% {
+
         translate:
             2px -1px;
+
     }
+
 
     75% {
+
         translate:
             -1px -1px;
+
     }
 
+
     100% {
+
         translate:
             0 0;
+
     }
 
 }
@@ -579,36 +833,47 @@ canvas {
 ================================= */
 
 #boss.beat {
+
     transform:
         translateY(-6px);
+
 }
 
 
 #boss.left {
+
     transform:
         translateX(-17px);
+
 }
 
 
 #boss.down {
+
     transform:
         translateY(11px);
+
 }
 
 
 #boss.up {
+
     transform:
         translateY(-20px);
+
 }
 
 
 #boss.right {
+
     transform:
         translateX(17px);
+
 }
 
 
 #boss.fake {
+
     transform:
         translateX(8px)
         skewX(-9deg);
@@ -618,6 +883,7 @@ canvas {
         saturate(0)
         brightness(0.65)
         !important;
+
 }
 
 
@@ -626,7 +892,9 @@ canvas {
 ================================= */
 
 #speaker {
-    position: relative;
+
+    position:
+        relative;
 
     width:
         115px;
@@ -642,12 +910,15 @@ canvas {
 
     border:
         6px solid #000;
+
 }
 
 
 .speaker-small,
 .speaker-big {
-    position: absolute;
+
+    position:
+        absolute;
 
     left:
         50%;
@@ -660,10 +931,12 @@ canvas {
 
     border:
         4px solid #444;
+
 }
 
 
 .speaker-small {
+
     top:
         14px;
 
@@ -672,10 +945,12 @@ canvas {
 
     height:
         42px;
+
 }
 
 
 .speaker-big {
+
     bottom:
         14px;
 
@@ -684,6 +959,7 @@ canvas {
 
     height:
         70px;
+
 }
 
 
@@ -692,7 +968,9 @@ canvas {
 ================================= */
 
 #player {
-    display: flex;
+
+    display:
+        flex;
 
     flex-direction:
         column;
@@ -702,17 +980,20 @@ canvas {
 
     margin-bottom:
         16px;
+
 }
 
 
 #player-head {
+
     width:
         82px;
 
     height:
         82px;
 
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         center;
@@ -731,17 +1012,20 @@ canvas {
 
     font-size:
         28px;
+
 }
 
 
 #player-body {
+
     width:
         125px;
 
     height:
         125px;
 
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         center;
@@ -757,40 +1041,62 @@ canvas {
 
     font-size:
         18px;
+
 }
 
 
-/* Ghost touch hit shake */
+/* =================================
+   PLAYER GHOST HIT
+================================= */
 
 #game.ghost-hit #player {
+
     animation:
         player-glitch
         0.12s
         steps(2)
         3;
+
 }
 
 
 @keyframes player-glitch {
 
     0% {
+
         transform:
             translate(0);
+
     }
+
 
     33% {
+
         transform:
-            translate(-5px, 2px);
+            translate(
+                -5px,
+                2px
+            );
+
     }
+
 
     66% {
+
         transform:
-            translate(5px, -2px);
+            translate(
+                5px,
+                -2px
+            );
+
     }
 
+
     100% {
+
         transform:
             translate(0);
+
     }
 
 }
@@ -801,22 +1107,27 @@ canvas {
 ================================= */
 
 .lane-group {
-    position: absolute;
+
+    position:
+        absolute;
 
     bottom:
         0;
 
     width:
-        42vw;
+        42%;
 
     height:
-        65vh;
+        65%;
 
     display:
         grid;
 
     grid-template-columns:
-        repeat(4, 1fr);
+        repeat(
+            4,
+            1fr
+        );
 
     gap:
         2px;
@@ -826,22 +1137,28 @@ canvas {
 
     z-index:
         20;
+
 }
 
 
 #boss-lanes {
+
     left:
-        1vw;
+        1%;
+
 }
 
 
 #player-lanes {
+
     right:
-        1vw;
+        1%;
+
 }
 
 
 .lane {
+
     position:
         relative;
 
@@ -850,6 +1167,7 @@ canvas {
 
     background:
         transparent;
+
 }
 
 
@@ -858,6 +1176,7 @@ canvas {
 ================================= */
 
 .receptor {
+
     position:
         absolute;
 
@@ -902,27 +1221,35 @@ canvas {
 
     line-height:
         1;
+
 }
 
 
 .receptor.active {
+
     transform:
         translateX(-50%)
-        translate(3px, 3px);
+        translate(
+            3px,
+            3px
+        );
 
     background:
         var(--sand);
 
     color:
         #111;
+
 }
 
 
 /* =================================
-   GHOST TOUCH RECEPTOR
+   GHOST RECEPTOR
 ================================= */
 
-#player-lanes .receptor.ghost-active {
+#player-lanes
+.receptor.ghost-active {
+
     background:
         #111;
 
@@ -937,19 +1264,25 @@ canvas {
         0.07s
         steps(2)
         infinite;
+
 }
 
 
 @keyframes ghost-flicker {
 
     0% {
+
         translate:
             -3px 0;
+
     }
 
+
     50% {
+
         translate:
             3px 0;
+
     }
 
 }
@@ -960,6 +1293,7 @@ canvas {
 ================================= */
 
 .note {
+
     position:
         absolute;
 
@@ -998,84 +1332,207 @@ canvas {
 
     line-height:
         1;
+
 }
 
 
 .note-left {
+
     background:
         var(--purple);
+
 }
 
 
 .note-down {
+
     background:
         var(--blue);
+
 }
 
 
 .note-up {
+
     background:
         var(--green);
+
 }
 
 
 .note-right {
+
     background:
         var(--red);
+
 }
 
 
 /* =================================
-   FAKE BOSS NOTES
+   FAKE NOTES
 ================================= */
 
 .fake-note {
+
+    background:
+        #1b1b1b
+        !important;
+
+    color:
+        #aaa18d
+        !important;
+
+    border-color:
+        #786f5d
+        !important;
+
+    border-style:
+        dashed;
+
+    opacity:
+        0.82;
+
     filter:
-        brightness(0.85);
+        grayscale(1)
+        contrast(1.35)
+        brightness(0.72);
+
+    box-shadow:
+        4px 0 0
+        rgba(
+            124,
+            56,
+            56,
+            0.42
+        ),
+
+        -3px 0 0
+        rgba(
+            80,
+            118,
+            124,
+            0.28
+        );
+
+}
+
+
+.fake-note::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        7px;
+
+    border:
+        2px dotted
+        rgba(
+            222,
+            215,
+            196,
+            0.38
+        );
+
+    pointer-events:
+        none;
+
 }
 
 
 .fake-note.reveal {
+
     background:
         #080808
         !important;
 
     color:
-        #ff5555;
+        #ff5555
+        !important;
 
     border-color:
-        var(--red);
+        var(--red)
+        !important;
+
+    border-style:
+        solid;
+
+    opacity:
+        1;
+
+    filter:
+        none;
+
+    box-shadow:
+        4px 0 0
+        rgba(
+            255,
+            85,
+            85,
+            0.42
+        ),
+
+        -4px 0 0
+        rgba(
+            124,
+            56,
+            56,
+            0.30
+        );
 
     animation:
         fake-shake
         0.07s
         steps(2)
         infinite;
+
+}
+
+
+.fake-note.reveal::after {
+
+    border-color:
+        rgba(
+            255,
+            85,
+            85,
+            0.65
+        );
+
 }
 
 
 @keyframes fake-shake {
 
     0% {
+
         transform:
             translateX(-50%)
             translateX(-4px);
+
     }
 
+
     50% {
+
         transform:
             translateX(-50%)
             translateX(4px);
+
     }
 
 }
 
 
 /* =================================
-   GHOST TOUCH MARK
+   GHOST TOUCH
 ================================= */
 
 .ghost-touch-mark {
+
     position:
         absolute;
 
@@ -1123,31 +1580,41 @@ canvas {
         0.16s
         steps(2)
         infinite;
+
 }
 
 
 .ghost-touch-mark::after {
+
     content:
         "?";
+
 }
 
 
 .ghost-touch-mark.fade {
+
     opacity:
         0;
+
 }
 
 
 @keyframes ghost-pop {
 
     0% {
+
         translate:
             -3px 0;
+
     }
 
+
     50% {
+
         translate:
             3px -3px;
+
     }
 
 }
@@ -1158,6 +1625,7 @@ canvas {
 ================================= */
 
 #judgement {
+
     position:
         absolute;
 
@@ -1168,7 +1636,10 @@ canvas {
         45%;
 
     transform:
-        translate(-50%, -50%);
+        translate(
+            -50%,
+            -50%
+        );
 
     z-index:
         60;
@@ -1190,19 +1661,24 @@ canvas {
 
     font-size:
         30px;
+
 }
 
 
 #judgement.show {
+
     display:
         block;
+
 }
 
 
 #judgement.tricked,
 #judgement.ghost {
+
     color:
         #ff5555;
+
 }
 
 
@@ -1212,6 +1688,7 @@ canvas {
 
 #start-screen,
 #end-screen {
+
     position:
         absolute;
 
@@ -1232,6 +1709,7 @@ canvas {
 
     background:
         transparent;
+
 }
 
 
@@ -1240,8 +1718,12 @@ canvas {
 ================================= */
 
 .menu {
+
     width:
-        min(440px, 90vw);
+        min(
+            440px,
+            90%
+        );
 
     padding:
         17px;
@@ -1254,10 +1736,12 @@ canvas {
 
     text-align:
         center;
+
 }
 
 
 .menu h1 {
+
     margin:
         5px;
 
@@ -1266,28 +1750,34 @@ canvas {
 
     font-size:
         39px;
+
 }
 
 
 .menu p {
+
     font-size:
         19px;
 
     line-height:
         1.2;
+
 }
 
 
 .menu .help {
+
     color:
         #8a8170;
 
     font-size:
         13px;
+
 }
 
 
 .tiny {
+
     color:
         #777;
 
@@ -1296,6 +1786,7 @@ canvas {
 
     font-size:
         12px;
+
 }
 
 
@@ -1304,6 +1795,7 @@ canvas {
 ================================= */
 
 #controls {
+
     display:
         flex;
 
@@ -1315,10 +1807,12 @@ canvas {
 
     margin:
         15px;
+
 }
 
 
 #controls div {
+
     width:
         60px;
 
@@ -1342,12 +1836,15 @@ canvas {
 
     border:
         4px solid #000;
+
 }
 
 
 #controls b {
+
     font-size:
         26px;
+
 }
 
 
@@ -1356,6 +1853,7 @@ canvas {
 ================================= */
 
 button {
+
     padding:
         8px 20px;
 
@@ -1380,20 +1878,27 @@ button {
 
     cursor:
         pointer;
+
 }
 
 
 button:active {
+
     transform:
-        translate(3px, 3px);
+        translate(
+            3px,
+            3px
+        );
+
 }
 
 
 /* =================================
-   END
+   END STATS
 ================================= */
 
 #end-stats {
+
     margin:
         15px;
 
@@ -1402,12 +1907,215 @@ button:active {
 
     line-height:
         1.5;
+
 }
 
 
+/* =================================
+   HIDDEN
+================================= */
+
 .hidden {
+
     display:
         none !important;
+
+}
+
+
+/* =================================
+   FULLSCREEN TOGGLE
+================================= */
+
+#fullscreen-toggle {
+
+    position:
+        fixed;
+
+    top:
+        14px;
+
+    right:
+        18px;
+
+    z-index:
+        10000;
+
+    padding:
+        7px 11px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.65
+        );
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.76
+        );
+
+    color:
+        #f5f5f0;
+
+    font-family:
+        "Pixelify Sans",
+        monospace;
+
+    font-size:
+        14px;
+
+    line-height:
+        1;
+
+    text-shadow:
+        1px 1px 0 #000;
+
+    cursor:
+        pointer;
+
+}
+
+
+#fullscreen-toggle:hover {
+
+    background:
+        #f5f5f0;
+
+    color:
+        #111;
+
+    text-shadow:
+        none;
+
+}
+
+
+#fullscreen-toggle:focus-visible {
+
+    outline:
+        2px solid #fff;
+
+    outline-offset:
+        2px;
+
+}
+
+
+/* =================================
+   FULLSCREEN
+
+   - monitor weg
+   - viewport vult hele scherm
+================================= */
+
+#game.game-fullscreen-mode
+#monitor-area {
+
+    display:
+        block;
+
+    background:
+        #000;
+
+}
+
+
+#game.game-fullscreen-mode
+#monitor-shell {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    max-width:
+        none;
+
+    max-height:
+        none;
+
+    aspect-ratio:
+        auto;
+
+}
+
+
+#game.game-fullscreen-mode
+#monitor-frame {
+
+    display:
+        none !important;
+
+}
+
+
+#game.game-fullscreen-mode
+#monitor-viewport {
+
+    left:
+        0;
+
+    top:
+        0;
+
+    right:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    border-radius:
+        0;
+
+}
+
+
+#game.game-fullscreen-mode
+#fight-surface {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+}
+
+
+/* ruimte voor fullscreen button */
+
+#game.game-fullscreen-mode
+#hud {
+
+    width:
+        min(
+            700px,
+            calc(
+                88vw -
+                170px
+            )
+        );
+
 }
 
 
@@ -1415,21 +2123,28 @@ button:active {
    SMALL SCREEN
 ================================= */
 
-@media(max-width: 900px) {
+@media (
+    max-width: 900px
+) {
 
     #stage {
+
         bottom:
             90px;
+
     }
 
 
     .lane-group {
+
         width:
-            48vw;
+            48%;
+
     }
 
 
     .receptor {
+
         width:
             52px;
 
@@ -1441,10 +2156,12 @@ button:active {
 
         font-size:
             36px;
+
     }
 
 
     .note {
+
         width:
             49px;
 
@@ -1456,24 +2173,63 @@ button:active {
 
         font-size:
             34px;
+
     }
 
 
     #boss {
+
         width:
             250px;
+
     }
 
 
     #player {
+
         margin-bottom:
             8px;
+
     }
 
 
     #stats {
+
         font-size:
             10px;
+
+    }
+
+
+    #fullscreen-toggle {
+
+        top:
+            10px;
+
+        right:
+            10px;
+
+        padding:
+            6px 8px;
+
+        font-size:
+            11px;
+
+    }
+
+
+    #game.game-fullscreen-mode
+    #hud {
+
+        width:
+            min(
+                620px,
+                calc(
+                    86vw -
+                    120px
+                )
+            );
+
     }
 
 }
