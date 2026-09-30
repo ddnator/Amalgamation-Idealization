@@ -31,7 +31,7 @@
     <div id="point-click-area">
 
         <div id="hud">
-            <span>LEVEL 1</span>
+            <span>LEVEL 2</span>
 
             <span id="location-label">
                 HOME
@@ -301,7 +301,7 @@
                     id="restart-button"
                     type="button"
             >
-                &gt; RESTART LEVEL 1
+                &gt; RESTART LEVEL 2
             </button>
 
         </div>

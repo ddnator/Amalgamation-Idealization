@@ -252,11 +252,11 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
         <div class="screen">
 
             <div class="tiny">
-                LEVEL_1.EXE
+                LEVEL_5.EXE
             </div>
 
             <h1>
-                LEVEL 1
+                LEVEL 5
             </h1>
 
             <button
@@ -311,7 +311,7 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
                     id="restart-button"
                     type="button"
             >
-                &gt; RESTART LEVEL 1
+                &gt; RESTART LEVEL 5
             </button>
 
         </div>

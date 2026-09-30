@@ -45,7 +45,7 @@ if (isset($_GET['wonGame'])) {
     <div id="point-click-area">
 
         <div id="hud">
-            <span>LEVEL 1</span>
+            <span>LEVEL 8</span>
 
             <span id="location-label">
                 HOME
@@ -255,11 +255,11 @@ if (isset($_GET['wonGame'])) {
         <div class="screen">
 
             <div class="tiny">
-                LEVEL_1.EXE
+                LEVEL_8.EXE
             </div>
 
             <h1>
-                LEVEL 1
+                LEVEL 8
             </h1>
 
             <button
@@ -314,7 +314,7 @@ if (isset($_GET['wonGame'])) {
                     id="restart-button"
                     type="button"
             >
-                &gt; RESTART LEVEL 1
+                &gt; RESTART LEVEL 8
             </button>
 
         </div>

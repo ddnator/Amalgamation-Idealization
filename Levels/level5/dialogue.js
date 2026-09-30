@@ -978,39 +978,39 @@ restartButton.addEventListener(
    HOME HOTSPOTS
 ========================================= */
 
-hotspotKitchen.addEventListener(
-    "click",
-    () => {
+// hotspotKitchen.addEventListener(
+//     "click",
+//     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
-        showBreakfastOverlay();
-        startDialogue("eat");
-    }
-);
+//         if (gameState.dialogueActive) {
+//             return;
+//         }
+//         showBreakfastOverlay();
+//         startDialogue("eat");
+//     }
+// );
 
-hotspotBed.addEventListener(
-    "click",
-    () => {
+// hotspotBed.addEventListener(
+//     "click",
+//     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
+//         if (gameState.dialogueActive) {
+//             return;
+//         }
 
-        startDialogue("try_sleep");
-    }
-);
+//         startDialogue("try_sleep");
+//     }
+// );
 
-hotspotComputer.addEventListener(
-    "click",
-    () => {
+// hotspotComputer.addEventListener(
+//     "click",
+//     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
+//         if (gameState.dialogueActive) {
+//             return;
+//         }
 
-        startDialogue("computer");
-    }
-);
+//         startDialogue("computer");
+//     }
+// );
 

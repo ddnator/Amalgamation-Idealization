@@ -9,7 +9,7 @@
             content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Level 1</title>
+    <title>Level 4</title>
 
     <link
             href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
@@ -31,7 +31,7 @@
     <div id="point-click-area">
 
         <div id="hud">
-            <span>LEVEL 1</span>
+            <span>LEVEL 4</span>
 
             <span id="location-label">
                 HOME
@@ -241,11 +241,11 @@
         <div class="screen">
 
             <div class="tiny">
-                LEVEL_1.EXE
+                LEVEL_4.EXE
             </div>
 
             <h1>
-                LEVEL 1
+                LEVEL 4
             </h1>
 
             <button
@@ -300,7 +300,7 @@
                     id="restart-button"
                     type="button"
             >
-                &gt; RESTART LEVEL 1
+                &gt; RESTART LEVEL 4
             </button>
 
         </div>
