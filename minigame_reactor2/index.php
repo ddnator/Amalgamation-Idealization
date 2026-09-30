@@ -29,8 +29,13 @@ if (!isset($_SESSION["points"])) {
 if (isset($_GET["points"])) {
     $_SESSION["points"] += (int)$_GET["points"];
 
+    if ($_SESSION["points"] >= 100) {
+        $_SESSION["points"] = 0;
+        header("location: ../Levels/level5/level5.php?reactorComplete=1&points=100");
+    } else {
     header("location: index.php");
     exit;
+    }
 }
 ?>
 

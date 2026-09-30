@@ -56,6 +56,7 @@ h3 {
 }
 
 .gradient {
+    position: relative;
     background: linear-gradient(90deg, #9db280 0%, #5f7554 30%, #23372d 65%, #14241d 100%);
     background-size: 260% 100%;
     -webkit-background-clip: text;
@@ -86,6 +87,29 @@ nav {
     display: flex;
     align-items: center;
 
+}
+
+.visionText {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    z-index: 1;
+    width: min(36vw, 32rem);
+    padding: 0.75rem 1rem;
+    background: #f4efdf;
+    border: 2px solid #647859;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.visionControl {
+    position: relative;
+}
+
+.ourVision {
+    margin-right: 63vw;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
 }
 
 nav a {
@@ -160,9 +184,14 @@ header img {
 }
 
 .tilted {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 0.1rem);
+    translate: 0 -50%;
     color: #7c3838;
-    rotate: 25deg;
     font-size: 2rem;
+    white-space: nowrap;
+    rotate: 25deg;
     animation: textPulse 0.7s ease-in-out infinite;
 }
 
