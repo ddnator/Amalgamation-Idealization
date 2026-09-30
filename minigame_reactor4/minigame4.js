@@ -93,7 +93,7 @@ function checkAnswer(currentLevel) {
 
             dialogButton.addEventListener('click', async () => {
                 await updateMoney(50);
-                window.location.href = 'minigame4.php'
+                window.location.href = '../levels/level5/level5.php?reactorComplete=1&points=100'
             });
         }
         if (userClickedPattern.length === gamePattern.length) {

@@ -1,20 +1,41 @@
 /* =========================================
-   SCENES
+   LEVEL 1 SCENES
+
+   BELANGRIJKE FIX:
+
+   setScene() verandert nu ALLEEN de scene.
+
+   setScene() roept NIET meer automatisch
+   showNormalBar() aan.
+
+   Daardoor gebeurt dit correct:
+
+   setScene("jim4");
+   startDialogue("jim_lisa");
+
+   en wordt de Jim-dialogue niet direct
+   opnieuw gesloten.
 ========================================= */
+
 
 import {
     barHint,
     barLocation,
     bottomBar,
+
     dialogueContent,
     dialogueHelp,
     dialogueOptions,
+
     hotspotBoss,
     hotspotDoor,
     hotspotjim,
+    hotspotWork,
+
     locationLabel,
     normalBar,
     sceneName,
+
     breakfastOverlay
 } from "./element.js";
 
@@ -24,34 +45,176 @@ import {
 } from "./gameState.js";
 
 
+/* =========================================
+   HOTSPOT SELECTORS
+========================================= */
+
 const homeHotspots =
     ".Bed, .Computer, .Breakfast, .Kitchen";
-
-
-const allHotspots =
-    ".Bed, .Computer, .Breakfast, .Kitchen, .Door";
 
 
 const workHotspots =
     ".jim, .work, .boss";
 
 
+const allHotspots =
+    ".Bed, " +
+    ".Computer, " +
+    ".Breakfast, " +
+    ".Kitchen, " +
+    ".Door, " +
+    ".jim, " +
+    ".work, " +
+    ".boss, " +
+    ".after-work-hotspot";
+
+
 /* =========================================
-   SET SCENE
+   SHOW SCENE ELEMENT
 ========================================= */
 
-export function setScene(scene) {
+function showSceneElement(
+    id
+) {
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+
+    if (
+        !element
+    ) {
+
+        console.warn(
+            `Scene element bestaat niet: #${id}`
+        );
+
+
+        return;
+    }
+
+
+    element.classList.remove(
+        "hidden"
+    );
+}
+
+
+/* =========================================
+   LABELS
+========================================= */
+
+function setLabels(
+    location,
+    scene,
+    hint
+) {
+
+    if (
+        locationLabel
+    ) {
+
+        locationLabel.textContent =
+            location;
+
+    }
+
+
+    if (
+        barLocation
+    ) {
+
+        barLocation.textContent =
+            location;
+
+    }
+
+
+    if (
+        sceneName
+    ) {
+
+        sceneName.textContent =
+            scene;
+
+    }
+
+
+    if (
+        barHint
+    ) {
+
+        barHint.textContent =
+            hint;
+
+    }
+}
+
+
+/* =========================================
+   SHOW HOTSPOTS
+========================================= */
+
+function showHotspots(
+    selector
+) {
+
+    document
+        .querySelectorAll(
+            selector
+        )
+        .forEach(
+            hotspot => {
+
+                hotspot.classList.remove(
+                    "hidden"
+                );
+
+            }
+        );
+}
+
+
+/* =========================================
+   SET SCENE
+
+   LET OP:
+
+   GEEN showNormalBar() meer onderaan.
+
+   Scene-management en dialogue-management
+   zijn nu van elkaar gescheiden.
+========================================= */
+
+export function setScene(
+    scene
+) {
 
     gameState.currentScene =
         scene;
 
 
+    /* =====================================
+       ALLE HOTSPOTS UIT
+    ====================================== */
+
     hideAllHotspots();
 
 
-    /*
-        Eerst alle scenes verbergen.
-    */
+    /* =====================================
+       BREAKFAST OVERLAY UIT
+    ====================================== */
+
+    showBreakfastOverlay(
+        null
+    );
+
+
+    /* =====================================
+       ALLE SCENES UIT
+    ====================================== */
 
     document
         .querySelectorAll(
@@ -63,6 +226,7 @@ export function setScene(scene) {
                 sceneElement.classList.add(
                     "hidden"
                 );
+
             }
         );
 
@@ -76,43 +240,24 @@ export function setScene(scene) {
         "home"
     ) {
 
-        document
-            .getElementById(
-                "caravanScene"
-            )
-            .classList.remove(
-                "hidden"
-            );
+        showSceneElement(
+            "caravanScene"
+        );
 
 
-        locationLabel.textContent =
-            "HOME";
+        setLabels(
+            "HOME",
+            "HOME",
+            "CLICK SOMETHING."
+        );
 
 
-        barLocation.textContent =
-            "HOME";
+        showHotspots(
+            homeHotspots
+        );
 
 
-        sceneName.textContent =
-            "HOME";
-
-
-        barHint.textContent =
-            "CLICK SOMETHING.";
-
-
-        document
-            .querySelectorAll(
-                homeHotspots
-            )
-            .forEach(
-                hotspot => {
-
-                    hotspot.classList.remove(
-                        "hidden"
-                    );
-                }
-            );
+        return;
     }
 
 
@@ -120,39 +265,35 @@ export function setScene(scene) {
        OUTSIDE HOME
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "outside"
     ) {
 
-        document
-            .getElementById(
-                "caravanSceneOutside"
-            )
-            .classList.remove(
+        showSceneElement(
+            "caravanSceneOutside"
+        );
+
+
+        setLabels(
+            "OUTSIDE",
+            "OUTSIDE",
+            "YOU ARE OUTSIDE YOUR HOME."
+        );
+
+
+        if (
+            hotspotDoor
+        ) {
+
+            hotspotDoor.classList.remove(
                 "hidden"
             );
 
-
-        locationLabel.textContent =
-            "OUTSIDE";
+        }
 
 
-        barLocation.textContent =
-            "OUTSIDE";
-
-
-        sceneName.textContent =
-            "OUTSIDE";
-
-
-        barHint.textContent =
-            "YOU ARE OUTSIDE YOUR HOME.";
-
-
-        hotspotDoor.classList.remove(
-            "hidden"
-        );
+        return;
     }
 
 
@@ -160,34 +301,24 @@ export function setScene(scene) {
        WALKING TO WORK
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "walkingToWorkDay"
     ) {
 
-        document
-            .getElementById(
-                "walkingToWorkDay"
-            )
-            .classList.remove(
-                "hidden"
-            );
+        showSceneElement(
+            "walkingToWorkDay"
+        );
 
 
-        locationLabel.textContent =
-            "ROUTE TO WORK";
+        setLabels(
+            "ROUTE TO WORK",
+            "ROUTE TO WORK",
+            "YOUR ROUTE TO WORK."
+        );
 
 
-        barLocation.textContent =
-            "ROUTE TO WORK";
-
-
-        sceneName.textContent =
-            "ROUTE TO WORK";
-
-
-        barHint.textContent =
-            "YOUR ROUTE TO WORK.";
+        return;
     }
 
 
@@ -195,34 +326,24 @@ export function setScene(scene) {
        OUTSIDE WORK
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "OutsideWorkDay"
     ) {
 
-        document
-            .getElementById(
-                "OutsideWorkDay"
-            )
-            .classList.remove(
-                "hidden"
-            );
+        showSceneElement(
+            "OutsideWorkDay"
+        );
 
 
-        locationLabel.textContent =
-            "WINSTON NUCLEAR POWERPLANT";
+        setLabels(
+            "WINSTON NUCLEAR POWERPLANT",
+            "WINSTON NUCLEAR POWERPLANT",
+            "WINSTON NUCLEAR POWERPLANT."
+        );
 
 
-        barLocation.textContent =
-            "WINSTON NUCLEAR POWERPLANT";
-
-
-        sceneName.textContent =
-            "WINSTON NUCLEAR POWERPLANT";
-
-
-        barHint.textContent =
-            "WINSTON NUCLEAR POWERPLANT.";
+        return;
     }
 
 
@@ -230,92 +351,123 @@ export function setScene(scene) {
        WORK
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "work"
     ) {
 
-        document
-            .getElementById(
-                "work"
-            )
-            .classList.remove(
+        showSceneElement(
+            "work"
+        );
+
+
+        setLabels(
+            "WORK",
+            "AT WORK",
+            "JIM IS WAVING AT U."
+        );
+
+
+        showHotspots(
+            workHotspots
+        );
+
+
+        /*
+            Als minigame al klaar is mag
+            Start Work niet terugkomen.
+        */
+
+        if (
+            gameState.minigameCompleted &&
+            hotspotWork
+        ) {
+
+            hotspotWork.classList.add(
                 "hidden"
             );
 
-
-        locationLabel.textContent =
-            "WORK";
+        }
 
 
-        barLocation.textContent =
-            "WORK";
-
-
-        sceneName.textContent =
-            "AT WORK";
-
-
-        barHint.textContent =
-            "JIM IS WAVING AT U.";
-
-
-        document
-            .querySelectorAll(
-                workHotspots
-            )
-            .forEach(
-                hotspot => {
-
-                    hotspot.classList.remove(
-                        "hidden"
-                    );
-                }
-            );
+        return;
     }
 
 
     /* =====================================
        WORK AFTER MINIGAME
+
+       BELANGRIJK:
+
+       De normale work-afbeelding wordt hier
+       ook werkelijk zichtbaar gemaakt.
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "work_after"
     ) {
 
-        locationLabel.textContent =
-            "WORK";
+        showSceneElement(
+            "work"
+        );
 
 
-        barLocation.textContent =
-            "WORK";
-
-
-        sceneName.textContent =
-            "WORK";
-
-
-        barHint.textContent =
-            "WORK FINISHED.";
+        setLabels(
+            "WORK",
+            "WORK",
+            "WORK FINISHED."
+        );
 
 
         /*
-            Jim en boss blijven beschikbaar.
+            Jim blijft beschikbaar.
         */
 
-        hotspotjim.classList.remove(
-            "hidden"
-        );
+        if (
+            hotspotjim
+        ) {
 
+            hotspotjim.classList.remove(
+                "hidden"
+            );
 
-        hotspotBoss.classList.remove(
-            "hidden"
-        );
+        }
 
 
         /*
-            Go home / go bar zichtbaar.
+            Boss blijft beschikbaar.
+        */
+
+        if (
+            hotspotBoss
+        ) {
+
+            hotspotBoss.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        /*
+            Start Work weg.
+        */
+
+        if (
+            hotspotWork
+        ) {
+
+            hotspotWork.classList.add(
+                "hidden"
+            );
+
+        }
+
+
+        /*
+            Eventuele Go Home / Go Bar
+            hotspots zichtbaar maken.
         */
 
         document
@@ -328,8 +480,12 @@ export function setScene(scene) {
                     hotspot.classList.remove(
                         "hidden"
                     );
+
                 }
             );
+
+
+        return;
     }
 
 
@@ -337,34 +493,24 @@ export function setScene(scene) {
        JIM 1
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "jim1"
     ) {
 
-        document
-            .getElementById(
-                "jim1"
-            )
-            .classList.remove(
-                "hidden"
-            );
+        showSceneElement(
+            "jim1"
+        );
 
 
-        locationLabel.textContent =
-            "JIM1";
+        setLabels(
+            "JIM",
+            "JIM",
+            "TALKING TO JIM."
+        );
 
 
-        barLocation.textContent =
-            "JIM1";
-
-
-        sceneName.textContent =
-            "JIM1";
-
-
-        barHint.textContent =
-            "JIM1.";
+        return;
     }
 
 
@@ -372,34 +518,24 @@ export function setScene(scene) {
        JIM 2
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "jim2"
     ) {
 
-        document
-            .getElementById(
-                "jim2"
-            )
-            .classList.remove(
-                "hidden"
-            );
+        showSceneElement(
+            "jim2"
+        );
 
 
-        locationLabel.textContent =
-            "JIM2";
+        setLabels(
+            "JIM",
+            "JIM",
+            "TALKING TO JIM."
+        );
 
 
-        barLocation.textContent =
-            "JIM2";
-
-
-        sceneName.textContent =
-            "JIM2";
-
-
-        barHint.textContent =
-            "JIM2.";
+        return;
     }
 
 
@@ -407,34 +543,24 @@ export function setScene(scene) {
        JIM 3
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "jim3"
     ) {
 
-        document
-            .getElementById(
-                "jim3"
-            )
-            .classList.remove(
-                "hidden"
-            );
+        showSceneElement(
+            "jim3"
+        );
 
 
-        locationLabel.textContent =
-            "JIM3";
+        setLabels(
+            "JIM",
+            "JIM",
+            "TALKING TO JIM."
+        );
 
 
-        barLocation.textContent =
-            "JIM3";
-
-
-        sceneName.textContent =
-            "JIM3";
-
-
-        barHint.textContent =
-            "JIM3.";
+        return;
     }
 
 
@@ -442,34 +568,24 @@ export function setScene(scene) {
        JIM 4
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "jim4"
     ) {
 
-        document
-            .getElementById(
-                "jim4"
-            )
-            .classList.remove(
-                "hidden"
-            );
+        showSceneElement(
+            "jim4"
+        );
 
 
-        locationLabel.textContent =
-            "JIM4";
+        setLabels(
+            "JIM",
+            "JIM",
+            "TALKING TO JIM."
+        );
 
 
-        barLocation.textContent =
-            "JIM4";
-
-
-        sceneName.textContent =
-            "JIM4";
-
-
-        barHint.textContent =
-            "JIM4.";
+        return;
     }
 
 
@@ -477,50 +593,50 @@ export function setScene(scene) {
        BOSS
     ====================================== */
 
-    else if (
+    if (
         scene ===
         "boss"
     ) {
 
-        document
-            .getElementById(
-                "boss"
-            )
-            .classList.remove(
-                "hidden"
-            );
+        showSceneElement(
+            "boss"
+        );
 
 
-        locationLabel.textContent =
-            "BOSS";
+        setLabels(
+            "BOSS",
+            "BOSS",
+            "TALKING TO BOSS."
+        );
 
 
-        barLocation.textContent =
-            "BOSS";
-
-
-        sceneName.textContent =
-            "BOSS";
-
-
-        barHint.textContent =
-            "BOSS";
+        return;
     }
 
 
-    /*
-        Na iedere scene de normale balk tonen.
-    */
+    /* =====================================
+       UNKNOWN
+    ====================================== */
 
-    showNormalBar();
+    console.warn(
+        "Onbekende Level 1 scene:",
+        scene
+    );
 }
 
 
 /* =========================================
    NORMAL BAR
+
+   Dit is nu de ENIGE functie die bewust
+   de dialogue sluit/reset.
 ========================================= */
 
 export function showNormalBar() {
+
+    /* =====================================
+       STATE RESET
+    ====================================== */
 
     gameState.dialogueActive =
         false;
@@ -546,42 +662,88 @@ export function showNormalBar() {
         null;
 
 
-    /*
-        dialogue-open wordt hier verwijderd.
+    /* =====================================
+       BOTTOM BAR CLASSES
+    ====================================== */
 
-        Daardoor wordt de balk weer klein
-        nadat de dialogue klaar is.
-    */
+    if (
+        bottomBar
+    ) {
 
-    bottomBar.classList.remove(
-        "player-speaking",
-        "ai-speaking",
-        "waiting",
-        "dialogue-open"
-    );
+        bottomBar.classList.remove(
+            "player-speaking",
+            "ai-speaking",
+            "waiting",
+            "dialogue-open"
+        );
 
-
-    normalBar.classList.remove(
-        "hidden"
-    );
+    }
 
 
-    dialogueContent.classList.add(
-        "hidden"
-    );
+    /* =====================================
+       NORMAL UI TONEN
+    ====================================== */
+
+    if (
+        normalBar
+    ) {
+
+        normalBar.classList.remove(
+            "hidden"
+        );
+
+    }
 
 
-    dialogueOptions.innerHTML =
-        "";
+    /* =====================================
+       DIALOGUE VERBERGEN
+    ====================================== */
+
+    if (
+        dialogueContent
+    ) {
+
+        dialogueContent.classList.add(
+            "hidden"
+        );
+
+    }
 
 
-    dialogueHelp.textContent =
-        "↑ ↓ SELECT   ENTER / 1-4";
+    /* =====================================
+       OPTIONS LEEGMAKEN
+    ====================================== */
+
+    if (
+        dialogueOptions
+    ) {
+
+        dialogueOptions.innerHTML =
+            "";
+
+    }
+
+
+    /* =====================================
+       HELP RESET
+    ====================================== */
+
+    if (
+        dialogueHelp
+    ) {
+
+        dialogueHelp.textContent =
+            "↑ ↓ SELECT   ENTER / 1-4";
+
+    }
 }
 
 
 /* =========================================
-   HIDE HOTSPOTS
+   HIDE ALL HOTSPOTS
+
+   Nu worden OOK de Work-hotspots
+   verborgen als je naar Jim/Boss/etc gaat.
 ========================================= */
 
 export function hideAllHotspots() {
@@ -596,6 +758,7 @@ export function hideAllHotspots() {
                 hotspot.classList.add(
                     "hidden"
                 );
+
             }
         );
 }
@@ -617,6 +780,11 @@ export function showBreakfastOverlay(
     }
 
 
+    /*
+        Alleen tijdens de eat-dialogue
+        laten zien.
+    */
+
     if (
         nodeId ===
         "eat"
@@ -625,12 +793,13 @@ export function showBreakfastOverlay(
         breakfastOverlay.classList.remove(
             "hidden"
         );
+
+
+        return;
     }
 
-    else {
 
-        breakfastOverlay.classList.add(
-            "hidden"
-        );
-    }
+    breakfastOverlay.classList.add(
+        "hidden"
+    );
 }
