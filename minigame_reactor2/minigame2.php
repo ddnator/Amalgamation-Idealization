@@ -80,6 +80,12 @@ if (isset($_GET["points"])) {
 </div>
 
 </main>
+
+<dialog>
+    <button class="close">X</button>
+    <div id="dialog-content"></div>
+</dialog>
+
 <footer>
     <div id="work-info">
         <div>
