@@ -67,10 +67,6 @@ function textCreator(number) {
 
 
     sidewaysText.classList.add('tilted')
-    sidewaysText.style.display = 'inline-block'
-    sidewaysText.style.marginLeft = '5px'
-    sidewaysText.style.marginBottom = '30x'
-    sidewaysText.style.verticalAlign = 'middle'
 
     headerTitle.appendChild(sidewaysText)
 }
