@@ -125,7 +125,7 @@ const dialogueTree = {
             {
                 text: "Continue",
                 speak: false,
-                next: "end"
+                action: "game_over"
             }
         ]
     },
@@ -138,7 +138,7 @@ const dialogueTree = {
             {
                 text: "Continue",
                 speak: false,
-                next: "end"
+                action: "game_over"
             }
         ]
     }

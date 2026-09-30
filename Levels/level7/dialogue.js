@@ -149,7 +149,7 @@ const dialogueTree = {
             {
                 text: "No u did not",
                 speak: false,
-                action: "intro",
+                next: "intro",
 
             },
         ]
@@ -176,7 +176,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action:
+                next:
                     "plan"
             },
             {
@@ -186,7 +186,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action:
+                next:
                     "really"
             }
         ]
@@ -209,7 +209,7 @@ const dialogueTree = {
             {
                 text: "Listen to the plan",
                 speak: false,
-                action: "dissapoint"
+                next: "dissapoint"
             }
         ]
     },
@@ -259,7 +259,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action:
+                next:
                     "want"
             },
             {
@@ -269,7 +269,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action:
+                next:
                     "leave"
             }
         ]
@@ -291,7 +291,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action:
+                next:
                     "No"
             },
             {
@@ -301,7 +301,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action:
+                next:
                     "Yes"
             }
         ]
@@ -322,7 +322,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "yesdid",
+                next: "yesdid",
 
             },
             {
@@ -332,7 +332,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "nodid",
+                next: "nodid",
 
             },
         ]
@@ -354,7 +354,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "yesdid",
+                next: "yesdid",
 
             },
             {
@@ -364,7 +364,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "nodid",
+                next: "nodid",
 
             },
         ]
@@ -385,7 +385,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "join",
+                next: "join",
 
             }
         ]
@@ -406,7 +406,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "iwant",
+                next: "iwant",
 
             },
             {
@@ -416,7 +416,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "what",
+                next: "what",
 
             },
             {
@@ -426,7 +426,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "nonot",
+                next: "nonot",
 
             }
         ]
@@ -447,7 +447,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "intro",
+                next: "intro",
 
             }
         ]
@@ -468,7 +468,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "said",
+                next: "said",
 
             }
         ]
@@ -489,7 +489,7 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "intro",
+                next: "intro",
 
             }
         ]

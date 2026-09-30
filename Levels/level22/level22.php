@@ -364,11 +364,11 @@
         <div class="screen">
 
             <div class="tiny">
-                LEVEL_1.EXE
+                LEVEL_2.EXE
             </div>
 
             <h1>
-                LEVEL 1
+                LEVEL 2
             </h1>
 
             <button
@@ -423,7 +423,7 @@
                     id="restart-button"
                     type="button"
             >
-                &gt; RESTART LEVEL 1
+                &gt; RESTART LEVEL 2
             </button>
 
         </div>

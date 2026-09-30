@@ -56,7 +56,7 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "You arrive home after a long day of work. You have a message on your laptop",
+            "You arrive home after a long day of work. You have a message on youre laptop",
 
         options: [
             {
@@ -175,7 +175,7 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "You received one mysterious message.",
+            "You recieved one mysterieus message.",
 
         options: [
             {

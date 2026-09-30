@@ -1,42 +1,50 @@
 import {
-    setScene, showBreakfastOverlay
+    setScene,
+    showBreakfastOverlay,
+    showNormalBar
 } from "./scene.js";
 
 import {
-    startDialogue,
+    startDialogue
 } from "./dialogue.js";
 
 import {
-    showNormalBar,
-} from "./scene.js";
+    gameState
+} from "./gameState.js";
 
-/*setScene("outside");
-startDialogue("outside_caravan"); */
+import {
+    minigameScreen,
+    reactorMinigameFrame
+} from "./element.js";
+
+
 /* =========================================
    ACTIONS
 ========================================= */
-import { gameState } from "./gameState.js";
-import { minigameScreen, reactorMinigameFrame } from "./element.js";
 
 export function runAction(action) {
 
-    /* CLOSE */
+    /* =====================================
+       CLOSE
+    ====================================== */
 
-    if (
-        action === "close"
-    ) {
+    if (action === "close") {
 
         closeDialogue();
 
         return;
     }
-    /* LEAVE BREAKFAST */
 
-    if (
-        action === "leave_breakfast"
-    ) {
 
-        hideBreakfastOverlay();
+    /* =====================================
+       LEAVE BREAKFAST
+    ====================================== */
+
+    if (action === "leave_breakfast") {
+
+        showBreakfastOverlay(
+            null
+        );
 
         setScene(
             "outside"
@@ -50,154 +58,269 @@ export function runAction(action) {
     }
 
 
-    /* BACK FROM BREAKFAST */
+    /* =====================================
+       BACK FROM BREAKFAST
+    ====================================== */
 
-    if (
-        action === "back_breakfast"
-    ) {
+    if (action === "back_breakfast") {
 
-        hideBreakfastOverlay();
+        showBreakfastOverlay(
+            null
+        );
 
         closeDialogue();
 
         return;
     }
+
+
+    /* =====================================
+       OUTSIDE HOME
+    ====================================== */
 
     if (action === "action_Outside") {
 
-        setScene("outside");
+        setScene(
+            "outside"
+        );
 
-        startDialogue("outside_caravan");
+        startDialogue(
+            "outside_caravan"
+        );
 
         return;
     }
+
+
+    /* =====================================
+       WALK TO WORK
+    ====================================== */
 
     if (action === "action_go_to_work") {
 
-        setScene("walkingToWorkDay");
+        setScene(
+            "walkingToWorkDay"
+        );
 
-        startDialogue("walk_to_work");
+        startDialogue(
+            "walk_to_work"
+        );
 
         return;
     }
 
-    /* Winston Nuclear PowerPlant outside*/
+
+    /* =====================================
+       OUTSIDE WORK
+    ====================================== */
 
     if (action === "action_OutsideWorkDay") {
 
-        setScene("OutsideWorkDay");
+        setScene(
+            "OutsideWorkDay"
+        );
 
-        startDialogue("winston_nuclear_powerplant");
-        return;
-    }
-    /* ARRIVE AT WORK */
-
-    if (
-        action === "action_work"
-    ) {
-
-        startDialogue("work");
-
-        setScene("work");
+        startDialogue(
+            "winston_nuclear_powerplant"
+        );
 
         return;
     }
 
-    if (
-        action === "action_jimOne"
-    ) {
 
-        setScene("jim1");
+    /* =====================================
+       ARRIVE AT WORK
 
-        startDialogue("jim_intro");
+       BELANGRIJK:
+
+       In jouw bestaande dialogue.js staat bij:
+
+       WORK -> Continue
+
+       action: "action_work"
+
+       Dat hoeft niet veranderd te worden.
+
+       Eerste keer:
+       OutsideWorkDay -> Work
+
+       Tweede keer:
+       Work dialogue -> Continue
+
+       Dan sluiten we alleen de dialogue.
+    ====================================== */
+
+    if (action === "action_work") {
+
+        /*
+            Dit is de Continue-knop van de
+            Work intro.
+
+            We zijn al op Work, dus NIET
+            opnieuw dezelfde dialogue starten.
+        */
+
+        if (
+            gameState.currentScene === "work" &&
+            gameState.currentNodeId === "work" &&
+            gameState.dialogueActive
+        ) {
+
+            closeDialogue();
+
+            return;
+        }
+
+
+        /*
+            Eerste keer dat speler het gebouw
+            binnenkomt.
+        */
+
+        setScene(
+            "work"
+        );
+
+        startDialogue(
+            "work"
+        );
+
         return;
     }
 
-    if (
-        action === "action_jimTwo"
-    ) {
 
-        setScene("jim2");
+    /* =====================================
+       JIM 1
+    ====================================== */
 
-        startDialogue("jim_upgrade");
+    if (action === "action_jimOne") {
+
+        setScene(
+            "jim1"
+        );
+
+        startDialogue(
+            "jim_intro"
+        );
+
         return;
     }
 
-    if (
-        action === "action_jimThree"
-    ) {
 
-        setScene("jim3");
+    /* =====================================
+       JIM 2
+    ====================================== */
 
-        startDialogue("jim_bad_sleep");
+    if (action === "action_jimTwo") {
+
+        setScene(
+            "jim2"
+        );
+
+        startDialogue(
+            "jim_upgrade"
+        );
+
         return;
     }
 
-    if (
-        action === "action_jimFour"
-    ) {
 
-        setScene("jim4");
+    /* =====================================
+       JIM 3
+    ====================================== */
 
-        startDialogue("jim_lisa");
+    if (action === "action_jimThree") {
+
+        setScene(
+            "jim3"
+        );
+
+        startDialogue(
+            "jim_bad_sleep"
+        );
+
         return;
     }
 
-    /* LEAVE JIM */
 
-    if (
-        action === "action_leave_jim"
-    ) {
+    /* =====================================
+       JIM 4
+    ====================================== */
+
+    if (action === "action_jimFour") {
+
+        setScene(
+            "jim4"
+        );
+
+        startDialogue(
+            "jim_lisa"
+        );
+
+        return;
+    }
+
+
+    /* =====================================
+       LEAVE JIM
+    ====================================== */
+
+    if (action === "action_leave_jim") {
 
         closeDialogue();
 
-        setScene("work");
-
-        return;
-    }
-
-    if (
-        action === "action_boss"
-    ) {
-
-        startDialogue("boss_task");
-
-        setScene("boss");
-
-        return;
-    }
-
-    if (
-        action === "close"
-    ) {
-
-        closeDialogue();
-
-        setScene("work");
+        setScene(
+            "work"
+        );
 
         return;
     }
 
 
+    /* =====================================
+       BOSS
+    ====================================== */
 
-    /* START REACTOR */
+    if (action === "action_boss") {
 
-    if (
-        action === "action_start_minigame"
-    ) {
+        /*
+            Eerst scene veranderen.
+
+            setScene() sluit namelijk de huidige
+            dialogue-bar.
+
+            Daarna pas boss dialogue openen.
+        */
+
+        setScene(
+            "boss"
+        );
+
+        startDialogue(
+            "boss_task"
+        );
+
+        return;
+    }
+
+
+    /* =====================================
+       START WORK / REACTOR
+    ====================================== */
+
+    if (action === "action_start_minigame") {
 
         startMinigame();
-        window.location.href = "/minigame_reactor1/minigame1.php";
 
         return;
     }
 
 
-    /* LEVEL 2 */
+    /* =====================================
+       LEVEL 2
+    ====================================== */
 
-    if (
-        action === "level2"
-    ) {
+    if (action === "level2") {
 
         goToLevel(
             2
@@ -207,11 +330,11 @@ export function runAction(action) {
     }
 
 
-    /* LEVEL 3 */
+    /* =====================================
+       LEVEL 3
+    ====================================== */
 
-    if (
-        action === "level3"
-    ) {
+    if (action === "level3") {
 
         goToLevel(
             3
@@ -219,6 +342,12 @@ export function runAction(action) {
 
         return;
     }
+
+
+    console.warn(
+        "Unknown Level 1 action:",
+        action
+    );
 }
 
 
@@ -228,23 +357,65 @@ export function runAction(action) {
 
 export function closeDialogue() {
 
+    /*
+        Scene onthouden voordat showNormalBar()
+        alle dialogue state reset.
+    */
+
+    const sceneBeforeClose =
+        gameState.currentScene;
+
+
     gameState.pendingOption =
         null;
+
 
     gameState.waitingForContinue =
         false;
 
+
     gameState.inputLocked =
         false;
 
-    showBreakfastOverlay(null);
+
+    showBreakfastOverlay(
+        null
+    );
+
+
+    /*
+        showNormalBar zet onder andere:
+
+        dialogueActive = false
+        currentNodeId = null
+        waitingForContinue = false
+        inputLocked = false
+    */
 
     showNormalBar();
+
+
+    /* =====================================
+       BOSS CLOSE-UP
+
+       Als speler bij boss op Leave klikt,
+       terug naar normale Work scene.
+    ====================================== */
+
+    if (
+        sceneBeforeClose === "boss"
+    ) {
+
+        setScene(
+            "work"
+        );
+
+    }
 }
 
 
 /* =========================================
-   REACTOR MINIGAME
+   START REACTOR MINIGAME
 ========================================= */
 
 function startMinigame() {
@@ -252,23 +423,63 @@ function startMinigame() {
     closeDialogue();
 
 
+    /* =====================================
+       ELEMENT CHECK
+    ====================================== */
+
+    if (
+        !minigameScreen
+    ) {
+
+        console.error(
+            "#minigame-screen bestaat niet."
+        );
+
+        return;
+    }
+
+
+    if (
+        !reactorMinigameFrame
+    ) {
+
+        console.error(
+            "#reactor-minigame-frame bestaat niet."
+        );
+
+        return;
+    }
+
+
+    /* =====================================
+       JUISTE REACTOR FILE
+
+       action.js:
+       /Levels/level1/action.js
+
+       minigame:
+       /minigame_reactor1/minigame1.php
+    ====================================== */
+
+    const reactorUrl =
+        new URL(
+            "../../minigame_reactor1/minigame1.php",
+            import.meta.url
+        );
+
+
     /*
-        level22.php zit in:
-
-        Levels/level1/level22.php
-
-        Reactor zit in:
-
-        minigame_reactor1/mingame1.html
-
-        Daarom:
-        ../../
+        Browsercache voorkomen.
     */
 
+    reactorUrl.searchParams.set(
+        "run",
+        Date.now().toString()
+    );
+
+
     reactorMinigameFrame.src =
-        "../../minigame_reactor1/mingame1.html?run="
-        +
-        Date.now();
+        reactorUrl.href;
 
 
     minigameScreen.classList.remove(
@@ -283,41 +494,177 @@ function startMinigame() {
 
 function finishLevel1Minigame() {
 
-    gameState.minigameCompleted = true;
-
-    minigameScreen.classList.add("hidden");
     /*
-        iframe stoppen/resetten
+        Niet twee keer afronden.
     */
-    reactorMinigameFrame.src = "about:blank";
 
-    /*
-        Terug naar point-and-click.
-    */
-    setScene("work_after");
+    if (
+        gameState.minigameCompleted
+    ) {
+
+        return;
+    }
+
+
+    gameState.minigameCompleted =
+        true;
+
+
+    /* =====================================
+       MINIGAME WEG
+    ====================================== */
+
+    if (
+        minigameScreen
+    ) {
+
+        minigameScreen.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    /* =====================================
+       IFRAME STOPPEN
+    ====================================== */
+
+    if (
+        reactorMinigameFrame
+    ) {
+
+        reactorMinigameFrame.src =
+            "about:blank";
+
+    }
+
+
+    /* =====================================
+       TERUG NAAR WORK
+    ====================================== */
+
+    setScene(
+        "work"
+    );
+
+
+    /* =====================================
+       START WORK NIET NOGMAALS
+    ====================================== */
+
+    const workHotspot =
+        document.getElementById(
+            "hotspot-work"
+        );
+
+
+    const workOverlay =
+        document.querySelector(
+            ".workOverlay"
+        );
+
+
+    if (
+        workHotspot
+    ) {
+
+        workHotspot.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    if (
+        workOverlay
+    ) {
+
+        workOverlay.style.opacity =
+            "0";
+
+    }
+
+
+    /* =====================================
+       BOTTOM TEXT
+    ====================================== */
+
+    const barHint =
+        document.getElementById(
+            "bar-hint"
+        );
+
+
+    if (
+        barHint
+    ) {
+
+        barHint.textContent =
+            "WORK FINISHED.";
+
+    }
 }
 
+
+/* =========================================
+   TEST FUNCTION
+========================================= */
 
 window.finishLevel1Minigame =
     finishLevel1Minigame;
 
 
 /* =========================================
-   LUISTER NAAR REACTOR 02
-
-   Reactor 02 stuurt na completion:
-
-   {
-       type: "level1-minigame-complete"
-   }
+   REACTOR COMPLETE MESSAGE
 ========================================= */
 
 window.addEventListener(
     "message",
+
     event => {
 
-        if (event.data && event.data.type === "level1-minigame-complete") {
-            finishLevel1Minigame();
+        /*
+            Alleen berichten van dezelfde website.
+        */
+
+        if (
+            event.origin !==
+            window.location.origin
+        ) {
+
+            return;
         }
+
+
+        if (
+            event.data &&
+            event.data.type ===
+                "level1-minigame-complete"
+        ) {
+
+            finishLevel1Minigame();
+
+        }
+
     }
 );
+
+
+/* =========================================
+   LEVEL NAVIGATION
+========================================= */
+
+function goToLevel(
+    levelNumber
+) {
+
+    const levelUrl =
+        new URL(
+            `../level${levelNumber}/level${levelNumber}.php`,
+            import.meta.url
+        );
+
+
+    window.location.href =
+        levelUrl.href;
+}

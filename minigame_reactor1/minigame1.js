@@ -14,8 +14,8 @@ closeButton.addEventListener('click', () => {
 
 function updateDateTime() {
     const now = new Date();
-    const date = now.toLocaleDateString('nl-NL', {month: 'numeric', day: 'numeric'});
-    const time = now.toLocaleTimeString('nl-NL', {hour: '2-digit', minute: '2-digit'});
+    const date = now.toLocaleDateString('nl-NL', { month: 'numeric', day: 'numeric' });
+    const time = now.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
 
     dateElement.textContent = date;
     timeElement.textContent = time;
@@ -27,8 +27,8 @@ updateDateTime();
 async function updateMoney(amount) {
     const response = await fetch('minigame1.php', {
         method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams({earned: amount})
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ earned: amount })
     });
 }
 

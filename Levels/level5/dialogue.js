@@ -81,7 +81,7 @@ const dialogueTree = {
     },
 
     boss: {
-        speaker: "AI",
+        speaker: "boss",
         text: "Hi Y/N ready for a day full of work? The others are gone now so no more distractions for you. You know what the task is for today?",
 
         options: [
@@ -197,14 +197,33 @@ const dialogueTree = {
     },
 
     okay: {
-        speaker: "AI",
+        speaker:
+            "AI",
         text: "Okay",
 
         options: [
             {
                 text: "Continue",
+
                 speak: false,
+
                 next: "boss"
+            }
+        ]
+    },
+
+    okay: {
+        speaker:
+            "AI",
+        text: "Okay",
+
+        options: [
+            {
+                text: "Continue",
+
+                speak: false,
+
+                next: "game_over"
             }
         ]
     },
@@ -978,39 +997,39 @@ restartButton.addEventListener(
    HOME HOTSPOTS
 ========================================= */
 
-hotspotKitchen.addEventListener(
-    "click",
-    () => {
+// hotspotKitchen.addEventListener(
+//     "click",
+//     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
-        showBreakfastOverlay();
-        startDialogue("eat");
-    }
-);
+//         if (gameState.dialogueActive) {
+//             return;
+//         }
+//         showBreakfastOverlay();
+//         startDialogue("eat");
+//     }
+// );
 
-hotspotBed.addEventListener(
-    "click",
-    () => {
+// hotspotBed.addEventListener(
+//     "click",
+//     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
+//         if (gameState.dialogueActive) {
+//             return;
+//         }
 
-        startDialogue("try_sleep");
-    }
-);
+//         startDialogue("try_sleep");
+//     }
+// );
 
-hotspotComputer.addEventListener(
-    "click",
-    () => {
+// hotspotComputer.addEventListener(
+//     "click",
+//     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
+//         if (gameState.dialogueActive) {
+//             return;
+//         }
 
-        startDialogue("computer");
-    }
-);
+//         startDialogue("computer");
+//     }
+// );
 

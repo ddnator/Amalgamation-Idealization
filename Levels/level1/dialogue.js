@@ -25,27 +25,42 @@ import {
 
     hotspotjim,
 
-    restartButton, hotspotKitchen, hotspotBed, hotspotComputer, hotspotWork, hotspotBoss
+    restartButton,
+    hotspotKitchen,
+    hotspotBed,
+    hotspotComputer,
+    hotspotWork,
+    hotspotBoss
 } from "./element.js";
+
+
 import {
     setScene,
     hideAllHotspots,
     showNormalBar,
-    showBreakfastOverlay,
+    showBreakfastOverlay
 } from "./scene.js";
+
 
 import {
     gameState
 } from "./gameState.js";
 
+
 import {
     closeDialogue,
     runAction
 } from "./action.js";
+
+
 /* =========================================
    DIALOGUE TREE
 ========================================= */
-let breakfast = false;
+
+let breakfast =
+    false;
+
+
 const dialogueTree = {
 
     /* =====================================
@@ -190,10 +205,14 @@ const dialogueTree = {
 
         options: [
             {
-                text: "leave",
-                speak: false,
-                action: "action_Outside",
+                text:
+                    "leave",
 
+                speak:
+                    false,
+
+                action:
+                    "action_Outside"
             },
 
             {
@@ -211,7 +230,7 @@ const dialogueTree = {
 
 
     /* =====================================
-       Computah
+       COMPUTER
     ====================================== */
 
     computer: {
@@ -238,7 +257,7 @@ const dialogueTree = {
 
 
     /* =====================================
-    LEAVE HOME
+       LEAVE HOME
     ====================================== */
 
     outside_caravan: {
@@ -251,12 +270,18 @@ const dialogueTree = {
 
         options: [
             {
-                text: "Head to work",
-                speak: false,
-                action: "action_go_to_work"
+                text:
+                    "Head to work",
+
+                speak:
+                    false,
+
+                action:
+                    "action_go_to_work"
             }
         ]
     },
+
 
     /* =====================================
        WALK TO WORK DAY
@@ -278,14 +303,16 @@ const dialogueTree = {
                 speak:
                     false,
 
-                action: "action_OutsideWorkDay",
-
+                action:
+                    "action_OutsideWorkDay"
             }
         ]
     },
+
+
     /* =====================================
-           WINSTON NUCLEAR POWER PLANT
-        ====================================== */
+       WINSTON NUCLEAR POWER PLANT
+    ====================================== */
 
     winston_nuclear_powerplant: {
 
@@ -308,6 +335,7 @@ const dialogueTree = {
             }
         ]
     },
+
 
     work: {
 
@@ -349,15 +377,16 @@ const dialogueTree = {
                 text:
                     "First time I'm hearing about it.",
 
-                action: "action_jimTwo"
-
+                action:
+                    "action_jimTwo"
             },
 
             {
                 text:
                     "I slept like shit last night.",
 
-                action: "action_jimThree"
+                action:
+                    "action_jimThree"
             },
 
             {
@@ -388,7 +417,8 @@ const dialogueTree = {
                 text:
                     "I don't recall, what happened?",
 
-                action: "action_jimFour"
+                action:
+                    "action_jimFour"
             },
 
             {
@@ -427,7 +457,8 @@ const dialogueTree = {
                 text:
                     "Don't worry about it, but I don't recall what happened to her?",
 
-                action: "action_jimFour"
+                action:
+                    "action_jimFour"
             },
 
             {
@@ -677,24 +708,29 @@ function startLevel1() {
         "hidden"
     );
 
+
     minigameScreen.classList.add(
         "hidden"
     );
+
 
     endScreen.classList.add(
         "hidden"
     );
 
+
     reactorMinigameFrame.src =
         "about:blank";
+
 
     gameState.minigameCompleted =
         false;
 
+
     setScene(
         "home"
-
     );
+
 
     startDialogue(
         "level_start"
@@ -705,19 +741,36 @@ function startLevel1() {
 window.startLevel1 =
     startLevel1;
 
+
 /* =========================================
    START DIALOGUE
 ========================================= */
 
 export function startDialogue(nodeId) {
 
-    gameState.dialogueActive = true;
+    gameState.dialogueActive =
+        true;
 
-    showBreakfastOverlay(nodeId);
+
+    /*
+        Hierdoor wordt de onderste balk
+        groter tijdens dialogue.
+    */
+
+    bottomBar.classList.add(
+        "dialogue-open"
+    );
+
+
+    showBreakfastOverlay(
+        nodeId
+    );
+
 
     normalBar.classList.add(
         "hidden"
     );
+
 
     dialogueContent.classList.remove(
         "hidden"
@@ -736,7 +789,11 @@ export function startDialogue(nodeId) {
 
 function showNode(nodeId) {
 
-    const node = dialogueTree[nodeId];
+    const node =
+        dialogueTree[
+            nodeId
+        ];
+
 
     if (!node) {
 
@@ -745,29 +802,52 @@ function showNode(nodeId) {
             nodeId
         );
 
+
         closeDialogue();
 
         return;
     }
 
-    gameState.currentNodeId = nodeId;
 
-    gameState.selectedOption = 0;
+    gameState.currentNodeId =
+        nodeId;
+
+
+    gameState.selectedOption =
+        0;
+
 
     gameState.inputLocked =
         false;
 
+
     gameState.waitingForContinue =
         false;
 
-    gameState.pendingOption = null;
 
-    gameState.dialogueActive = true;
+    gameState.pendingOption =
+        null;
+
+
+    gameState.dialogueActive =
+        true;
+
+
+    /*
+        Zorg dat de balk groot blijft
+        wanneer we naar de volgende
+        dialogue-node gaan.
+    */
+
+    bottomBar.classList.add(
+        "dialogue-open"
+    );
 
 
     normalBar.classList.add(
         "hidden"
     );
+
 
     dialogueContent.classList.remove(
         "hidden"
@@ -782,7 +862,8 @@ function showNode(nodeId) {
 
 
     if (
-        node.type === "ai"
+        node.type ===
+        "ai"
     ) {
 
         bottomBar.classList.add(
@@ -794,8 +875,10 @@ function showNode(nodeId) {
     dialogueSpeaker.textContent =
         node.speaker || "";
 
+
     dialogueText.textContent =
         node.text || "";
+
 
     dialogueHelp.textContent =
         "↑ ↓ SELECT   ENTER / 1-4";
@@ -812,7 +895,9 @@ function showNode(nodeId) {
 function renderOptions() {
 
     const node =
-        dialogueTree[gameState.currentNodeId];
+        dialogueTree[
+            gameState.currentNodeId
+        ];
 
 
     dialogueOptions.innerHTML =
@@ -823,12 +908,16 @@ function renderOptions() {
         !node ||
         !node.options
     ) {
+
         return;
     }
 
 
     node.options.forEach(
-        (option, index) => {
+        (
+            option,
+            index
+        ) => {
 
             const button =
                 document.createElement(
@@ -839,12 +928,14 @@ function renderOptions() {
             button.type =
                 "button";
 
+
             button.className =
                 "dialogue-option";
 
 
             if (
-                index === gameState.selectedOption
+                index ===
+                gameState.selectedOption
             ) {
 
                 button.classList.add(
@@ -858,8 +949,10 @@ function renderOptions() {
                     "span"
                 );
 
+
             number.className =
                 "option-number";
+
 
             number.textContent =
                 `${index + 1}.`;
@@ -870,6 +963,7 @@ function renderOptions() {
                     "span"
                 );
 
+
             label.textContent =
                 option.text;
 
@@ -877,6 +971,7 @@ function renderOptions() {
             button.appendChild(
                 number
             );
+
 
             button.appendChild(
                 label
@@ -891,10 +986,14 @@ function renderOptions() {
                         gameState.inputLocked ||
                         gameState.waitingForContinue
                     ) {
+
                         return;
                     }
 
-                    gameState.selectedOption = index;
+
+                    gameState.selectedOption =
+                        index;
+
 
                     updateSelection();
                 }
@@ -930,54 +1029,57 @@ function chooseOption(index) {
         gameState.inputLocked ||
         gameState.waitingForContinue
     ) {
+
         return;
     }
 
 
     const node =
-        dialogueTree[gameState.currentNodeId];
+        dialogueTree[
+            gameState.currentNodeId
+        ];
 
 
     if (
         !node ||
         !node.options
     ) {
+
         return;
     }
 
 
     const option =
-        node.options[index];
+        node.options[
+            index
+        ];
 
 
     if (!option) {
+
         return;
     }
 
 
-    gameState.inputLocked = true;
+    gameState.inputLocked =
+        true;
 
 
     /*
-        speak:false betekent dat de keuze
-        een ACTION is.
-
-        Bijvoorbeeld:
-        - Start working
-        - Go to work
-        - Get up
-
-        Die worden niet als Y/N dialogue
-        weergegeven.
+        speak:false betekent dat iets
+        een actie is en niet wordt
+        uitgesproken door Y/N.
     */
 
     if (
-        option.speak === false
+        option.speak ===
+        false
     ) {
 
         runOption(
             option
         );
+
 
         return;
     }
@@ -985,22 +1087,20 @@ function chooseOption(index) {
 
     /* =====================================
        Y/N PRAAT
-
-       GEEN AUTOMATISCHE TIMER.
-
-       De zin blijft staan totdat de speler
-       klikt, ENTER of SPACE indrukt.
     ====================================== */
 
     gameState.pendingOption =
         option;
 
-    gameState.waitingForContinue = true;
+
+    gameState.waitingForContinue =
+        true;
 
 
     bottomBar.classList.remove(
         "ai-speaking"
     );
+
 
     bottomBar.classList.add(
         "player-speaking",
@@ -1011,11 +1111,14 @@ function chooseOption(index) {
     dialogueSpeaker.textContent =
         "Y/N";
 
+
     dialogueText.textContent =
         option.text;
 
+
     dialogueOptions.innerHTML =
         "";
+
 
     dialogueHelp.textContent =
         "ENTER / SPACE / CLICK TO CONTINUE";
@@ -1032,16 +1135,25 @@ function continueDialogue() {
         !gameState.waitingForContinue ||
         !gameState.pendingOption
     ) {
+
         return;
     }
 
-    const option = gameState.pendingOption;
 
-    gameState.pendingOption = null;
+    const option =
+        gameState.pendingOption;
 
-    gameState.waitingForContinue = false;
 
-    gameState.inputLocked = false;
+    gameState.pendingOption =
+        null;
+
+
+    gameState.waitingForContinue =
+        false;
+
+
+    gameState.inputLocked =
+        false;
 
 
     bottomBar.classList.remove(
@@ -1069,8 +1181,9 @@ dialogueContent.addEventListener(
     event => {
 
         /*
-            Klik op een keuze moet niet
-            onmiddellijk ook verdergaan.
+            Als je op een antwoord klikt,
+            moet die klik niet meteen
+            ook de dialogue doorgaan.
         */
 
         if (
@@ -1078,6 +1191,7 @@ dialogueContent.addEventListener(
                 ".dialogue-option"
             )
         ) {
+
             return;
         }
 
@@ -1110,6 +1224,7 @@ function runOption(option) {
             option.next
         );
 
+
         return;
     }
 
@@ -1122,12 +1237,13 @@ function runOption(option) {
             option.action
         );
 
+
         return;
     }
 
+
     closeDialogue();
 }
-
 
 
 /* =========================================
@@ -1141,6 +1257,7 @@ document.addEventListener(
         if (
             !gameState.dialogueActive
         ) {
+
             return;
         }
 
@@ -1154,14 +1271,18 @@ document.addEventListener(
         ) {
 
             if (
-                event.key === "Enter" ||
-                event.key === " "
+                event.key ===
+                "Enter" ||
+                event.key ===
+                " "
             ) {
 
                 event.preventDefault();
 
+
                 continueDialogue();
             }
+
 
             return;
         }
@@ -1170,12 +1291,15 @@ document.addEventListener(
         if (
             gameState.inputLocked
         ) {
+
             return;
         }
 
 
         const node =
-            dialogueTree[gameState.currentNodeId];
+            dialogueTree[
+                gameState.currentNodeId
+            ];
 
 
         if (
@@ -1183,11 +1307,14 @@ document.addEventListener(
             !node.options ||
             node.options.length === 0
         ) {
+
             return;
         }
 
 
-        /* NUMBER KEYS */
+        /* =================================
+           NUMBER KEYS
+        ================================== */
 
         if (
             event.key >= "1" &&
@@ -1195,7 +1322,9 @@ document.addEventListener(
         ) {
 
             const index =
-                Number(event.key) - 1;
+                Number(
+                    event.key
+                ) - 1;
 
 
             if (
@@ -1208,17 +1337,22 @@ document.addEventListener(
                 );
             }
 
+
             return;
         }
 
 
-        /* DOWN */
+        /* =================================
+           DOWN
+        ================================== */
 
         if (
-            event.key === "ArrowDown"
+            event.key ===
+            "ArrowDown"
         ) {
 
             event.preventDefault();
+
 
             gameState.selectedOption++;
 
@@ -1235,23 +1369,29 @@ document.addEventListener(
 
             updateSelection();
 
+
             return;
         }
 
 
-        /* UP */
+        /* =================================
+           UP
+        ================================== */
 
         if (
-            event.key === "ArrowUp"
+            event.key ===
+            "ArrowUp"
         ) {
 
             event.preventDefault();
+
 
             gameState.selectedOption--;
 
 
             if (
-                gameState.selectedOption < 0
+                gameState.selectedOption <
+                0
             ) {
 
                 gameState.selectedOption =
@@ -1261,17 +1401,22 @@ document.addEventListener(
 
             updateSelection();
 
+
             return;
         }
 
 
-        /* ENTER */
+        /* =================================
+           ENTER
+        ================================== */
 
         if (
-            event.key === "Enter"
+            event.key ===
+            "Enter"
         ) {
 
             event.preventDefault();
+
 
             chooseOption(
                 gameState.selectedOption
@@ -1294,11 +1439,15 @@ function updateSelection() {
 
 
     buttons.forEach(
-        (button, index) => {
+        (
+            button,
+            index
+        ) => {
 
             button.classList.toggle(
                 "selected",
-                index === gameState.selectedOption
+                index ===
+                gameState.selectedOption
             );
         }
     );
@@ -1313,6 +1462,7 @@ function goToLevel(level) {
 
     closeDialogue();
 
+
     endScreen.classList.remove(
         "hidden"
     );
@@ -1324,6 +1474,7 @@ function goToLevel(level) {
 
         endTitle.textContent =
             "GO TO LEVEL 2";
+
 
         endText.textContent =
             "Level 1 complete.";
@@ -1344,6 +1495,7 @@ function goToLevel(level) {
 
         endTitle.textContent =
             "GO TO LEVEL 3";
+
 
         endText.textContent =
             "Level 1 complete.";
@@ -1367,25 +1519,42 @@ restartButton.addEventListener(
     "click",
     () => {
 
-        endScreen.classList.add("hidden");
-
-        minigameScreen.classList.add("hidden");
-
-        reactorMinigameFrame.src = "about:blank";
-
-        startScreen.classList.remove("hidden");
-
-        gameState.minigameCompleted = false;
-
-        gameState.currentScene = "home";
-
-        gameState.waitingForContinue = false;
-
-        gameState.pendingOption = null;
+        endScreen.classList.add(
+            "hidden"
+        );
 
 
+        minigameScreen.classList.add(
+            "hidden"
+        );
+
+
+        reactorMinigameFrame.src =
+            "about:blank";
+
+
+        startScreen.classList.remove(
+            "hidden"
+        );
+
+
+        gameState.minigameCompleted =
+            false;
+
+
+        gameState.currentScene =
+            "home";
+
+
+        gameState.waitingForContinue =
+            false;
+
+
+        gameState.pendingOption =
+            null;
     }
 );
+
 
 /* =========================================
    HOME HOTSPOTS
@@ -1395,37 +1564,62 @@ hotspotKitchen.addEventListener(
     "click",
     () => {
 
-        if (gameState.dialogueActive) {
+        if (
+            gameState.dialogueActive
+        ) {
+
             return;
         }
+
+
         showBreakfastOverlay();
-        startDialogue("eat");
+
+
+        startDialogue(
+            "eat"
+        );
     }
 );
+
 
 hotspotBed.addEventListener(
     "click",
     () => {
 
-        if (gameState.dialogueActive) {
+        if (
+            gameState.dialogueActive
+        ) {
+
             return;
         }
 
-        startDialogue("try_sleep");
+
+        startDialogue(
+            "try_sleep"
+        );
     }
 );
+
 
 hotspotComputer.addEventListener(
     "click",
     () => {
 
-        if (gameState.dialogueActive) {
+        if (
+            gameState.dialogueActive
+        ) {
+
             return;
         }
 
-        startDialogue("computer");
+
+        startDialogue(
+            "computer"
+        );
     }
 );
+
+
 /* =========================================
    WORK HOTSPOTS
 ========================================= */
@@ -1434,36 +1628,59 @@ hotspotjim.addEventListener(
     "click",
     () => {
 
-        if (gameState.dialogueActive) {
+        if (
+            gameState.dialogueActive
+        ) {
+
             return;
         }
 
-        runAction("action_jimOne")
+
+        runAction(
+            "action_jimOne"
+        );
     }
 );
+
 
 hotspotWork.addEventListener(
     "click",
     () => {
 
-        if (gameState.dialogueActive) {
+        if (
+            gameState.dialogueActive
+        ) {
+
             return;
         }
 
-        runAction("action_start_minigame")
+
+        runAction(
+            "action_start_minigame"
+        );
     }
 );
+
 
 hotspotBoss.addEventListener(
     "click",
     () => {
 
-        if (gameState.dialogueActive) {
+        if (
+            gameState.dialogueActive
+        ) {
+
             return;
         }
 
-        runAction("action_boss")
 
-        startDialogue("boss_task");
+        runAction(
+            "action_boss"
+        );
+
+
+        startDialogue(
+            "boss_task"
+        );
     }
 );

@@ -7,20 +7,19 @@ const timeElement = document.getElementById("time");
 let nextNumber = 1;
 let gameFinished = false;
 
-
 function updateDateTime() {
 
     const now = new Date();
     const date =
         now.toLocaleDateString("nl-NL", {
-                month: "numeric", day: "numeric"
-            });
+            month: "numeric", day: "numeric"
+        });
 
     const time =
         now.toLocaleTimeString("nl-NL", {
-                hour: "2-digit",
-                minute: "2-digit"
-            }
+            hour: "2-digit",
+            minute: "2-digit"
+        }
         );
 
     dateElement.textContent = date;
@@ -32,8 +31,8 @@ updateDateTime();
 async function updateMoney(amount) {
     const response = await fetch('minigame2.php', {
         method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams({earned: amount})
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ earned: amount })
     });
 }
 
@@ -46,18 +45,19 @@ function startGame() {
     nextNumberText.textContent = nextNumber;
 
     const numbers = [];
-    for (let i = 1; i <= 10; i++) {numbers.push(i);}
+    for (let i = 1; i <= 10; i++) { numbers.push(i); }
 
     numbers.sort(() => Math.random() - 0.5);
     numbers.forEach(number => {
-            const button = document.createElement("button");
-            button.classList.add("number");
-            button.textContent = number;
-            button.addEventListener("click", () => { handleNumberClick(number, button);
-                }
-            );
-            gameBoard.appendChild(button);
+        const button = document.createElement("button");
+        button.classList.add("number");
+        button.textContent = number;
+        button.addEventListener("click", () => {
+            handleNumberClick(number, button);
         }
+        );
+        gameBoard.appendChild(button);
+    }
     );
 }
 
@@ -88,22 +88,42 @@ function handleNumberClick(number, button) {
     button.classList.add("incorrect");
 
     setTimeout(() => {
-            button.classList.remove(
-                "incorrect"
-            );
-        }, 500
+        button.classList.remove(
+            "incorrect"
+        );
+    }, 500
     );
 }
-function finishReactor2() {
 
+function showWinDialog() {
+    const dialog = document.querySelector('dialog');
+    const dialogContent = document.querySelector('#dialog-content');
+
+    dialogContent.innerHTML = `
+        <h2>Completed!</h2>
+        <p>You found all the numbers!</p>
+        <img src="../images/good-job.png" alt="">
+        <button class="done-button">Done</button>
+    `;
+
+    const doneButton = dialogContent.querySelector('.done-button');
+
+    doneButton.addEventListener('click', () => {
+        window.location.href = '../minigame_reactor3/memory.php?points=100';
+    });
+
+    dialog.showModal();
+}
+
+function finishReactor2() {
     if (gameFinished) {
         return;
     }
 
     gameFinished = true;
     nextNumberText.textContent = "Done!";
-    window.location.href = "index.php?points=100";
-    setTimeout(returnToLevel5, 700);
+
+    showWinDialog();
 }
 
 function returnToLevel5() {
