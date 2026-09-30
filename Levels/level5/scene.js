@@ -93,7 +93,7 @@ export function setScene(scene) {
         barHint.textContent = "YOUR ROUTE TO WORK.";
 
     }
-// when you're outside your work
+    // when you're outside your work
 
     else if (scene === "OutsideWorkDay") {
 
@@ -108,15 +108,19 @@ export function setScene(scene) {
 
     }
 
-    else if ( scene === "work" )
-    { locationLabel.textContent = "WORK";
+    else if (scene === "work") {
+        document
+            .getElementById("work")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "WORK";
         barLocation.textContent = "WORK";
         sceneName.textContent = "AT WORK";
         barHint.textContent = "JIM IS WAVING AT U.";
-        document .querySelectorAll( ".work-hotspot" )
+        document.querySelectorAll(".work-hotspot")
 
-            .forEach( hotspot =>
-            { hotspot.classList.remove( "hidden" ); } ); }
+            .forEach(hotspot => { hotspot.classList.remove("hidden"); });
+    }
 
     else if (scene === "work_after") {
 
@@ -127,17 +131,18 @@ export function setScene(scene) {
 
         /* Jim en boss blijven beschikbaar. */
 
-        hotspotJim.classList.remove( "hidden" );
-        hotspotBoss.classList.remove( "hidden" );
+        hotspotJim.classList.remove("hidden");
+        hotspotBoss.classList.remove("hidden");
 
         /* Nu verschijnen ook:
          - Go home
           - Go bar */
-        document .querySelectorAll( ".after-work-hotspot" )
-            .forEach( hotspot =>
-                { hotspot.classList.remove( "hidden" );
-                }
-            ); }
+        document.querySelectorAll(".after-work-hotspot")
+            .forEach(hotspot => {
+                hotspot.classList.remove("hidden");
+            }
+            );
+    }
 
 
     showNormalBar();
