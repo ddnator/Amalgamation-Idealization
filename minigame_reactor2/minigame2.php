@@ -29,7 +29,7 @@ if (!isset($_SESSION["points"])) {
 if (isset($_GET["points"])) {
     $_SESSION["points"] += (int)$_GET["points"];
 
-    header("location: memory.php");
+    header("location: minigame2.php");
     exit;
 }
 ?>
