@@ -49,7 +49,7 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
             </span>
 
             <span id="scene-name">
-                HOME
+                hello
             </span>
 
         </div>
@@ -63,15 +63,15 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
 
             <img
                     class="Background"
-                    src="/Images/Home_Base.png"
+                    src="/Images/boss.png"
                     alt=""
             >
 
-            <button
+            <!-- <button
                     id="hotspot-bed"
                     class="Bed"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay BedOverlay"
@@ -80,11 +80,11 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
             >
 
 
-            <button
+            <!-- <button
                     id="hotspot-computer"
                     class="Computer"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay ComputerOverlay"
@@ -92,12 +92,12 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
                     alt=""
             >
 
-            <button
+            <!-- <button
                 id="hotspot-breakfast"
                 class="Breakfast"
                 type="button"
 
-            ></button>
+            ></button> -->
             <img
                     class="Overlay BreakfastOverlay hidden"
                     src="/Images/Breakfast.png"
@@ -105,11 +105,11 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
             >
 
 
-            <button
+            <!-- <button
                     id="hotspot-kitchen"
                     class="Kitchen"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay KitchenOverlay"
