@@ -123,7 +123,7 @@ function choicesReaction(choiceIndex) {
         button.innerText = 'Proceed';
         image.src = '../images/good-job.png'
         button.addEventListener('click', async () => {
-            await updateMoney(50);
+            await updateMoney(25);
             addMessage(1);
             addChoices(1);
         });
@@ -153,7 +153,7 @@ function choicesReaction(choiceIndex) {
         button.innerText = 'Proceed';
         image.src = '../images/good-job.png'
         button.addEventListener('click', async () => {
-            await updateMoney(50);
+            await updateMoney(25);
             window.location.href = "../minigame_reactor2/index.php?points=100";
         });
     } else if (choiceIndex === 7) {
