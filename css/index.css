@@ -56,6 +56,7 @@ h3 {
 }
 
 .gradient {
+    position: relative;
     background: linear-gradient(90deg, #9db280 0%, #5f7554 30%, #23372d 65%, #14241d 100%);
     background-size: 260% 100%;
     -webkit-background-clip: text;
@@ -183,9 +184,14 @@ header img {
 }
 
 .tilted {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 0.1rem);
+    translate: 0 -50%;
     color: #7c3838;
-    rotate: 25deg;
     font-size: 2rem;
+    white-space: nowrap;
+    rotate: 25deg;
     animation: textPulse 0.7s ease-in-out infinite;
 }
 

@@ -9,7 +9,7 @@
             content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Level 1</title>
+    <title>Level 2</title>
 
     <link
             href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
@@ -37,9 +37,6 @@
                 HOME
             </span>
 
-            <span id="scene-name">
-                HOME
-            </span>
 
         </div>
 
@@ -241,11 +238,11 @@
         <div class="screen">
 
             <div class="tiny">
-                LEVEL_1.EXE
+                LEVEL_2.EXE
             </div>
 
             <h1>
-                LEVEL 1
+                LEVEL 2
             </h1>
 
             <button

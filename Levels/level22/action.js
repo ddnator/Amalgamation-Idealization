@@ -15,8 +15,8 @@ startDialogue("outside_caravan"); */
 /* =========================================
    ACTIONS
 ========================================= */
-import { gameState } from "./gameState.js";
-import { minigameScreen, reactorMinigameFrame } from "./element.js";
+import {gameState} from "./gameState.js";
+import {minigameScreen, reactorMinigameFrame} from "./element.js";
 
 export function runAction(action) {
 
@@ -72,32 +72,115 @@ export function runAction(action) {
         return;
     }
 
-    if (action === "action_go_to_work") {
+    if (action === "action_go_home") {
 
-        setScene("walkingToWorkDay");
+        setScene("walkingHomeNight");
 
-        startDialogue("walk_to_work");
+        startDialogue("walk_home");
+
+        return;
+    }
+
+    if (action === "action_go_bar") {
+
+        setScene("ErwinsBar");
+
+        startDialogue("outside_bar");
 
         return;
     }
 
     /* Winston Nuclear PowerPlant outside*/
 
-    if (action === "OutsideWorkDay") {
+    if (action === "action_OutsideWorkDay") {
 
         setScene("OutsideWorkDay");
 
         startDialogue("winston_nuclear_powerplant");
-
         return;
     }
     /* ARRIVE AT WORK */
 
     if (
-        action === "show_work"
+        action === "action_work"
     ) {
 
-        startDialogue("jim_intro");
+        startDialogue("work");
+
+        setScene("work");
+
+        return;
+    }
+
+    if (
+        action === "action_stevenOne"
+    ) {
+
+        setScene("steven1");
+
+        startDialogue("steven_intro");
+        return;
+    }
+
+    if (
+        action === "action_stevenTwo"
+    ) {
+
+        setScene("steven3");
+
+        startDialogue("steven_no_money");
+        return;
+    }
+
+    if (
+        action === "action_stevenThree"
+    ) {
+
+        setScene("steven3");
+
+        startDialogue("steven_yes_money");
+        return;
+    }
+
+    if (
+        action === "action_stevenFour"
+    ) {
+
+        setScene("steve4");
+
+        startDialogue("steven_explain");
+        return;
+    }
+
+    /* LEAVE STEVEN */
+
+    if (
+        action === "action_leave_steven"
+    ) {
+
+        closeDialogue();
+
+        setScene("ErwinsBar");
+
+        return;
+    }
+
+    if (
+        action === "action_boss"
+    ) {
+
+        startDialogue("boss_task");
+
+        setScene("boss");
+
+        return;
+    }
+
+    if (
+        action === "close"
+    ) {
+
+        closeDialogue();
 
         setScene("work");
 
@@ -105,22 +188,11 @@ export function runAction(action) {
     }
 
 
-    /* LEAVE JIM */
-
-    if (
-        action === "leave_jim"
-    ) {
-
-        closeDialogue();
-
-        return;
-    }
-
 
     /* START REACTOR */
 
     if (
-        action === "start_minigame"
+        action === "action_start_minigame"
     ) {
 
         startMinigame();
@@ -129,32 +201,29 @@ export function runAction(action) {
     }
 
 
-    if (
-        action === "game_over"
-    ) {
-        window.location.href = "../../gameoverscreen.html";
-
-        return
-    }
-
-    /* LEVEL 5 */
+    /* LEVEL 2 */
 
     if (
-        action === "level6"
+        action === "level2"
     ) {
 
-        window.location.href = "../level6/level6.php";
-
+        goToLevel(
+            2
+        );
 
         return;
     }
 
+
+    /* LEVEL 3 */
+
     if (
-        action === "level7"
+        action === "level3"
     ) {
 
-        window.location.href = "../level7/level7.php";
-
+        goToLevel(
+            3
+        );
 
         return;
     }
@@ -165,7 +234,7 @@ export function runAction(action) {
    CLOSE DIALOGUE
 ========================================= */
 
-export function closeDialogue() {
+ export function closeDialogue() {
 
     gameState.pendingOption =
         null;
@@ -176,7 +245,7 @@ export function closeDialogue() {
     gameState.inputLocked =
         false;
 
-    showBreakfastOverlay(null);
+     showBreakfastOverlay(null);
 
     showNormalBar();
 }
@@ -204,7 +273,15 @@ function startMinigame() {
         ../../
     */
 
-    window.location.href = "../../minigame_reactor2/index.php";
+    reactorMinigameFrame.src =
+        "../../minigame_reactor1/mingame1.html?run="
+        +
+        Date.now();
+
+
+    minigameScreen.classList.remove(
+        "hidden"
+    );
 }
 
 
