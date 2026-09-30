@@ -269,7 +269,7 @@
 
             <img
                     class="Background"
-                    src="/Images/steven3.png"
+                    src="/Images/steven2.png"
                     alt=""
             >
         </div>
@@ -282,7 +282,28 @@
                     alt=""
             >
         </div>
+        <!-- =====================================
+               Inside Eren's bar 1
+         ====================================== -->
+        <div id="insideBarOne" class="game-scene hidden">
 
+            <img
+                    class="Background"
+                    src="/Images/Erwin1.png"
+                    alt=""
+            >
+        </div>
+        <!-- =====================================
+               Inside Eren's bar 2
+         ====================================== -->
+        <div id="insideBarTwo" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/Erwin2.png"
+                    alt=""
+            >
+        </div>
         <!-- =====================================
                 All Scenes must be INSIDE this </div> otherwise it will not work!
              ====================================== -->
