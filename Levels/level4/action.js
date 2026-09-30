@@ -176,9 +176,9 @@ function startMinigame() {
 
 
     /*
-        level22.php zit in:
+        level1.php zit in:
 
-        Levels/level1/level22.php
+        Levels/level1/level1.php
 
         Reactor zit in:
 
