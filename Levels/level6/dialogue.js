@@ -44,204 +44,321 @@ import {
    DIALOGUE TREE
 ========================================= */
 let breakfast = false;
-const hidden = document.getElementById('hidden');
-let gameComplete = 'not done';
-if (hidden) {
-    gameComplete = hidden.dataset.myValue;
-}
 const dialogueTree = {
+
+    /* =====================================
+       START
+    ====================================== */
+
     level_start: {
+
         speaker:
             "NARRATOR",
+
         text:
-            "You arrive at work.",
+            "You arrive at the bar",
 
         options: [
             {
                 text:
-                    "Talk to your boss",
+                    "Continue",
 
                 speak:
                     false,
 
                 next:
-                    "boss"
+                    "erwin_message" //check
+            },
+        ]
+    },
+
+    erwin_message: {
+
+        speaker:
+            "Erwin",
+
+        text:
+            "Hi Y/N there is someone waiting for you at you're home.",
+
+        options: [
+            {
+                text:
+                    "Continue",
+
+                speak:
+                    false,
+
+                next:
+                    "erwin_yo" //check
+            },
+        ]
+    },
+
+    erwin_yo: {
+        speaker:
+        "Erwin",
+
+        text:"Yo whats up Y/N, what do you want?",
+
+        options: [
+            {
+                text:
+                    "Do you still have the good stuff?",
+
+                speak:
+                    false,
+
+                next:
+                    "what_kind" //check
             },
             {
                 text:
-                    "Work",
+                    "Can I get the usual?",
+
+                speak:
+                    false,
+
+                next: //check
+                    "which_usual",
+            },
+            {
+                text:
+                    "Tell me a joke Erwin",
+
+                speak: 
+                    false,
+
+                next:
+                    "your_mom" //check
+            }
+        ]
+    },
+
+    what_kind: {
+        speaker:
+        "Erwin",
+
+        text:"What kind of good stuff do you want?",
+
+        options: [
+            {
+                text:
+                    "I want a body part upgrade",
+                
+                speak:
+                    false,
+
+                next:
+                    "what_upgrade" //check
+            },
+            {
+                text:
+                    "Drugs",
+                
+                speak:
+                    false,
+
+                action:
+                    "level7" //check
+            }
+        ]
+    },
+
+    which_usual: {
+        speaker:
+        "Erwin",
+
+        text: "Which usual do you want?",
+        
+        options: [
+            {
+                text:
+                    "I want a body part upgrade",
+                
+                speak:
+                    false,
+
+                next:
+                    "what_upgrade" //check
+            },
+            {
+                text:
+                    "Drugs",
+                
+                speak:
+                    false,
+
+                action:
+                    "level4" //check
+            }
+        ]
+    }, 
+
+    your_mom: {
+        speaker:
+        "Erwin",
+
+        text: "Your mom",
+
+        options: [
+            {
+                text:
+                    "...",
+
+                speak:
+                    false,
+
+                next:
+                    "erwin_yo"
+            }
+        ]
+    },
+
+    what_upgrade: {
+        speaker:
+        "Erwin",
+
+        text: "What upgrade do you want this time?",
+
+        options: [
+            {
+                text:
+                    "I want to upgrade my eye",
+
+                speak:
+                    false,
+
+                next:
+                    "eye_upgrade"
+            },
+            {
+                text:
+                    "I want to upgrade my leg",
+
+                speak:
+                    false,
+
+                next:
+                    "leg_upgrade"
+            },
+            {
+                text:
+                    "I want to upgrade my arm",
+
+                speak:
+                    false,
+
+                next:
+                    "arm_upgrade"
+            },
+            {
+                text:
+                    "I want to upgrade my heart",
+
+                speak:
+                    false,
+
+                next:
+                    "heart_upgrade"
+            }
+        ]
+    },
+
+    eye_upgrade: {
+        speaker:
+        "Narrator",
+
+        text: "Upgrading eyes",
+
+        options: [
+            {
+                text: "Continue",
+
+                speak:
+                    false,
+
+                next:
+                    "upgrade_done"
+            }
+        ]
+    },
+
+    leg_upgrade: {
+        speaker:
+        "Narrator",
+
+        text: "Upgrading leg",
+
+        options: [
+            {
+                text: "Continue",
+
+                speak:
+                    false,
+
+                next:
+                    "upgrade_done"
+            }
+        ]
+    },
+
+    arm_upgrade: {
+        speaker:
+        "Narrator",
+
+        text: "Upgrading arms",
+
+        options: [
+            {
+                text: "Continue",
+
+                speak:
+                    false,
+
+                next:
+                    "upgrade_done"
+            }
+        ]
+    },
+
+    heart_upgrade: {
+        speaker:
+        "Narrator",
+
+        text: "Sorry bro it's out of stock",
+
+        options: [
+            {
+                text: "Continue",
+
+                speak:
+                    false,
+
+                next:
+                    "what_upgrade"
+            }
+        ]
+    },
+
+    upgrade_done: {
+        speaker:
+        "Erwin",
+
+        text: "All done now, enjoy and be carefull with it",
+
+        options: [
+            {
+                text: "Continue",
 
                 speak:
                     false,
 
                 action:
-                    "start_minigame"//check
-            }
-        ]
-    },
-
-    boss: {
-        speaker: "AI",
-        text: "Hi Y/N ready for a day full of work? The others are gone now so no more distractions for you. You know what the task is for today?",
-
-        options: [
-            {
-                text:
-                    "Where is everyone?",
-
-                speak:
-                    false,
-
-                next: "quota"
-            },
-            {
-                text:
-                    "What is my task today",
-
-                speak:
-                    false,
-
-                next: "minigame_explanation"
-            },
-            {
-                text:
-                    "I got a strange letter, do you know what it is?",
-
-                speak:
-                    false,
-
-                next: "strange_letter"
-            },
-            {
-                text:
-                    "bye",
-
-                speak:
-                    false,
-
-                next: "level_start"
-            }
-        ]
-    },
-
-    quota: {
-        speaker:
-            "AI",
-        text: "They did not meet their quota yesterday.",
-
-        options: [
-            {
-                text: "Continue",
-
-                speak: false,
-
-                next:
-                    "boss"
-            }
-        ]
-    },
-
-    minigame_explanation: {
-        speaker:
-            "AI",
-        text: "Today I want you to fix reactor 2. The system of that reactor has recently crashed and nobody has fixed it yet. \n The way you fix the system is by pressing the numbers in the right order.",
-
-        options: [
-            {
-                text: "Continue",
-
-                speak: false,
-
-                next: "boss"
-            }
-        ]
-    },
-
-    strange_letter: {
-        speaker:
-            "AI",
-        text: "Can you show me?",
-
-        options: [
-            {
-                text: "Yes, it's here in my pocket.",
-
-                speak: false,
-
-                next: "show_it"
-            },
-            {
-                text: "No I left it at home",
-
-                speak: false,
-
-                next: "okay"
-            }
-        ]
-    },
-
-    show_it: {
-        speaker:
-            "AI",
-        text: "I am so dissapointed in you, have a good life rotting in hell",
-
-        options: [
-            {
-                text: "Game over",
-
-                speak: false,
-
-                action: "game_over"
-            }
-        ]
-    },
-
-    okay: {
-        speaker: "AI",
-        text: "Okay",
-
-        options: [
-            {
-                text: "Continue",
-                speak: false,
-                next: "boss"
-            }
-        ]
-    },
-
-    minigame_done: {
-        speaker: "AI",
-        text: "Goodjob! Tomorow after work we got something for you!",
-
-        options: [
-            {
-                text: "Ok thanks!",
-                speak: false,
-                next: "finish_work"
-            }
-        ]
-    },
-
-    finish_work: {
-        speaker: "Narrator",
-        text: "",
-
-        options: [
-            {
-                text: "Go to bar",
-                speak: false,
-                action: "level6"
-            },
-            {
-                text: "Go home",
-                speak: false,
-                action: "level7"
+                    "level7"
             }
         ]
     }
-};
-
-
+}
 /* =========================================
    START LEVEL
 ========================================= */
@@ -277,15 +394,9 @@ function startLevel1() {
 
     );
 
-    if (gameComplete === "done") {
-        startDialogue(
-            "minigame_done"
-        );
-    } else {
-        startDialogue(
-            "level_start"
-        );
-    }
+    startDialogue(
+        "level_start"
+    );
 }
 
 
@@ -1013,4 +1124,5 @@ hotspotComputer.addEventListener(
         startDialogue("computer");
     }
 );
+
 

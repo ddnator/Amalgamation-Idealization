@@ -1,12 +1,3 @@
-<?php
-$gamecomplete = false;
-if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
-    if ($_GET['reactorComplete'] === '1' && $_GET['points'] === '100') {
-        $gamecomplete = true;
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +9,7 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
             content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Level 5</title>
+    <title>Level 1</title>
 
     <link
             href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
@@ -30,9 +21,7 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
 </head>
 
 <body>
-    <?php if ($gamecomplete) { ?>
-    <div id="hidden" data-my-value="done"></div>
-    <?php } ?>
+
 <div id="game">
 
     <!-- =========================================
@@ -42,7 +31,7 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
     <div id="point-click-area">
 
         <div id="hud">
-            <span>LEVEL 5</span>
+            <span>LEVEL 1</span>
 
             <span id="location-label">
                 HOME
@@ -153,8 +142,6 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
                     src="/Images/StreetDay.png"
                     alt=""
             >
-
-
         </div>
 
         <!-- =====================================
@@ -179,23 +166,91 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
                     src="/Images/Work_Base.png"
                     alt=""
             >
+
+            <button
+                    id="hotspot-jim"
+                    class="jim"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay jimOverlay"
+                    src="/Images/Work_JimO.png"
+                    alt=""
+            >
+            <button
+                    id="hotspot-work"
+                    class="work"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay workOverlay"
+                    src="/Images/Work_MinigameO.png"
+                    alt=""
+            >
+
+            <button
+                    id="hotspot-boss"
+                    class="boss"
+                    type="button"
+            ></button>
+
+            <img
+                    class="Overlay bossOverlay"
+                    src="/Images/Work_TalkToBossO.png"
+                    alt=""
+            >
         </div>
 
+        <div id="jim1" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/jimHappy.png"
+                    alt=""
+            >
+        </div>
+
+        <div id="jim2" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/jimSpeaking.png"
+                    alt=""
+            >
+        </div>
+
+        <div id="jim3" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/jimNeutral.png"
+                    alt=""
+            >
+        </div>
+        <div id="jim4" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/jimAngry.png"
+                    alt=""
+            >
+        </div>
+
+        <div id="boss" class="game-scene hidden">
+
+            <img
+                    class="Background"
+                    src="/Images/boss.png"
+                    alt=""
+            >
+        </div>
+
+        <!-- =====================================
+                All Scenes must be INSIDE this </div> otherwise it will not work!
+             ====================================== -->
     </div>
-    <!-- =====================================
-                Walking to Work Scene
-          ====================================== -->
-    <div id="walkingToWorkDay" class="game-scene hidden">
-
-        <img
-                class="Background"
-                src="/Images/StreetDay.png"
-                alt=""
-        >
-    </div>
-
-
-
 </div>
 
     <!-- =========================================

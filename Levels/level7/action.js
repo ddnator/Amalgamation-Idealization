@@ -83,21 +83,95 @@ export function runAction(action) {
 
     /* Winston Nuclear PowerPlant outside*/
 
-    if (action === "OutsideWorkDay") {
+    if (action === "action_OutsideWorkDay") {
 
         setScene("OutsideWorkDay");
 
         startDialogue("winston_nuclear_powerplant");
-
         return;
     }
     /* ARRIVE AT WORK */
 
     if (
-        action === "show_work"
+        action === "action_work"
     ) {
 
+        startDialogue("work");
+
+        setScene("work");
+
+        return;
+    }
+
+    if (
+        action === "action_jimOne"
+    ) {
+
+        setScene("jim1");
+
         startDialogue("jim_intro");
+        return;
+    }
+
+    if (
+        action === "action_jimTwo"
+    ) {
+
+        setScene("jim2");
+
+        startDialogue("jim_upgrade");
+        return;
+    }
+
+    if (
+        action === "action_jimThree"
+    ) {
+
+        setScene("jim3");
+
+        startDialogue("jim_bad_sleep");
+        return;
+    }
+
+    if (
+        action === "action_jimFour"
+    ) {
+
+        setScene("jim4");
+
+        startDialogue("jim_lisa");
+        return;
+    }
+
+    /* LEAVE JIM */
+
+    if (
+        action === "action_leave_jim"
+    ) {
+
+        closeDialogue();
+
+        setScene("work");
+
+        return;
+    }
+
+    if (
+        action === "action_boss"
+    ) {
+
+        startDialogue("boss_task");
+
+        setScene("boss");
+
+        return;
+    }
+
+    if (
+        action === "close"
+    ) {
+
+        closeDialogue();
 
         setScene("work");
 
@@ -105,22 +179,11 @@ export function runAction(action) {
     }
 
 
-    /* LEAVE JIM */
-
-    if (
-        action === "leave_jim"
-    ) {
-
-        closeDialogue();
-
-        return;
-    }
-
 
     /* START REACTOR */
 
     if (
-        action === "start_minigame"
+        action === "action_start_minigame"
     ) {
 
         startMinigame();
@@ -130,34 +193,24 @@ export function runAction(action) {
 
 
     if (
-        action === "game_over"
+        action === "level8"
     ) {
-        window.location.href = "../../gameoverscreen.html";
 
-        return
+        window.location.href = "../level8/level8.php";
+
+
+        return;
     }
-
-    /* LEVEL 5 */
-
     if (
-        action === "level6"
+        action === "level9"
     ) {
 
-        window.location.href = "../level6/level6.php";
+        window.location.href = "../level9/level9.php";
 
 
         return;
     }
 
-    if (
-        action === "level7"
-    ) {
-
-        window.location.href = "../level7/level7.php";
-
-
-        return;
-    }
 }
 
 
@@ -192,9 +245,9 @@ function startMinigame() {
 
 
     /*
-        level22.php zit in:
+        level1.php zit in:
 
-        Levels/level1/level22.php
+        Levels/level1/level1.php
 
         Reactor zit in:
 
@@ -204,7 +257,15 @@ function startMinigame() {
         ../../
     */
 
-    window.location.href = "../../minigame_reactor2/index.php";
+    reactorMinigameFrame.src =
+        "../../minigame_reactor1/mingame1.html?run="
+        +
+        Date.now();
+
+
+    minigameScreen.classList.remove(
+        "hidden"
+    );
 }
 
 

@@ -56,7 +56,7 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "You wake up alone in ur home",
+            "You arrive at the bar",
 
         options: [
             {

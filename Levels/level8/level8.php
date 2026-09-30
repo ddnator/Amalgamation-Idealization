@@ -1,12 +1,11 @@
 <?php
 $gamecomplete = false;
-if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
-    if ($_GET['reactorComplete'] === '1' && $_GET['points'] === '100') {
+if (isset($_GET['wonGame'])) {
+    if ($_GET['wonGame'] === '1') {
         $gamecomplete = true;
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +17,7 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
             content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Level 5</title>
+    <title>Level 8</title>
 
     <link
             href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
@@ -30,9 +29,11 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
 </head>
 
 <body>
-    <?php if ($gamecomplete) { ?>
+<?php if ($gamecomplete) { ?>
     <div id="hidden" data-my-value="done"></div>
-    <?php } ?>
+<?php } ?>
+
+
 <div id="game">
 
     <!-- =========================================
@@ -42,7 +43,7 @@ if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
     <div id="point-click-area">
 
         <div id="hud">
-            <span>LEVEL 5</span>
+            <span>LEVEL 1</span>
 
             <span id="location-label">
                 HOME

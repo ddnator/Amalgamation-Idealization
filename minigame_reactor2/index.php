@@ -1,5 +1,26 @@
 <?php
-session_start();
+require_once __DIR__ . '/../includes/database.php';
+require_once __DIR__ . "/../includes/isUserLoggedIn.php";
+if ($_SESSION['logged_in'] && $_SESSION['username']) {
+    $username = $_SESSION['username'];
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $earned = (int)($_POST['earned'] ?? 0);
+
+    $stmt = mysqli_prepare($db, 'UPDATE users SET money = money + ? WHERE username = ?');
+    mysqli_stmt_bind_param($stmt, 'is', $earned, $username);
+    mysqli_stmt_execute($stmt);
+
+    header('Content-Type: application/json');
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+$stmt = mysqli_prepare($db, 'SELECT money FROM users WHERE username = ?');
+mysqli_stmt_bind_param($stmt, 's', $username);
+mysqli_stmt_execute($stmt);
+$user = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
 if (!isset($_SESSION["points"])) {
     $_SESSION["points"] = 0;
@@ -8,8 +29,12 @@ if (!isset($_SESSION["points"])) {
 if (isset($_GET["points"])) {
     $_SESSION["points"] += (int)$_GET["points"];
 
+    if ($_SESSION["points"] > 100) {
+        header("location: ../Levels/level5/level5.php?reactorComplete=1&points=100");
+    } else {
     header("location: index.php");
     exit;
+    }
 }
 ?>
 
@@ -65,7 +90,7 @@ if (isset($_GET["points"])) {
             <p>Working...</p>
         </div>
         <div id="money-made">
-            <p>$100</p>
+            <p>$<?php echo $user['money'] ?></p>
         </div>
     </div>
     <div aria-label="work-value" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" class="work-bar"

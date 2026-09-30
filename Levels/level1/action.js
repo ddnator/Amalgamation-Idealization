@@ -15,8 +15,8 @@ startDialogue("outside_caravan"); */
 /* =========================================
    ACTIONS
 ========================================= */
-import {gameState} from "./gameState.js";
-import {minigameScreen, reactorMinigameFrame} from "./element.js";
+import { gameState } from "./gameState.js";
+import { minigameScreen, reactorMinigameFrame } from "./element.js";
 
 export function runAction(action) {
 
@@ -187,6 +187,7 @@ export function runAction(action) {
     ) {
 
         startMinigame();
+        window.location.href = "/minigame_reactor1/minigame1.php";
 
         return;
     }
@@ -225,7 +226,7 @@ export function runAction(action) {
    CLOSE DIALOGUE
 ========================================= */
 
- export function closeDialogue() {
+export function closeDialogue() {
 
     gameState.pendingOption =
         null;
@@ -236,7 +237,7 @@ export function runAction(action) {
     gameState.inputLocked =
         false;
 
-     showBreakfastOverlay(null);
+    showBreakfastOverlay(null);
 
     showNormalBar();
 }

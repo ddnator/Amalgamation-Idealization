@@ -50,207 +50,104 @@ if (hidden) {
     gameComplete = hidden.dataset.myValue;
 }
 const dialogueTree = {
+
+    /* =====================================
+       START
+    ====================================== */
+
     level_start: {
-        speaker:
-            "NARRATOR",
-        text:
-            "You arrive at work.",
+        speaker:"AI",
+        text:"Y/N you have done a great job here and already have some mechanical parts.",
 
         options: [
             {
-                text:
-                    "Talk to your boss",
-
-                speak:
-                    false,
-
-                next:
-                    "boss"
+                text: "No I have not.",
+                speak:false,
+                next: "otherwise" 
             },
             {
-                text:
-                    "Work",
-
-                speak:
-                    false,
-
-                action:
-                    "start_minigame"//check
-            }
-        ]
-    },
-
-    boss: {
-        speaker: "AI",
-        text: "Hi Y/N ready for a day full of work? The others are gone now so no more distractions for you. You know what the task is for today?",
-
-        options: [
-            {
-                text:
-                    "Where is everyone?",
-
-                speak:
-                    false,
-
-                next: "quota"
-            },
-            {
-                text:
-                    "What is my task today",
-
-                speak:
-                    false,
-
-                next: "minigame_explanation"
-            },
-            {
-                text:
-                    "I got a strange letter, do you know what it is?",
-
-                speak:
-                    false,
-
-                next: "strange_letter"
-            },
-            {
-                text:
-                    "bye",
-
-                speak:
-                    false,
-
-                next: "level_start"
-            }
-        ]
-    },
-
-    quota: {
-        speaker:
-            "AI",
-        text: "They did not meet their quota yesterday.",
-
-        options: [
-            {
-                text: "Continue",
-
+                text: "Yes I do, why?",
                 speak: false,
-
-                next:
-                    "boss"
+                next: "heartbeat"
             }
         ]
     },
 
-    minigame_explanation: {
-        speaker:
-            "AI",
-        text: "Today I want you to fix reactor 2. The system of that reactor has recently crashed and nobody has fixed it yet. \n The way you fix the system is by pressing the numbers in the right order.",
-
-        options: [
-            {
-                text: "Continue",
-
-                speak: false,
-
-                next: "boss"
-            }
-        ]
-    },
-
-    strange_letter: {
-        speaker:
-            "AI",
-        text: "Can you show me?",
-
-        options: [
-            {
-                text: "Yes, it's here in my pocket.",
-
-                speak: false,
-
-                next: "show_it"
-            },
-            {
-                text: "No I left it at home",
-
-                speak: false,
-
-                next: "okay"
-            }
-        ]
-    },
-
-    show_it: {
-        speaker:
-            "AI",
-        text: "I am so dissapointed in you, have a good life rotting in hell",
-
-        options: [
-            {
-                text: "Game over",
-
-                speak: false,
-
-                action: "game_over"
-            }
-        ]
-    },
-
-    okay: {
-        speaker: "AI",
-        text: "Okay",
+    otherwise: {
+        speaker:"AI",
+        text:"Your heart says otherwise.",
 
         options: [
             {
                 text: "Continue",
                 speak: false,
-                next: "boss"
+                next: "heartbeat"
             }
         ]
     },
 
-    minigame_done: {
-        speaker: "AI",
-        text: "Goodjob! Tomorow after work we got something for you!",
+    heartbeat: {
+        speaker:"Narrator",
+        text:"You grab your chest en for the first in a very long time you hear the beating of a mechanical heart in your chest",
 
         options: [
             {
-                text: "Ok thanks!",
+                text: "Continue",
                 speak: false,
-                next: "finish_work"
+                next: "join_AI"
             }
         ]
     },
-
-    finish_work: {
-        speaker: "Narrator",
-        text: "",
+   
+    join_AI: {
+        speaker:"AI",
+        text:"Since you have been such a great worker, why don't you join us?",
 
         options: [
             {
-                text: "Go to bar",
+                text: "Yes I will",
                 speak: false,
-                action: "level6"
+                next: "yes"
             },
             {
-                text: "Go home",
+                text: "I WILL NEVER!!!",
                 speak: false,
-                action: "level7"
+                next: "no"
+            }
+        ]
+    },
+
+    yes: {
+        speaker:"AI",
+        text:"Great, it was not like you had a choice anyways.",
+
+        options: [
+            {
+                text: "Continue",
+                speak: false,
+                next: "end"
+            }
+        ]
+    },
+
+    no: {
+        speaker:"AI",
+        text:"You never had a choice to begin with.",
+
+        options: [
+            {
+                text: "Continue",
+                speak: false,
+                next: "end"
             }
         ]
     }
-};
-
-
-/* =========================================
-   START LEVEL
-========================================= */
+}
 
 startButton.addEventListener(
     "click",
     startLevel1
 );
-
 
 function startLevel1() {
 
@@ -277,18 +174,10 @@ function startLevel1() {
 
     );
 
-    if (gameComplete === "done") {
-        startDialogue(
-            "minigame_done"
-        );
-    } else {
-        startDialogue(
-            "level_start"
-        );
-    }
+    startDialogue(
+        "level_start"
+    );
 }
-
-
 window.startLevel1 =
     startLevel1;
 
@@ -1013,4 +902,5 @@ hotspotComputer.addEventListener(
         startDialogue("computer");
     }
 );
+
 
