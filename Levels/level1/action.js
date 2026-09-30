@@ -379,9 +379,8 @@ export function closeDialogue() {
 ========================================= */
 
 function startMinigame() {
-
-    closeDialogue();
-
+    console.log('ge')
+    
 
     /* =====================================
        ELEMENT CHECK

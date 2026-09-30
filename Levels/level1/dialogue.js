@@ -359,7 +359,7 @@ const dialogueTree = {
                     false,
 
                 action:
-                    "action_work"
+                    "close"
             }
         ]
     },
