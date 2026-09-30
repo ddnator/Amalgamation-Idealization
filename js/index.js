@@ -1,10 +1,11 @@
 window.addEventListener('load', init)
 
-function init() {
 
+function init() {
     VarCreator()
     fillWindow()
     textCreator()
+    eventCreator()
 }
 
 function VarCreator() {
@@ -13,6 +14,20 @@ function VarCreator() {
     if (endButton) {
         endButton.addEventListener('click', EndButtonEventHandler)
     }
+}
+
+function eventCreator() {
+    let visionButton = document.querySelector('.ourVision')
+
+    if (visionButton) {
+        visionButton.addEventListener('click', visionButtonEventHandler)
+    }
+}
+
+function visionButtonEventHandler(event) {
+    event.preventDefault()
+    const visionText = document.querySelector('.visionText')
+    visionText.hidden = !visionText.hidden
 }
 
 function EndButtonEventHandler(event) {

@@ -88,6 +88,29 @@ nav {
 
 }
 
+.visionText {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    z-index: 1;
+    width: min(36vw, 32rem);
+    padding: 0.75rem 1rem;
+    background: #f4efdf;
+    border: 2px solid #647859;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.visionControl {
+    position: relative;
+}
+
+.ourVision {
+    margin-right: 63vw;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
 nav a {
     font-size: 1.7rem;
     color: #647859;
