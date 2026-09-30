@@ -159,7 +159,7 @@ const dialogueTree = {
                     false,
 
                 action:
-                    "level4" //check
+                    "level7" //check
             }
         ]
     },
