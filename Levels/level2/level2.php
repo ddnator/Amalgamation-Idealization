@@ -37,6 +37,10 @@
                 HOME
             </span>
 
+            <span id="scene-name">
+                HOME
+            </span>
+
 
         </div>
 
