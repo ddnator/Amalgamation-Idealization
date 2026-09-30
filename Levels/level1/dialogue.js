@@ -603,18 +603,23 @@ const dialogueTree = {
             "ai",
 
         text:
-            "...",
+            "",
 
         options: [
             {
                 text:
-                    "Leave",
+                    "Go home",
 
                 speak:
                     false,
 
                 action:
-                    "close"
+                    "level2"
+            },
+            {
+                text: "Go to the bar",
+                speak: false,
+                action:"level3"
             }
         ]
     },
