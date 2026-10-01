@@ -1,4 +1,5 @@
 window.addEventListener('load', init)
+const sidewaysText = document.createElement('span')
 
 function init() {
     let titleOption = Math.floor(Math.random() * 6) + 1
@@ -43,13 +44,17 @@ function EndButtonEventHandler(event) {
 
 
 function textCreator(number) {
+    let image = document.querySelector('.profileImg')
+    image.addEventListener('click', changeText)
+
+
     let randomNumber = number
     const headerTitle = document.querySelector('#homeHeader h1')
     console.log(randomNumber)
     if (!headerTitle) {
         return
     }
-    const sidewaysText = document.createElement('span')
+
 
     if (randomNumber == 1) {
         sidewaysText.textContent = 'Try now!'
@@ -73,4 +78,8 @@ function textCreator(number) {
 }
 
 function fillWindow() {
+}
+
+function changeText() {
+    sidewaysText.textContent = 'Roel the goat'
 }

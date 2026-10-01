@@ -195,7 +195,7 @@ const dialogueTree = {
 
     end6: {
         speaker: "Y/N",
-        text: "For the first time in my life, I feel like I'm in control again.",
+        text: "For the first time in my life, I feel like I'm in controll agains.",
 
         options: [
             {

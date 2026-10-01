@@ -1,8 +1,10 @@
 <?php
+$backgroundimage = "../../images/Home_Base.png";
 $gamecomplete = false;
 if (isset($_GET['gameWon'])) {
     if ($_GET['gameWon'] === '1') {
         $gamecomplete = true;
+        $backgroundimage = "../../images/Work_Outside.png";
     }
 }
 ?>
@@ -133,7 +135,7 @@ if (isset($_GET['gameWon'])) {
 
                         <img
                             class="Background"
-                            src="../../images/Home_Base.png"
+                            src="<?= $backgroundimage ?>"
                             alt=""
                         >
 
