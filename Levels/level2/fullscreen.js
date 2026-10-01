@@ -147,7 +147,8 @@ async function enterFullscreen() {
 
         await enterBrowserFullscreen();
 
-    } catch (
+    }
+    catch (
         error
     ) {
 
@@ -166,7 +167,8 @@ async function exitFullscreen() {
 
         await exitBrowserFullscreen();
 
-    } catch (
+    }
+    catch (
         error
     ) {
 
@@ -230,3 +232,12 @@ document.addEventListener(
 );
 
 updateFullscreenButton();
+
+window.enterLevel2Fullscreen =
+    enterFullscreen;
+
+window.exitLevel2Fullscreen =
+    exitFullscreen;
+
+window.toggleLevel2Fullscreen =
+    toggleFullscreen;

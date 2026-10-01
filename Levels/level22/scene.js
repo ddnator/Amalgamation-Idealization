@@ -12,7 +12,7 @@ import {
     dialogueOptions,
     hotspotBoss,
     hotspotDoor,
-    hotspotJim,
+    hotspotjim,
     locationLabel,
     normalBar,
     sceneName,
@@ -28,6 +28,9 @@ const homeHotspots =
 
 const allHotspots =
     ".Bed, .Computer, .Breakfast, .Kitchen, .Door";
+
+const workHotspots =
+    ".jim, .work, .boss";
 export function setScene(scene) {
 
     gameState.currentScene = scene;
@@ -81,24 +84,37 @@ export function setScene(scene) {
 
         hotspotDoor.classList.remove("hidden");
     }
-    else if (scene === "walkingToWorkDay") {
+    else if (scene === "walkingHomeNight") {
 
         document
-            .getElementById("walkingToWorkDay")
+            .getElementById("walkingHomeNight")
             .classList.remove("hidden");
 
-        locationLabel.textContent = "ROUTE TO WORK";
-        barLocation.textContent = "ROUTE TO WORK";
-        sceneName.textContent = "ROUTE TO WORK";
-        barHint.textContent = "YOUR ROUTE TO WORK.";
+        locationLabel.textContent = "ROUTE HOME";
+        barLocation.textContent = "ROUTE HOME";
+        sceneName.textContent = "ROUTE HOME";
+        barHint.textContent = "YOUR ROUTE HOME";
 
     }
-    // when you're outside your work
 
-    else if (scene === "OutsideWorkDay") {
+    else if (scene === "ErwinsBar") {
 
         document
-            .getElementById("OutsideWorkDay")
+            .getElementById("ErwinsBar")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "Erwin's Bar";
+        barLocation.textContent = "Erwin's Bar";
+        sceneName.textContent = "Erwin's Bar";
+        barHint.textContent = "Erwin's Bar";
+
+    }
+// when you're outside your work
+
+    else if (scene === "OutsideWorkNight") {
+
+        document
+            .getElementById("OutsideWorkNight")
             .classList.remove("hidden");
 
         locationLabel.textContent = "WINSTON NUCLEAR POWERPLANT";
@@ -108,19 +124,25 @@ export function setScene(scene) {
 
     }
 
-    else if (scene === "work") {
+    else if ( scene === "work" )
+    {
+
+
         document
             .getElementById("work")
             .classList.remove("hidden");
-
         locationLabel.textContent = "WORK";
         barLocation.textContent = "WORK";
         sceneName.textContent = "AT WORK";
         barHint.textContent = "JIM IS WAVING AT U.";
-        document.querySelectorAll(".work-hotspot")
 
-            .forEach(hotspot => { hotspot.classList.remove("hidden"); });
-    }
+        const workHotspots =
+        ".jim, .work, .boss";
+
+        document .querySelectorAll( workHotspots )
+
+            .forEach( hotspot =>
+            { hotspot.classList.remove( "hidden" ); } ); }
 
     else if (scene === "work_after") {
 
@@ -131,20 +153,103 @@ export function setScene(scene) {
 
         /* Jim en boss blijven beschikbaar. */
 
-        hotspotJim.classList.remove("hidden");
-        hotspotBoss.classList.remove("hidden");
+        hotspotJim.classList.remove( "hidden" );
+        hotspotBoss.classList.remove( "hidden" );
 
         /* Nu verschijnen ook:
          - Go home
           - Go bar */
-        document.querySelectorAll(".after-work-hotspot")
-            .forEach(hotspot => {
-                hotspot.classList.remove("hidden");
-            }
-            );
+        document .querySelectorAll( ".after-work-hotspot" )
+            .forEach( hotspot =>
+                { hotspot.classList.remove( "hidden" );
+                }
+            ); }
+
+    else if (scene === "steven1") {
+
+        document
+            .getElementById("steven1")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "STEVEN1";
+        barLocation.textContent = "STEVEN1";
+        sceneName.textContent = "STEVEN1";
+        barHint.textContent = "STEVEN1.";
+
     }
 
+    else if (scene === "steven2") {
 
+        document
+            .getElementById("STEVEN2")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "STEVEN2";
+        barLocation.textContent = "STEVEN2";
+        sceneName.textContent = "STEVEN2";
+        barHint.textContent = "STEVEN2.";
+
+    }
+    else if (scene === "steven3") {
+
+        document
+            .getElementById("steven3")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "STEVEN3";
+        barLocation.textContent = "STEVEN3";
+        sceneName.textContent = "STEVEN3";
+        barHint.textContent = "STEVEN3.";
+
+    }
+    else if (scene === "steven4") {
+
+        document
+            .getElementById("steven4")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "STEVEN4";
+        barLocation.textContent = "STEVEN4";
+        sceneName.textContent = "STEVEN4";
+        barHint.textContent = "STEVEN4.";
+
+    }
+
+    else if (scene === "insideBarOne") {
+
+        document
+            .getElementById("insideBarOne")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "Erwin's Bar";
+        barLocation.textContent = "Erwin's Bar";
+        sceneName.textContent = "Erwin's Bar";
+        barHint.textContent = "Erwin's Bar";
+
+    }
+    else if (scene === "insideBarTwo") {
+
+        document
+            .getElementById("insideBarTwo")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "Erwin's Bar";
+        barLocation.textContent = "Erwin's Bar";
+        sceneName.textContent = "Erwin's Bar";
+        barHint.textContent = "Erwin's Bar";
+    }
+    else if (scene === "boss") {
+
+        document
+            .getElementById("boss")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "BOSS";
+        barLocation.textContent = "BOSS";
+        sceneName.textContent = "BOSS";
+        barHint.textContent = "BOSS";
+
+    }
     showNormalBar();
 }
 

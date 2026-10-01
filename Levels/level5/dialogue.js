@@ -40,6 +40,7 @@ import {
     closeDialogue,
     runAction
 } from "./action.js";
+
 /* =========================================
    DIALOGUE TREE
 ========================================= */
@@ -49,7 +50,10 @@ let gameComplete = 'not done';
 if (hidden) {
     gameComplete = hidden.dataset.myValue;
 }
+
+
 const dialogueTree = {
+
     level_start: {
         speaker:
             "NARRATOR",
@@ -292,9 +296,10 @@ function startLevel1() {
         false;
 
     setScene(
-        "home"
-
+        "work"
     );
+
+
 
     if (gameComplete === "done") {
         startDialogue(
@@ -997,39 +1002,39 @@ restartButton.addEventListener(
    HOME HOTSPOTS
 ========================================= */
 
-hotspotKitchen.addEventListener(
-    "click",
-    () => {
+// hotspotKitchen.addEventListener(
+//     "click",
+//     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
-        showBreakfastOverlay();
-        startDialogue("eat");
-    }
-);
+//         if (gameState.dialogueActive) {
+//             return;
+//         }
+//         showBreakfastOverlay();
+//         startDialogue("eat");
+//     }
+// );
 
-hotspotBed.addEventListener(
-    "click",
-    () => {
+// hotspotBed.addEventListener(
+//     "click",
+//     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
+//         if (gameState.dialogueActive) {
+//             return;
+//         }
 
-        startDialogue("try_sleep");
-    }
-);
+//         startDialogue("try_sleep");
+//     }
+// );
 
-hotspotComputer.addEventListener(
-    "click",
-    () => {
+// hotspotComputer.addEventListener(
+//     "click",
+//     () => {
 
-        if (gameState.dialogueActive) {
-            return;
-        }
+//         if (gameState.dialogueActive) {
+//             return;
+//         }
 
-        startDialogue("computer");
-    }
-);
+//         startDialogue("computer");
+//     }
+// );
 

@@ -16,7 +16,9 @@ function updateFullscreenButton() {
     if (
         !fullscreenButton
     ) {
+
         return;
+
     }
 
     if (
@@ -36,21 +38,25 @@ function updateFullscreenButton() {
             "Exit fullscreen"
         );
 
-        return;
     }
 
-    fullscreenButton.textContent =
-        "⛶ FULLSCREEN";
+    else {
 
-    fullscreenButton.setAttribute(
-        "title",
-        "Fullscreen"
-    );
+        fullscreenButton.textContent =
+            "⛶ FULLSCREEN";
 
-    fullscreenButton.setAttribute(
-        "aria-label",
-        "Enter fullscreen"
-    );
+        fullscreenButton.setAttribute(
+            "title",
+            "Fullscreen"
+        );
+
+        fullscreenButton.setAttribute(
+            "aria-label",
+            "Enter fullscreen"
+        );
+
+    }
+
 }
 
 function enableFullscreenLayout() {
@@ -72,8 +78,10 @@ function enableFullscreenLayout() {
                     "resize"
                 )
             );
+
         }
     );
+
 }
 
 function disableFullscreenLayout() {
@@ -95,8 +103,10 @@ function disableFullscreenLayout() {
                     "resize"
                 )
             );
+
         }
     );
+
 }
 
 async function enterBrowserFullscreen() {
@@ -108,6 +118,7 @@ async function enterBrowserFullscreen() {
         await game.requestFullscreen();
 
         return;
+
     }
 
     if (
@@ -115,28 +126,35 @@ async function enterBrowserFullscreen() {
     ) {
 
         game.webkitRequestFullscreen();
+
     }
+
 }
 
 async function exitBrowserFullscreen() {
 
     if (
-        document.fullscreenElement &&
+        document.fullscreenElement
+        &&
         document.exitFullscreen
     ) {
 
         await document.exitFullscreen();
 
         return;
+
     }
 
     if (
-        document.webkitFullscreenElement &&
+        document.webkitFullscreenElement
+        &&
         document.webkitExitFullscreen
     ) {
 
         document.webkitExitFullscreen();
+
     }
+
 }
 
 async function enterFullscreen() {
@@ -147,7 +165,9 @@ async function enterFullscreen() {
 
         await enterBrowserFullscreen();
 
-    } catch (
+    }
+
+    catch (
         error
     ) {
 
@@ -155,7 +175,9 @@ async function enterFullscreen() {
             "Browser fullscreen kon niet gestart worden:",
             error
         );
+
     }
+
 }
 
 async function exitFullscreen() {
@@ -166,7 +188,9 @@ async function exitFullscreen() {
 
         await exitBrowserFullscreen();
 
-    } catch (
+    }
+
+    catch (
         error
     ) {
 
@@ -174,7 +198,9 @@ async function exitFullscreen() {
             "Browser fullscreen kon niet afgesloten worden:",
             error
         );
+
     }
+
 }
 
 async function toggleFullscreen() {
@@ -185,13 +211,17 @@ async function toggleFullscreen() {
 
         await exitFullscreen();
 
-        return;
     }
 
-    await enterFullscreen();
+    else {
+
+        await enterFullscreen();
+
+    }
+
 }
 
-fullscreenButton.addEventListener(
+fullscreenButton?.addEventListener(
     "click",
     async event => {
 
@@ -200,6 +230,7 @@ fullscreenButton.addEventListener(
         event.stopPropagation();
 
         await toggleFullscreen();
+
     }
 );
 
@@ -212,7 +243,9 @@ document.addEventListener(
         ) {
 
             disableFullscreenLayout();
+
         }
+
     }
 );
 
@@ -225,8 +258,19 @@ document.addEventListener(
         ) {
 
             disableFullscreenLayout();
+
         }
+
     }
 );
 
 updateFullscreenButton();
+
+window.enterLevel22Fullscreen =
+    enterFullscreen;
+
+window.exitLevel22Fullscreen =
+    exitFullscreen;
+
+window.toggleLevel22Fullscreen =
+    toggleFullscreen;
