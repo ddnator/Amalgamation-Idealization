@@ -93,7 +93,7 @@ function installImageFallback(
         ) {
 
             console.error(
-                "Kon afbeelding niet laden:",
+                "Could not load images:",
                 paths
             );
 
@@ -195,7 +195,7 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "There is someone waiting infront of your door",
+            "There is someone waiting in front of your door",
 
         options: [
 
@@ -222,7 +222,7 @@ const dialogueTree = {
             {
 
                 text:
-                    "Are you the one that gave me the sticky note?",
+                    "Are you the one that gave me the Message?",
 
                 next:
                     "indeed"
@@ -244,7 +244,7 @@ const dialogueTree = {
             "???",
 
         text:
-            "I am the one who put the sticky note there, u should really start lockin youre door by the way.",
+            "I am the one who send you that message",
 
         options: [
 
@@ -1176,17 +1176,10 @@ function runAction(
     action
 ) {
 
-    if (
-        action ===
-        "level8"
-    ) {
-
-        window.location.href =
-            "../level8/level8.php";
-
+    if (action === "level8") {
+        window.location.href = "../level8/level8.php";
 
         return;
-
     }
 
 
@@ -1243,16 +1236,8 @@ document.addEventListener(
             ];
 
 
-        if (
-            !node
-            ||
-            !node.options
-            ||
-            node.options.length === 0
-        ) {
-
+        if (!node || !node.options || node.options.length === 0) {
             return;
-
         }
 
 

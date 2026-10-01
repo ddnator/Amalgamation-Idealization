@@ -61,8 +61,19 @@
                     <img
                         id="home-background"
                         class="Background"
-                        src="/Images/Home_Base.png"
+                        src="/Images/caravan_stephanie_base.png"
                         alt=""
+                    >
+                    <button
+                            id="hotspot-stephanie"
+                            class="stephanie"
+                            type="button"
+                    ></button>
+
+                    <img
+                            class="Overlay StephanieOverlay"
+                            src="/Images/caravan_stephanie_hover.png"
+                            alt=""
                     >
 
 

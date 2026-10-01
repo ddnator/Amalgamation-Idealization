@@ -640,7 +640,7 @@ const dialogueTree = {
         options: [
             {
                 text:
-                    "Go to home",
+                    "Go home",
 
                 speak:
                     false,
