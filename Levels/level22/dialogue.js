@@ -474,6 +474,21 @@ Steven will talk about his shutdown legs
             }
         ]
     },
+
+    upgrade: {
+
+        speaker: "ERWIN",
+        text: "Have fun, don't forget to pay on time",
+
+        options: [
+
+            {
+                text: "Thank you",
+
+                action: "outside_bar"
+            }
+        ]
+    },
     /* =====================================
      erwin upgrade
   ====================================== */
@@ -485,26 +500,26 @@ Steven will talk about his shutdown legs
             {
                 text: "My eyes",
 
-                action: "action_upgrade_eyes"
+                action: "action_upgrade"
 
             },
 
             {
                 text: "My legs",
 
-                action: "action_upgrade_legs"
+                action: "action_upgrade"
             },
 
             {
                 text: "my arms",
 
-                action: "action_upgrade_arms"
+                action: "action_upgrade"
             },
 
             {
                 text: "my HEART",
 
-                action: "action_upgrade_heart"
+                action: "action_upgrade"
             }
         ]
     },
@@ -552,36 +567,27 @@ Steven will talk about his shutdown legs
 
     boss_task: {
 
-        speaker:
-            "AI",
+        speaker: "AI",
 
-        type:
-            "ai",
+        type: "ai",
 
-        text:
-            "Morning Y/N, good to see you are on time today. The task for today is to manage the factory and put in the code, even you can manage that, right?",
+        text: "Morning Y/N, good to see you are on time today. The task for today is to manage the factory and put in the code, even you can manage that, right?",
 
         options: [
             {
-                text:
-                    "Start working",
+                text: "Start working",
 
-                speak:
-                    false,
+                speak: false,
 
-                action:
-                    "action_start_minigame"
+                action: "action_start_minigame"
             },
 
             {
-                text:
-                    "Leave",
+                text: "Leave",
 
-                speak:
-                    false,
+                speak: false,
 
-                action:
-                    "close"
+                action: "close"
             }
         ]
     },
@@ -593,11 +599,9 @@ Steven will talk about his shutdown legs
 
     boss_after: {
 
-        speaker:
-            "AI",
+        speaker: "AI",
 
-        type:
-            "ai",
+        type: "ai",
 
         text:
             "...",

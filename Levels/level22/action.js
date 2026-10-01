@@ -183,6 +183,15 @@ export function runAction(action) {
         return;
     }
 
+    if (
+        action === "action_upgrade"
+    ) {
+
+        setScene("upgrade");
+
+        startDialogue("upgrade");
+        return;
+    }
     /* LEAVE STEVEN */
 
     if (

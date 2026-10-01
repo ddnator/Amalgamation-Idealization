@@ -164,6 +164,15 @@
                     </div>
 
 
+                    <div id="upgrade" class="game-scene hidden">
+
+                        <img
+                                class="Background"
+                                src="../../Images/upgrade.png"
+                                alt=""
+                        >
+                    </div>
+
                     <!-- =====================================
                          OUTSIDE WORK NIGHT
                     ====================================== -->
