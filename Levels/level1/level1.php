@@ -1,7 +1,7 @@
 <?php
 $gamecomplete = false;
-if (isset($_GET['reactorComplete']) && isset($_GET['points'])) {
-    if ($_GET['reactorComplete'] === '1' && $_GET['points'] === '100') {
+if (isset($_GET['gameWon'])) {
+    if ($_GET['gameWon'] === '1') {
         $gamecomplete = true;
     }
 }

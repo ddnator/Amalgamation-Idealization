@@ -1,8 +1,3 @@
-
-/* =========================================
-   SCENES
-========================================= */
-
 import {
     barHint,
     barLocation,
@@ -10,151 +5,193 @@ import {
     dialogueContent,
     dialogueHelp,
     dialogueOptions,
-    hotspotBoss,
-    hotspotDoor,
-    hotspotJim,
     locationLabel,
     normalBar,
     sceneName,
-    breakfastOverlay
+    breakfastOverlay,
+    hotspotHome,
+    hotspotBar
 } from "./element.js";
 
 import {
     gameState
 } from "./gameState.js";
 
-const homeHotspots =
-    ".Bed, .Computer, .Breakfast, .Kitchen";
-
-const allHotspots =
-    ".Bed, .Computer, .Breakfast, .Kitchen, .Door";
 export function setScene(scene) {
 
-    gameState.currentScene = scene;
+    gameState.currentScene =
+        scene;
 
-    hideAllHotspots();
-
-    // Hide every scene
     document
         .querySelectorAll(".game-scene")
-        .forEach(sceneElement => {
-            sceneElement.classList.add("hidden");
+        .forEach(element => {
+            element.classList.add("hidden");
         });
 
-    // Show the requested scene
-    if (scene === "home") {
+    hotspotHome?.classList.add("hidden");
+    hotspotBar?.classList.add("hidden");
+
+    showBreakfastOverlay(null);
+
+    if (
+        scene === "home"
+    ) {
 
         document
             .getElementById("caravanScene")
             .classList.remove("hidden");
 
-        locationLabel.textContent = "HOME";
-        barLocation.textContent = "HOME";
-        sceneName.textContent = "HOME";
-        barHint.textContent = "CLICK SOMETHING.";
+        locationLabel.textContent =
+            "HOME";
 
-        const homeHotspots =
-            ".Bed, .Computer, .Breakfast, .Kitchen";
+        barLocation.textContent =
+            "HOME";
 
-        const allHotspots =
-            ".Bed, .Computer, .Breakfast, .Kitchen, .Door";
+        sceneName.textContent =
+            "HOME";
 
-        document
-            .querySelectorAll(homeHotspots)
-            .forEach(hotspot => {
-                hotspot.classList.remove("hidden");
-            });
+        barHint.textContent =
+            "CLICK SOMETHING.";
 
-
+        return;
     }
 
-    else if (scene === "outside") {
+    if (
+        scene === "outside"
+    ) {
 
         document
             .getElementById("caravanSceneOutside")
             .classList.remove("hidden");
 
-        locationLabel.textContent = "OUTSIDE";
-        barLocation.textContent = "OUTSIDE";
-        sceneName.textContent = "OUTSIDE";
-        barHint.textContent = "YOU ARE OUTSIDE YOUR HOME.";
+        locationLabel.textContent =
+            "OUTSIDE";
 
-        hotspotDoor.classList.remove("hidden");
+        barLocation.textContent =
+            "OUTSIDE";
+
+        sceneName.textContent =
+            "OUTSIDE";
+
+        barHint.textContent =
+            "YOU ARE OUTSIDE YOUR HOME.";
+
+        return;
     }
-    else if (scene === "walkingToWorkDay") {
+
+    if (
+        scene === "walkingToWorkDay"
+    ) {
 
         document
             .getElementById("walkingToWorkDay")
             .classList.remove("hidden");
 
-        locationLabel.textContent = "ROUTE TO WORK";
-        barLocation.textContent = "ROUTE TO WORK";
-        sceneName.textContent = "ROUTE TO WORK";
-        barHint.textContent = "YOUR ROUTE TO WORK.";
+        locationLabel.textContent =
+            "ROUTE TO WORK";
 
+        barLocation.textContent =
+            "ROUTE TO WORK";
+
+        sceneName.textContent =
+            "ROUTE TO WORK";
+
+        barHint.textContent =
+            "YOUR ROUTE TO WORK.";
+
+        return;
     }
-// when you're outside your work
 
-    else if (scene === "OutsideWorkDay") {
+    if (
+        scene === "OutsideWorkDay"
+    ) {
 
         document
             .getElementById("OutsideWorkDay")
             .classList.remove("hidden");
 
-        locationLabel.textContent = "WINSTON NUCLEAR POWERPLANT";
-        barLocation.textContent = "WINSTON NUCLEAR POWERPLANT";
-        sceneName.textContent = "WINSTON NUCLEAR POWERPLANT";
-        barHint.textContent = "WINSTON NUCLEAR POWERPLANT.";
+        locationLabel.textContent =
+            "WINSTON NUCLEAR POWERPLANT";
 
+        barLocation.textContent =
+            "WINSTON NUCLEAR POWERPLANT";
+
+        sceneName.textContent =
+            "WINSTON NUCLEAR POWERPLANT";
+
+        barHint.textContent =
+            "ENTER THE BUILDING.";
+
+        return;
     }
 
-    else if ( scene === "work" )
-    { locationLabel.textContent = "WORK";
-        barLocation.textContent = "WORK";
-        sceneName.textContent = "AT WORK";
-        barHint.textContent = "JIM IS WAVING AT U.";
-        document .querySelectorAll( ".work-hotspot" )
+    if (
+        scene === "work"
+    ) {
 
-            .forEach( hotspot =>
-            { hotspot.classList.remove( "hidden" ); } ); }
+        document
+            .getElementById("work")
+            .classList.remove("hidden");
 
-    else if (scene === "work_after") {
+        locationLabel.textContent =
+            "WORK";
 
-        locationLabel.textContent = "WORK";
-        barLocation.textContent = "WORK";
-        sceneName.textContent = "WORK";
-        barHint.textContent = "WORK FINISHED.";
+        barLocation.textContent =
+            "WORK";
 
-        /* Jim en boss blijven beschikbaar. */
+        sceneName.textContent =
+            "AT WORK";
 
-        hotspotJim.classList.remove( "hidden" );
-        hotspotBoss.classList.remove( "hidden" );
+        barHint.textContent =
+            "JIM IS WAVING AT U.";
 
-        /* Nu verschijnen ook:
-         - Go home
-          - Go bar */
-        document .querySelectorAll( ".after-work-hotspot" )
-            .forEach( hotspot =>
-                { hotspot.classList.remove( "hidden" );
-                }
-            ); }
+        return;
+    }
 
+    if (
+        scene === "work_after"
+    ) {
 
-    showNormalBar();
+        document
+            .getElementById("work")
+            .classList.remove("hidden");
+
+        locationLabel.textContent =
+            "WORK";
+
+        barLocation.textContent =
+            "WORK";
+
+        sceneName.textContent =
+            "WORK";
+
+        barHint.textContent =
+            "WORK FINISHED.";
+
+        hotspotHome?.classList.remove("hidden");
+        hotspotBar?.classList.remove("hidden");
+    }
 }
-
-/* =========================================
-   NORMAL BAR
-========================================= */
 
 export function showNormalBar() {
 
-    gameState.dialogueActive = false;
-    gameState.currentNodeId = null;
-    gameState.selectedOption = 0;
-    gameState.inputLocked = false;
-    gameState.waitingForContinue = false;
-    gameState.pendingOption = null;
+    gameState.dialogueActive =
+        false;
+
+    gameState.currentNodeId =
+        null;
+
+    gameState.selectedOption =
+        0;
+
+    gameState.inputLocked =
+        false;
+
+    gameState.waitingForContinue =
+        false;
+
+    gameState.pendingOption =
+        null;
 
     bottomBar.classList.remove(
         "player-speaking",
@@ -162,33 +199,33 @@ export function showNormalBar() {
         "waiting"
     );
 
-    normalBar.classList.remove("hidden");
+    normalBar.classList.remove(
+        "hidden"
+    );
 
-    dialogueContent.classList.add("hidden");
+    dialogueContent.classList.add(
+        "hidden"
+    );
 
-    dialogueOptions.innerHTML = "";
+    dialogueOptions.innerHTML =
+        "";
 
     dialogueHelp.textContent =
         "↑ ↓ SELECT   ENTER / 1-4";
 }
-export function hideAllHotspots() {
 
-    document
-        .querySelectorAll(allHotspots)
-        .forEach(hotspot => {
-            hotspot.classList.add("hidden");
-        });
-}
-export function showBreakfastOverlay(nodeId) {
+export function showBreakfastOverlay(
+    nodeId
+) {
 
-    if (!breakfastOverlay) {
+    if (
+        !breakfastOverlay
+    ) {
         return;
     }
 
-    if (nodeId === "eat") {
-        breakfastOverlay.classList.remove("hidden");
-    }
-    else {
-        breakfastOverlay.classList.add("hidden");
-    }
+    breakfastOverlay.classList.toggle(
+        "hidden",
+        nodeId !== "eat"
+    );
 }

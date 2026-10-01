@@ -28,15 +28,15 @@
               CARAVAN SCENE INSIDE
         ====================================== -->
 <div class="game-scene" id="caravanScene">
-<img alt="" class="Background" src="../../images/Home_Base.png"/>
-<button class="Bed" id="hotspot-bed" type="button"></button>
+<img alt="" class="Background" src="../../images/Erwin1.png"/>
+<!-- <button class="Bed" id="hotspot-bed" type="button"></button>
 <img alt="" class="Overlay BedOverlay" src="../../images/Home_bed.png"/>
 <button class="Computer" id="hotspot-computer" type="button"></button>
 <img alt="" class="Overlay ComputerOverlay" src="../../images/Home_Computer.png"/>
 <button class="Breakfast" id="hotspot-breakfast" type="button"></button>
 <img alt="" class="Overlay BreakfastOverlay hidden" src="../../images/Breakfast.png"/>
 <button class="Kitchen" id="hotspot-kitchen" type="button"></button>
-<img alt="" class="Overlay KitchenOverlay" src="../../images/Home_kitchen.png"/>
+<img alt="" class="Overlay KitchenOverlay" src="../../images/Home_kitchen.png"/> -->
 </div>
 <!-- =====================================
             CARAVAN SCENE OUTSIDE during DAY (Only hotspot is the door)
