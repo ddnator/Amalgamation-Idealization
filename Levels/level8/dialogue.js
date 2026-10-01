@@ -56,8 +56,8 @@ const dialogueTree = {
     ====================================== */
 
     level_start: {
-        speaker:"NARRATOR",
-        text:"You confront your AI boss",
+        speaker: "NARRATOR",
+        text: "You confront your AI boss",
 
         options: [
             {
@@ -74,8 +74,8 @@ const dialogueTree = {
     },
 
     antagonist_AI: {
-        speaker:"AI",
-        text:"Why are you not working!?",
+        speaker: "AI",
+        text: "Why are you not working!?",
 
         options: [
             {
@@ -91,8 +91,8 @@ const dialogueTree = {
         ]
     },
     laughing_AI: {
-        speaker:"AI",
-        text:"Ha ha ha, you little human can not do anything!",
+        speaker: "AI",
+        text: "Ha ha ha, you little human can not do anything!",
 
         options: [
             {
@@ -109,10 +109,10 @@ const dialogueTree = {
     },
 
     game_complete: {
-        speaker:"",
-        text:"",
-        speaker:"Y/N",
-        text:"I did it...",
+        speaker: "",
+        text: "",
+        speaker: "Y/N",
+        text: "I did it...",
 
         options: [
             {
@@ -156,7 +156,7 @@ const dialogueTree = {
 
     end3: {
         speaker: "Y/N",
-        text: "I need to contact the Stefanie. The rebellion needs to know that the AI can be beaten",
+        text: "I need to contact Stefanie. The rebellion needs to know that the AI can be beaten",
 
         options: [
             {
@@ -195,7 +195,7 @@ const dialogueTree = {
 
     end6: {
         speaker: "Y/N",
-        text: "For the first time in my life, I feel like I'm in controll agains.",
+        text: "For the first time in my life, I feel like I'm in control again.",
 
         options: [
             {
@@ -205,7 +205,7 @@ const dialogueTree = {
             }
         ]
     },
-    
+
     // end7: {
     //     speaker: "Y/N",
     //     text: "The end, thanks for playing our game!",
@@ -260,14 +260,14 @@ function startLevel1() {
     );
 
     if (gameComplete === "done") {
-            startDialogue(
-                "game_complete"
-            );
-        } else {
-            startDialogue(
-                "level_start"
-            );
-        }
+        startDialogue(
+            "game_complete"
+        );
+    } else {
+        startDialogue(
+            "level_start"
+        );
+    }
 }
 
 
