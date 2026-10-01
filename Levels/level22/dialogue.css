@@ -1,5 +1,5 @@
 :root {
-    --bottom-bar-height: 180px;
+    --bottom-bar-height: 150px;
     --monitor-ratio: 1.3319672131;
     --bar-bg: #f4f4f1;
     --text: #53634d;
@@ -51,11 +51,6 @@ button {
 #fullscreen-toggle:hover {
     background: #f5f5f0;
     color: #111;
-}
-
-#fullscreen-toggle:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
 }
 
 #monitor-area {
@@ -117,15 +112,7 @@ button {
     z-index: 5;
 }
 
-#point-click-area {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #000;
-}
-
+#point-click-area,
 .game-scene {
     position: absolute;
     inset: 0;
@@ -135,7 +122,8 @@ button {
     background: #000;
 }
 
-.Background {
+.Background,
+.Overlay {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -144,7 +132,21 @@ button {
     object-fit: fill;
     object-position: center;
     image-rendering: pixelated;
+}
+
+.Background {
     z-index: 1;
+}
+
+.Overlay {
+    z-index: 12;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.BreakfastOverlay {
+    z-index: 15;
+    opacity: 1;
 }
 
 #hud {
@@ -166,12 +168,8 @@ button {
     pointer-events: none;
 }
 
-#hotspot-stephanie {
+.hotspot {
     position: absolute;
-    left: 22.46%;
-    top: 29.89%;
-    width: 18.46%;
-    height: 65.52%;
     z-index: 40;
     padding: 0;
     margin: 0;
@@ -179,23 +177,122 @@ button {
     outline: 0;
     background: transparent;
     cursor: pointer;
+    pointer-events: auto;
+    appearance: none;
 }
 
-#stephanie-hover {
-    position: absolute;
-    inset: 0;
+.bed-hotspot {
+    left: 37.953%;
+    top: 23.418%;
+    width: 28.145%;
+    height: 58.544%;
+}
+
+.computer-hotspot {
+    left: 62.047%;
+    top: 25%;
+    width: 21.535%;
+    height: 35.443%;
+}
+
+.kitchen-hotspot {
+    left: 0.213%;
+    top: 23.418%;
+    width: 43.71%;
+    height: 74.051%;
+}
+
+.exit-hotspot {
+    left: 0;
+    top: 62.658%;
     width: 100%;
-    height: 100%;
-    object-fit: fill;
-    image-rendering: pixelated;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 30;
+    height: 37.342%;
+    z-index: 35;
 }
 
-#hotspot-stephanie:hover + #stephanie-hover,
-#hotspot-stephanie:focus-visible + #stephanie-hover {
+.door-hotspot {
+    left: 0;
+    top: 21.379%;
+    width: 54.154%;
+    height: 78.621%;
+}
+
+.steven-hotspot {
+    left: 79.231%;
+    top: 61.663%;
+    width: 20.769%;
+    height: 35.335%;
+}
+
+.bar-door-hotspot {
+    left: 60.308%;
+    top: 35.104%;
+    width: 21.692%;
+    height: 50.115%;
+}
+
+.jim-hotspot {
+    left: 77.875%;
+    top: 21.111%;
+    width: 13.25%;
+    height: 72.889%;
+}
+
+.work-terminal-hotspot {
+    left: 32.125%;
+    top: 16.444%;
+    width: 33.75%;
+    height: 43.111%;
+}
+
+.boss-hotspot {
+    left: 3.375%;
+    top: 12.444%;
+    width: 23.625%;
+    height: 85.111%;
+}
+
+#hotspot-bed:hover + .BedOverlay,
+#hotspot-bed:focus-visible + .BedOverlay,
+#hotspot-computer:hover + .ComputerOverlay,
+#hotspot-computer:focus-visible + .ComputerOverlay,
+#hotspot-kitchen:hover + .KitchenOverlay,
+#hotspot-kitchen:focus-visible + .KitchenOverlay,
+#hotspot-exit:hover + .ExitOverlay,
+#hotspot-exit:focus-visible + .ExitOverlay,
+#hotspot-door:hover + .DoorOverlay,
+#hotspot-door:focus-visible + .DoorOverlay,
+#hotspot-steven:hover + .stevenOverlay,
+#hotspot-steven:focus-visible + .stevenOverlay,
+#hotspot-doorBar:hover + .doorBarOverlay,
+#hotspot-doorBar:focus-visible + .doorBarOverlay,
+#hotspot-jim:hover + .jimOverlay,
+#hotspot-jim:focus-visible + .jimOverlay,
+#hotspot-work:hover + .workOverlay,
+#hotspot-work:focus-visible + .workOverlay,
+#hotspot-boss:hover + .bossOverlay,
+#hotspot-boss:focus-visible + .bossOverlay {
     opacity: 1;
+}
+
+.after-work-hotspot {
+    position: absolute;
+    bottom: 18px;
+    z-index: 70;
+    padding: 7px 12px;
+    border: 3px solid #000;
+    background: #f4f4f1;
+    color: #53634d;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#hotspot-home {
+    left: 24px;
+}
+
+#hotspot-bar {
+    right: 24px;
 }
 
 #bottom-bar {
@@ -215,41 +312,41 @@ button {
 #normal-bar {
     position: absolute;
     inset: 0;
-    padding: 18px 26px;
+    padding: 18px 24px;
 }
 
 #bar-location {
     color: var(--accent);
-    font-size: 20px;
+    font-size: 19px;
 }
 
 #bar-hint {
     position: absolute;
-    left: 26px;
-    bottom: 18px;
+    left: 24px;
+    bottom: 17px;
     color: #606e5a;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 #dialogue-content {
     position: absolute;
     inset: 0;
-    padding: 16px 26px 30px;
+    padding: 15px 24px 28px;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
 #dialogue-speaker {
-    margin: 0 0 7px;
+    margin: 0 0 6px;
     color: var(--accent);
-    font-size: 20px;
+    font-size: 19px;
     line-height: 1;
     text-transform: uppercase;
 }
 
 #dialogue-text {
     max-width: 96%;
-    margin: 0 0 10px;
+    margin: 0 0 9px;
     color: var(--text);
     font-size: 19px;
     line-height: 1.2;
@@ -260,8 +357,8 @@ button {
 #dialogue-options {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 34px;
-    row-gap: 4px;
+    column-gap: 30px;
+    row-gap: 3px;
     width: 100%;
     margin-top: 4px;
 }
@@ -273,7 +370,7 @@ button {
     width: 100%;
     min-width: 0;
     margin: 0;
-    padding: 3px 5px 3px 32px;
+    padding: 2px 5px 2px 31px;
     border: 0;
     background: transparent;
     color: var(--text);
@@ -293,8 +390,8 @@ button {
 .dialogue-option.selected::before {
     content: ">";
     position: absolute;
-    left: 7px;
-    top: 3px;
+    left: 6px;
+    top: 2px;
     color: var(--accent-bright);
 }
 
@@ -314,6 +411,14 @@ button {
     pointer-events: none;
 }
 
+#bottom-bar.player-speaking {
+    border-top-color: var(--accent);
+}
+
+#bottom-bar.waiting #dialogue-help {
+    color: var(--accent);
+}
+
 #start-screen {
     position: absolute;
     inset: 0;
@@ -324,30 +429,23 @@ button {
     background: #000;
 }
 
-.start-menu {
-    width: min(620px, 88vw);
-    padding: 30px;
+.screen {
+    width: min(650px, 90vw);
     color: #eee;
 }
 
-.start-menu .tiny {
+.screen .tiny {
     color: #777771;
     font-size: 12px;
 }
 
-.start-menu h1 {
-    margin: 5px 0 12px;
+.screen h1 {
+    margin: 5px 0 25px;
     color: var(--accent);
-    font-size: 50px;
+    font-size: 47px;
 }
 
-.start-menu p {
-    margin: 0 0 28px;
-    color: #777;
-    font-size: 16px;
-}
-
-.start-menu button {
+.screen button {
     padding: 0;
     border: 0;
     background: transparent;
@@ -356,8 +454,37 @@ button {
     cursor: pointer;
 }
 
-.start-menu button:hover {
+.screen button:hover {
     color: var(--accent-bright);
+}
+
+#minigame-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: #000;
+}
+
+#reactor-minigame-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #000;
+}
+
+#minigame-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 20001;
+    padding: 7px 11px;
+    border: 1px solid #fff;
+    background: #000;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
 }
 
 .hidden {
@@ -398,7 +525,7 @@ button {
 
 @media (max-width: 1000px) {
     :root {
-        --bottom-bar-height: 190px;
+        --bottom-bar-height: 170px;
     }
 
     #dialogue-options {
@@ -427,7 +554,7 @@ button {
 
 @media (max-width: 700px) {
     :root {
-        --bottom-bar-height: 210px;
+        --bottom-bar-height: 190px;
     }
 
     #hud {
@@ -438,7 +565,7 @@ button {
     }
 
     #dialogue-content {
-        padding: 12px 13px 27px;
+        padding: 11px 12px 25px;
     }
 
     #dialogue-speaker,

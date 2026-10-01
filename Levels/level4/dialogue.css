@@ -1,733 +1,1852 @@
+/* =========================================================
+   LEVEL 1
+
+   NORMAL:
+   - monitor zichtbaar
+   - dialogue buiten monitor
+
+   FULLSCREEN:
+   - monitor-overlay weg
+   - game gebruikt volledig bovenste scherm
+   - dialogue blijft onderaan
+========================================================= */
+
+
 :root {
-    --bar-height: 125px;
 
-    --black: #000000;
-    --dark: #070707;
+    --bottom-bar-height:
+        150px;
 
-    --white: #eeeeE6;
 
-    --green: #47d92f;
-    --dark-green: #1f7218;
+    --monitor-ratio:
+        1.33178654;
 
-    --gray: #707069;
+
+    --white:
+        #f4f4f1;
+
+
+    --text:
+        #53634d;
+
+
+    --red:
+        #b85f53;
+
+
+    --red-bright:
+        #ee806f;
+
 }
 
 
-/* =========================================
+/* =========================================================
    RESET
-========================================= */
+========================================================= */
 
 * {
-    box-sizing: border-box;
+
+    box-sizing:
+        border-box;
+
 }
 
 
 html,
 body {
-    margin: 0;
-    padding: 0;
 
-    width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-
-    background: #000;
-}
-
-
-body {
-    font-family:
-        "Pixelify Sans",
-        monospace;
-
-    color:
-        var(--white);
-}
-
-
-/* =========================================
-   GAME
-========================================= */
-
-#game {
-    position: relative;
-
-    width: 100vw;
-    height: 100vh;
-
-    overflow: hidden;
-
-    background: #000;
-}
-
-
-/* =========================================
-   POINT AND CLICK AREA
-========================================= */
-
-#point-click-area {
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height:
-        calc(
-            100vh -
-            var(--bar-height)
-        );
-
-    overflow: hidden;
-
-    background: #101010;
-
-    z-index: 1;
-}
-
-
-/* =========================================
-   HUD
-========================================= */
-
-#hud {
-    position: absolute;
-
-    top: 14px;
-    left: 18px;
-    right: 18px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    color:
-        var(--green);
-
-    font-size:
-        17px;
-
-    z-index:
-        50;
-
-    pointer-events:
-        none;
-}
-
-
-/* =========================================
-   SCENE
-========================================= */
-
-#caravanScene {
-    position: absolute;
-
-    inset: 0;
-
-    overflow: hidden;
-
-    background:
-        #101010;
-}
-
-
-#scene-name {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    color:
-        #202020;
-
-    font-size:
-        clamp(
-            55px,
-            9vw,
-            120px
-        );
-
-    pointer-events:
-        none;
-
-    user-select:
-        none;
-}
-
-
-/* =========================================
-   HOTSPOTS
-========================================= */
-
-.hotspot {
-    position: absolute;
-
-    padding:
-        6px 9px;
-
-    border:
-        2px solid var(--green);
-
-    border-radius:
+    margin:
         0;
 
-    background:
-        rgba(0, 0, 0, 0.35);
+    padding:
+        0;
 
-    color:
-        var(--green);
-
-    font-family:
-        "Pixelify Sans",
-        monospace;
-
-    font-size:
-        15px;
-
-    cursor:
-        pointer;
-
-    z-index:
-        20;
-}
-
-
-.hotspot:hover {
-    background:
-        var(--green);
-
-    color:
-        #000;
-}
-
-
-/* =========================================
-   HOME HOTSPOTS
-========================================= */
-
-#hotspot-bed {
-    left: 45%;
-    bottom: 24%;
-    padding: 5rem;
-    padding-top: 12rem;
-}
-
-
-#hotspot-kitchen {
-    right: 70%;
-    top: 20%;
-    padding: 10rem;
-    padding-top: 12rem;
-
-}
-
-
-#hotspot-computer {
-    right: 20%;
-    top: 10%; !important;
-    padding: 6rem;
-}
-
-
-#hotspot-door {
-    right: 10%;
-    bottom: 18%;
-}
-
-
-/* =========================================
-   WORK HOTSPOTS
-========================================= */
-
-#hotspot-jim {
-    left: 18%;
-    bottom: 24%;
-}
-
-
-#hotspot-boss {
-    right: 14%;
-    top: 25%;
-}
-
-
-#hotspot-work {
-    left: 50%;
-    bottom: 18%;
-
-    transform:
-        translateX(-50%);
-}
-
-
-/* =========================================
-   AFTER WORK HOTSPOTS
-========================================= */
-
-#hotspot-home {
-    left: 30%;
-    bottom: 14%;
-}
-
-
-#hotspot-bar {
-    right: 30%;
-    bottom: 14%;
-}
-
-
-/* =========================================
-   BOTTOM BAR
-========================================= */
-
-#bottom-bar {
-    position: absolute;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
+    width:
+        100%;
 
     height:
-        var(--bar-height);
-
-    background:
-        #030303;
-
-    border-top:
-        4px solid var(--white);
+        100%;
 
     overflow:
         hidden;
 
-    z-index:
-        100;
-}
-
-
-/* =========================================
-   NORMAL BAR
-========================================= */
-
-#normal-bar {
-    position: absolute;
-
-    inset: 0;
-
-    padding:
-        18px 24px;
-}
-
-
-#bar-location {
-    color:
-        var(--green);
-
-    font-size:
-        19px;
-}
-
-
-#bar-hint {
-    position: absolute;
-
-    left: 24px;
-    bottom: 18px;
-
-    color:
-        #55554f;
-
-    font-size:
-        14px;
-}
-
-
-/* =========================================
-   DIALOGUE
-========================================= */
-
-#dialogue-content {
-    position: absolute;
-
-    inset: 0;
-
-    padding:
-        14px 22px 28px 22px;
-
-    cursor:
-        default;
-}
-
-
-/* =========================================
-   SPEAKER
-========================================= */
-
-#dialogue-speaker {
-    margin-bottom:
-        6px;
-
-    color:
-        var(--green);
-
-    font-size:
-        19px;
-
-    text-transform:
-        uppercase;
-}
-
-
-/* =========================================
-   TEXT
-========================================= */
-
-#dialogue-text {
-    min-height:
-        55px;
-
-    max-width:
-        96%;
-
-    color:
-        var(--white);
-
-    font-size:
-        20px;
-
-    line-height:
-        1.15;
-
-    white-space:
-        pre-line;
-}
-
-
-/* =========================================
-   OPTIONS
-========================================= */
-
-#dialogue-options {
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    column-gap:
-        25px;
-
-    row-gap:
-        2px;
-
-    margin-top:
-        6px;
-}
-
-
-.dialogue-option {
-    position: relative;
-
-    width: 100%;
-
-    padding:
-        2px 4px 2px 32px;
-
-    border:
-        0;
-
-    border-radius:
-        0;
-
     background:
-        transparent;
+        #000;
 
-    color:
-        var(--white);
+}
+
+
+body {
 
     font-family:
         "Pixelify Sans",
         monospace;
 
-    font-size:
-        16px;
-
-    text-align:
-        left;
-
-    cursor:
-        pointer;
 }
 
 
-.dialogue-option:hover {
-    color:
-        var(--green);
-}
+/* =========================================================
+   GAME
+========================================================= */
 
+#game {
 
-.dialogue-option.selected {
-    color:
-        var(--green);
-}
-
-
-.dialogue-option.selected::before {
-    content: ">";
-
-    position: absolute;
-
-    left: 6px;
-
-    color:
-        var(--green);
-}
-
-
-.option-number {
-    display:
-        inline-block;
+    position:
+        relative;
 
     width:
-        25px;
+        100vw;
 
-    color:
-        var(--gray);
-}
+    height:
+        100vh;
 
-
-.dialogue-option.selected .option-number {
-    color:
-        var(--green);
-}
-
-
-/* =========================================
-   PLAYER SPEAKING
-========================================= */
-
-#bottom-bar.player-speaking {
-    border-top-color:
-        var(--green);
-}
-
-
-#bottom-bar.player-speaking #dialogue-speaker {
-    color:
-        var(--white);
-}
-
-
-/* =========================================
-   WAITING FOR CONTINUE
-========================================= */
-
-#bottom-bar.waiting {
-    cursor:
-        pointer;
-}
-
-
-#bottom-bar.waiting #dialogue-help {
-    color:
-        var(--green);
-}
-
-
-/* =========================================
-   HELP
-========================================= */
-
-#dialogue-help {
-    position: absolute;
-
-    right: 18px;
-    bottom: 7px;
-
-    color:
-        #4b4b47;
-
-    font-size:
-        11px;
-}
-
-
-/* =========================================
-   START / MINIGAME / END
-========================================= */
-
-#start-screen,
-#minigame-screen,
-#end-screen {
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-
-    justify-content:
-        center;
-
-    align-items:
-        center;
+    overflow:
+        hidden;
 
     background:
         #000;
 
+}
+
+
+/* =========================================================
+   FULLSCREEN BUTTON
+========================================================= */
+
+#fullscreen-toggle {
+
+    position:
+        fixed;
+
+    top:
+        14px;
+
+    right:
+        18px;
+
     z-index:
-        500;
-}
+        10000;
 
 
-/* =========================================
-   REACTOR MINIGAME
-========================================= */
-
-#minigame-screen {
     padding:
-        0;
-}
+        7px 11px;
 
-
-#reactor-minigame-frame {
-    display:
-        block;
-
-    width:
-        100%;
-
-    height:
-        100%;
 
     border:
-        0;
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.65
+        );
+
 
     background:
-        #fff;
-}
+        rgba(
+            0,
+            0,
+            0,
+            0.72
+        );
 
-
-/* =========================================
-   SCREENS
-========================================= */
-
-.screen {
-    width:
-        min(650px, 90vw);
-}
-
-
-.screen .tiny {
-    color:
-        #62625d;
-
-    font-size:
-        12px;
-}
-
-
-.screen h1 {
-    margin:
-        5px 0 25px 0;
 
     color:
-        var(--green);
+        #f5f5f0;
 
-    font-size:
-        47px;
-}
-
-
-.screen p {
-    margin-bottom:
-        25px;
-
-    font-size:
-        20px;
-}
-
-
-.screen button {
-    padding:
-        0;
-
-    border:
-        0;
-
-    background:
-        transparent;
-
-    color:
-        var(--white);
 
     font-family:
         "Pixelify Sans",
         monospace;
 
+
     font-size:
-        22px;
+        14px;
+
+
+    line-height:
+        1;
+
 
     cursor:
         pointer;
+
+
+    text-shadow:
+        1px 1px 0
+        #000;
+
+
+    backdrop-filter:
+        blur(
+            2px
+        );
+
+}
+
+
+#fullscreen-toggle:hover {
+
+    background:
+        #f5f5f0;
+
+
+    color:
+        #111;
+
+
+    text-shadow:
+        none;
+
+}
+
+
+#fullscreen-toggle:focus-visible {
+
+    outline:
+        2px solid
+        #fff;
+
+
+    outline-offset:
+        2px;
+
+}
+
+
+/* =========================================================
+   MONITOR AREA
+========================================================= */
+
+#monitor-area {
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        0;
+
+    right:
+        0;
+
+
+    bottom:
+        var(--bottom-bar-height);
+
+
+    display:
+        flex;
+
+
+    align-items:
+        center;
+
+
+    justify-content:
+        center;
+
+
+    overflow:
+        hidden;
+
+
+    background:
+        #000;
+
+
+    z-index:
+        1;
+
+}
+
+
+/* =========================================================
+   MONITOR SHELL
+========================================================= */
+
+#monitor-shell {
+
+    position:
+        relative;
+
+
+    height:
+        min(
+            100%,
+            calc(
+                100vw /
+                var(--monitor-ratio)
+            )
+        );
+
+
+    width:
+        min(
+            100%,
+            calc(
+                (
+                    100vh -
+                    var(--bottom-bar-height)
+                )
+                *
+                var(--monitor-ratio)
+            )
+        );
+
+
+    aspect-ratio:
+        574 / 431;
+
+
+    flex:
+        0 0 auto;
+
+
+    overflow:
+        hidden;
+
+
+    background:
+        transparent;
+
+}
+
+
+/* =========================================================
+   MONITOR FRAME
+========================================================= */
+
+#monitor-frame {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    width:
+        100%;
+
+
+    height:
+        100%;
+
+
+    display:
+        block;
+
+
+    object-fit:
+        fill;
+
+
+    pointer-events:
+        none;
+
+
+    user-select:
+        none;
+
+
+    z-index:
+        100;
+
+}
+
+
+/* =========================================================
+   MONITOR VIEWPORT
+========================================================= */
+
+#monitor-viewport {
+
+    position:
+        absolute;
+
+
+    left:
+        2.44%;
+
+
+    top:
+        2.78%;
+
+
+    right:
+        2.96%;
+
+
+    bottom:
+        4.87%;
+
+
+    overflow:
+        hidden;
+
+
+    background:
+        #000;
+
+
+    border-radius:
+        1.6%;
+
+
+    z-index:
+        5;
+
+}
+
+
+/* =========================================================
+   POINT CLICK AREA
+========================================================= */
+
+#point-click-area {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    width:
+        100%;
+
+
+    height:
+        100%;
+
+
+    overflow:
+        hidden;
+
+
+    background:
+        transparent;
+
+}
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+#hud {
+
+    position:
+        absolute;
+
+
+    top:
+        12px;
+
+
+    left:
+        16px;
+
+
+    right:
+        16px;
+
+
+    display:
+        flex;
+
+
+    align-items:
+        center;
+
+
+    justify-content:
+        space-between;
+
+
+    color:
+        #f5f5f0;
+
+
+    font-size:
+        16px;
+
+
+    line-height:
+        1;
+
+
+    text-shadow:
+        1px 1px 0 #000,
+        -1px 1px 0 #000;
+
+
+    pointer-events:
+        none;
+
+
+    z-index:
+        60;
+
+}
+
+
+#scene-name,
+#location-label {
+
+    color:
+        #f5f5f0;
+
+}
+
+
+/* =========================================================
+   SCENES
+========================================================= */
+
+.game-scene,
+#caravanScene,
+#caravanSceneOutside,
+#walkingToWorkDay,
+#OutsideWorkDay,
+#work,
+#jim1,
+#jim2,
+#jim3,
+#jim4,
+#boss {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    width:
+        100%;
+
+
+    height:
+        100%;
+
+
+    overflow:
+        hidden;
+
+
+    background:
+        transparent;
+
+}
+
+
+/* =========================================================
+   SCENE IMAGE
+
+   fill betekent:
+
+   - niets afgesneden
+   - geen balken binnen scherm
+========================================================= */
+
+.game-scene > img.Background,
+#caravanScene > img.Background,
+#caravanSceneOutside > img.Background,
+#walkingToWorkDay > img.Background,
+#OutsideWorkDay > img.Background,
+#work > img.Background,
+#jim1 > img.Background,
+#jim2 > img.Background,
+#jim3 > img.Background,
+#jim4 > img.Background,
+#boss > img.Background {
+
+    position:
+        absolute !important;
+
+
+    inset:
+        0 !important;
+
+
+    width:
+        100% !important;
+
+
+    height:
+        100% !important;
+
+
+    display:
+        block !important;
+
+
+    object-fit:
+        fill !important;
+
+
+    object-position:
+        center center !important;
+
+
+    image-rendering:
+        pixelated;
+
+
+    filter:
+        none !important;
+
+
+    background:
+        transparent !important;
+
+
+    z-index:
+        0 !important;
+
+}
+
+
+/* =========================================================
+   OVERLAYS
+========================================================= */
+
+.game-scene > img.Overlay {
+
+    position:
+        absolute !important;
+
+
+    inset:
+        0 !important;
+
+
+    width:
+        100% !important;
+
+
+    height:
+        100% !important;
+
+
+    display:
+        block;
+
+
+    object-fit:
+        fill !important;
+
+
+    object-position:
+        center center !important;
+
+
+    image-rendering:
+        pixelated;
+
+
+    filter:
+        none !important;
+
+
+    pointer-events:
+        none !important;
+
+
+    z-index:
+        5 !important;
+
+}
+
+
+#point-click-area > img.Overlay {
+
+    position:
+        absolute !important;
+
+
+    inset:
+        0 !important;
+
+
+    width:
+        100% !important;
+
+
+    height:
+        100% !important;
+
+
+    object-fit:
+        fill !important;
+
+
+    pointer-events:
+        none !important;
+
+
+    z-index:
+        5 !important;
+
+}
+
+
+/* =========================================================
+   HOME HOTSPOTS
+
+   Pixel detection gebeurt via hotspots.js.
+========================================================= */
+
+#hotspot-bed,
+#hotspot-kitchen,
+#hotspot-computer,
+#hotspot-breakfast {
+
+    position:
+        absolute !important;
+
+
+    left:
+        0 !important;
+
+
+    top:
+        0 !important;
+
+
+    width:
+        0 !important;
+
+
+    height:
+        0 !important;
+
+
+    right:
+        auto !important;
+
+
+    bottom:
+        auto !important;
+
+
+    padding:
+        0 !important;
+
+
+    margin:
+        0 !important;
+
+
+    border:
+        0 !important;
+
+
+    outline:
+        0 !important;
+
+
+    background:
+        transparent !important;
+
+
+    pointer-events:
+        none !important;
+
+}
+
+
+/* =========================================================
+   ANDERE HOTSPOTS
+========================================================= */
+
+#hotspot-door,
+#hotspot-jim,
+#hotspot-work,
+#hotspot-boss,
+.Door,
+.jim,
+.work,
+.boss {
+
+    z-index:
+        40 !important;
+
+}
+
+
+/* =========================================================
+   DIALOGUE
+========================================================= */
+
+#bottom-bar {
+
+    position:
+        absolute;
+
+
+    left:
+        0;
+
+
+    right:
+        0;
+
+
+    bottom:
+        0;
+
+
+    width:
+        100%;
+
+
+    height:
+        var(--bottom-bar-height);
+
+
+    overflow:
+        hidden;
+
+
+    background:
+        #f4f4f1;
+
+
+    border-top:
+        3px solid #647859;
+
+
+    color:
+        var(--text);
+
+
+    z-index:
+        200;
+
+}
+
+
+/* =========================================================
+   NORMAL BAR
+========================================================= */
+
+#normal-bar {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    padding:
+        18px 24px;
+
+}
+
+
+#bar-location {
+
+    color:
+        var(--red);
+
+
+    font-size:
+        19px;
+
+}
+
+
+#bar-hint {
+
+    position:
+        absolute;
+
+
+    left:
+        24px;
+
+
+    bottom:
+        17px;
+
+
+    color:
+        #606e5a;
+
+
+    font-size:
+        13px;
+
+}
+
+
+/* =========================================================
+   DIALOGUE CONTENT
+========================================================= */
+
+#dialogue-content {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    padding:
+        15px 24px 28px 24px;
+
+
+    overflow-x:
+        hidden;
+
+
+    overflow-y:
+        auto;
+
+}
+
+
+/* =========================================================
+   SPEAKER
+========================================================= */
+
+#dialogue-speaker {
+
+    margin:
+        0 0 6px 0;
+
+
+    color:
+        var(--red);
+
+
+    font-size:
+        19px;
+
+
+    line-height:
+        1;
+
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* =========================================================
+   DIALOGUE TEXT
+========================================================= */
+
+#dialogue-text {
+
+    max-width:
+        96%;
+
+
+    margin:
+        0 0 9px 0;
+
+
+    color:
+        var(--text);
+
+
+    font-size:
+        19px;
+
+
+    line-height:
+        1.2;
+
+
+    white-space:
+        pre-line;
+
+
+    overflow-wrap:
+        break-word;
+
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+#dialogue-options {
+
+    display:
+        grid;
+
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+
+    column-gap:
+        30px;
+
+
+    row-gap:
+        3px;
+
+
+    width:
+        100%;
+
+
+    margin-top:
+        4px;
+
+}
+
+
+/* =========================================================
+   OPTION
+========================================================= */
+
+.dialogue-option {
+
+    position:
+        relative;
+
+
+    display:
+        flex;
+
+
+    align-items:
+        flex-start;
+
+
+    width:
+        100%;
+
+
+    min-width:
+        0;
+
+
+    margin:
+        0;
+
+
+    padding:
+        2px 5px 2px 31px;
+
+
+    border:
+        0;
+
+
+    border-radius:
+        0;
+
+
+    background:
+        transparent;
+
+
+    color:
+        var(--text);
+
+
+    font-family:
+        "Pixelify Sans",
+        monospace;
+
+
+    font-size:
+        15px;
+
+
+    line-height:
+        1.2;
+
+
+    text-align:
+        left;
+
+
+    white-space:
+        normal;
+
+
+    overflow-wrap:
+        anywhere;
+
+
+    cursor:
+        pointer;
+
+}
+
+
+.dialogue-option:hover {
+
+    color:
+        var(--red-bright);
+
+}
+
+
+.dialogue-option.selected {
+
+    color:
+        var(--red);
+
+}
+
+
+.dialogue-option.selected::before {
+
+    content:
+        ">";
+
+
+    position:
+        absolute;
+
+
+    left:
+        6px;
+
+
+    top:
+        2px;
+
+
+    color:
+        var(--red);
+
+}
+
+
+.option-number {
+
+    display:
+        inline-block;
+
+
+    flex:
+        0 0 25px;
+
+
+    width:
+        25px;
+
+
+    color:
+        #71806a;
+
+}
+
+
+.dialogue-option.selected
+.option-number {
+
+    color:
+        var(--red);
+
+}
+
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+#bottom-bar.player-speaking {
+
+    border-top-color:
+        var(--red);
+
+}
+
+
+#bottom-bar.player-speaking
+#dialogue-speaker {
+
+    color:
+        var(--text);
+
+}
+
+
+/* =========================================================
+   WAITING
+========================================================= */
+
+#bottom-bar.waiting {
+
+    cursor:
+        pointer;
+
+}
+
+
+#bottom-bar.waiting
+#dialogue-help {
+
+    color:
+        var(--red);
+
+}
+
+
+/* =========================================================
+   HELP
+========================================================= */
+
+#dialogue-help {
+
+    position:
+        absolute;
+
+
+    right:
+        16px;
+
+
+    bottom:
+        7px;
+
+
+    color:
+        #687562;
+
+
+    font-size:
+        9px;
+
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =========================================================
+   DIALOGUE OPEN
+========================================================= */
+
+#bottom-bar.dialogue-open {
+
+    height:
+        var(--bottom-bar-height);
+
+}
+
+
+/* =========================================================
+   FULLSCREEN GAME MODE
+
+   Wordt door fullscreen.js toegevoegd.
+
+   Monitor-overlay volledig weg.
+
+   Monitor viewport gebruikt volledige bovenste ruimte.
+========================================================= */
+
+#game.game-fullscreen-mode
+#monitor-area {
+
+    align-items:
+        stretch;
+
+
+    justify-content:
+        stretch;
+
+
+    background:
+        #000;
+
+}
+
+
+/* =========================================================
+   SHELL WORDT VOLLEDIG SCHERM
+========================================================= */
+
+#game.game-fullscreen-mode
+#monitor-shell {
+
+    width:
+        100%;
+
+
+    height:
+        100%;
+
+
+    max-width:
+        none;
+
+
+    max-height:
+        none;
+
+
+    aspect-ratio:
+        auto;
+
+
+    flex:
+        1 1 auto;
+
+}
+
+
+/* =========================================================
+   MONITOR RAND VERBERGEN
+========================================================= */
+
+#game.game-fullscreen-mode
+#monitor-frame {
+
+    display:
+        none !important;
+
+}
+
+
+/* =========================================================
+   VIEWPORT VULT HELE GAME AREA
+========================================================= */
+
+#game.game-fullscreen-mode
+#monitor-viewport {
+
+    left:
+        0;
+
+
+    top:
+        0;
+
+
+    right:
+        0;
+
+
+    bottom:
+        0;
+
+
+    width:
+        100%;
+
+
+    height:
+        100%;
+
+
+    border-radius:
+        0;
+
+}
+
+
+/* =========================================================
+   FULLSCREEN HUD
+
+   Beetje extra ruimte zodat fullscreen button
+   rechtsboven niet over HOME heen valt.
+========================================================= */
+
+#game.game-fullscreen-mode
+#hud {
+
+    right:
+        170px;
+
+}
+
+
+/* =========================================================
+   FULLSCREEN BUTTON IN FULLSCREEN MODE
+========================================================= */
+
+#game.game-fullscreen-mode
+#fullscreen-toggle {
+
+    background:
+        rgba(
+            0,
+            0,
+            0,
+            0.78
+        );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+#start-screen {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    display:
+        flex;
+
+
+    justify-content:
+        center;
+
+
+    align-items:
+        center;
+
+
+    background:
+        #000;
+
+
+    z-index:
+        500;
+
+}
+
+
+.screen {
+
+    width:
+        min(
+            650px,
+            90vw
+        );
+
+
+    color:
+        #eee;
+
+}
+
+
+.screen .tiny {
+
+    color:
+        #777771;
+
+
+    font-size:
+        12px;
+
+}
+
+
+.screen h1 {
+
+    margin:
+        5px 0 25px 0;
+
+
+    color:
+        var(--red);
+
+
+    font-size:
+        47px;
+
+}
+
+
+.screen p {
+
+    margin-bottom:
+        25px;
+
+
+    color:
+        #eee;
+
+
+    font-size:
+        20px;
+
+}
+
+
+.screen button {
+
+    padding:
+        0;
+
+
+    border:
+        0;
+
+
+    background:
+        transparent;
+
+
+    color:
+        #eee;
+
+
+    font-family:
+        "Pixelify Sans",
+        monospace;
+
+
+    font-size:
+        22px;
+
+
+    cursor:
+        pointer;
+
 }
 
 
 .screen button:hover {
+
     color:
-        var(--green);
+        var(--red-bright);
+
 }
 
 
-/* =========================================
+/* =========================================================
+   MINIGAME
+========================================================= */
+
+#minigame-screen {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    display:
+        flex;
+
+
+    justify-content:
+        center;
+
+
+    align-items:
+        center;
+
+
+    padding:
+        0;
+
+
+    background:
+        #000;
+
+
+    z-index:
+        500;
+
+}
+
+
+#reactor-minigame-frame {
+
+    display:
+        block;
+
+
+    width:
+        100%;
+
+
+    height:
+        100%;
+
+
+    margin:
+        0;
+
+
+    padding:
+        0;
+
+
+    border:
+        0;
+
+
+    background:
+        #fff;
+
+}
+
+
+/* =========================================================
+   END
+========================================================= */
+
+#end-screen {
+
+    position:
+        absolute;
+
+
+    inset:
+        0;
+
+
+    display:
+        flex;
+
+
+    justify-content:
+        center;
+
+
+    align-items:
+        center;
+
+
+    background:
+        #000;
+
+
+    z-index:
+        500;
+
+}
+
+
+/* =========================================================
    HIDDEN
-========================================= */
+========================================================= */
 
 .hidden {
+
     display:
         none !important;
+
 }
 
 
-/* =========================================
-   MOBILE
-========================================= */
+/* =========================================================
+   MEDIUM
+========================================================= */
 
-@media(max-width: 700px) {
+@media (
+    max-width:
+    1000px
+) {
 
     :root {
-        --bar-height:
-            250px;
+
+        --bottom-bar-height:
+            170px;
+
     }
 
 
     #dialogue-options {
+
         grid-template-columns:
             1fr;
+
+    }
+
+
+    #dialogue-speaker {
+
+        font-size:
+            17px;
+
     }
 
 
     #dialogue-text {
+
         font-size:
             17px;
+
     }
 
 
     .dialogue-option {
+
         font-size:
             14px;
+
     }
 
 
-    #scene-name {
-        font-size:
-            48px;
-    }
+    #fullscreen-toggle {
+
+        top:
+            10px;
 
 
-    .hotspot {
+        right:
+            10px;
+
+
         font-size:
             12px;
+
     }
+
+
+    #game.game-fullscreen-mode
+    #hud {
+
+        right:
+            145px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+    max-width:
+    700px
+) {
+
+    :root {
+
+        --bottom-bar-height:
+            190px;
+
+    }
+
+
+    #hud {
+
+        top:
+            7px;
+
+
+        left:
+            9px;
+
+
+        right:
+            9px;
+
+
+        font-size:
+            11px;
+
+    }
+
+
+    #dialogue-content {
+
+        padding:
+            11px 12px 25px 12px;
+
+    }
+
+
+    #dialogue-speaker {
+
+        font-size:
+            15px;
+
+    }
+
+
+    #dialogue-text {
+
+        font-size:
+            15px;
+
+    }
+
+
+    #dialogue-options {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .dialogue-option {
+
+        padding-left:
+            27px;
+
+
+        font-size:
+            12px;
+
+    }
+
+
+    #dialogue-help {
+
+        right:
+            8px;
+
+
+        bottom:
+            5px;
+
+
+        font-size:
+            8px;
+
+    }
+
+
+    #fullscreen-toggle {
+
+        padding:
+            6px 8px;
+
+
+        font-size:
+            10px;
+
+    }
+
+
+    #game.game-fullscreen-mode
+    #hud {
+
+        right:
+            115px;
+
+    }
+
 }

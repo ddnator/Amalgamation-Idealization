@@ -1,26 +1,34 @@
 import {
-    setScene, showBreakfastOverlay
+    setScene,
+    showBreakfastOverlay,
+    showNormalBar
 } from "./scene.js";
 
 import {
-    startDialogue,
+    startDialogue
 } from "./dialogue.js";
 
 import {
-    showNormalBar,
-} from "./scene.js";
+    gameState
+} from "./gameState.js";
 
-/*setScene("outside");
-startDialogue("outside_caravan"); */
+import {
+    minigameScreen,
+    reactorMinigameFrame,
+    hotspotWork,
+    barHint
+} from "./element.js";
+
+
 /* =========================================
    ACTIONS
 ========================================= */
-import {gameState} from "./gameState.js";
-import {minigameScreen, reactorMinigameFrame} from "./element.js";
 
 export function runAction(action) {
 
-    /* CLOSE */
+    /* =====================================
+       CLOSE
+    ====================================== */
 
     if (
         action === "close"
@@ -30,157 +38,308 @@ export function runAction(action) {
 
         return;
     }
-    /* LEAVE BREAKFAST */
+
+
+    /* =====================================
+       LEAVE BREAKFAST
+    ====================================== */
 
     if (
         action === "leave_breakfast"
     ) {
 
-        hideBreakfastOverlay();
+        showBreakfastOverlay(
+            null
+        );
+
 
         setScene(
             "outside"
         );
 
+
         startDialogue(
             "outside_caravan"
         );
+
 
         return;
     }
 
 
-    /* BACK FROM BREAKFAST */
+    /* =====================================
+       BACK FROM BREAKFAST
+    ====================================== */
 
     if (
         action === "back_breakfast"
     ) {
 
-        hideBreakfastOverlay();
+        showBreakfastOverlay(
+            null
+        );
+
 
         closeDialogue();
 
-        return;
-    }
-
-    if (action === "action_Outside") {
-
-        setScene("outside");
-
-        startDialogue("outside_caravan");
 
         return;
     }
 
-    if (action === "action_go_to_work") {
 
-        setScene("walkingToWorkDay");
+    /* =====================================
+       OUTSIDE HOME
+    ====================================== */
 
-        startDialogue("walk_to_work");
+    if (
+        action === "action_Outside"
+    ) {
+
+        showBreakfastOverlay(
+            null
+        );
+
+
+        setScene(
+            "outside"
+        );
+
+
+        startDialogue(
+            "outside_caravan"
+        );
+
 
         return;
     }
 
-    /* Winston Nuclear PowerPlant outside*/
 
-    if (action === "action_OutsideWorkDay") {
+    /* =====================================
+       WALK TO WORK
+    ====================================== */
 
-        setScene("OutsideWorkDay");
+    if (
+        action === "action_go_to_work"
+    ) {
 
-        startDialogue("winston_nuclear_powerplant");
+        setScene(
+            "walkingToWorkDay"
+        );
+
+
+        startDialogue(
+            "walk_to_work"
+        );
+
+
         return;
     }
-    /* ARRIVE AT WORK */
+
+
+    /* =====================================
+       OUTSIDE WORK
+    ====================================== */
+
+    if (
+        action === "action_OutsideWorkDay"
+    ) {
+
+        setScene(
+            "OutsideWorkDay"
+        );
+
+
+        startDialogue(
+            "winston_nuclear_powerplant"
+        );
+
+
+        return;
+    }
+
 
     if (
         action === "action_work"
     ) {
 
-        startDialogue("work");
+    
 
-        setScene("work");
+        if (
+            gameState.currentScene ===
+                "work" &&
+
+            gameState.currentNodeId ===
+                "work" &&
+
+            gameState.dialogueActive
+        ) {
+
+            closeDialogue();
+
+
+            return;
+        }
+
+
+        /*
+            Eerste keer dat speler
+            het gebouw binnengaat.
+        */
+
+        setScene(
+            "work"
+        );
+
+
+        startDialogue(
+            "work"
+        );
+
 
         return;
     }
+
 
     if (
         action === "action_jimOne"
     ) {
 
-        setScene("jim1");
+        /*
+            Eerst de afbeelding veranderen.
 
-        startDialogue("jim_intro");
+            Daarna pas de dialogue openen.
+        */
+
+        setScene(
+            "jim1"
+        );
+
+
+        startDialogue(
+            "jim_intro"
+        );
+
+
         return;
     }
+
 
     if (
         action === "action_jimTwo"
     ) {
 
-        setScene("jim2");
+        setScene(
+            "jim2"
+        );
 
-        startDialogue("jim_upgrade");
+
+        startDialogue(
+            "jim_upgrade"
+        );
+
+
         return;
     }
+
 
     if (
         action === "action_jimThree"
     ) {
 
-        setScene("jim3");
+        setScene(
+            "jim3"
+        );
 
-        startDialogue("jim_bad_sleep");
+
+        startDialogue(
+            "jim_bad_sleep"
+        );
+
+
         return;
     }
+
 
     if (
         action === "action_jimFour"
     ) {
 
-        setScene("jim4");
+        setScene(
+            "jim4"
+        );
 
-        startDialogue("jim_lisa");
+
+        startDialogue(
+            "jim_lisa"
+        );
+
+
         return;
     }
 
-    /* LEAVE JIM */
+
+    /* =====================================
+       LEAVE JIM
+    ====================================== */
 
     if (
         action === "action_leave_jim"
     ) {
 
+        /*
+            Dialogue eerst sluiten.
+        */
+
         closeDialogue();
 
-        setScene("work");
+
+        /*
+            Daarna terug naar normale
+            Work scene.
+        */
+
+        setScene(
+            "work"
+        );
+
 
         return;
     }
+
+
+    /* =====================================
+       BOSS
+    ====================================== */
 
     if (
         action === "action_boss"
     ) {
 
-        startDialogue("boss_task");
+        /*
+            Eerst Boss-afbeelding.
+        */
 
-        setScene("boss");
+        setScene(
+            "boss"
+        );
+
+
+        /*
+            Daarna Boss dialogue.
+        */
+
+        startDialogue(
+            "boss_task"
+        );
+
 
         return;
     }
 
-    if (
-        action === "close"
-    ) {
 
-        closeDialogue();
-        
-        setScene("work");
-
-        return;
-    }
-
-
-
-    /* START REACTOR */
+    /* =====================================
+       START REACTOR
+    ====================================== */
 
     if (
         action === "action_start_minigame"
@@ -188,11 +347,14 @@ export function runAction(action) {
 
         startMinigame();
 
+
         return;
     }
 
 
-    /* LEVEL 2 */
+    /* =====================================
+       LEVEL 2
+    ====================================== */
 
     if (
         action === "level2"
@@ -202,11 +364,14 @@ export function runAction(action) {
             2
         );
 
+
         return;
     }
 
 
-    /* LEVEL 3 */
+    /* =====================================
+       LEVEL 3
+    ====================================== */
 
     if (
         action === "level3"
@@ -216,8 +381,19 @@ export function runAction(action) {
             3
         );
 
+
         return;
     }
+
+
+    /* =====================================
+       UNKNOWN ACTION
+    ====================================== */
+
+    console.warn(
+        "Unknown Level 1 action:",
+        action
+    );
 }
 
 
@@ -225,54 +401,156 @@ export function runAction(action) {
    CLOSE DIALOGUE
 ========================================= */
 
- export function closeDialogue() {
+export function closeDialogue() {
+
+    /*
+        Onthouden waar we waren voordat
+        showNormalBar() de dialogue state reset.
+    */
+
+    const sceneBeforeClose =
+        gameState.currentScene;
+
 
     gameState.pendingOption =
         null;
 
+
     gameState.waitingForContinue =
         false;
+
 
     gameState.inputLocked =
         false;
 
-     showBreakfastOverlay(null);
+
+    /*
+        Eventuele breakfast overlay weg.
+    */
+
+    showBreakfastOverlay(
+        null
+    );
+
+
+    /*
+        Dialogue daadwerkelijk sluiten.
+    */
 
     showNormalBar();
+
+
+    /* =====================================
+       BOSS LEAVE
+
+       De Boss-node heeft:
+
+       action: "close"
+
+       Als je Boss verlaat moet je terug
+       naar de normale Work-afbeelding.
+    ====================================== */
+
+    if (
+        sceneBeforeClose ===
+        "boss"
+    ) {
+
+        setScene(
+            "work"
+        );
+
+    }
 }
 
 
 /* =========================================
-   REACTOR MINIGAME
+   START REACTOR MINIGAME
 ========================================= */
 
 function startMinigame() {
 
-    closeDialogue();
-
-
     /*
-        level1.php zit in:
-
-        Levels/level1/level1.php
-
-        Reactor zit in:
-
-        minigame_reactor1/mingame1.html
-
-        Daarom:
-        ../../
+        Dialogue sluiten voordat iframe
+        wordt geopend.
     */
 
-    reactorMinigameFrame.src =
-        "../../minigame_reactor1/mingame1.html?run="
-        +
-        Date.now();
+    closeDialogue();
+    window.location.href = "../../minigame_reactor1/minigame1.php";
+
+    /* =====================================
+       ELEMENT CHECK
+    ====================================== */
+
+    // if (
+    //     !minigameScreen
+    // ) {
+
+    //     console.error(
+    //         "#minigame-screen bestaat niet."
+    //     );
 
 
-    minigameScreen.classList.remove(
-        "hidden"
-    );
+    //     return;
+    // }
+
+
+    // if (
+    //     !reactorMinigameFrame
+    // ) {
+
+    //     console.error(
+    //         "#reactor-minigame-frame bestaat niet."
+    //     );
+
+
+    //     return;
+    // }
+
+
+    // /* =====================================
+    //    JUISTE FILE
+
+    //    action.js:
+    //    /Levels/level1/action.js
+
+    //    Reactor:
+    //    /minigame_reactor1/minigame1.php
+    // ====================================== */
+
+    // const reactorUrl =
+    //     new URL(
+    //         "../../minigame_reactor1/minigame1.php",
+    //         import.meta.url
+    //     );
+
+
+    // /*
+    //     Voorkom dat Chrome een oude versie
+    //     van het iframe uit cache gebruikt.
+    // */
+
+    // reactorUrl.searchParams.set(
+    //     "run",
+    //     Date.now().toString()
+    // );
+
+
+    // /* =====================================
+    //    IFRAME LADEN
+    // ====================================== */
+
+    // reactorMinigameFrame.src =
+    //     reactorUrl.href;
+
+
+    // /* =====================================
+    //    MINIGAME TONEN
+    // ====================================== */
+
+    // minigameScreen.classList.remove(
+    //     "hidden"
+    // );
 }
 
 
@@ -282,41 +560,156 @@ function startMinigame() {
 
 function finishLevel1Minigame() {
 
-    gameState.minigameCompleted = true;
-
-    minigameScreen.classList.add("hidden");
     /*
-        iframe stoppen/resetten
+        Niet meerdere keren afronden.
     */
-    reactorMinigameFrame.src = "about:blank";
+
+    if (
+        gameState.minigameCompleted
+    ) {
+
+        return;
+    }
+
+
+    gameState.minigameCompleted =
+        true;
+
+
+    /* =====================================
+       MINIGAME SCHERM VERBERGEN
+    ====================================== */
+
+    if (
+        minigameScreen
+    ) {
+
+        minigameScreen.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    /* =====================================
+       IFRAME STOPPEN
+    ====================================== */
+
+    if (
+        reactorMinigameFrame
+    ) {
+
+        reactorMinigameFrame.src =
+            "about:blank";
+
+    }
+
+
+    /* =====================================
+       NORMALE UI TERUG
+    ====================================== */
+
+    showNormalBar();
+
+
+    /* =====================================
+       WORK AFTER MINIGAME
+    ====================================== */
+
+    setScene(
+        "work_after"
+    );
+
 
     /*
-        Terug naar point-and-click.
+        Start Work hotspot verbergen.
     */
-    setScene("work_after");
+
+    if (
+        hotspotWork
+    ) {
+
+        hotspotWork.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    /*
+        Onderste hint aanpassen.
+    */
+
+    if (
+        barHint
+    ) {
+
+        barHint.textContent =
+            "WORK FINISHED.";
+
+    }
 }
 
+
+/* =========================================
+   GLOBAL TEST
+========================================= */
 
 window.finishLevel1Minigame =
     finishLevel1Minigame;
 
 
 /* =========================================
-   LUISTER NAAR REACTOR 02
-
-   Reactor 02 stuurt na completion:
-
-   {
-       type: "level1-minigame-complete"
-   }
+   REACTOR COMPLETE MESSAGE
 ========================================= */
 
 window.addEventListener(
     "message",
+
     event => {
 
-        if (event.data && event.data.type === "level1-minigame-complete") {
-            finishLevel1Minigame();
+        /*
+            Alleen berichten van dezelfde site.
+        */
+
+        if (
+            event.origin !==
+            window.location.origin
+        ) {
+
+            return;
         }
+
+
+        if (
+            event.data &&
+            event.data.type ===
+                "level1-minigame-complete"
+        ) {
+
+            finishLevel1Minigame();
+
+        }
+
     }
 );
+
+
+/* =========================================
+   LEVEL NAVIGATION
+========================================= */
+
+function goToLevel(
+    levelNumber
+) {
+
+    const levelUrl =
+        new URL(
+            `../level${levelNumber}/level${levelNumber}.php`,
+            import.meta.url
+        );
+
+
+    window.location.href =
+        levelUrl.href;
+}

@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -21,16 +20,11 @@
         rel="stylesheet"
         href="dialogue.css"
     >
-
 </head>
 
 <body>
 
-
 <div id="game">
-
-
-
 
     <button
         id="fullscreen-toggle"
@@ -41,86 +35,98 @@
         ⛶ FULLSCREEN
     </button>
 
-
-  
-
     <div id="monitor-area">
-
 
         <div id="monitor-shell">
 
-
-
             <div id="monitor-viewport">
-
 
                 <div id="point-click-area">
 
+                    <div id="hud">
+                        <span>LEVEL 7</span>
+                        <span id="location-label">OUTSIDE CARAVAN</span>
+                        <span id="scene-name">OUTSIDE CARAVAN</span>
+                    </div>
 
-
-                    <img
-                        id="home-background"
-                        class="Background"
-                        src="/Images/Home_Base.png"
-                        alt=""
+                    <div
+                        id="outside-scene"
+                        class="game-scene"
                     >
 
+                        <img
+                            class="Background"
+                            src="../../Images/caravan_stephanie_base.png"
+                            alt=""
+                        >
 
+                        <button
+                            id="hotspot-stephanie"
+                            type="button"
+                            aria-label="Stefanie"
+                        ></button>
 
-                    <div id="hud">
-
-                        <span>
-                            LEVEL 7
-                        </span>
-
-                        <span id="location-label">
-                            HOME
-                        </span>
-
-                        <span id="scene-name">
-                            HOME
-                        </span>
+                        <img
+                            id="stephanie-hover"
+                            src="../../Images/caravan_stephanie_hover.png"
+                            alt=""
+                        >
 
                     </div>
 
+                    <div
+                        id="stephanie1-scene"
+                        class="game-scene hidden"
+                    >
+
+                        <img
+                            class="Background"
+                            src="../../Images/stephanie1.png"
+                            alt=""
+                        >
+
+                    </div>
+
+                    <div
+                        id="stephanie2-scene"
+                        class="game-scene hidden"
+                    >
+
+                        <img
+                            class="Background"
+                            src="../../Images/stephanie2.png"
+                            alt=""
+                        >
+
+                    </div>
 
                 </div>
 
-
             </div>
-
-
-
 
             <img
                 id="monitor-frame"
-                src="/Images/EnshittifiedTV.png"
+                src="../../Images/EnshittifiedTV.png"
                 alt=""
             >
 
-
         </div>
-
 
     </div>
 
-
     <div id="bottom-bar">
-
 
         <div id="normal-bar">
 
             <div id="bar-location">
-                HOME
+                OUTSIDE CARAVAN
             </div>
 
             <div id="bar-hint">
-                SOMEONE IS WAITING AT YOUR DOOR.
+                CLICK STEFANIE.
             </div>
 
         </div>
-
-
 
         <div
             id="dialogue-content"
@@ -131,46 +137,35 @@
                 NARRATOR
             </div>
 
-
             <div id="dialogue-text">
                 ...
             </div>
 
-
             <div id="dialogue-options"></div>
-
 
             <div id="dialogue-help">
                 ↑ ↓ SELECT &nbsp;&nbsp; ENTER / 1-4
             </div>
 
-
         </div>
-
 
     </div>
 
-
     <div id="start-screen">
 
-
         <div class="start-menu">
-
 
             <div class="tiny">
                 LEVEL_7.EXE
             </div>
 
-
             <h1>
                 LEVEL 7
             </h1>
 
-
             <p>
-                SOMEONE IS WAITING.
+                SOMEONE IS WAITING OUTSIDE.
             </p>
-
 
             <button
                 id="start-button"
@@ -179,19 +174,14 @@
                 &gt; START GAME
             </button>
 
-
         </div>
-
 
     </div>
 
-
 </div>
-
 
 <script src="dialogue.js"></script>
 <script src="fullscreen.js"></script>
-
 
 </body>
 
