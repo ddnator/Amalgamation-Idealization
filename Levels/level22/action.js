@@ -117,6 +117,8 @@ export function runAction(action) {
         closeDialogue();
         setScene("ErwinsBar");
 
+        startDialogue("outside_bar");
+
 
     }
     /* Winston Nuclear PowerPlant outside*/
@@ -190,6 +192,8 @@ export function runAction(action) {
         closeDialogue();
 
         setScene("ErwinsBar");
+
+        startDialogue("outside_bar");
 
         return;
     }

@@ -431,7 +431,7 @@ const dialogueTree = {
             }
         ]
     },
-    yesdid: {
+    yes_did: {
 
         speaker:
             "???",
@@ -442,7 +442,7 @@ const dialogueTree = {
         options: [
             {
                 text:
-                    "Continu",
+                    "Continue",
 
                 speak:
                     false,
@@ -458,12 +458,12 @@ const dialogueTree = {
             "???",
 
         text:
-            "I thought u said that u decoded the message. U know that you could have just said no and I would have told you?.",
+            "I thought you said that you decoded the message. You know that you could have just said no and I would have told you?.",
 
         options: [
             {
                 text:
-                    "Continu",
+                    "Continue",
 
                 speak:
                     false,
@@ -484,7 +484,7 @@ const dialogueTree = {
         options: [
             {
                 text:
-                    "Continu",
+                    "Continue",
 
                 speak:
                     false,
@@ -500,7 +500,7 @@ const dialogueTree = {
             "???",
 
         text:
-            "O okay then not I guess have fun with the very little life you have left.",
+            "Oh okay, then not I guess have fun with the very little life you have left.",
 
         options: [
             {
@@ -528,7 +528,7 @@ const dialogueTree = {
             "???",
 
         text:
-            "I put it there so I know u got it.",
+            "I put it there so I know you got it.",
 
         options: [
             {
@@ -560,7 +560,7 @@ const dialogueTree = {
             "???",
 
         text:
-            "Okay Mr funny pants then not. Enjoy youre last few moments while you can",
+            "Okay Mr funny pants then not. Enjoy your last few moments while you can",
 
         options: [
             {
