@@ -18,6 +18,8 @@
 
     <link rel="stylesheet" href="dialogue.css">
     <link rel="stylesheet" href="/css/PAC.css">
+    <link rel="stylesheet" href="/css/monitor-overlay.css">
+    <script src="/js/monitor-overlay.js" defer></script>
 </head>
 
 <body>

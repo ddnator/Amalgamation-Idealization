@@ -9,7 +9,7 @@
             content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Level 1</title>
+    <title>Level 9</title>
 
     <link
             href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
@@ -18,8 +18,6 @@
 
     <link rel="stylesheet" href="dialogue.css">
     <link rel="stylesheet" href="/css/PAC.css">
-    <link rel="stylesheet" href="/css/monitor-overlay.css">
-    <script src="/js/monitor-overlay.js" defer></script>
 </head>
 
 <body>
@@ -33,7 +31,7 @@
     <div id="point-click-area">
 
         <div id="hud">
-            <span>LEVEL 1</span>
+            <span>LEVEL 9</span>
 
             <span id="location-label">
                 HOME
@@ -54,15 +52,15 @@
 
             <img
                     class="Background"
-                    src="/Images/Home_Base.png"
+                    src="/Images/boss.png"
                     alt=""
             >
 
-            <button
+            <!-- <button
                     id="hotspot-bed"
                     class="Bed"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay BedOverlay"
@@ -71,11 +69,11 @@
             >
 
 
-            <button
+            <!-- <button
                     id="hotspot-computer"
                     class="Computer"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay ComputerOverlay"
@@ -83,12 +81,12 @@
                     alt=""
             >
 
-            <button
+            <!-- <button
                 id="hotspot-breakfast"
                 class="Breakfast"
                 type="button"
 
-            ></button>
+            ></button> -->
             <img
                     class="Overlay BreakfastOverlay hidden"
                     src="/Images/Breakfast.png"
@@ -96,11 +94,11 @@
             >
 
 
-            <button
+            <!-- <button
                     id="hotspot-kitchen"
                     class="Kitchen"
                     type="button"
-            ></button>
+            ></button> -->
 
             <img
                     class="Overlay KitchenOverlay"
@@ -117,7 +115,7 @@
 
             <img
                     class="Background"
-                    src="/Images/CAravan_Base.png"
+                    src="/Images/boss.png"
                     alt=""
             >
         </div>
@@ -144,6 +142,8 @@
                     src="/Images/StreetDay.png"
                     alt=""
             >
+
+
         </div>
 
         <!-- =====================================
@@ -168,91 +168,23 @@
                     src="/Images/Work_Base.png"
                     alt=""
             >
-
-            <button
-                    id="hotspot-jim"
-                    class="jim"
-                    type="button"
-            ></button>
-
-            <img
-                    class="Overlay jimOverlay"
-                    src="/Images/Work_JimO.png"
-                    alt=""
-            >
-            <button
-                    id="hotspot-work"
-                    class="work"
-                    type="button"
-            ></button>
-
-            <img
-                    class="Overlay workOverlay"
-                    src="/Images/Work_MinigameO.png"
-                    alt=""
-            >
-
-            <button
-                    id="hotspot-boss"
-                    class="boss"
-                    type="button"
-            ></button>
-
-            <img
-                    class="Overlay bossOverlay"
-                    src="/Images/Work_TalkToBossO.png"
-                    alt=""
-            >
         </div>
 
-        <div id="jim1" class="game-scene hidden">
-
-            <img
-                    class="Background"
-                    src="/Images/jimHappy.png"
-                    alt=""
-            >
-        </div>
-
-        <div id="jim2" class="game-scene hidden">
-
-            <img
-                    class="Background"
-                    src="/Images/jimSpeaking.png"
-                    alt=""
-            >
-        </div>
-
-        <div id="jim3" class="game-scene hidden">
-
-            <img
-                    class="Background"
-                    src="/Images/jimNeutral.png"
-                    alt=""
-            >
-        </div>
-        <div id="jim4" class="game-scene hidden">
-
-            <img
-                    class="Background"
-                    src="/Images/jimAngry.png"
-                    alt=""
-            >
-        </div>
-
-        <div id="boss" class="game-scene hidden">
-
-            <img
-                    class="Background"
-                    src="/Images/boss.png"
-                    alt=""
-            >
-        </div>
-
-        <!-- =====================================
-                All Scenes must be INSIDE this </div> otherwise it will not work!
-             ====================================== -->
     </div>
+    <!-- =====================================
+                Walking to Work Scene
+          ====================================== -->
+    <div id="walkingToWorkDay" class="game-scene hidden">
+
+        <img
+                class="Background"
+                src="/Images/StreetDay.png"
+                alt=""
+        >
+    </div>
+
+
+
 </div>
 
     <!-- =========================================
@@ -309,11 +241,11 @@
         <div class="screen">
 
             <div class="tiny">
-                LEVEL_1.EXE
+                LEVEL_9.EXE
             </div>
 
             <h1>
-                LEVEL 1
+                LEVEL 9
             </h1>
 
             <button
@@ -368,7 +300,7 @@
                     id="restart-button"
                     type="button"
             >
-                &gt; RESTART LEVEL 1
+                &gt; RESTART LEVEL 9
             </button>
 
         </div>
