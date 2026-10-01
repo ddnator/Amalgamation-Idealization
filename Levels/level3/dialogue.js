@@ -80,13 +80,12 @@ const dialogueTree = {
                     "level2"
             }
         ]
-        },
     },
 
     erwin_yo: {
         speaker:
+            "Erwin",
 
-        text:"Yo whats up Y/N, what do you want?",
         text: "Yo whats up with you, what do you want?",
 
         options: [
@@ -114,7 +113,6 @@ const dialogueTree = {
                 text:
                     "Tell me a joke Erwin",
 
-                speak: 
                 speak:
                     false,
 
@@ -126,17 +124,14 @@ const dialogueTree = {
 
     what_kind: {
         speaker:
-        "Erwin",
             "Erwin",
 
-        text:"What kind of good stuff do you want?",
         text: "What kind of good stuff do you want?",
 
         options: [
             {
                 text:
                     "I want a body part upgrade",
-                
 
                 speak:
                     false,
@@ -147,7 +142,6 @@ const dialogueTree = {
             {
                 text:
                     "Drugs",
-                
 
                 speak:
                     false,
@@ -160,17 +154,14 @@ const dialogueTree = {
 
     which_usual: {
         speaker:
-        "Erwin",
             "Erwin",
 
         text: "Which usual do you want?",
-        
 
         options: [
             {
                 text:
                     "I want a body part upgrade",
-                
 
                 speak:
                     false,
@@ -181,7 +172,6 @@ const dialogueTree = {
             {
                 text:
                     "Drugs",
-                
 
                 speak:
                     false,
@@ -190,12 +180,10 @@ const dialogueTree = {
                     "level4" //check
             }
         ]
-    }, 
     },
 
     your_mom: {
         speaker:
-        "Erwin",
             "Erwin",
 
         text: "Your mom",
@@ -216,7 +204,6 @@ const dialogueTree = {
 
     what_upgrade: {
         speaker:
-        "Erwin",
             "Erwin",
 
         text: "What upgrade do you want this time?",
@@ -267,7 +254,6 @@ const dialogueTree = {
 
     eye_upgrade: {
         speaker:
-        "Narrator",
             "Narrator",
 
         text: "Upgrading eyes",
@@ -287,7 +273,6 @@ const dialogueTree = {
 
     leg_upgrade: {
         speaker:
-        "Narrator",
             "Narrator",
 
         text: "Upgrading leg",
@@ -307,7 +292,6 @@ const dialogueTree = {
 
     arm_upgrade: {
         speaker:
-        "Narrator",
             "Narrator",
 
         text: "Upgrading arms",
@@ -327,7 +311,6 @@ const dialogueTree = {
 
     heart_upgrade: {
         speaker:
-        "Narrator",
             "Narrator",
 
         text: "Sorry bro it's out of stock",
@@ -347,7 +330,6 @@ const dialogueTree = {
 
     upgrade_done: {
         speaker:
-        "Erwin",
             "Erwin",
 
         text: "All done now, enjoy and be carefull with it",

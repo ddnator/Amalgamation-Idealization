@@ -218,7 +218,6 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "You recieved one mysterieus message.",
             "You recieved one mysterious message.",
 
         options: [
@@ -250,7 +249,6 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "They messages reads as follows: Bsf zpv opu ujsfe pg uif BJ uibu jt dpouspmmjoh vt kpjo uif sfcfmt. Tff zpv tppo...",
             "The message reads as follows: Bsf zpv opu ujsfe pg uif BJ uibu jt dpouspmmjoh vt kpjo uif sfcfmt. Tff zpv tppo...",
 
         options: [

@@ -244,7 +244,6 @@ const dialogueTree = {
             "NARRATOR",
 
         text:
-            "Computer no workie today :(.",
             "Computer does not work today.",
 
         options: [
@@ -376,7 +375,6 @@ const dialogueTree = {
             "JIM",
 
         text:
-            "Hi Y/N how are you doing; Did you hear that they upgraded our boss last night? I think he's trying to suck up to our new 'overlords' by looking less human",
             "Hi you how are you doing; Did you hear that they upgraded our boss last night? I think he's trying to suck up to our new 'overlords' by looking less human",
 
         options: [
@@ -517,7 +515,6 @@ const dialogueTree = {
             "JIM",
 
         text:
-            "Well i better get to work before the same happens to me.",
             "Well I better get to work before the same happens to me.",
 
         options: [
@@ -565,7 +562,6 @@ const dialogueTree = {
             "ai",
 
         text:
-            "Morning Y/N, good to see you are on time today. The task for today is to manage the factory and put in the code, even you can manage that, right?",
             "Morning You good human, good to see you are on time today. The task for today is to manage the factory and put in the code, even you can manage that, right?",
 
         options: [
@@ -623,6 +619,7 @@ const dialogueTree = {
             {
                 text: "Go to the bar",
                 speak: false,
+                action: "level3"
             }
         ]
     },

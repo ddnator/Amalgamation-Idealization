@@ -56,16 +56,12 @@ const dialogueTree = {
     ====================================== */
 
     level_start: {
-        speaker:"AI",
-        text:"Y/N you have done a great job here and already have some mechanical parts.",
         speaker: "AI",
         text: "Y/N you have done a great job here and already have some mechanical parts.",
 
         options: [
             {
                 text: "No I have not.",
-                speak:false,
-                next: "otherwise" 
                 speak: false,
                 next: "otherwise"
             },
@@ -78,8 +74,6 @@ const dialogueTree = {
     },
 
     otherwise: {
-        speaker:"AI",
-        text:"Your heart says otherwise.",
         speaker: "AI",
         text: "Your heart says otherwise.",
 
@@ -93,8 +87,6 @@ const dialogueTree = {
     },
 
     heartbeat: {
-        speaker:"Narrator",
-        text:"You grab your chest en for the first in a very long time you hear the beating of a mechanical heart in your chest",
         speaker: "Narrator",
         text: "You grab your chest and for the first in a very long time you hear the beating of a mechanical heart in your chest",
 
@@ -106,11 +98,8 @@ const dialogueTree = {
             }
         ]
     },
-   
 
     join_AI: {
-        speaker:"AI",
-        text:"Since you have been such a great worker, why don't you join us?",
         speaker: "AI",
         text: "Since you have been such a great worker, why don't you join us?",
 
@@ -129,8 +118,6 @@ const dialogueTree = {
     },
 
     yes: {
-        speaker:"AI",
-        text:"Great, it was not like you had a choice anyways.",
         speaker: "AI",
         text: "Great, it was not like you had a choice anyways.",
 
@@ -144,8 +131,6 @@ const dialogueTree = {
     },
 
     no: {
-        speaker:"AI",
-        text:"You never had a choice to begin with.",
         speaker: "AI",
         text: "You never had a choice to begin with.",
 

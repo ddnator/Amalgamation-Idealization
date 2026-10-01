@@ -105,7 +105,6 @@ function installImageFallback(
 
         image.src =
             paths[
-                index
             index
             ];
 
