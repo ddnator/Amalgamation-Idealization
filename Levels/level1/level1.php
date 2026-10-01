@@ -119,7 +119,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/Home_Base.png"
+                            src="../../Images/Home_Base.png"
                             alt=""
                         >
 
@@ -136,7 +136,7 @@
 
                         <img
                             class="Overlay BedOverlay"
-                            src="../../images/Home_bed.png"
+                            src="../../Images/Home_bed.png"
                             alt=""
                         >
 
@@ -154,7 +154,7 @@
 
                         <img
                             class="Overlay ComputerOverlay"
-                            src="../../images/Home_Computer.png"
+                            src="../../Images/Home_Computer.png"
                             alt=""
                         >
 
@@ -172,7 +172,7 @@
 
                         <img
                             class="Overlay BreakfastOverlay hidden"
-                            src="../../images/Breakfast.png"
+                            src="../../Images/Breakfast.png"
                             alt=""
                         >
 
@@ -190,7 +190,7 @@
 
                         <img
                             class="Overlay KitchenOverlay"
-                            src="../../images/Home_kitchen.png"
+                            src="../../Images/Home_kitchen.png"
                             alt=""
                         >
 
@@ -209,7 +209,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/CAravan_Base.png"
+                            src="../../Images/CAravan_Base.png"
                             alt=""
                         >
 
@@ -226,7 +226,7 @@
 
                     <img
                         class="Overlay DoorOverlay"
-                        src="../../images/CAravan_Door.png"
+                        src="../../Images/CAravan_Door.png"
                         alt=""
                     >
 
@@ -243,7 +243,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/StreetDay.png"
+                            src="../../Images/StreetDay.png"
                             alt=""
                         >
 
@@ -262,7 +262,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/Work_Outside_D.png"
+                            src="../../Images/Work_Outside_D.png"
                             alt=""
                         >
 
@@ -281,7 +281,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/Work_Base.png"
+                            src="../../Images/Work_Base.png"
                             alt=""
                         >
 
@@ -298,7 +298,7 @@
 
                         <img
                             class="Overlay jimOverlay"
-                            src="../../images/Work_JimO.png"
+                            src="../../Images/Work_JimO.png"
                             alt=""
                         >
 
@@ -316,7 +316,7 @@
 
                         <img
                             class="Overlay workOverlay"
-                            src="../../images/Work_MinigameO.png"
+                            src="../../Images/Work_MinigameO.png"
                             alt=""
                         >
 
@@ -334,7 +334,7 @@
 
                         <img
                             class="Overlay bossOverlay"
-                            src="../../images/Work_TalkToBossO.png"
+                            src="../../Images/Work_TalkToBossO.png"
                             alt=""
                         >
 
@@ -353,7 +353,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/jimHappy.png"
+                            src="../../Images/jimHappy.png"
                             alt=""
                         >
 
@@ -372,7 +372,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/jimSpeaking.png"
+                            src="../../Images/jimSpeaking.png"
                             alt=""
                         >
 
@@ -391,7 +391,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/jimNeutral.png"
+                            src="../../Images/jimNeutral.png"
                             alt=""
                         >
 
@@ -410,7 +410,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/jimAngry.png"
+                            src="../../Images/jimAngry.png"
                             alt=""
                         >
 
@@ -429,7 +429,7 @@
 
                         <img
                             class="Background"
-                            src="../../images/boss.png"
+                            src="../../Images/boss.png"
                             alt=""
                         >
 
@@ -448,7 +448,7 @@
 
             <img
                 id="monitor-frame"
-                src="../../images/Computer_UI.png"
+                src="../../Images/EnshittifiedTV.png"
                 alt=""
             >
 
