@@ -696,8 +696,8 @@ const dialogueTree = {
                 text:
                     "I want an upgrade",
 
-                action:
-                    "action_upgrade"
+                next: "erwin_upgrade"
+
             },
 
             {
