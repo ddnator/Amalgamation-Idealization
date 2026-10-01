@@ -156,7 +156,7 @@ const dialogueTree = {
 
     end3: {
         speaker: "Y/N",
-        text: "I need to contact the Stefanie. The rebellion needs to know that the AI can be beaten",
+        text: "I need to contact Stefanie. The rebellion needs to know that the AI can be beaten",
 
         options: [
             {
@@ -195,7 +195,7 @@ const dialogueTree = {
 
     end6: {
         speaker: "Y/N",
-        text: "For the first time in my life, I feel like I'm in controll agains.",
+        text: "For the first time in my life, I feel like I'm in controll again.",
 
         options: [
             {
