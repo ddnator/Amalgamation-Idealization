@@ -43,7 +43,29 @@
 
         </div>
 
+        <!-- =====================================
+           CARAVAN SCENE OUTSIDE WITH STEPHANIE
+     ====================================== -->
+        <div id="caravanSceneOutside" class="game-scene hidden">
 
+            <img
+                    class="Background"
+                    src="/Images/caravan_stephanie_base.png"
+                    alt=""
+            >
+        </div>
+
+        <button
+                id="hotspot-stephanie"
+                class="stephanie"
+                type="button"
+        ></button>
+
+        <img
+                class="Overlay StephanieOverlay"
+                src="/Images/caravan_stephanie_hover.png"
+                alt=""
+        >
         <!-- =====================================
               CARAVAN SCENE INSIDE
         ====================================== -->

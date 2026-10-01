@@ -121,13 +121,13 @@
         </div>
 
         <button
-                id="hotspot-door"
-                class="Door"
+                id="hotspot-stephanie"
+                class="stephanie"
                 type="button"
         ></button>
 
         <img
-                class="Overlay DoorOverlay"
+                class="Overlay StephanieOverlay"
                 src="/Images/CAravan_Door.png"
                 alt=""
         >

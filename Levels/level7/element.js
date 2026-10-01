@@ -118,6 +118,11 @@ export const hotspotBoss =
         "hotspot-boss"
     );
 
+export const hotspotStephanie =
+    document.getElementById(
+        "hotspot-stephanie"
+    );
+
 export const hotspotWork =
     document.getElementById(
         "hotspot-work"

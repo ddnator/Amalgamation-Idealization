@@ -42,6 +42,7 @@ import {
     closeDialogue,
     runAction
 } from "./action.js";
+import {hotspotStephanie} from "../level22/element";
 /* =========================================
    DIALOGUE TREE
 ========================================= */
@@ -1671,5 +1672,16 @@ hotspotBoss.addEventListener(
         runAction("action_boss")
 
         startDialogue("boss_task");
+    }
+);
+hotspotStephanie.addEventListener(
+    "click",
+    () => {
+
+        if (gameState.dialogueActive) {
+            return;
+        }
+
+        runAction("action_jimOne")
     }
 );
