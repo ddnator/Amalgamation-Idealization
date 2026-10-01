@@ -130,8 +130,6 @@
 
                     </div>
 
-<<<<<<< HEAD
-=======
 
                     <div id="upgrade" class="game-scene hidden">
 
@@ -145,8 +143,6 @@
                     <!-- =====================================
                          OUTSIDE WORK NIGHT
                     ====================================== -->
-
->>>>>>> 58bb39cdd435fda2992e27ff02c9360df7fbcad2
                     <div id="OutsideWorkNight" class="game-scene hidden">
 
                         <img

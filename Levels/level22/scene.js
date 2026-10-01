@@ -178,6 +178,19 @@ export function setScene(scene) {
 
     }
 
+    else if (scene === "upgrade") {
+
+        document
+            .getElementById("upgrade")
+            .classList.remove("hidden");
+
+        locationLabel.textContent = "UPGRADE";
+        barLocation.textContent = "UPGRADE";
+        sceneName.textContent = "UPGRADE";
+        barHint.textContent = "UPGRADE";
+
+    }
+
     else if (scene === "steven2") {
 
         document

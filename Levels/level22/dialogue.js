@@ -85,6 +85,11 @@ const scenes = {
             "caravanScene"
         ),
 
+    upgrade:
+        document.getElementById(
+            "upgrade"
+        ),
+
     outside:
         document.getElementById(
             "caravanSceneOutside"
@@ -736,7 +741,7 @@ const dialogueTree = {
                 text:
                     "My eyes",
 
-                action: "action_upgrade_eyes"
+                action: "action_upgrade"
 
             },
 
@@ -744,27 +749,49 @@ const dialogueTree = {
                 text:
                     "My legs",
 
-                action: "action_upgrade_legs"
+                action: "action_upgrade"
             },
 
             {
                 text:
                     "my arms",
 
-                action: "action_upgrade_arms"
+                action: "action_upgrade"
             },
 
             {
                 text:
                     "my HEART",
 
-                action: "action_upgrade_heart"
+                action: "action_upgrade"
             }
 
         ]
 
     },
+    /* =====================================
+     upgrade
+ ====================================== */
+    upgrade: {
 
+        speaker:
+            "ERWIN",
+
+        text:
+            "Have fun, don't forget to pay on time",
+
+        options: [
+
+            {
+                text:
+                    "My eyes",
+                action: "action_leave_erwin"
+
+            },
+
+        ]
+
+    },
     erwin_steven: {
 
         speaker:
@@ -926,6 +953,33 @@ const dialogueTree = {
         ]
 
     },
+
+    at_bar: {
+
+        speaker:
+            "NARRATOR",
+
+        text:
+            "my favorite bar",
+
+        options: [
+
+            {
+                text:
+                    "Go back",
+
+                speak:
+                    false,
+
+                action:
+                    "action_walk_home"
+            },
+
+
+        ]
+
+    },
+
 
     go_bar: {
 
@@ -1724,7 +1778,7 @@ function runAction(
             "ErwinsBar"
         );
 
-        closeDialogue();
+        startDialogue("go_bar");
 
         return;
 
@@ -1839,8 +1893,7 @@ function runAction(
             "ErwinsBar"
         );
 
-        closeDialogue();
-
+        startDialogue("go_bar")
         return;
 
     }
@@ -1850,8 +1903,9 @@ function runAction(
         "action_upgrade"
     ) {
 
+        setScene("upgrade");
         startDialogue(
-            "erwin_upgrade"
+            "upgrade"
         );
 
         return;
@@ -1862,32 +1916,11 @@ function runAction(
         action ===
         "action_drugs"
 
-        ||
 
-        action ===
-        "action_upgrade"
-
-        ||
-
-        action ===
-        "action_upgrade"
-
-        ||
-
-        action ===
-        "action_upgrade"
-
-        ||
-
-        action ===
-        "action_upgrade"
     ) {
 
-        setScene(
-            "ErwinsBar"
-        );
-
-        closeDialogue();
+        setScene("ErwinsBar");
+        startDialogue("go_bar")
 
         return;
 
