@@ -19,7 +19,7 @@ import {gameState} from "./gameState.js";
 import {minigameScreen, reactorMinigameFrame} from "./element.js";
 
 export function runAction(action) {
-    console.log("runAction: " + action);
+
     /* CLOSE */
 
     if (action === "close") {
@@ -32,13 +32,6 @@ export function runAction(action) {
     if ( action === "start_bossfight") {
 
         window.location.href = "../../bossfight/bossfight.php";
-
-        return;
-    }
-
-    if (action === "ending") {
-        console.log("ending");
-        window.location.href = "../../endingscreen.html";
 
         return;
     }

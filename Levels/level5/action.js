@@ -97,7 +97,7 @@ export function runAction(action) {
         action === "show_work"
     ) {
 
-        startDialogue("level_start");
+        startDialogue("jim_intro");
 
         setScene("work");
 
@@ -188,7 +188,7 @@ export function closeDialogue() {
 
 function startMinigame() {
 
-
+    closeDialogue();
 
 
     /*
@@ -204,7 +204,7 @@ function startMinigame() {
         ../../
     */
 
-    window.location.href = "../../minigame_reactor3/memory.php";
+    window.location.href = "../../minigame_reactor2/index.php";
 }
 
 
