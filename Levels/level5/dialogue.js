@@ -87,6 +87,7 @@ const dialogueTree = {
     boss: {
         speaker: "boss",
         text: "Hi Y/N ready for a day full of work? The others are gone now so no more distractions for you. You know what the task is for today?",
+        text: "Hi are you ready for a day full of work again? The others are gone now so no more distractions for you. You know what the task is for today?",
 
         options: [
             {
@@ -149,6 +150,7 @@ const dialogueTree = {
         speaker:
             "AI",
         text: "Today I want you to fix reactor 2. The system of that reactor has recently crashed and nobody has fixed it yet. \n The way you fix the system is by pressing the numbers in the right order.",
+        text: "Today I want you to fix reactor 3 and 4. The system of that reactor has recently crashed and nobody has fixed it yet. \n The way you fix the system is by remembering .",
 
         options: [
             {
@@ -187,7 +189,6 @@ const dialogueTree = {
     show_it: {
         speaker:
             "AI",
-        text: "I am so dissapointed in you, have a good life rotting in hell",
 
         options: [
             {

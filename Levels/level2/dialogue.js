@@ -57,7 +57,7 @@ const dialogueTree = {
 
     try_sleep: {
         speaker: "NARRATOR",
-        text: "You want to sleep?",
+        text: "Do you want to sleep?",
         options: [
             {
                 text: "Go to sleep",
@@ -99,7 +99,7 @@ const dialogueTree = {
 
     computer: {
         speaker: "NARRATOR",
-        text: "You recieved one mysterieus message.",
+        text: "You recieved one mysterious message.",
         options: [
             {
                 text: "Look at the message",
@@ -397,7 +397,7 @@ function showNode(
 
     const node =
         dialogueTree[
-            nodeId
+        nodeId
         ];
 
     if (
@@ -473,7 +473,7 @@ function renderOptions() {
 
     const node =
         dialogueTree[
-            gameState.currentNodeId
+        gameState.currentNodeId
         ];
 
     dialogueOptions.innerHTML =
@@ -588,7 +588,7 @@ function chooseOption(
 
     const node =
         dialogueTree[
-            gameState.currentNodeId
+        gameState.currentNodeId
         ];
 
     if (
@@ -600,7 +600,7 @@ function chooseOption(
 
     const option =
         node.options[
-            index
+        index
         ];
 
     if (
@@ -773,7 +773,7 @@ document.addEventListener(
 
         const node =
             dialogueTree[
-                gameState.currentNodeId
+            gameState.currentNodeId
             ];
 
         if (

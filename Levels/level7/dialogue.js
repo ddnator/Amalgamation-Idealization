@@ -106,6 +106,7 @@ function installImageFallback(
         image.src =
             paths[
                 index
+            index
             ];
 
 
@@ -244,7 +245,7 @@ const dialogueTree = {
             "???",
 
         text:
-            "I am the one who send you that message",
+            "I am the one who send you the message.",
 
         options: [
 
@@ -448,7 +449,7 @@ const dialogueTree = {
             "???",
 
         text:
-            "You got my sticky note correct?",
+            "You got my message correct?",
 
         options: [
 
@@ -880,7 +881,7 @@ function showNode(
 
     const node =
         dialogueTree[
-            nodeId
+        nodeId
         ];
 
 
@@ -946,7 +947,7 @@ function renderOptions() {
 
     const node =
         dialogueTree[
-            currentNodeId
+        currentNodeId
         ];
 
 
@@ -1100,7 +1101,7 @@ function chooseOption(
 
     const node =
         dialogueTree[
-            currentNodeId
+        currentNodeId
         ];
 
 
@@ -1117,7 +1118,7 @@ function chooseOption(
 
     const option =
         node.options[
-            index
+        index
         ];
 
 
@@ -1232,7 +1233,7 @@ document.addEventListener(
 
         const node =
             dialogueTree[
-                currentNodeId
+            currentNodeId
             ];
 
 
