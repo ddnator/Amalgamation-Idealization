@@ -109,7 +109,7 @@ function showWinDialog() {
     const doneButton = dialogContent.querySelector('.done-button');
 
     doneButton.addEventListener('click', () => {
-        window.location.href = '../levels/level1/level1.php?gameWon=1';
+        window.location.href = '../levels/level22/level22.php';
     });
 
     dialog.showModal();
