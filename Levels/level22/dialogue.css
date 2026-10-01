@@ -1,27 +1,11 @@
-/* =========================================================
-   LEVEL 22
-
-   - monitor rond het speelbeeld
-   - tekstblok buiten de monitor
-   - geen CRT filter
-   - fullscreen verwijdert monitor-overlay
-   - scene vult het monitor-scherm
-========================================================= */
-
 :root {
     --bottom-bar-height: 150px;
-    --monitor-ratio: 1.3319672131; /* 650 / 488 */
-
-    --white: #f4f4f1;
+    --monitor-ratio: 1.3319672131;
+    --bar-bg: #f4f4f1;
     --text: #53634d;
-    --red: #b85f53;
-    --red-bright: #ee806f;
+    --accent: #b85f53;
+    --accent-bright: #ee806f;
 }
-
-
-/* =========================================================
-   RESET
-========================================================= */
 
 * {
     box-sizing: border-box;
@@ -31,631 +15,418 @@ html,
 body {
     margin: 0;
     padding: 0;
-
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-
     background: #000;
 }
 
-body {
+body,
+button {
     font-family: "Pixelify Sans", monospace;
 }
-
-
-/* =========================================================
-   GAME
-========================================================= */
 
 #game {
     position: relative;
-
     width: 100vw;
     height: 100vh;
-
     overflow: hidden;
-
     background: #000;
 }
 
-
-/* =========================================================
-   FULLSCREEN BUTTON
-========================================================= */
-
 #fullscreen-toggle {
     position: fixed;
-
     top: 14px;
     right: 18px;
-
     z-index: 10000;
-
     padding: 7px 11px;
-
     border: 1px solid rgba(255, 255, 255, 0.65);
-
-    background: rgba(0, 0, 0, 0.72);
-
+    background: rgba(0, 0, 0, 0.76);
     color: #f5f5f0;
-
-    font-family: "Pixelify Sans", monospace;
     font-size: 14px;
     line-height: 1;
-
     cursor: pointer;
-
-    text-shadow: 1px 1px 0 #000;
 }
 
 #fullscreen-toggle:hover {
     background: #f5f5f0;
     color: #111;
-    text-shadow: none;
 }
-
-#fullscreen-toggle:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
-}
-
-
-/* =========================================================
-   MONITOR AREA
-
-   Eventuele zwarte ruimte staat BUITEN de monitor.
-========================================================= */
 
 #monitor-area {
     position: absolute;
-
     top: 0;
     left: 0;
     right: 0;
     bottom: var(--bottom-bar-height);
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     overflow: hidden;
-
     background: #000;
-
     z-index: 1;
 }
 
-
-/* =========================================================
-   MONITOR SHELL
-========================================================= */
-
 #monitor-shell {
     position: relative;
-
     width: min(
         100%,
-        calc((100vh - var(--bottom-bar-height)) * var(--monitor-ratio))
+        calc(
+            (100vh - var(--bottom-bar-height))
+            * var(--monitor-ratio)
+        )
     );
-
     height: min(
         100%,
-        calc(100vw / var(--monitor-ratio))
+        calc(
+            100vw / var(--monitor-ratio)
+        )
     );
-
     aspect-ratio: 650 / 488;
-
     flex: 0 0 auto;
-
     overflow: hidden;
-
-    background: transparent;
 }
-
-
-/* =========================================================
-   MONITOR FRAME
-========================================================= */
 
 #monitor-frame {
     position: absolute;
-
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     display: block;
-
     object-fit: fill;
-
+    image-rendering: pixelated;
     pointer-events: none;
     user-select: none;
-
     z-index: 100;
 }
 
-
-/* =========================================================
-   MONITOR VIEWPORT
-
-   Afgestemd op Images/EnshittifiedTV.png (650x488).
-   De transparante schermopening begint ongeveer bij:
-   x 58, y 38 en eindigt rond x 594, y 439.
-========================================================= */
-
 #monitor-viewport {
     position: absolute;
-
-    left: 8.92%;
-    top: 7.79%;
-    right: 8.46%;
-    bottom: 9.84%;
-
+    left: 8.923%;
+    top: 7.787%;
+    right: 8.462%;
+    bottom: 9.836%;
     overflow: hidden;
-
     background: #000;
-
-    border-radius: 2%;
-
+    border-radius: 2.2%;
     z-index: 5;
 }
 
-
-/* =========================================================
-   POINT & CLICK AREA
-========================================================= */
-
-#point-click-area {
+#point-click-area,
+.game-scene {
     position: absolute;
-
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-
     background: #000;
 }
 
+.Background,
+.Overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: fill;
+    object-position: center;
+    image-rendering: pixelated;
+}
 
-/* =========================================================
-   HUD
-========================================================= */
+.Background {
+    z-index: 1;
+}
+
+.Overlay {
+    z-index: 12;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.BreakfastOverlay {
+    z-index: 15;
+    opacity: 1;
+}
 
 #hud {
     position: absolute;
-
     top: 12px;
     left: 16px;
     right: 16px;
-
+    z-index: 70;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-
+    align-items: center;
     color: #f5f5f0;
-
     font-size: 16px;
     line-height: 1;
-
     text-shadow:
         1px 1px 0 #000,
-        -1px 1px 0 #000;
-
+        -1px 1px 0 #000,
+        1px -1px 0 #000;
     pointer-events: none;
-
-    z-index: 60;
 }
 
-#scene-name,
-#location-label {
-    color: #f5f5f0;
-}
-
-
-/* =========================================================
-   SCENES
-========================================================= */
-
-.game-scene,
-#caravanScene,
-#caravanSceneOutside,
-#walkingHomeNight,
-#OutsideWorkNight,
-#ErwinsBar,
-#work,
-#steven1,
-#steven2,
-#steven3,
-#steven4,
-#boss {
+.hotspot {
     position: absolute;
+    z-index: 40;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: auto;
+    appearance: none;
+}
 
-    inset: 0;
+.bed-hotspot {
+    left: 37.953%;
+    top: 23.418%;
+    width: 28.145%;
+    height: 58.544%;
+}
 
+.computer-hotspot {
+    left: 62.047%;
+    top: 25%;
+    width: 21.535%;
+    height: 35.443%;
+}
+
+.kitchen-hotspot {
+    left: 0.213%;
+    top: 23.418%;
+    width: 43.71%;
+    height: 74.051%;
+}
+
+.exit-hotspot {
+    left: 0;
+    top: 62.658%;
     width: 100%;
-    height: 100%;
-
-    overflow: hidden;
-
-    background: #000;
+    height: 37.342%;
+    z-index: 35;
 }
 
-
-/* =========================================================
-   BACKGROUNDS
-
-   fill = geen crop en geen zwarte balken binnen de monitor.
-========================================================= */
-
-.game-scene > img.Background {
-    position: absolute !important;
-
-    inset: 0 !important;
-
-    width: 100% !important;
-    height: 100% !important;
-
-    display: block !important;
-
-    object-fit: fill !important;
-    object-position: center center !important;
-
-    image-rendering: pixelated;
-
-    filter: none !important;
-
-    background: transparent !important;
-
-    z-index: 0 !important;
+.door-hotspot {
+    left: 0;
+    top: 21.379%;
+    width: 54.154%;
+    height: 78.621%;
 }
 
-
-/* =========================================================
-   OVERLAY IMAGES
-========================================================= */
-
-.game-scene > img.Overlay,
-#point-click-area > img.Overlay {
-    position: absolute !important;
-
-    inset: 0 !important;
-
-    width: 100% !important;
-    height: 100% !important;
-
-    display: block;
-
-    object-fit: fill !important;
-    object-position: center center !important;
-
-    image-rendering: pixelated;
-
-    filter: none !important;
-
-    pointer-events: none !important;
-
-    z-index: 5 !important;
+.steven-hotspot {
+    left: 79.231%;
+    top: 61.663%;
+    width: 20.769%;
+    height: 35.335%;
 }
 
-
-/* =========================================================
-   PIXEL HOTSPOTS
-
-   De oude PAC.css rechthoeken mogen niet meer klikken.
-   hotspots.js doet de echte pixel-hit detection.
-========================================================= */
-
-#hotspot-bed,
-#hotspot-kitchen,
-#hotspot-computer,
-#hotspot-breakfast,
-#hotspot-jim,
-#hotspot-work,
-#hotspot-boss,
-#hotspot-steven,
-#hotspot-doorBar {
-    position: absolute !important;
-
-    left: 0 !important;
-    top: 0 !important;
-
-    width: 0 !important;
-    height: 0 !important;
-
-    right: auto !important;
-    bottom: auto !important;
-
-    padding: 0 !important;
-    margin: 0 !important;
-
-    border: 0 !important;
-    outline: 0 !important;
-
-    background: transparent !important;
-
-    pointer-events: none !important;
+.bar-door-hotspot {
+    left: 60.308%;
+    top: 35.104%;
+    width: 21.692%;
+    height: 50.115%;
 }
 
-
-/* =========================================================
-   OVERLAY HOVERS BEGINNEN ONZICHTBAAR
-========================================================= */
-
-.BedOverlay,
-.KitchenOverlay,
-.ComputerOverlay,
-.jimOverlay,
-.workOverlay,
-.bossOverlay,
-.stevenOverlay,
-.doorBarOverlay {
-    opacity: 0;
+.jim-hotspot {
+    left: 77.875%;
+    top: 21.111%;
+    width: 13.25%;
+    height: 72.889%;
 }
 
-
-/* =========================================================
-   OVERIGE HOTSPOTS
-========================================================= */
-
-#hotspot-door,
-.Door {
-    z-index: 40 !important;
+.work-terminal-hotspot {
+    left: 32.125%;
+    top: 16.444%;
+    width: 33.75%;
+    height: 43.111%;
 }
 
+.boss-hotspot {
+    left: 3.375%;
+    top: 12.444%;
+    width: 23.625%;
+    height: 85.111%;
+}
 
-/* =========================================================
-   BOTTOM BAR - BUITEN MONITOR
-========================================================= */
+#hotspot-bed:hover + .BedOverlay,
+#hotspot-bed:focus-visible + .BedOverlay,
+#hotspot-computer:hover + .ComputerOverlay,
+#hotspot-computer:focus-visible + .ComputerOverlay,
+#hotspot-kitchen:hover + .KitchenOverlay,
+#hotspot-kitchen:focus-visible + .KitchenOverlay,
+#hotspot-exit:hover + .ExitOverlay,
+#hotspot-exit:focus-visible + .ExitOverlay,
+#hotspot-door:hover + .DoorOverlay,
+#hotspot-door:focus-visible + .DoorOverlay,
+#hotspot-steven:hover + .stevenOverlay,
+#hotspot-steven:focus-visible + .stevenOverlay,
+#hotspot-doorBar:hover + .doorBarOverlay,
+#hotspot-doorBar:focus-visible + .doorBarOverlay,
+#hotspot-jim:hover + .jimOverlay,
+#hotspot-jim:focus-visible + .jimOverlay,
+#hotspot-work:hover + .workOverlay,
+#hotspot-work:focus-visible + .workOverlay,
+#hotspot-boss:hover + .bossOverlay,
+#hotspot-boss:focus-visible + .bossOverlay {
+    opacity: 1;
+}
+
+.after-work-hotspot {
+    position: absolute;
+    bottom: 18px;
+    z-index: 70;
+    padding: 7px 12px;
+    border: 3px solid #000;
+    background: #f4f4f1;
+    color: #53634d;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#hotspot-home {
+    left: 24px;
+}
+
+#hotspot-bar {
+    right: 24px;
+}
 
 #bottom-bar {
     position: absolute;
-
     left: 0;
     right: 0;
     bottom: 0;
-
     width: 100%;
     height: var(--bottom-bar-height);
-
     overflow: hidden;
-
-    background: #f4f4f1;
-
+    background: var(--bar-bg);
     border-top: 3px solid #647859;
-
     color: var(--text);
-
     z-index: 200;
 }
-
-
-/* =========================================================
-   NORMAL BAR
-========================================================= */
 
 #normal-bar {
     position: absolute;
     inset: 0;
-
     padding: 18px 24px;
 }
 
 #bar-location {
-    color: var(--red);
+    color: var(--accent);
     font-size: 19px;
 }
 
 #bar-hint {
     position: absolute;
-
     left: 24px;
     bottom: 17px;
-
     color: #606e5a;
-
     font-size: 13px;
 }
 
-
-/* =========================================================
-   DIALOGUE
-========================================================= */
-
 #dialogue-content {
     position: absolute;
-
     inset: 0;
-
-    padding: 15px 24px 28px 24px;
-
+    padding: 15px 24px 28px;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
 #dialogue-speaker {
-    margin: 0 0 6px 0;
-
-    color: var(--red);
-
+    margin: 0 0 6px;
+    color: var(--accent);
     font-size: 19px;
     line-height: 1;
-
     text-transform: uppercase;
 }
 
 #dialogue-text {
     max-width: 96%;
-
-    margin: 0 0 9px 0;
-
+    margin: 0 0 9px;
     color: var(--text);
-
     font-size: 19px;
     line-height: 1.2;
-
     white-space: pre-line;
     overflow-wrap: break-word;
 }
 
 #dialogue-options {
     display: grid;
-
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
     column-gap: 30px;
     row-gap: 3px;
-
     width: 100%;
-
     margin-top: 4px;
 }
 
 .dialogue-option {
     position: relative;
-
     display: flex;
     align-items: flex-start;
-
     width: 100%;
     min-width: 0;
-
     margin: 0;
     padding: 2px 5px 2px 31px;
-
     border: 0;
-    border-radius: 0;
-
     background: transparent;
-
     color: var(--text);
-
-    font-family: "Pixelify Sans", monospace;
     font-size: 15px;
     line-height: 1.2;
-
     text-align: left;
-
     white-space: normal;
     overflow-wrap: anywhere;
-
     cursor: pointer;
 }
 
 .dialogue-option:hover,
 .dialogue-option.selected {
-    color: var(--red-bright);
+    color: var(--accent-bright);
 }
 
 .dialogue-option.selected::before {
     content: ">";
-
     position: absolute;
-
     left: 6px;
     top: 2px;
-
-    color: var(--red-bright);
+    color: var(--accent-bright);
 }
 
 .option-number {
     display: inline-block;
-
     flex: 0 0 25px;
     width: 25px;
-
     color: #71806a;
 }
 
 #dialogue-help {
     position: absolute;
-
     right: 16px;
     bottom: 7px;
-
     color: #687562;
-
     font-size: 9px;
-
     pointer-events: none;
 }
 
 #bottom-bar.player-speaking {
-    border-top-color: var(--red);
+    border-top-color: var(--accent);
 }
 
 #bottom-bar.waiting #dialogue-help {
-    color: var(--red);
+    color: var(--accent);
 }
 
-
-/* =========================================================
-   FULLSCREEN MODE
-
-   Monitor-overlay verdwijnt.
-   Game + tekstblok blijven samen fullscreen.
-========================================================= */
-
-#game.game-fullscreen-mode #monitor-area {
-    align-items: stretch;
-    justify-content: stretch;
-}
-
-#game.game-fullscreen-mode #monitor-shell {
-    width: 100%;
-    height: 100%;
-
-    max-width: none;
-    max-height: none;
-
-    aspect-ratio: auto;
-
-    flex: 1 1 auto;
-}
-
-#game.game-fullscreen-mode #monitor-frame {
-    display: none !important;
-}
-
-#game.game-fullscreen-mode #monitor-viewport {
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 100%;
-
-    border-radius: 0;
-}
-
-#game.game-fullscreen-mode #hud {
-    right: 180px;
-}
-
-
-/* =========================================================
-   START / MINIGAME / END
-========================================================= */
-
-#start-screen,
-#minigame-screen,
-#end-screen {
+#start-screen {
     position: absolute;
-
     inset: 0;
-
+    z-index: 5000;
     display: flex;
-    justify-content: center;
     align-items: center;
-
+    justify-content: center;
     background: #000;
-
-    z-index: 500;
 }
 
 .screen {
@@ -669,70 +440,90 @@ body {
 }
 
 .screen h1 {
-    margin: 5px 0 25px 0;
-
-    color: var(--red);
-
+    margin: 5px 0 25px;
+    color: var(--accent);
     font-size: 47px;
-}
-
-.screen p {
-    margin-bottom: 25px;
-
-    color: #eee;
-
-    font-size: 20px;
 }
 
 .screen button {
     padding: 0;
-
     border: 0;
-
     background: transparent;
-
     color: #eee;
-
-    font-family: "Pixelify Sans", monospace;
     font-size: 22px;
-
     cursor: pointer;
 }
 
 .screen button:hover {
-    color: var(--red-bright);
+    color: var(--accent-bright);
+}
+
+#minigame-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    background: #000;
 }
 
 #reactor-minigame-frame {
-    display: block;
-
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-
-    margin: 0;
-    padding: 0;
-
     border: 0;
-
-    background: #fff;
+    background: #000;
 }
 
-
-/* =========================================================
-   HIDDEN
-========================================================= */
+#minigame-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 20001;
+    padding: 7px 11px;
+    border: 1px solid #fff;
+    background: #000;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+}
 
 .hidden {
     display: none !important;
 }
 
+#game.game-fullscreen-mode #monitor-area {
+    align-items: stretch;
+    justify-content: stretch;
+}
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+#game.game-fullscreen-mode #monitor-shell {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    aspect-ratio: auto;
+    flex: 1 1 auto;
+}
+
+#game.game-fullscreen-mode #monitor-frame {
+    display: none !important;
+}
+
+#game.game-fullscreen-mode #monitor-viewport {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+#game.game-fullscreen-mode #hud {
+    right: 180px;
+}
 
 @media (max-width: 1000px) {
-
     :root {
         --bottom-bar-height: 170px;
     }
@@ -762,7 +553,6 @@ body {
 }
 
 @media (max-width: 700px) {
-
     :root {
         --bottom-bar-height: 190px;
     }
@@ -771,12 +561,11 @@ body {
         top: 7px;
         left: 9px;
         right: 9px;
-
         font-size: 11px;
     }
 
     #dialogue-content {
-        padding: 11px 12px 25px 12px;
+        padding: 11px 12px 25px;
     }
 
     #dialogue-speaker,

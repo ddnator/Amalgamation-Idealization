@@ -1,35 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level 22</title>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap"
-        rel="stylesheet"
-    >
-
-    <link rel="stylesheet" href="../../css/PAC.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dialogue.css">
 </head>
-
 <body>
 
 <div id="game">
 
-    <button
-        id="fullscreen-toggle"
-        type="button"
-        aria-label="Toggle fullscreen"
-        title="Fullscreen"
-    >
+    <button id="fullscreen-toggle" type="button" aria-label="Toggle fullscreen" title="Fullscreen">
         ⛶ FULLSCREEN
     </button>
 
@@ -43,22 +25,11 @@
 
                     <div id="hud">
                         <span>LEVEL 22</span>
-
-                        <span id="location-label">
-                            OUTSIDE WORK
-                        </span>
-
-                        <span id="scene-name">
-                            OUTSIDE WORK
-                        </span>
+                        <span id="location-label">OUTSIDE WORK</span>
+                        <span id="scene-name">OUTSIDE WORK</span>
                     </div>
 
-
-                    <!-- =====================================
-                         CARAVAN SCENE INSIDE
-                    ====================================== -->
-
-                    <div id="caravanScene" class="game-scene">
+                    <div id="caravanScene" class="game-scene hidden">
 
                         <img
                             class="Background"
@@ -68,7 +39,7 @@
 
                         <button
                             id="hotspot-bed"
-                            class="Bed"
+                            class="hotspot bed-hotspot"
                             type="button"
                             aria-label="Bed"
                         ></button>
@@ -81,7 +52,7 @@
 
                         <button
                             id="hotspot-computer"
-                            class="Computer"
+                            class="hotspot computer-hotspot"
                             type="button"
                             aria-label="Computer"
                         ></button>
@@ -93,21 +64,8 @@
                         >
 
                         <button
-                            id="hotspot-breakfast"
-                            class="Breakfast"
-                            type="button"
-                            aria-label="Breakfast"
-                        ></button>
-
-                        <img
-                            class="Overlay BreakfastOverlay hidden"
-                            src="../../Images/Breakfast.png"
-                            alt=""
-                        >
-
-                        <button
                             id="hotspot-kitchen"
-                            class="Kitchen"
+                            class="hotspot kitchen-hotspot"
                             type="button"
                             aria-label="Kitchen"
                         ></button>
@@ -118,12 +76,26 @@
                             alt=""
                         >
 
+                        <button
+                            id="hotspot-exit"
+                            class="hotspot exit-hotspot"
+                            type="button"
+                            aria-label="Leave home"
+                        ></button>
+
+                        <img
+                            class="Overlay ExitOverlay"
+                            src="../../Images/Home_Exit.png"
+                            alt=""
+                        >
+
+                        <img
+                            class="Overlay BreakfastOverlay hidden"
+                            src="../../Images/Breakfast.png"
+                            alt=""
+                        >
+
                     </div>
-
-
-                    <!-- =====================================
-                         CARAVAN OUTSIDE NIGHT
-                    ====================================== -->
 
                     <div id="caravanSceneOutside" class="game-scene hidden">
 
@@ -133,25 +105,20 @@
                             alt=""
                         >
 
+                        <button
+                            id="hotspot-door"
+                            class="hotspot door-hotspot"
+                            type="button"
+                            aria-label="Door"
+                        ></button>
+
+                        <img
+                            class="Overlay DoorOverlay"
+                            src="../../Images/CAravan_Door.png"
+                            alt=""
+                        >
+
                     </div>
-
-                    <button
-                        id="hotspot-door"
-                        class="Door"
-                        type="button"
-                        aria-label="Door"
-                    ></button>
-
-                    <img
-                        class="Overlay DoorOverlay"
-                        src="../../Images/CAravan_Door.png"
-                        alt=""
-                    >
-
-
-                    <!-- =====================================
-                         WALKING HOME NIGHT
-                    ====================================== -->
 
                     <div id="walkingHomeNight" class="game-scene hidden">
 
@@ -163,6 +130,8 @@
 
                     </div>
 
+<<<<<<< HEAD
+=======
 
                     <div id="upgrade" class="game-scene hidden">
 
@@ -177,6 +146,7 @@
                          OUTSIDE WORK NIGHT
                     ====================================== -->
 
+>>>>>>> 58bb39cdd435fda2992e27ff02c9360df7fbcad2
                     <div id="OutsideWorkNight" class="game-scene hidden">
 
                         <img
@@ -186,11 +156,6 @@
                         >
 
                     </div>
-
-
-                    <!-- =====================================
-                         ERWIN'S BAR
-                    ====================================== -->
 
                     <div id="ErwinsBar" class="game-scene hidden">
 
@@ -202,7 +167,7 @@
 
                         <button
                             id="hotspot-steven"
-                            class="steven"
+                            class="hotspot steven-hotspot"
                             type="button"
                             aria-label="Steven"
                         ></button>
@@ -215,7 +180,7 @@
 
                         <button
                             id="hotspot-doorBar"
-                            class="bar"
+                            class="hotspot bar-door-hotspot"
                             type="button"
                             aria-label="Bar door"
                         ></button>
@@ -228,10 +193,25 @@
 
                     </div>
 
+                    <div id="insideBarOne" class="game-scene hidden">
 
-                    <!-- =====================================
-                         WORK
-                    ====================================== -->
+                        <img
+                            class="Background"
+                            src="../../Images/Erwin1.png"
+                            alt=""
+                        >
+
+                    </div>
+
+                    <div id="insideBarTwo" class="game-scene hidden">
+
+                        <img
+                            class="Background"
+                            src="../../Images/Erwin2.png"
+                            alt=""
+                        >
+
+                    </div>
 
                     <div id="work" class="game-scene hidden">
 
@@ -243,7 +223,7 @@
 
                         <button
                             id="hotspot-jim"
-                            class="jim"
+                            class="hotspot jim-hotspot"
                             type="button"
                             aria-label="Jim"
                         ></button>
@@ -256,7 +236,7 @@
 
                         <button
                             id="hotspot-work"
-                            class="work"
+                            class="hotspot work-terminal-hotspot"
                             type="button"
                             aria-label="Start work"
                         ></button>
@@ -269,7 +249,7 @@
 
                         <button
                             id="hotspot-boss"
-                            class="boss"
+                            class="hotspot boss-hotspot"
                             type="button"
                             aria-label="Boss"
                         ></button>
@@ -280,63 +260,78 @@
                             alt=""
                         >
 
+                        <button
+                            id="hotspot-home"
+                            class="after-work-hotspot hidden"
+                            type="button"
+                        >
+                            GO HOME
+                        </button>
+
+                        <button
+                            id="hotspot-bar"
+                            class="after-work-hotspot hidden"
+                            type="button"
+                        >
+                            GO BAR
+                        </button>
+
                     </div>
 
-
-                    <!-- =====================================
-                         STEVEN CLOSEUPS
-                    ====================================== -->
-
                     <div id="steven1" class="game-scene hidden">
+
                         <img
                             class="Background"
                             src="../../Images/steven1.png"
                             alt=""
                         >
+
                     </div>
 
                     <div id="steven2" class="game-scene hidden">
+
                         <img
                             class="Background"
                             src="../../Images/steven2.png"
                             alt=""
                         >
+
                     </div>
 
                     <div id="steven3" class="game-scene hidden">
+
                         <img
                             class="Background"
                             src="../../Images/steven3.png"
                             alt=""
                         >
+
                     </div>
 
                     <div id="steven4" class="game-scene hidden">
+
                         <img
                             class="Background"
                             src="../../Images/steven3.png"
                             alt=""
                         >
+
                     </div>
 
-
-                    <!-- =====================================
-                         BOSS
-                    ====================================== -->
-
                     <div id="boss" class="game-scene hidden">
+
                         <img
                             class="Background"
                             src="../../Images/boss.png"
                             alt=""
                         >
+
                     </div>
 
                 </div>
 
             </div>
 
-            <!-- Monitor overlay -->
             <img
                 id="monitor-frame"
                 src="../../Images/EnshittifiedTV.png"
@@ -347,21 +342,16 @@
 
     </div>
 
-
-    <!-- =========================================
-         BOTTOM BAR OUTSIDE MONITOR
-    ========================================== -->
-
     <div id="bottom-bar">
 
         <div id="normal-bar">
 
             <div id="bar-location">
-                HOME
+                OUTSIDE WORK
             </div>
 
             <div id="bar-hint">
-                CLICK SOMETHING.
+                ...
             </div>
 
         </div>
@@ -372,7 +362,7 @@
         >
 
             <div id="dialogue-speaker">
-                JIM
+                NARRATOR
             </div>
 
             <div id="dialogue-text">
@@ -388,11 +378,6 @@
         </div>
 
     </div>
-
-
-    <!-- =========================================
-         START SCREEN
-    ========================================== -->
 
     <div id="start-screen">
 
@@ -417,58 +402,30 @@
 
     </div>
 
-
-    <!-- =========================================
-         REACTOR MINIGAME
-    ========================================== -->
-
     <div
         id="minigame-screen"
         class="hidden"
     >
 
+        <button
+            id="minigame-close"
+            type="button"
+        >
+            ✕ RETURN TO WORK
+        </button>
+
         <iframe
             id="reactor-minigame-frame"
-            title="Reactor minigame"
             src="about:blank"
+            title="Reactor minigame"
             allow="autoplay"
         ></iframe>
 
     </div>
 
-
-    <!-- =========================================
-         LEVEL END
-    ========================================== -->
-
-    <div
-        id="end-screen"
-        class="hidden"
-    >
-
-        <div class="screen">
-
-            <h1 id="end-title">
-                LEVEL COMPLETE
-            </h1>
-
-            <p id="end-text"></p>
-
-            <button
-                id="restart-button"
-                type="button"
-            >
-                &gt; RESTART LEVEL 22
-            </button>
-
-        </div>
-
-    </div>
-
 </div>
 
-<script type="module" src="dialogue.js"></script>
-<script src="hotspots.js"></script>
+<script src="dialogue.js"></script>
 <script src="fullscreen.js"></script>
 
 </body>

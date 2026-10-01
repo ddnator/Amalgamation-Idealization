@@ -1,4 +1,3 @@
-
 const game =
     document.getElementById(
         "game"
@@ -12,14 +11,14 @@ const fullscreenButton =
 let fullscreenMode =
     false;
 
-
-
 function updateFullscreenButton() {
 
     if (
         !fullscreenButton
     ) {
+
         return;
+
     }
 
     if (
@@ -40,6 +39,7 @@ function updateFullscreenButton() {
         );
 
     }
+
     else {
 
         fullscreenButton.textContent =
@@ -56,20 +56,10 @@ function updateFullscreenButton() {
         );
 
     }
+
 }
 
-
-/* =========================================================
-   LAYOUT AAN
-========================================================= */
-
 function enableFullscreenLayout() {
-
-    if (
-        !game
-    ) {
-        return;
-    }
 
     fullscreenMode =
         true;
@@ -91,20 +81,10 @@ function enableFullscreenLayout() {
 
         }
     );
+
 }
 
-
-/* =========================================================
-   LAYOUT UIT
-========================================================= */
-
 function disableFullscreenLayout() {
-
-    if (
-        !game
-    ) {
-        return;
-    }
 
     fullscreenMode =
         false;
@@ -126,27 +106,19 @@ function disableFullscreenLayout() {
 
         }
     );
+
 }
 
-
-/* =========================================================
-   BROWSER FULLSCREEN AAN
-========================================================= */
-
 async function enterBrowserFullscreen() {
-
-    if (
-        !game
-    ) {
-        return;
-    }
 
     if (
         game.requestFullscreen
     ) {
 
         await game.requestFullscreen();
+
         return;
+
     }
 
     if (
@@ -154,109 +126,113 @@ async function enterBrowserFullscreen() {
     ) {
 
         game.webkitRequestFullscreen();
+
     }
+
 }
-
-
-/* =========================================================
-   BROWSER FULLSCREEN UIT
-========================================================= */
 
 async function exitBrowserFullscreen() {
 
     if (
-        document.fullscreenElement &&
+        document.fullscreenElement
+        &&
         document.exitFullscreen
     ) {
 
         await document.exitFullscreen();
+
         return;
+
     }
 
     if (
-        document.webkitFullscreenElement &&
+        document.webkitFullscreenElement
+        &&
         document.webkitExitFullscreen
     ) {
 
         document.webkitExitFullscreen();
+
     }
+
 }
-
-
-/* =========================================================
-   ENTER
-========================================================= */
 
 async function enterFullscreen() {
 
     enableFullscreenLayout();
 
     try {
+
         await enterBrowserFullscreen();
+
     }
-    catch (error) {
+
+    catch (
+        error
+    ) {
 
         console.warn(
             "Browser fullscreen kon niet gestart worden:",
             error
         );
+
     }
+
 }
-
-
-/* =========================================================
-   EXIT
-========================================================= */
 
 async function exitFullscreen() {
 
     disableFullscreenLayout();
 
     try {
+
         await exitBrowserFullscreen();
+
     }
-    catch (error) {
+
+    catch (
+        error
+    ) {
 
         console.warn(
             "Browser fullscreen kon niet afgesloten worden:",
             error
         );
+
     }
+
 }
-
-
-/* =========================================================
-   TOGGLE
-========================================================= */
 
 async function toggleFullscreen() {
 
     if (
         fullscreenMode
     ) {
-        await exitFullscreen();
-    }
-    else {
-        await enterFullscreen();
-    }
-}
 
+        await exitFullscreen();
+
+    }
+
+    else {
+
+        await enterFullscreen();
+
+    }
+
+}
 
 fullscreenButton?.addEventListener(
     "click",
     async event => {
 
         event.preventDefault();
+
         event.stopPropagation();
 
         await toggleFullscreen();
+
     }
 );
-
-
-/* =========================================================
-   ESC / BROWSER EXIT
-========================================================= */
 
 document.addEventListener(
     "fullscreenchange",
@@ -265,8 +241,11 @@ document.addEventListener(
         if (
             !document.fullscreenElement
         ) {
+
             disableFullscreenLayout();
+
         }
+
     }
 );
 
@@ -277,10 +256,21 @@ document.addEventListener(
         if (
             !document.webkitFullscreenElement
         ) {
+
             disableFullscreenLayout();
+
         }
+
     }
 );
 
-
 updateFullscreenButton();
+
+window.enterLevel22Fullscreen =
+    enterFullscreen;
+
+window.exitLevel22Fullscreen =
+    exitFullscreen;
+
+window.toggleLevel22Fullscreen =
+    toggleFullscreen;
