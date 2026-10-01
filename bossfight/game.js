@@ -180,6 +180,29 @@ let bossTimer =
 
 
 /* =====================================
+   HIDDEN ASSIST MODE
+
+   Secret input:
+   LEFT LEFT RIGHT RIGHT
+===================================== */
+
+let botPlayEnabled =
+    false;
+
+
+let secretInputIndex =
+    0;
+
+
+const secretInputSequence = [
+    "left",
+    "left",
+    "right",
+    "right"
+];
+
+
+/* =====================================
    GHOST TOUCH STATE
 ===================================== */
 
@@ -336,8 +359,6 @@ function beatToTime(beat) {
 
 /* =====================================
    PIXELATE BOSS
-
-   48px = expres shitty
 ===================================== */
 
 function pixelateBoss(
@@ -600,8 +621,6 @@ function buildFight() {
                         item[1];
 
 
-                    /* BOSS */
-
                     notes.push({
 
                         side:
@@ -637,8 +656,6 @@ function buildFight() {
 
                     });
 
-
-                    /* PLAYER */
 
                     notes.push({
 
@@ -748,13 +765,6 @@ function buildFight() {
                     });
 
 
-                    /*
-                        Verborgen trap.
-
-                        Fake boss note wordt niet
-                        aan player gegeven.
-                    */
-
                     round.traps.push({
 
                         lane:
@@ -792,7 +802,7 @@ function buildFight() {
 
 
 /* =====================================
-   PHASE + PNG BACKGROUND
+   PHASE
 ===================================== */
 
 function setPhase(phase) {
@@ -813,14 +823,132 @@ function setPhase(phase) {
         `PHASE ${phase}`;
 
 
-    /*
-        Alleen echte PNG wordt vervangen.
-    */
-
     background.src =
         `img/bg-phase${phase}.png`;
 
 }
+
+
+/* =====================================
+   SECRET BOTPLAY CODE
+===================================== */
+
+function getSecretDirection(code) {
+
+    if (
+        code === "ArrowLeft"
+        ||
+        code === "KeyA"
+    ) {
+
+        return "left";
+
+    }
+
+
+    if (
+        code === "ArrowRight"
+        ||
+        code === "KeyD"
+    ) {
+
+        return "right";
+
+    }
+
+
+    return null;
+
+}
+
+
+function handleSecretMenuInput(event) {
+
+    if (
+        running
+        ||
+        startScreen.classList.contains(
+            "hidden"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const direction =
+        getSecretDirection(
+            event.code
+        );
+
+
+    if (
+        !direction
+    ) {
+
+        return;
+
+    }
+
+
+    event.preventDefault();
+
+
+    if (
+        event.repeat
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        direction ===
+        secretInputSequence[
+            secretInputIndex
+        ]
+    ) {
+
+        secretInputIndex++;
+
+
+        if (
+            secretInputIndex >=
+            secretInputSequence.length
+        ) {
+
+            botPlayEnabled =
+                true;
+
+
+            secretInputIndex =
+                0;
+
+        }
+
+
+        return;
+
+    }
+
+
+    secretInputIndex =
+        direction ===
+        secretInputSequence[0]
+
+            ? 1
+
+            : 0;
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    handleSecretMenuInput
+);
 
 
 /* =====================================
@@ -833,10 +961,16 @@ startButton.addEventListener(
 );
 
 
-restartButton.addEventListener(
-    "click",
-    startGame
-);
+if (
+    restartButton
+) {
+
+    restartButton.addEventListener(
+        "click",
+        startGame
+    );
+
+}
 
 
 /* =====================================
@@ -932,6 +1066,10 @@ async function startGame() {
         Infinity;
 
 
+    secretInputIndex =
+        0;
+
+
     running =
         true;
 
@@ -953,9 +1091,15 @@ async function startGame() {
     );
 
 
-    endScreen.classList.add(
-        "hidden"
-    );
+    if (
+        endScreen
+    ) {
+
+        endScreen.classList.add(
+            "hidden"
+        );
+
+    }
 
 
     try {
@@ -1042,7 +1186,7 @@ function gameLoop() {
 
 
 /* =====================================
-   BEAT ANIMATION
+   BEAT
 ===================================== */
 
 function updateBeat(time) {
@@ -1099,8 +1243,6 @@ function updateRound(time) {
             rounds[i];
 
 
-        /* BOSS */
-
         if (
             time >=
             round.bossStart -
@@ -1126,8 +1268,6 @@ function updateRound(time) {
 
         }
 
-
-        /* PLAYER */
 
         if (
             time >=
@@ -1192,10 +1332,6 @@ function changeRound(index) {
         config.phase
     );
 
-
-    /*
-        Reset ghost touch voor ronde.
-    */
 
     ghostRoundIndex =
         -1;
@@ -1364,7 +1500,7 @@ function createNote(note) {
 
 
 /* =====================================
-   NOTE MOVEMENT
+   UPDATE NOTES
 ===================================== */
 
 function updateNotes(time) {
@@ -1453,11 +1589,6 @@ function updateNotes(time) {
                 progress;
 
 
-            /*
-                4-pixel movement voor
-                shitty retro look.
-            */
-
             note.element.style.top =
                 `${
                     Math.round(
@@ -1475,7 +1606,15 @@ function updateNotes(time) {
                 &&
                 time >=
                 note.time -
-                0.11
+                (
+                    rounds[
+                        note.roundIndex
+                    ].config.phase === 2
+
+                        ? 0.42
+
+                        : 0.30
+                )
             ) {
 
                 note.revealed =
@@ -1511,6 +1650,55 @@ function updateNotes(time) {
 
 
                 return;
+
+            }
+
+
+            /* =================================
+               HIDDEN BOTPLAY
+            ================================= */
+
+            if (
+                botPlayEnabled
+                &&
+                note.side ===
+                "player"
+                &&
+                !note.fake
+                &&
+                time >=
+                note.time
+                &&
+                time <=
+                note.time +
+                note.good
+            ) {
+
+                const round =
+                    rounds[
+                        note.roundIndex
+                    ];
+
+
+                if (
+                    round
+                ) {
+
+                    flashReceptor(
+                        playerLanes,
+                        note.lane
+                    );
+
+
+                    playerHit(
+                        note.lane,
+                        round
+                    );
+
+
+                    return;
+
+                }
 
             }
 
@@ -1660,22 +1848,9 @@ function getPlayerRound(time) {
 
 /* =====================================
    GHOST TOUCH
-
-   PHASE 1:
-   geen ghost touch
-
-   PHASE 2:
-   soms één phantom input
-
-   PHASE 3:
-   sneller + soms twee tegelijk
 ===================================== */
 
 function updateGhostTouch(time) {
-
-    /*
-        Oude ghost touches verwijderen.
-    */
 
     ghostTouches =
         ghostTouches.filter(
@@ -1698,10 +1873,6 @@ function updateGhostTouch(time) {
         );
 
 
-    /*
-        Alleen tijdens player beurt.
-    */
-
     if (
         !round
         ||
@@ -1720,10 +1891,6 @@ function updateGhostTouch(time) {
 
     }
 
-
-    /*
-        Nieuwe ronde.
-    */
 
     if (
         ghostRoundIndex !==
@@ -1769,10 +1936,6 @@ function updateGhostTouch(time) {
     }
 
 
-    /*
-        Niet op het allerlaatste moment.
-    */
-
     if (
         time >
         round.end -
@@ -1789,10 +1952,6 @@ function updateGhostTouch(time) {
         time
     );
 
-
-    /*
-        Phase 3 vaker.
-    */
 
     if (
         round.config.phase === 2
@@ -1837,11 +1996,6 @@ function triggerGhostTouch(
     const phase =
         round.config.phase;
 
-
-    /*
-        Phase 3 heeft kans op
-        dubbele ghost touch.
-    */
 
     let amount =
         (
@@ -1888,11 +2042,6 @@ function triggerGhostTouch(
             lane
         );
 
-
-        /*
-            Ghost touch niet direct
-            bovenop echte note zetten.
-        */
 
         const realTooClose =
             notes.some(
@@ -2136,6 +2285,15 @@ document.addEventListener(
         }
 
 
+        if (
+            botPlayEnabled
+        ) {
+
+            return;
+
+        }
+
+
         flashReceptor(
             playerLanes,
             lane
@@ -2179,15 +2337,6 @@ function playerHit(
     const time =
         music.currentTime;
 
-
-    /*
-        1.
-        ECHTE NOTE KRIJGT ALTIJD
-        VOORRANG.
-
-        Ghost touch kan dus geen
-        goede input stelen.
-    */
 
     const matching =
         notes
@@ -2298,14 +2447,6 @@ function playerHit(
     }
 
 
-    /*
-        2.
-        GHOST TOUCH
-
-        Player reageert op
-        phantom receptor.
-    */
-
     const ghost =
         getGhostTouch(
             lane,
@@ -2330,14 +2471,6 @@ function playerHit(
 
     }
 
-
-    /*
-        3.
-        FAKE BOSS NOTE
-
-        Player heeft een fake boss
-        note onthouden en kopieert hem.
-    */
 
     const trap =
         round.traps.find(
@@ -2380,11 +2513,6 @@ function playerHit(
 
     }
 
-
-    /*
-        4.
-        Verkeerde richting.
-    */
 
     const nearby =
         notes
@@ -2971,6 +3099,9 @@ function checkEnd(time) {
 
 /* =====================================
    WIN
+
+   Geen SHIFT COMPLETE scherm.
+   Meteen naar Level 8.
 ===================================== */
 
 function winGame() {
@@ -2996,17 +3127,30 @@ function winGame() {
     );
 
 
-    endTitle.textContent =
-        "SHIFT COMPLETE";
+    document
+        .querySelectorAll(
+            ".note, .ghost-touch-mark"
+        )
+        .forEach(
+            element => {
+
+                element.remove();
+
+            }
+        );
 
 
-    showEnd();
+    window.location.href =
+        "../levels/level8/level8.php?wonGame=1";
 
 }
 
 
 /* =====================================
    LOSE
+
+   Geen FAILED scherm.
+   Meteen naar game over.
 ===================================== */
 
 function loseGame() {
@@ -3032,21 +3176,6 @@ function loseGame() {
     );
 
 
-    endTitle.textContent =
-        "FAILED";
-
-
-    showEnd();
-
-}
-
-
-/* =====================================
-   END SCREEN
-===================================== */
-
-function showEnd() {
-
     document
         .querySelectorAll(
             ".note, .ghost-touch-mark"
@@ -3060,58 +3189,8 @@ function showEnd() {
         );
 
 
-    const attempts =
-        hits
-        +
-        misses;
-
-
-    const accuracy =
-        attempts
-
-            ?
-
-            hits
-            /
-            attempts
-            *
-            100
-
-            :
-
-            100;
-
-
-    endStats.innerHTML = `
-
-        SCORE ${
-            String(score)
-                .padStart(
-                    6,
-                    "0"
-                )
-        }
-
-        <br>
-
-        HITS ${hits}
-
-        <br>
-
-        MISS ${misses}
-
-        <br>
-
-        ACC ${
-            accuracy.toFixed(1)
-        }%
-
-    `;
-
-
-    endScreen.classList.remove(
-        "hidden"
-    );
+    window.location.href =
+        "../gameoverscreen.html";
 
 }
 
@@ -3126,14 +3205,6 @@ window.addEventListener(
 
     async () => {
 
-
-        /*
-            Boss terugbrengen naar
-            maar 48 pixels.
-
-            Daarna wordt hij groot
-            weergegeven zonder smoothing.
-        */
 
         pixelateBoss(
             48

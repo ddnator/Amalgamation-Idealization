@@ -43,7 +43,7 @@ if(isset($_POST['submit'])) {
                 $_SESSION['username'] = $user[0]['username'];
                 $_SESSION['logged_in'] = true;
                 $_SESSION['points'] = 0;
-                header("location: index.php");
+                header("location: minigame2.php");
                 exit;
             } else {
                 $errors['password'] = 'Password incorrect';

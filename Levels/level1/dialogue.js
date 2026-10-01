@@ -52,6 +52,11 @@ import {
     runAction
 } from "./action.js";
 
+const hidden = document.getElementById('hidden');
+let gameComplete = 'not done';
+if (hidden) {
+    gameComplete = hidden.dataset.myValue;
+}
 
 /* =========================================
    DIALOGUE TREE
@@ -354,7 +359,7 @@ const dialogueTree = {
                     false,
 
                 action:
-                    "action_work"
+                    "close"
             }
         ]
     },
@@ -598,18 +603,23 @@ const dialogueTree = {
             "ai",
 
         text:
-            "...",
+            "",
 
         options: [
             {
                 text:
-                    "Leave",
+                    "Go home",
 
                 speak:
                     false,
 
                 action:
-                    "close"
+                    "level2"
+            },
+            {
+                text: "Go to the bar",
+                speak: false,
+                action:"level3"
             }
         ]
     },
@@ -732,9 +742,15 @@ function startLevel1() {
     );
 
 
-    startDialogue(
-        "level_start"
-    );
+    if (gameComplete === "done") {
+        startDialogue(
+            "boss_after"
+        );
+    } else {
+        startDialogue(
+            "level_start"
+        );
+    }
 }
 
 
@@ -791,7 +807,7 @@ function showNode(nodeId) {
 
     const node =
         dialogueTree[
-            nodeId
+        nodeId
         ];
 
 
@@ -896,7 +912,7 @@ function renderOptions() {
 
     const node =
         dialogueTree[
-            gameState.currentNodeId
+        gameState.currentNodeId
         ];
 
 
@@ -1036,7 +1052,7 @@ function chooseOption(index) {
 
     const node =
         dialogueTree[
-            gameState.currentNodeId
+        gameState.currentNodeId
         ];
 
 
@@ -1051,7 +1067,7 @@ function chooseOption(index) {
 
     const option =
         node.options[
-            index
+        index
         ];
 
 
@@ -1298,7 +1314,7 @@ document.addEventListener(
 
         const node =
             dialogueTree[
-                gameState.currentNodeId
+            gameState.currentNodeId
             ];
 
 

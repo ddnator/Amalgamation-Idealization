@@ -1,3 +1,4 @@
+
 const game =
     document.getElementById(
         "game"
@@ -10,6 +11,8 @@ const fullscreenButton =
 
 let fullscreenMode =
     false;
+
+
 
 function updateFullscreenButton() {
 
@@ -36,24 +39,37 @@ function updateFullscreenButton() {
             "Exit fullscreen"
         );
 
-        return;
     }
+    else {
 
-    fullscreenButton.textContent =
-        "⛶ FULLSCREEN";
+        fullscreenButton.textContent =
+            "⛶ FULLSCREEN";
 
-    fullscreenButton.setAttribute(
-        "title",
-        "Fullscreen"
-    );
+        fullscreenButton.setAttribute(
+            "title",
+            "Fullscreen"
+        );
 
-    fullscreenButton.setAttribute(
-        "aria-label",
-        "Enter fullscreen"
-    );
+        fullscreenButton.setAttribute(
+            "aria-label",
+            "Enter fullscreen"
+        );
+
+    }
 }
 
+
+/* =========================================================
+   LAYOUT AAN
+========================================================= */
+
 function enableFullscreenLayout() {
+
+    if (
+        !game
+    ) {
+        return;
+    }
 
     fullscreenMode =
         true;
@@ -72,11 +88,23 @@ function enableFullscreenLayout() {
                     "resize"
                 )
             );
+
         }
     );
 }
 
+
+/* =========================================================
+   LAYOUT UIT
+========================================================= */
+
 function disableFullscreenLayout() {
+
+    if (
+        !game
+    ) {
+        return;
+    }
 
     fullscreenMode =
         false;
@@ -95,18 +123,29 @@ function disableFullscreenLayout() {
                     "resize"
                 )
             );
+
         }
     );
 }
 
+
+/* =========================================================
+   BROWSER FULLSCREEN AAN
+========================================================= */
+
 async function enterBrowserFullscreen() {
+
+    if (
+        !game
+    ) {
+        return;
+    }
 
     if (
         game.requestFullscreen
     ) {
 
         await game.requestFullscreen();
-
         return;
     }
 
@@ -118,6 +157,11 @@ async function enterBrowserFullscreen() {
     }
 }
 
+
+/* =========================================================
+   BROWSER FULLSCREEN UIT
+========================================================= */
+
 async function exitBrowserFullscreen() {
 
     if (
@@ -126,7 +170,6 @@ async function exitBrowserFullscreen() {
     ) {
 
         await document.exitFullscreen();
-
         return;
     }
 
@@ -139,18 +182,19 @@ async function exitBrowserFullscreen() {
     }
 }
 
+
+/* =========================================================
+   ENTER
+========================================================= */
+
 async function enterFullscreen() {
 
     enableFullscreenLayout();
 
     try {
-
         await enterBrowserFullscreen();
-
     }
-    catch (
-        error
-    ) {
+    catch (error) {
 
         console.warn(
             "Browser fullscreen kon niet gestart worden:",
@@ -159,18 +203,19 @@ async function enterFullscreen() {
     }
 }
 
+
+/* =========================================================
+   EXIT
+========================================================= */
+
 async function exitFullscreen() {
 
     disableFullscreenLayout();
 
     try {
-
         await exitBrowserFullscreen();
-
     }
-    catch (
-        error
-    ) {
+    catch (error) {
 
         console.warn(
             "Browser fullscreen kon niet afgesloten worden:",
@@ -179,31 +224,39 @@ async function exitFullscreen() {
     }
 }
 
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
 async function toggleFullscreen() {
 
     if (
         fullscreenMode
     ) {
-
         await exitFullscreen();
-
-        return;
     }
-
-    await enterFullscreen();
+    else {
+        await enterFullscreen();
+    }
 }
 
-fullscreenButton.addEventListener(
+
+fullscreenButton?.addEventListener(
     "click",
     async event => {
 
         event.preventDefault();
-
         event.stopPropagation();
 
         await toggleFullscreen();
     }
 );
+
+
+/* =========================================================
+   ESC / BROWSER EXIT
+========================================================= */
 
 document.addEventListener(
     "fullscreenchange",
@@ -212,7 +265,6 @@ document.addEventListener(
         if (
             !document.fullscreenElement
         ) {
-
             disableFullscreenLayout();
         }
     }
@@ -225,19 +277,10 @@ document.addEventListener(
         if (
             !document.webkitFullscreenElement
         ) {
-
             disableFullscreenLayout();
         }
     }
 );
 
+
 updateFullscreenButton();
-
-window.enterLevel2Fullscreen =
-    enterFullscreen;
-
-window.exitLevel2Fullscreen =
-    exitFullscreen;
-
-window.toggleLevel2Fullscreen =
-    toggleFullscreen;
