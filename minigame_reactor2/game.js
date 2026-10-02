@@ -108,7 +108,8 @@ function showWinDialog() {
 
     const doneButton = dialogContent.querySelector('.done-button');
 
-    doneButton.addEventListener('click', () => {
+    doneButton.addEventListener('click', async () => {
+        await updateMoney(50);
         window.location.href = '../levels/level22/level22.php';
     });
 

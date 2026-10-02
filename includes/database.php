@@ -1,7 +1,7 @@
 <?php
-$host = "127.0.0.1";
-$database = "amalgamation_Idealization";
-$user = "root";
-$password = "";
+$host = "localhost";
+$username = "prj_2026_2027_tle_t4";
+$password = "joolohgh";
+$database = "prj_2026_2027_tle_t4";
 
-$db = mysqli_connect($host, $user, $password, $database);
+$db = mysqli_connect($host, $username, $password, $database);
